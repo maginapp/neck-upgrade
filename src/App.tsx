@@ -17,6 +17,8 @@ const App: React.FC = () => {
           getHolidays(),
           getNextHoliday()
         ]);
+        console.log(historicalEvents, holidayInfo, nextHolidayInfo);
+
         setEvents(historicalEvents);
         setHolidays(holidayInfo);
         setNextHoliday(nextHolidayInfo);

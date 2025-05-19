@@ -9,7 +9,9 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:style": "stylelint \"**/*.{css,scss}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,scss}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "fetch-poetry": "tsx scripts/fetch-poetry/index.ts",
+    "cleanup-poetry": "tsx scripts/fetch-poetry/cleanup.ts"
   },
   "keywords": [
     "chrome-extension",
@@ -19,6 +21,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "chinese-poetry": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

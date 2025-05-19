@@ -1,6 +1,7 @@
 export interface HistoricalEvent {
   year: string;
   description: string;
+  content: string;
 }
 
 export interface HolidayInfo {
