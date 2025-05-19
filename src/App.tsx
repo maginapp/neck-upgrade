@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getHistoricalEvents, getHolidays } from './utils/wikiApi';
 import { getNextHoliday } from './utils/holidayApi';
-import { HistoricalEvent, HolidayInfo } from './types';
+import { HistoricalEvent, HolidayInfo, HolidayWikiInfo } from './types';
 import './styles/App.css';
 
 const App: React.FC = () => {
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
-  const [holidays, setHolidays] = useState<HolidayInfo[]>([]);
+  const [holidays, setHolidays] = useState<HolidayWikiInfo[]>([]);
   const [nextHoliday, setNextHoliday] = useState<HolidayInfo | null>(null);
 
   useEffect(() => {
@@ -39,8 +39,7 @@ const App: React.FC = () => {
         <ul>
           {events.map((event, index) => (
             <li key={index}>
-              <span className="year">{event.year}</span>
-              <span className="description">{event.description}</span>
+              <span className="description" dangerouslySetInnerHTML={{ __html: event.html }}></span>
             </li>
           ))}
         </ul>
@@ -51,13 +50,7 @@ const App: React.FC = () => {
         <ul>
           {holidays.map((holiday, index) => (
             <li key={index}>
-              <span className="name">{holiday.name}</span>
-              <span className="date">{holiday.date}</span>
-              {holiday.link && (
-                <a href={holiday.link} target="_blank" rel="noopener noreferrer" className="link">
-                  查看详情
-                </a>
-              )}
+              <span className="description" dangerouslySetInnerHTML={{ __html: holiday.html }}></span>
             </li>
           ))}
         </ul>

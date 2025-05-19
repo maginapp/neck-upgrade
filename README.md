@@ -53,4 +53,6 @@ MIT
 2. 假期api: 
 3. 历史数据
 4. 古诗词数据
-5.  
+5. [ZenQuotes](https://zenquotes.io/) GET https://zenquotes.io/api/random
+    [一言](https://v1.hitokoto.cn/?c=i)
+6. https://github.com/first20hours/google-10000-english.git

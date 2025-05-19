@@ -1,7 +1,13 @@
 export interface HistoricalEvent {
   year: string;
-  description: string;
+  html: string;
   content: string;
+}
+
+export interface HolidayWikiInfo {
+  name: string;
+  region: string;
+  html: string;
 }
 
 export interface HolidayInfo {

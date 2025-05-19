@@ -35,36 +35,17 @@ li {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--text-color);
 }
 
-.year {
+li a {
   font-weight: bold;
   color: var(--primary-color);
   min-width: 60px;
-}
-
-.name {
-  font-weight: bold;
-  color: var(--primary-color);
-  min-width: 100px;
-}
-
-.date {
-  color: var(--text-color);
-  flex: 1;
-}
-
-.link {
-  color: var(--primary-color);
   text-decoration: none;
-  font-size: 14px;
-  padding: 4px 8px;
-  border: 1px solid var(--primary-color);
-  border-radius: 4px;
-  transition: all 0.3s ease;
 }
 
-.link:hover {
+li a:hover {
   background-color: var(--primary-color);
   color: #fff;
 }
