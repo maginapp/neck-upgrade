@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--header-bg);
+  color: var(--text-color);
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.time {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.holidayInfo {
+  font-size: 1rem;
+  color: var(--text-secondary);
+} 

@@ -45,10 +45,10 @@ const parseWikiEvents = (html: string): { events: HistoricalEventWithCategory[];
         const eventMatch = item.innerHTML.match(eventRegex);
         if (eventMatch !== null) {
           events.push({
-            year: eventMatch[1],
+            // year: eventMatch[1],
             html: processWikiLinks(item.innerHTML ?? ''),
             category,
-            content: item.textContent ?? '',
+            // content: item.textContent ?? '',
           });
         }
       }
@@ -58,8 +58,8 @@ const parseWikiEvents = (html: string): { events: HistoricalEventWithCategory[];
         const text = item.textContent ?? '';
         if (text.includes('节') || text.includes('日')) {
           holidays.push({
-            name: text,
-            region: text.split(/[：:]/)[1]?.trim() ?? '',
+            // name: text,
+            // region: text.split(/[：:]/)[1]?.trim() ?? '',
             html: processWikiLinks(item.innerHTML)
           });
         }

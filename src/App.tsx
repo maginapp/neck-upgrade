@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import  { useState, useEffect } from 'react';
+import { Header } from './components/Header/Header';
+import { Content, ContentType } from './components/Content/Content';
+import { Settings } from './components/Settings/Settings';
 import { getHistoricalEvents, getHolidays } from './utils/wikiApi';
 import { getNextHoliday } from './utils/holidayApi';
-import { HistoricalEvent, HolidayInfo, HolidayWikiInfo } from './types';
-import './styles/App.css';
+import { HistoricalEvent, HolidayInfo } from './types';
+import styles from './App.module.css';
 
-const App: React.FC = () => {
+function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [neckMode, setNeckMode] = useState<'normal' | 'training' | 'intense'>('normal');
+  const [contentType, setContentType] = useState<ContentType>('history');
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
-  const [holidays, setHolidays] = useState<HolidayWikiInfo[]>([]);
+  const [holidays, setHolidays] = useState<HistoricalEvent[]>([]);
   const [nextHoliday, setNextHoliday] = useState<HolidayInfo | null>(null);
 
   useEffect(() => {
@@ -17,7 +23,6 @@ const App: React.FC = () => {
           getHolidays(),
           getNextHoliday()
         ]);
-        console.log(historicalEvents, holidayInfo, nextHolidayInfo);
 
         setEvents(historicalEvents);
         setHolidays(holidayInfo);
@@ -30,44 +35,27 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
+  const contentData = {
+    title: '历史上的今天',
+    content: '',
+    events,
+    holidays
+  };
+
   return (
-    <div className="app-container">
-      <h1>历史上的今天</h1>
-      
-      <section className="historical-events">
-        <h2>大事记</h2>
-        <ul>
-          {events.map((event, index) => (
-            <li key={index}>
-              <span className="description" dangerouslySetInnerHTML={{ __html: event.html }}></span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="holidays">
-        <h2>节假日</h2>
-        <ul>
-          {holidays.map((holiday, index) => (
-            <li key={index}>
-              <span className="description" dangerouslySetInnerHTML={{ __html: holiday.html }}></span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {nextHoliday && (
-        <section className="next-holiday">
-          <h2>下一个节假日</h2>
-          <div className="holiday-card">
-            <h3>{nextHoliday.name}</h3>
-            <p>日期：{nextHoliday.date}</p>
-            {nextHoliday.isOffDay && <p className="off-day">放假</p>}
-          </div>
-        </section>
-      )}
+    <div className={`${styles.app} ${styles[theme]}`}>
+      <Header nextHoliday={nextHoliday || { name: 'Loading...', date: '' }} />
+      <Content type={contentType} data={contentData} />
+      <Settings
+        currentTheme={theme}
+        currentNeckMode={neckMode}
+        currentDataType={contentType}
+        onThemeChange={setTheme}
+        onNeckModeChange={setNeckMode}
+        onDataTypeChange={setContentType}
+      />
     </div>
   );
-};
+}
 
 export default App; 

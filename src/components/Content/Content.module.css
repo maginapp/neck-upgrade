@@ -1,0 +1,70 @@
+.content {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.historyContent,
+.poetryContent,
+.englishContent {
+  background-color: var(--content-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.historicalEvents,
+.holidays {
+  margin-top: 2rem;
+}
+
+.historicalEvents h3,
+.holidays h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.historicalEvents ul,
+.holidays ul {
+  list-style: none;
+  padding: 0;
+}
+
+.historicalEvents li,
+.holidays li {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: var(--item-bg);
+  border-radius: 4px;
+}
+
+.description {
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.poem {
+  font-size: 1.2rem;
+  line-height: 2;
+  margin: 1rem 0;
+  white-space: pre-line;
+}
+
+.translation {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.word {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.sentence {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+} 
