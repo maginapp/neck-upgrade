@@ -98,6 +98,33 @@ interface NextRecordParams<T> {
   batchSize?: number; // 每次获取的记录数量
 }
 
+// 从数据源中随机选择指定数量的记录
+const selectRandom = <T>(
+  batchSize: number,
+  data: T[],
+  compareFn: (a: T, b: T) => boolean,
+  excludeRecords: T[] = []
+): T[] => {
+  const availableRecords =
+    excludeRecords.length > 0
+      ? data.filter((record) => !excludeRecords.some((exclude) => compareFn(exclude, record)))
+      : data;
+
+  const result: Set<T> = new Set();
+  let retryCount = 0;
+
+  while (result.size < batchSize && retryCount < MAX_RETRY_COUNT) {
+    for (let i = 0; i < batchSize; i++) {
+      const randomIndex = Math.floor(Math.random() * availableRecords.length);
+      const selectedRecord = availableRecords[randomIndex];
+      result.add(selectedRecord);
+    }
+    retryCount++;
+  }
+
+  return [...result];
+};
+
 /**
  * 获取下一批学习记录
  * @description
@@ -151,28 +178,6 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     (records.todayNew.currentIndex === 0 && records.todayNew.records.length === 0)
   ) {
     const data = await getData();
-    // 从数据源中随机选择指定数量的记录
-    const selectRandom = (excludeRecords: T[] = []): T[] => {
-      const availableRecords = data.filter(
-        (record) => !excludeRecords.some((exclude) => compareFn(exclude, record))
-      );
-
-      const result: T[] = [];
-      let retryCount = 0;
-
-      while (result.length < unitCount && retryCount < MAX_RETRY_COUNT) {
-        const randomIndex = Math.floor(Math.random() * availableRecords.length);
-        const selectedRecord = availableRecords[randomIndex];
-
-        if (!result.some((record) => compareFn(selectedRecord, record))) {
-          result.push(selectedRecord);
-        }
-
-        retryCount++;
-      }
-
-      return result;
-    };
 
     // 需要选择新的诗词
     const allPreviousRecords = records.history
@@ -182,9 +187,9 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     // 选择与历史记录不重复的诗词
     let selectedRecords: T[];
     if (allPreviousRecords.length + unitCount > data.length) {
-      selectedRecords = selectRandom([]);
+      selectedRecords = selectRandom(batchSize, data, compareFn, []);
     } else {
-      selectedRecords = selectRandom(allPreviousRecords);
+      selectedRecords = selectRandom(batchSize, data, compareFn, allPreviousRecords);
     }
 
     let formattedRecords: T[] = selectedRecords;
@@ -243,7 +248,6 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     result.push(record);
     remainingCount--;
   }
-
   await saveLearningRecords(cacheKey, records);
   return [...new Set(result)];
 };

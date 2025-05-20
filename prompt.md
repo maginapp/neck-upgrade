@@ -18,37 +18,6 @@
 [] todo
 
 1. 主题模式添加新模式： 跟随系统/暗黑模式/普通模式，默认跟随系统
-3. 主题切换色彩
-4. 颈椎模式支持
-5. 优化并发节流写法
-7. test
-
-````
-  // 生成当天需要复习的诗词
-    records.todayReview = {
-      records: generateReviews(records.history, forgetIntervals, todayRatio),
-      currentIndex: 0,
-    };
-    await saveLearningRecords(cacheKey, records);
-  }
-
-  const result: T[] = [];
-  let remainingCount = batchSize;
-
-  // 优先返回当天新增的
-  while (remainingCount > 0 && records.todayNew.currentIndex < records.todayNew.records.length) {
-    const record = records.todayNew.records[records.todayNew.currentIndex];
-    records.todayNew.currentIndex++;
-    result.push(record);
-
-    // 如果已经展示过这首，将其添加到历史记录
-    const historyRecord = records.history.find((record) => record.date === currentDate);
-
-    if (!historyRecord) {
-      records.history.unshift({
-        date: currentDate,
-        records: [record],
-
-
-        ```逻辑有问题
-````
+2. 主题切换色彩
+3. 颈椎模式支持
+4. test

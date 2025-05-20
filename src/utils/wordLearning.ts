@@ -1,6 +1,7 @@
 import { CACHE_KEYS } from '@/constants';
 import { DictionaryEntry } from '../types/dictionary';
 import { getNextRecord } from './generateNext';
+import { limitConcurrency } from './base';
 
 const BATCH_SIZE = 5;
 const MAX_CONCURRENT_REQUESTS = 3;
@@ -61,28 +62,15 @@ const getWordDefinition = async (word: string): Promise<DictionaryEntry> => {
 
 // 批量获取单词定义
 const getWordDefinitions = async (words: WordInfo[]): Promise<WordInfo[]> => {
-  const definitions: WordInfo[] = [];
-  const chunks = [];
-
-  // 将单词分成最多3个并发请求的块
-  for (let i = 0; i < words.length; i += MAX_CONCURRENT_REQUESTS) {
-    chunks.push(words.slice(i, i + MAX_CONCURRENT_REQUESTS));
-  }
-
-  for (const chunk of chunks) {
-    const promises = chunk.map((vocabulary) => getWordDefinition(vocabulary.word));
-    const chunkDefinitions = await Promise.all(promises);
-
-    const results = chunkDefinitions
-      .filter((item): item is DictionaryEntry => item !== null && item !== undefined)
-      .map((item) => ({
-        word: item.word,
-        definition: item,
-      }));
-    definitions.push(...results);
-  }
-
-  return definitions;
+  const results = await limitConcurrency(
+    getWordDefinition,
+    words.map((word) => word.word),
+    MAX_CONCURRENT_REQUESTS
+  );
+  return results.map((result) => ({
+    word: result.word,
+    definition: result,
+  }));
 };
 
 export const getNextWord = async (): Promise<WordInfo[] | null> => {
