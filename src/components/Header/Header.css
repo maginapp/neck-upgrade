@@ -1,0 +1,58 @@
+.header {
+  padding: 20px;
+  background-color: var(--header-bg);
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.time-section {
+  text-align: left;
+}
+
+.current-time {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.current-date {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.holiday-section {
+  text-align: right;
+}
+
+.holiday-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.holiday-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.holiday-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.holiday-date {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.off-day {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 0.9rem;
+}

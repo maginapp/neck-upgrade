@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "历史上的今天",
-  "version": "1.0.0",
-  "description": "展示历史上的今天和节假日信息",
+  "name": "neck-upgrade",
+  "version": "__VERSION__",
+  "description": "保护颈椎",
   "permissions": [
     "storage",
     "activeTab"

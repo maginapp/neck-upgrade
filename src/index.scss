@@ -12,7 +12,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    'Fira Code', 'JetBrains Mono', 'Consolas', monospace, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   color: var(--text-color);
   line-height: 1.6;
   background-color: #fff;
@@ -22,4 +24,4 @@ body {
   width: 400px;
   min-height: 500px;
   padding: 20px;
-} 
+}

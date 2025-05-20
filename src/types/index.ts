@@ -1,14 +1,15 @@
 export interface HistoricalEvent {
-  year: string;
-  description: string;
-  content: string;
+  html: string;
+}
+
+export interface HolidayWikiInfo {
+  html: string;
 }
 
 export interface HolidayInfo {
   name: string;
   date: string;
   isOffDay?: boolean;
-  link?: string;
 }
 
 export interface NextHolidayResponse {
@@ -20,4 +21,4 @@ export interface NextHolidayResponse {
     wage: number;
     rest: number;
   };
-} 
+}
