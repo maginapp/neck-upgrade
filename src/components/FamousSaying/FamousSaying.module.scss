@@ -1,0 +1,27 @@
+.container {
+  padding: 1rem;
+  background-color: var(--content-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+.quote {
+  .content {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .author {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: right;
+
+    .source {
+      opacity: 0.8;
+    }
+  }
+} 
