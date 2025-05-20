@@ -6,10 +6,10 @@ import { useSettings } from './components/Settings/useSettings';
 
 function App() {
   // 状态管理：主题、颈椎模式和内容类型
-  const { settings, setSettings } = useSettings();
+  const { settings, setSettings, currentTheme } = useSettings();
 
   return (
-    <div className={`${styles.app} ${styles[settings.theme]}`}>
+    <div className={`${styles.app} ${styles[currentTheme]}`}>
       <Header />
       <Content type={settings.dataType} />
       <Settings setSettings={setSettings} settings={settings} />

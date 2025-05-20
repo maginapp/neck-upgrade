@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getNextWord } from '@/utils/wordLearning';
-import styles from './English.module.css';
+import styles from './English.module.scss';
 
 interface WordInfo {
   word: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './DataSwitch.module.css';
+import styles from './DataSwitch.module.scss';
 import { DataType } from '@/types/app';
 import { getDataTypeLabel } from '@/utils/labels';
 

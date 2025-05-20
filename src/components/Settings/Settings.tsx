@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import { NeckModeSelector } from '../NeckMode/NeckMode';
 import { DataSwitch } from '../DataSwitch/DataSwitch';
-import styles from './Settings.module.css';
+import styles from './Settings.module.scss';
 import { DataType, Theme, NeckMode, Settings as SettingsType } from '@/types/app';
 
 interface SettingsProps {

@@ -1,5 +1,5 @@
 import { DataType, Theme, NeckMode, Settings } from '@/types/app';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
 import { CacheManager } from '@/utils/cacheManager';
@@ -24,10 +24,21 @@ const settingsStorage = new SettingsStorage();
 
 export function useSettings() {
   const [settings, setSettings] = useState<Settings>({
-    theme: Theme.Light,
+    theme: Theme.System,
     neckMode: NeckMode.Normal,
     dataType: DataType.History,
   });
+
+  // 系统主题状态
+  const [systemTheme, setSystemTheme] = useState<Theme>(() => {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return isDark ? Theme.Dark : Theme.Light;
+  });
+
+  // 计算当前实际应用的主题
+  const currentTheme = useMemo(() => {
+    return settings.theme === Theme.System ? systemTheme : settings.theme;
+  }, [settings.theme, systemTheme]);
 
   // 组件挂载时从存储中加载设置
   useEffect(() => {
@@ -40,6 +51,22 @@ export function useSettings() {
     loadSettings();
   }, []);
 
+  // 监听系统主题变化
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleThemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      setSystemTheme(e.matches ? Theme.Dark : Theme.Light);
+    };
+
+    // 监听系统主题变化
+    mediaQuery.addEventListener('change', handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleThemeChange);
+    };
+  }, []);
+
   // 当设置发生变化时保存到存储中
   useEffect(() => {
     const saveSettings = async () => {
@@ -48,5 +75,5 @@ export function useSettings() {
     saveSettings();
   }, [settings]);
 
-  return { settings, setSettings };
+  return { settings, setSettings, currentTheme };
 }

@@ -7,6 +7,7 @@ export enum DataType {
 
 // 主题类型
 export enum Theme {
+  System = 'system',
   Light = 'light',
   Dark = 'dark',
 }

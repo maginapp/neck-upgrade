@@ -10,14 +10,14 @@
   background: none;
   cursor: pointer;
   transition: all 0.3s;
-}
 
-.modeButton:hover {
-  background-color: var(--hover-bg);
-}
+  &:hover {
+    background-color: var(--hover-bg);
+  }
 
-.modeButton.active {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
+  &.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+} 

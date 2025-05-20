@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Content.module.css';
+import styles from './Content.module.scss';
 import { getHistoricalEvents, getHolidays } from '@/utils/wikiApi';
 import { HistoricalEvent, HolidayWikiInfo } from '@/types';
 

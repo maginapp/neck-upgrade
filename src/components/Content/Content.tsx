@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Content.module.css';
+import styles from './Content.module.scss';
 import { DataType } from '@/types/app';
 import { History } from './History';
 import { PoetryComponent } from './Poetry';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getNextHoliday } from '../../utils/holidayApi';
 import { HolidayInfo } from '../../types';
-import './Header.css';
+import './Header.scss';
 
 export const Header: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>('');

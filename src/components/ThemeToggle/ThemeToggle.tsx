@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ThemeToggle.module.css';
+import styles from './ThemeToggle.module.scss';
 import { Theme } from '@/types/app';
 import { getThemeLabel } from '@/utils/labels';
 
@@ -9,13 +9,42 @@ interface ThemeToggleProps {
 }
 
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeChange }) => {
+  const getNextTheme = (current: Theme): Theme => {
+    switch (current) {
+      case Theme.System:
+        return Theme.Light;
+      case Theme.Light:
+        return Theme.Dark;
+      case Theme.Dark:
+        return Theme.System;
+      default:
+        return Theme.System;
+    }
+  };
+
+  const getThemeIcon = (theme: Theme): string => {
+    switch (theme) {
+      case Theme.System:
+        return '💻';
+      case Theme.Light:
+        return '☀️';
+      case Theme.Dark:
+        return '🌙';
+      default:
+        return '💻';
+    }
+  };
+
   return (
-    <button
-      className={styles.themeToggle}
-      onClick={() => onThemeChange(currentTheme === Theme.Light ? Theme.Dark : Theme.Light)}
-      aria-label={`切换到${getThemeLabel(currentTheme === Theme.Light ? Theme.Dark : Theme.Light)}主题`}
-    >
-      {currentTheme === Theme.Light ? '🌙' : '☀️'}
-    </button>
+    <div className={styles.themeToggleContainer}>
+      <button
+        className={styles.themeToggle}
+        onClick={() => onThemeChange(getNextTheme(currentTheme))}
+        aria-label={`切换到${getThemeLabel(getNextTheme(currentTheme))}主题`}
+      >
+        {getThemeIcon(currentTheme)}
+      </button>
+      <span className={styles.themeLabel}>{getThemeLabel(currentTheme)}</span>
+    </div>
   );
 };

@@ -6,7 +6,16 @@ import { Theme, NeckMode, DataType } from '@/types/app';
  * @returns 主题的显示标签
  */
 export const getThemeLabel = (theme: Theme): string => {
-  return theme === Theme.Light ? '浅色' : '深色';
+  switch (theme) {
+    case Theme.System:
+      return '跟随系统';
+    case Theme.Light:
+      return '浅色';
+    case Theme.Dark:
+      return '深色';
+    default:
+      return '跟随系统';
+  }
 };
 
 /**

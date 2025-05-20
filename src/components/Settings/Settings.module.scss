@@ -21,10 +21,10 @@
   padding: 0.5rem;
   z-index: 1000;
   transition: transform 0.3s;
-}
 
-.settingsButton:hover {
-  transform: rotate(30deg);
+  &:hover {
+    transform: rotate(30deg);
+  }
 }
 
 .sidebar {
@@ -37,10 +37,10 @@
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   transition: right 0.3s ease-in-out;
   z-index: 1001;
-}
 
-.sidebar.open {
-  right: 0;
+  &.open {
+    right: 0;
+  }
 }
 
 .sidebarContent {
@@ -63,11 +63,11 @@
 
 .settingsGroup {
   margin-top: 2rem;
-}
 
-.settingsGroup h3 {
-  margin-bottom: 1rem;
-  color: var(--text-color);
+  h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
 }
 
 .overlay {
@@ -78,4 +78,4 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-}
+} 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './NeckMode.module.css';
+import styles from './NeckMode.module.scss';
 import { NeckMode } from '@/types/app';
 import { getNeckModeLabel } from '@/utils/labels';
 
