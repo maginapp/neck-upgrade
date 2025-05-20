@@ -13,6 +13,8 @@ export const CACHE_KEYS = {
   WIKI_DATA: 'wiki_data_cache_new_tab',
   WIKI_CACHE_EXPIRY: 'wiki_cache_expiry',
   TIMOR_TECH_API_HOLIDAY: 'timor_tech_api_holiday',
+  POETRY_LEARNING_RECORD: 'poetry_learning_record',
+  EN_WORD_LEARNING_RECORD: 'en_word_learning_record',
 } as const;
 
 // 请求限制

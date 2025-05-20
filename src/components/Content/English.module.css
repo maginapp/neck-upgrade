@@ -1,0 +1,144 @@
+.container {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: #e5e7eb;
+  }
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+.button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button:disabled {
+    background-color: #4b5563;
+  }
+}
+
+.wordList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wordCard {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .wordCard {
+    border-color: #374151;
+    background-color: #1f2937;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.wordHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.word {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .word {
+    color: #f3f4f6;
+  }
+}
+
+.phonetic {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .phonetic {
+    color: #9ca3af;
+  }
+}
+
+.meanings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.meaning {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.partOfSpeech {
+  color: #6b7280;
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .partOfSpeech {
+    color: #9ca3af;
+  }
+}
+
+.definitions {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.definition {
+  color: #374151;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .definition {
+    color: #d1d5db;
+  }
+}

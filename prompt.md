@@ -15,9 +15,42 @@
 
 拆分App.tsx，分为组件，调整目录结构
 
-1. 顶部组件（当前时间（动态变化），日期，，提供下一次节假日信息）
-2. 内容组件（历史上的今天数据或古诗词或英语单词）
-3. 侧边组件（名人名言）
-4. 右上角添加设置按钮，点击后出侧边栏，
+[] todo
 
-utils添加新方法，处理单词，每天从
+1. 主题模式添加新模式： 跟随系统/暗黑模式/普通模式，默认跟随系统
+2. 缓存右上角配置
+3. 主题切换色彩
+4. 颈椎模式支持
+5. 优化并发节流写法
+6. 大json抽离，不打包
+7. test
+
+````
+  // 生成当天需要复习的诗词
+    records.todayReview = {
+      records: generateReviews(records.history, forgetIntervals, todayRatio),
+      currentIndex: 0,
+    };
+    await saveLearningRecords(cacheKey, records);
+  }
+
+  const result: T[] = [];
+  let remainingCount = batchSize;
+
+  // 优先返回当天新增的
+  while (remainingCount > 0 && records.todayNew.currentIndex < records.todayNew.records.length) {
+    const record = records.todayNew.records[records.todayNew.currentIndex];
+    records.todayNew.currentIndex++;
+    result.push(record);
+
+    // 如果已经展示过这首，将其添加到历史记录
+    const historyRecord = records.history.find((record) => record.date === currentDate);
+
+    if (!historyRecord) {
+      records.history.unshift({
+        date: currentDate,
+        records: [record],
+
+
+        ```逻辑有问题
+````

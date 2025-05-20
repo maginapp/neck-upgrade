@@ -3,14 +3,8 @@
   "name": "neck-upgrade",
   "version": "__VERSION__",
   "description": "保护颈椎",
-  "permissions": [
-    "storage",
-    "activeTab"
-  ],
-  "host_permissions": [
-    "https://zh.wikipedia.org/*",
-    "https://timor.tech/*"
-  ],
+  "permissions": ["storage", "activeTab", "unlimitedStorage"],
+  "host_permissions": ["https://zh.wikipedia.org/*", "https://timor.tech/*"],
   "action": {
     "default_popup": "index.html",
     "default_icon": {
@@ -32,9 +26,15 @@
       "js": ["assets/content.js"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/data/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
   }
-} 
+}
