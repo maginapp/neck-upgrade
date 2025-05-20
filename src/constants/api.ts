@@ -15,6 +15,7 @@ export const CACHE_KEYS = {
   TIMOR_TECH_API_HOLIDAY: 'timor_tech_api_holiday',
   POETRY_LEARNING_RECORD: 'poetry_learning_record',
   EN_WORD_LEARNING_RECORD: 'en_word_learning_record',
+  EXTENSION_SETTINGS: 'extension_settings',
 } as const;
 
 // 请求限制

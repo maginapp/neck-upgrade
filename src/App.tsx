@@ -1,26 +1,20 @@
-import { useState } from 'react';
 import { Header } from './components/Header/Header';
 import { Content } from './components/Content/Content';
 import { Settings } from './components/Settings/Settings';
 import styles from './App.module.scss';
-import { DataType, Theme, NeckMode } from './types/app';
+import { useSettings } from './components/Settings/useSettings';
 
 function App() {
-  const [theme, setTheme] = useState<Theme>(Theme.Light);
-  const [neckMode, setNeckMode] = useState<NeckMode>(NeckMode.Normal);
-  const [contentType, setContentType] = useState<DataType>(DataType.History);
+  // 状态管理：主题、颈椎模式和内容类型
+  const { settings, setSettings } = useSettings();
 
   return (
-    <div className={`${styles.app} ${styles[theme]}`}>
+    <div className={`${styles.app} ${styles[settings.theme]}`}>
       <Header />
-      <Content type={contentType} />
+      <Content type={settings.dataType} />
       <Settings
-        currentTheme={theme}
-        currentNeckMode={neckMode}
-        currentDataType={contentType}
-        onThemeChange={setTheme}
-        onNeckModeChange={setNeckMode}
-        onDataTypeChange={setContentType}
+        setSettings={setSettings}
+        settings={settings}
       />
     </div>
   );

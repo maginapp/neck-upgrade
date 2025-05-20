@@ -9,8 +9,13 @@ export class CacheManager<T> {
     this.key = key;
   }
 
-  // 检查缓存是否过期（是否在同一天）
-  private isExpired(timestamp: string): boolean {
+  /**
+   * 检查缓存是否过期
+   * 通过比较日期判断是否在同一天
+   * @param timestamp 缓存时间戳
+   * @returns 是否过期
+   */
+  protected isExpired(timestamp: string): boolean {
     const cacheDate = new Date(timestamp);
     const now = new Date();
     return (
@@ -20,7 +25,10 @@ export class CacheManager<T> {
     );
   }
 
-  // 获取缓存数据
+  /**
+   * 获取缓存数据
+   * 如果数据存在且未过期则返回数据，否则返回null
+   */
   async get(): Promise<T | null> {
     return new Promise((resolve) => {
       chrome.storage.local.get([this.key], (result) => {
@@ -34,7 +42,11 @@ export class CacheManager<T> {
     });
   }
 
-  // 设置缓存数据
+  /**
+   * 设置缓存数据
+   * 将数据和时间戳一起存储
+   * @param data 要缓存的数据
+   */
   async set(data: T): Promise<void> {
     const cacheData = {
       data,
@@ -45,14 +57,19 @@ export class CacheManager<T> {
     });
   }
 
-  // 清除缓存
+  /**
+   * 清除缓存数据
+   */
   async clear(): Promise<void> {
     return new Promise((resolve) => {
       chrome.storage.local.remove([this.key], resolve);
     });
   }
 
-  // 获取缓存状态
+  /**
+   * 获取缓存状态
+   * @returns 包含缓存存在状态、是否过期和时间戳的对象
+   */
   async getStatus(): Promise<{ exists: boolean; isExpired: boolean; timestamp?: string }> {
     return new Promise((resolve) => {
       chrome.storage.local.get([this.key], (result) => {

@@ -9,15 +9,14 @@
 - 展示下一个节假日的详细信息
 - 支持本地数据缓存
 
-## 技术栈
 
-- React
-- TypeScript
-- Vite
-- ESLint
-- Prettier
-- Stylelint
-- Husky
+## 使用
+
+1. 在 Chrome 浏览器中打开扩展程序页面（chrome://extensions/）
+2. 开启开发者模式
+3. 点击"加载已解压的扩展程序"
+4. 选择项目的 `dist` 目录
+
 
 ## 开发
 
@@ -35,17 +34,6 @@ pnpm run dev
 ```bash
 pnpm run build
 ```
-
-## 使用
-
-1. 在 Chrome 浏览器中打开扩展程序页面（chrome://extensions/）
-2. 开启开发者模式
-3. 点击"加载已解压的扩展程序"
-4. 选择项目的 `dist` 目录
-
-## 许可证
-
-MIT
 
 ## 鸣谢
 

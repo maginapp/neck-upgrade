@@ -17,3 +17,9 @@ export enum NeckMode {
   Training = 'training',
   Intense = 'intense',
 }
+export interface Settings {
+  theme: Theme;
+  neckMode: NeckMode;
+  dataType: DataType;
+}
+

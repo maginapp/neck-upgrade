@@ -3,26 +3,29 @@ import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import { NeckModeSelector } from '../NeckMode/NeckMode';
 import { DataSwitch } from '../DataSwitch/DataSwitch';
 import styles from './Settings.module.css';
-import { DataType, Theme, NeckMode } from '@/types/app';
+import { DataType, Theme, NeckMode, Settings as SettingsType } from '@/types/app';
 
 interface SettingsProps {
-  onThemeChange: (theme: Theme) => void;
-  onNeckModeChange: (mode: NeckMode) => void;
-  onDataTypeChange: (type: DataType) => void;
-  currentTheme: Theme;
-  currentNeckMode: NeckMode;
-  currentDataType: DataType;
+  settings: SettingsType,
+  setSettings: (settings: SettingsType) => void;
 }
 
 export const Settings: React.FC<SettingsProps> = ({
-  onThemeChange,
-  onNeckModeChange,
-  onDataTypeChange,
-  currentTheme,
-  currentNeckMode,
-  currentDataType,
+  setSettings,
+  settings,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const onThemeChange = (theme: Theme) => {
+    setSettings({ ...settings, theme });
+  };
+
+  const onNeckModeChange = (neckMode: NeckMode) => {
+    setSettings({ ...settings, neckMode });
+  };
+  const onDataTypeChange = (dataType: DataType) => {
+    setSettings({ ...settings, dataType });
+  }
 
   return (
     <>
@@ -46,15 +49,15 @@ export const Settings: React.FC<SettingsProps> = ({
           <h2>设置</h2>
           <div className={styles.settingsGroup}>
             <h3>主题</h3>
-            <ThemeToggle currentTheme={currentTheme} onThemeChange={onThemeChange} />
+            <ThemeToggle currentTheme={settings.theme} onThemeChange={onThemeChange} />
           </div>
           <div className={styles.settingsGroup}>
             <h3>颈椎模式</h3>
-            <NeckModeSelector currentMode={currentNeckMode} onModeChange={onNeckModeChange} />
+            <NeckModeSelector currentMode={settings.neckMode} onModeChange={onNeckModeChange} />
           </div>
           <div className={styles.settingsGroup}>
             <h3>内容类型</h3>
-            <DataSwitch currentType={currentDataType} onTypeChange={onDataTypeChange} />
+            <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
           </div>
         </div>
       </div>
