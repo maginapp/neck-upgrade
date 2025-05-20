@@ -22,4 +22,3 @@ export interface Settings {
   neckMode: NeckMode;
   dataType: DataType;
 }
-

@@ -5,7 +5,6 @@ import { getNextRecord } from './generateNext';
 const SELECTED_POEMS_COUNT = 4;
 const REVIEW_COUNT = 30; // 复习天数
 
-
 /**
  * 加载JSON数据文件
  * @param path 数据文件路径
@@ -22,7 +21,7 @@ async function loadJsonData<T>(path: string): Promise<T> {
     console.error(`Error loading data from ${path}:`, error);
     throw error;
   }
-} 
+}
 
 // 缓存加载的数据
 let poetryDataCache: Poetry[] | null = null;

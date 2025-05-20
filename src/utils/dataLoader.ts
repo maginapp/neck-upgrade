@@ -14,4 +14,4 @@ export async function loadJsonData<T>(path: string): Promise<T> {
     console.error(`Error loading data from ${path}:`, error);
     throw error;
   }
-} 
+}

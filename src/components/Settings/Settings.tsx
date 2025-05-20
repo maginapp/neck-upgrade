@@ -6,14 +6,11 @@ import styles from './Settings.module.css';
 import { DataType, Theme, NeckMode, Settings as SettingsType } from '@/types/app';
 
 interface SettingsProps {
-  settings: SettingsType,
+  settings: SettingsType;
   setSettings: (settings: SettingsType) => void;
 }
 
-export const Settings: React.FC<SettingsProps> = ({
-  setSettings,
-  settings,
-}) => {
+export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onThemeChange = (theme: Theme) => {
@@ -25,7 +22,7 @@ export const Settings: React.FC<SettingsProps> = ({
   };
   const onDataTypeChange = (dataType: DataType) => {
     setSettings({ ...settings, dataType });
-  }
+  };
 
   return (
     <>

@@ -12,10 +12,7 @@ function App() {
     <div className={`${styles.app} ${styles[settings.theme]}`}>
       <Header />
       <Content type={settings.dataType} />
-      <Settings
-        setSettings={setSettings}
-        settings={settings}
-      />
+      <Settings setSettings={setSettings} settings={settings} />
     </div>
   );
 }
