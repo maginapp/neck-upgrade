@@ -11,8 +11,21 @@ interface WordInfo {
   definition?: DictionaryEntry;
 }
 
+// 缓存加载的数据
+let wordListCache: WordInfo[] | null = null;
+
+/**
+ * 获取诗词数据
+ */
+export async function getWordList(): Promise<WordInfo[]> {
+  if (!wordListCache) {
+    wordListCache = await getWordListFromFile();
+  }
+  return wordListCache;
+}
+
 // 从文件读取单词列表
-const getWordList = async (): Promise<WordInfo[]> => {
+const getWordListFromFile = async (): Promise<WordInfo[]> => {
   try {
     const response = await fetch(chrome.runtime.getURL('data/google-10000-english-no-swears.txt'));
     const text = await response.text();
