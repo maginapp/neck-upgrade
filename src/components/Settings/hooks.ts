@@ -25,7 +25,13 @@ const settingsStorage = new SettingsStorage();
 export function useSettings() {
   const [settings, setSettings] = useState<Settings>({
     theme: Theme.System,
-    neckMode: NeckMode.Normal,
+    neck: {
+      mode: NeckMode.Normal,
+      rotate: 0,
+      duration: 0,
+      cusDuration: 15,
+      cusMaxRotate: 180,
+    },
     dataType: DataType.History,
   });
 

@@ -23,5 +23,5 @@ export const Content: React.FC<ContentProps> = ({ type }) => {
     }
   };
 
-  return <main className={styles.content}>{renderContent()}</main>;
+  return <div className={styles.content}>{renderContent()}</div>;
 };

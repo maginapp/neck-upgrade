@@ -28,6 +28,7 @@ export const getNeckModeLabel = (mode: NeckMode): string => {
     [NeckMode.Normal]: '普通',
     [NeckMode.Training]: '训练',
     [NeckMode.Intense]: '强化',
+    [NeckMode.Custom]: '自定义',
   };
   return labels[mode];
 };

@@ -1,0 +1,64 @@
+.mainView {
+  display: grid;
+  width: 70vh;
+  height: 70vh;
+  grid-template-columns: 5fr 1fr;
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas: 'h  s' 'c  s';
+  margin: auto;
+  overflow: hidden;
+
+  &.custom,
+  &.intense {
+    .content {
+      transform: rotate(180deg);
+    }
+  }
+
+  .side {
+    grid-area: s;
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    justify-self: center;
+  }
+
+  .content {
+    grid-area: c;
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+  }
+
+  .header {
+    grid-area: h;
+  }
+}
+
+// 其他可能的组合示例
+.verticalUpright {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
+.verticalSideways {
+  writing-mode: vertical-lr;
+  text-orientation: sideways;
+}
+
+.sidewaysRight {
+  writing-mode: sideways-rl;
+  text-orientation: sideways-right;
+}
+
+.mixedOrientation {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
+
+@media screen and (max-width: 857px) {
+  .mainView {
+    min-width: 600px;
+    min-height: 600px;
+    transform: rotate(0) !important;
+  }
+}

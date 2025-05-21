@@ -9,18 +9,7 @@ export interface HolidayWikiInfo {
 export interface HolidayInfo {
   name: string;
   date: string;
-  isOffDay?: boolean;
-}
-
-export interface NextHolidayResponse {
-  code: number;
-  holiday: {
-    holiday: boolean;
-    name: string;
-    date: string;
-    wage: number;
-    rest: number;
-  };
+  rest: number;
 }
 
 // 历史学习记录（30天内）

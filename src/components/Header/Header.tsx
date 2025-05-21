@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getNextHoliday } from '../../utils/holidayApi';
 import { HolidayInfo } from '../../types';
-import './Header.scss';
+import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>('');
@@ -42,19 +42,17 @@ export const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="header">
-      <div className="time-section">
-        <div className="current-time">{currentTime}</div>
-        <div className="current-date">{currentDate}</div>
+    <header className={styles.header}>
+      <div className={styles.timeSection}>
+        <span className={styles.currentTime}>{currentTime}</span>
+        <span className={styles.currentDate}>{currentDate}</span>
       </div>
       {nextHoliday && (
-        <div className="holiday-section">
-          <h3>下一个节假日</h3>
-          <div className="holiday-info">
-            <span className="holiday-name">{nextHoliday.name}</span>
-            <span className="holiday-date">{nextHoliday.date}</span>
-            {nextHoliday.isOffDay && <span className="off-day">放假</span>}
-          </div>
+        <div className={styles.holidaySection}>
+          距离下一个休息日 - <span className={styles.holidayHighlight}>{nextHoliday.name}</span>
+          <span className={styles.holidayHighlight}>{nextHoliday.date}</span>
+          还有
+          <span className={styles.holidayHighlight}>{nextHoliday.rest}天</span>
         </div>
       )}
     </header>

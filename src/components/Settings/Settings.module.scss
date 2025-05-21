@@ -1,10 +1,10 @@
 .settings {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 16px;
+  right: 16px;
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 16px;
+  padding: 16px;
   background-color: var(--settings-bg);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -12,13 +12,13 @@
 
 .settingsButton {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 24px;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 8px;
   z-index: 1000;
   transition: transform 0.3s;
 
@@ -30,8 +30,8 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -300px;
-  width: 300px;
+  right: -400px;
+  width: 400px;
   height: 100vh;
   background-color: var(--settings-bg);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
@@ -44,28 +44,28 @@
 }
 
 .sidebarContent {
-  padding: 2rem;
+  padding: 32px;
   height: 100%;
   overflow-y: auto;
 }
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 24px;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 8px;
   color: var(--text-color);
 }
 
 .settingsGroup {
-  margin-top: 2rem;
+  margin-top: 32px;
 
   h3 {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
     color: var(--text-color);
   }
 }
@@ -76,6 +76,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 1000;
-} 
+}

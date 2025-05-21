@@ -32,9 +32,8 @@ export const History: React.FC = () => {
 
   return (
     <div className={styles.historyContent}>
-      <h2>历史上的今天</h2>
       <section className={styles.historicalEvents}>
-        <h3>大事记</h3>
+        <h2>历史上的今天</h2>
         <ul>
           {events.map((event, index) => (
             <li key={index}>
@@ -45,7 +44,7 @@ export const History: React.FC = () => {
       </section>
 
       <section className={styles.holidays}>
-        <h3>节假日和习俗</h3>
+        <h2>节假日和习俗</h2>
         <ul>
           {holiday.map((event, index) => (
             <li key={index}>

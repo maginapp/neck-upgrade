@@ -6,7 +6,6 @@ import styles from './FamousSaying.module.scss';
 export const FamousSaying: React.FC = () => {
   const [quote, setQuote] = useState<FamousInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchQuote = async () => {
@@ -14,10 +13,12 @@ export const FamousSaying: React.FC = () => {
         setLoading(true);
         const newQuote = await getRandomFamousQuote();
         setQuote(newQuote);
-        setError(null);
       } catch (err) {
-        setError('获取名言失败，请稍后重试');
         console.error('Failed to fetch famous quote:', err);
+        setQuote({
+          content: '获取名言失败，请稍后重试',
+          source: '2222',
+        });
       } finally {
         setLoading(false);
       }
@@ -28,10 +29,6 @@ export const FamousSaying: React.FC = () => {
 
   if (loading) {
     return <div className={styles.container}>加载中...</div>;
-  }
-
-  if (error) {
-    return <div className={styles.container}>{error}</div>;
   }
 
   if (!quote) {

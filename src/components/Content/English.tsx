@@ -44,7 +44,7 @@ export const English = () => {
       <div className={styles.header}>
         <h2 className={styles.title}>单词学习</h2>
         <button onClick={fetchNextWords} disabled={loading} className={styles.button}>
-          {loading ? '加载中...' : '下一个'}
+          {loading ? '加载中...' : '>'}
         </button>
       </div>
 

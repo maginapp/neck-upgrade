@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
-import { NeckModeSelector } from '../NeckMode/NeckMode';
-import { DataSwitch } from '../DataSwitch/DataSwitch';
+import { ThemeToggle } from '../ThemeToggle';
+import { NeckMode } from '../NeckMode';
+import { DataSwitch } from '../DataSwitch';
 import styles from './Settings.module.scss';
-import { DataType, Theme, NeckMode, Settings as SettingsType } from '@/types/app';
+import { DataType, Theme, NeckModeConfig, Settings as SettingsType } from '@/types/app';
 
 interface SettingsProps {
   settings: SettingsType;
-  setSettings: (settings: SettingsType) => void;
+  setSettings: React.Dispatch<React.SetStateAction<SettingsType>>;
 }
 
 export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => {
@@ -17,8 +17,8 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
     setSettings({ ...settings, theme });
   };
 
-  const onNeckModeChange = (neckMode: NeckMode) => {
-    setSettings({ ...settings, neckMode });
+  const onNeckModeChange = (neck: NeckModeConfig) => {
+    setSettings({ ...settings, neck });
   };
   const onDataTypeChange = (dataType: DataType) => {
     setSettings({ ...settings, dataType });
@@ -50,7 +50,7 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
           </div>
           <div className={styles.settingsGroup}>
             <h3>颈椎模式</h3>
-            <NeckModeSelector currentMode={settings.neckMode} onModeChange={onNeckModeChange} />
+            <NeckMode neckConfig={settings.neck} onModeChange={onNeckModeChange} />
           </div>
           <div className={styles.settingsGroup}>
             <h3>内容类型</h3>

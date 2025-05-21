@@ -31,8 +31,6 @@ export const PoetryComponent: React.FC = () => {
     return <div>暂无诗词</div>;
   }
 
-  // console.log('???? poems', poems);
-
   return (
     <div>
       {poems.map((poem, index) => {

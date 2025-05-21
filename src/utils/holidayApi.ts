@@ -1,6 +1,7 @@
 import { HOLIDAY_API_BASE_URL, CACHE_KEYS } from '@/constants';
-import { HolidayInfo, NextHolidayResponse } from '../types';
+import { HolidayInfo } from '../types';
 import { CacheManager } from './cacheManager';
+import { HolidayApiResponse } from '@/types/timor';
 
 // const CACHE_KEY = 'holiday_data_cache';
 
@@ -30,14 +31,14 @@ export const getNextHoliday = async (): Promise<HolidayInfo | null> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data: NextHolidayResponse = await response.json();
+    const data: HolidayApiResponse = await response.json();
 
     let nextHoliday: HolidayInfo | null = null;
     if (data.code === 0 && data.holiday) {
       nextHoliday = {
         name: data.holiday.name,
         date: data.holiday.date,
-        isOffDay: data.holiday.holiday,
+        rest: data.holiday.rest,
       };
     }
 

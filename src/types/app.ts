@@ -17,9 +17,19 @@ export enum NeckMode {
   Normal = 'normal',
   Training = 'training',
   Intense = 'intense',
+  Custom = 'custom',
 }
+
+export interface NeckModeConfig {
+  rotate: number;
+  duration: number;
+  mode: NeckMode;
+  cusMaxRotate: number;
+  cusDuration: number;
+}
+
 export interface Settings {
   theme: Theme;
-  neckMode: NeckMode;
+  neck: NeckModeConfig;
   dataType: DataType;
 }

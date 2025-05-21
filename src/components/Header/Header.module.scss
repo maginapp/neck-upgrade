@@ -1,0 +1,36 @@
+.header {
+  padding: 0 10px;
+}
+
+.timeSection {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+}
+
+.currentTime {
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.currentDate {
+  color: var(--text-secondary);
+}
+
+.holidaySection {
+  margin-top: 10px;
+}
+
+.holidaySection div > div {
+  margin-bottom: 8px;
+}
+
+.holidayHighlight {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 5px;
+}
