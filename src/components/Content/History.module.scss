@@ -1,0 +1,28 @@
+.historicalSection {
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--text-secondary);
+
+  li, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    background-color: var(--item-bg);
+    margin-bottom: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  a:visited {
+    color: var(--text-color);
+  }
+  a:hover {
+    color: var(-primary-color);
+  }
+}
+

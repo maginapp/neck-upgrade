@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Content.module.scss';
+import styles from './Poetry.module.scss';
 import { getNextPoem } from '@/utils/poetryLearning';
 import { Poetry } from '@/types/poetry';
 
@@ -28,21 +28,16 @@ export const PoetryComponent: React.FC = () => {
   }
 
   if (!poems.length) {
-    return <div>暂无诗词</div>;
+    return null;
   }
 
   return (
-    <div>
+    <>
       {poems.map((poem, index) => {
         return (
-          <div key={index} className={styles.poetryContent}>
+          <div key={index} className={styles.poetryContainer}>
             <h2>{poem.title}</h2>
             <h3>{poem.author}</h3>
-            <div className={styles.poemContent}>
-              {poem.paragraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
             {poem.tags && poem.tags.length > 0 && (
               <div className={styles.tags}>
                 {poem.tags.map((tag, index) => (
@@ -52,9 +47,14 @@ export const PoetryComponent: React.FC = () => {
                 ))}
               </div>
             )}
+            <div className={styles.poemContent}>
+              {poem.paragraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
           </div>
         );
       })}
-    </div>
+    </>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Content.module.scss';
+import React, { useEffect, useMemo, useState } from 'react';
+import styles from './History.module.scss';
 import { getHistoricalEvents, getHolidays } from '@/utils/wikiApi';
 import { HistoricalEvent, HolidayWikiInfo } from '@/types';
 
@@ -26,25 +26,28 @@ export const History: React.FC = () => {
     fetchData();
   }, []);
 
+  const title = useMemo(() => {
+    if (events.length > 0 && holiday.length > 0) {
+      return '历史上的今天 - 节假日和习俗';
+    }
+
+    if (events.length > 0) {
+      return '历史上的今天';
+    }
+
+    if (holiday.length > 0) {
+      return '节假日和习俗';
+    }
+  }, [events, holiday]);
+
   if (loading) {
     return <div className="loading">加载中...</div>;
   }
 
   return (
-    <div className={styles.historyContent}>
-      <section className={styles.historicalEvents}>
-        <h2>历史上的今天</h2>
-        <ul>
-          {events.map((event, index) => (
-            <li key={index}>
-              <div className="description" dangerouslySetInnerHTML={{ __html: event.html }}></div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.holidays}>
-        <h2>节假日和习俗</h2>
+    <>
+      <h2>{title}</h2>
+      <section className={styles.historicalSection}>
         <ul>
           {holiday.map((event, index) => (
             <li key={index}>
@@ -53,6 +56,15 @@ export const History: React.FC = () => {
           ))}
         </ul>
       </section>
-    </div>
+      <section className={styles.historicalSection}>
+        <ul>
+          {events.map((event, index) => (
+            <li key={index}>
+              <div className="description" dangerouslySetInnerHTML={{ __html: event.html }}></div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
   );
 };

@@ -18,17 +18,17 @@ const MOD_CONFIG = {
   [NeckModeType.Training]: {
     min: 15,
     max: 60,
-    duration: 15,
+    duration: 10,
   },
   [NeckModeType.Intense]: {
     min: 80,
     max: 180,
-    duration: 30,
+    duration: 20,
   },
   [NeckModeType.Custom]: {
     min: 0,
     max: 360,
-    duration: 0,
+    duration: 10,
   },
 };
 
@@ -43,7 +43,7 @@ export const NeckMode = (props: NeckModeProps) => {
   const modes = Object.values(NeckModeType);
 
   const handleModeChange = (newMode: NeckModeType) => {
-    let config = MOD_CONFIG[newMode];
+    const config = MOD_CONFIG[newMode];
 
     if (newMode !== NeckModeType.Custom) {
       onModeChange({
@@ -60,10 +60,10 @@ export const NeckMode = (props: NeckModeProps) => {
 
   const handleCustomConfigChange = (params: CustomProps) => {
     const { nextCurDuration, nextCurMaxRotate } = params;
-    let config = MOD_CONFIG[NeckModeType.Custom];
+    const config = MOD_CONFIG[NeckModeType.Custom];
 
-    let duration = nextCurDuration ?? cusDuration ?? config.duration;
-    let maxRotate = nextCurMaxRotate ?? cusMaxRotate ?? config.max;
+    const duration = nextCurDuration ?? cusDuration ?? config.duration;
+    const maxRotate = nextCurMaxRotate ?? cusMaxRotate ?? config.max;
 
     onModeChange({
       mode: NeckModeType.Custom,
@@ -111,10 +111,8 @@ export const NeckMode = (props: NeckModeProps) => {
               max="60"
               value={cusDuration}
               onChange={(e) => {
-                // setCustomDuration(formatIntNumber(e.target.value, 5, 60));
-                let customDuration = formatIntNumber(e.target.value, 5, 60);
                 handleCustomConfigChange({
-                  nextCurDuration: customDuration,
+                  nextCurDuration: formatIntNumber(e.target.value, 5, 60),
                 });
               }}
             />
@@ -127,10 +125,8 @@ export const NeckMode = (props: NeckModeProps) => {
               max="360"
               value={cusMaxRotate}
               onChange={(e) => {
-                // setCustomMaxRotate(formatIntNumber(e.target.value, 0, 360));
-                const customMaxRotate = formatIntNumber(e.target.value, 0, 360);
                 handleCustomConfigChange({
-                  nextCurMaxRotate: customMaxRotate,
+                  nextCurMaxRotate: formatIntNumber(e.target.value, 0, 360),
                 });
               }}
             />

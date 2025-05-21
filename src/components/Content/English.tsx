@@ -21,6 +21,7 @@ export const English = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchNextWords = async () => {
+    if (loading) return;
     try {
       setLoading(true);
       const nextWords = await getNextWord();
@@ -41,11 +42,8 @@ export const English = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>单词学习</h2>
-        <button onClick={fetchNextWords} disabled={loading} className={styles.button}>
-          {loading ? '加载中...' : '>'}
-        </button>
+      <div className={styles.header} onClick={fetchNextWords}>
+        {loading ? '...' : '🔁'}
       </div>
 
       <div className={styles.wordList}>

@@ -19,8 +19,8 @@ export const CACHE_KEYS = {
 } as const;
 
 // 请求限制
-export const MAX_EVENTS_PER_PAGE = 10;
-export const MAX_HOLIDAYS_PER_PAGE = 3;
+export const MAX_EVENTS_PER_PAGE = 8;
+export const MAX_HOLIDAYS_PER_PAGE = 1;
 
 // wiki match
 export const WIKI_MATCH_CATEGORY = {

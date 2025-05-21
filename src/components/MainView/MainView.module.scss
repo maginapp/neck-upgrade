@@ -1,7 +1,7 @@
 .mainView {
   display: grid;
-  width: 70vh;
-  height: 70vh;
+  width: 60vh;
+  height: 60vh;
   grid-template-columns: 5fr 1fr;
   grid-template-rows: 1fr 4fr;
   grid-template-areas: 'h  s' 'c  s';
@@ -20,6 +20,9 @@
     writing-mode: vertical-rl;
     text-orientation: sideways;
     justify-self: center;
+    // 计算所得 width: 60vh / (5 + 1);
+    width: 10vh;
+    overflow: hidden;
   }
 
   .content {
@@ -31,6 +34,18 @@
 
   .header {
     grid-area: h;
+  }
+}
+
+@media screen and (max-width: 848px) {
+  .mainView {
+    min-width: 600px;
+    min-height: 600px;
+    transform: rotate(0) !important;
+    .side {
+      // 计算所得 min-width: 600px / (5 + 1);
+      min-width: 100px;
+    }
   }
 }
 
@@ -55,10 +70,4 @@
   text-orientation: mixed;
 }
 
-@media screen and (max-width: 857px) {
-  .mainView {
-    min-width: 600px;
-    min-height: 600px;
-    transform: rotate(0) !important;
-  }
-}
+

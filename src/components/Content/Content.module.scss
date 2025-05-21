@@ -2,63 +2,32 @@
   padding: 5px;
 }
 
-.historyContent,
-.poetryContent,
-.englishContent {
-  border-radius: 8px;
-}
+// .description {
+//   line-height: 1.6;
+//   color: var(--text-color);
+// }
 
-.historicalEvents,
-.holidays {
-  margin-top: 32px;
-}
+// .poem {
+//   line-height: 2;
+//   margin: 16px 0;
+//   white-space: pre-line;
+// }
 
-.historicalEvents h3,
-.holidays h3 {
-  margin-bottom: 16px;
-  color: var(--text-color);
-}
+// .translation {
+//   margin-top: 16px;
+//   padding-top: 16px;
+//   border-top: 1px solid var(--border-color);
+//   color: var(--text-secondary);
+// }
 
-.historicalEvents ul,
-.holidays ul {
-  list-style: none;
-  padding: 0;
-}
+// .word {
+//   font-size: 32px;
+//   font-weight: bold;
+//   margin-bottom: 16px;
+// }
 
-.historicalEvents li,
-.holidays li {
-  margin-bottom: 16px;
-  padding: 16px;
-  background-color: var(--item-bg);
-  border-radius: 4px;
-}
-
-.description {
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-.poem {
-  line-height: 2;
-  margin: 16px 0;
-  white-space: pre-line;
-}
-
-.translation {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border-color);
-  color: var(--text-secondary);
-}
-
-.word {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.sentence {
-  font-size: 1.16px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
+// .sentence {
+//   font-size: 1.16px;
+//   line-height: 1.6;
+//   color: var(--text-secondary);
+// }

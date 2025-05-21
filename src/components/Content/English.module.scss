@@ -1,38 +1,8 @@
 .container {
-  padding: 16px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--text-color);
-}
-
-.button {
-  padding: 8px 24px;
-  background: none;
-  border: 1px solid var(--text-color);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.button:hover {
-  opacity: 0.9;
-}
-
-.button:disabled {
-  background-color: var(--text-secondary);
-  cursor: not-allowed;
+  .header {
+    text-align: right;
+    padding-right: 16px;
+  }
 }
 
 .wordList {
@@ -42,11 +12,7 @@
 }
 
 .wordCard {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 16px;
-  background-color: var(--content-bg);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding-bottom: 8px;
 }
 
 .wordHeader {

@@ -25,7 +25,11 @@ const processWikiLinks = (html: string): string => {
   return html
     .replace(/href="\/wiki\/([^"]+)"/g, 'href="https://zh.wikipedia.org/wiki/$1"')
     .replace(/<a[^>]*href="#cite_note-[^"]*"[^>]*>.*?<\/a>/g, '')
-    .replace(/src="\/\/upload\.wikimedia\.org\/([^"]+)"/g, 'src="https://upload.wikimedia.org/$1"');
+    .replace(/src="\/\/upload\.wikimedia\.org\/([^"]+)"/g, 'src="https://upload.wikimedia.org/$1"')
+    .replace(
+      /srcset="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
+      'src="https://upload.wikimedia.org/$1"'
+    );
 };
 
 // 解析HTML内容，提取大事记和节假日信息
