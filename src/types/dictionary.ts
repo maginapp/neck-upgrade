@@ -7,13 +7,13 @@ export interface DictionaryEntry {
   sourceUrls?: string[];
 }
 
-interface Phonetic {
+export interface Phonetic {
   text: string;
   audio: string;
   sourceUrl?: string;
 }
 
-interface Meaning {
+export interface Meaning {
   partOfSpeech: string;
   definitions: Definition[];
   synonyms: string[];

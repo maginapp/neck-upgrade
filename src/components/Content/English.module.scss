@@ -2,6 +2,10 @@
   .header {
     text-align: right;
     padding-right: 16px;
+    flex-wrap: wrap;
+  }
+  .refresh {
+    cursor: pointer;
   }
 }
 
@@ -31,6 +35,21 @@
 .phonetic {
   color: var(--text-secondary);
   font-size: 14px;
+}
+
+.audioMananger {
+  cursor: pointer;
+}
+
+.audioPlayer {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.source {
+  color: var(--text-secondary);
+  text-decoration: underline;
 }
 
 .meanings {
