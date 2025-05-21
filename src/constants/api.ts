@@ -21,3 +21,9 @@ export const CACHE_KEYS = {
 // 请求限制
 export const MAX_EVENTS_PER_PAGE = 10;
 export const MAX_HOLIDAYS_PER_PAGE = 3;
+
+// wiki match
+export const WIKI_MATCH_CATEGORY = {
+  bigEvent: ['大事记', '大事記'],
+  holiday: ['节假日和习俗', '節假日和習俗'],
+};

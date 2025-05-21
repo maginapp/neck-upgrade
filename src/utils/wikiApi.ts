@@ -5,6 +5,7 @@ import {
   CACHE_KEYS,
   MAX_EVENTS_PER_PAGE,
   MAX_HOLIDAYS_PER_PAGE,
+  WIKI_MATCH_CATEGORY,
 } from '../constants';
 
 interface HistoricalEventWithCategory extends HistoricalEvent {
@@ -35,16 +36,22 @@ const parseWikiEvents = (
   const holidays: HolidayWikiInfo[] = [];
 
   // 使用正则表达式匹配h2标签和其内容，提取id属性作为分类
-  const sectionRegex = /<h2[^>]*id="([^"]*)"[^>]*>.*?<\/h2>(.*?)(?=<h2|$)/gs;
+  const sectionRegex =
+    /<h2[^>]*id="([^"]*)"[^>]*>.*?<span[^>]*>.*?<\/span>(.*?)<\/h2>(.*?)(?=<h2|$)/gs;
+
   let sectionMatch;
 
   while ((sectionMatch = sectionRegex.exec(html)) !== null) {
     const category = sectionMatch[1].trim();
-    const content = sectionMatch[2];
+    const title = sectionMatch[2].trim();
+    const content = sectionMatch[3];
 
     const list = new DOMParser().parseFromString(content, 'text/html').querySelectorAll('li');
 
-    if (category === '大事记') {
+    if (
+      WIKI_MATCH_CATEGORY.bigEvent.includes(category) ||
+      WIKI_MATCH_CATEGORY.bigEvent.includes(title)
+    ) {
       // 处理历史事件
       const eventRegex = /(\d{4})年.*?/;
       for (const item of list) {
@@ -56,7 +63,10 @@ const parseWikiEvents = (
           });
         }
       }
-    } else if (category === '节假日和习俗') {
+    } else if (
+      WIKI_MATCH_CATEGORY.holiday.includes(category) ||
+      WIKI_MATCH_CATEGORY.holiday.includes(title)
+    ) {
       // 处理节假日信息
       for (const item of list) {
         const text = item.textContent ?? '';
