@@ -27,10 +27,9 @@ export const FamousSaying: React.FC = () => {
 
     fetchQuote();
   }, []);
-
   return (
     <div className={styles.container}>
-      {loading && <Loading />}
+      {<Loading writingMode="initial" />}
       {quote && (
         <div className={styles.quote}>
           <p className={styles.content}>{quote.content}</p>
