@@ -3,8 +3,15 @@ import { ThemeToggle } from '../Theme';
 import { NeckMode } from '../NeckMode';
 import { DataSwitch } from '../DataSwitch';
 import styles from './Settings.module.scss';
-import { DataType, Theme, NeckModeConfig, Settings as SettingsType } from '@/types/app';
+import {
+  DataType,
+  Theme,
+  NeckModeConfig,
+  Settings as SettingsType,
+  KnowledgeMode,
+} from '@/types/app';
 import { MESSAGE_TYPES } from '@/constants/events';
+import { KnowledgeSwtich } from '../KnowledgeSwtich';
 
 interface SettingsProps {
   settings: SettingsType;
@@ -23,6 +30,9 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
   };
   const onDataTypeChange = (dataType: DataType) => {
     setSettings({ ...settings, dataType });
+  };
+  const onKnowledgeModeChange = (knowledgeMode: KnowledgeMode) => {
+    setSettings({ ...settings, knowledge: knowledgeMode });
   };
 
   useEffect(() => {
@@ -77,6 +87,13 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
           <div className={styles.settingsGroup}>
             <h3>内容类型</h3>
             <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
+          </div>
+          <div className={styles.settingsGroup}>
+            <h3>百科数据源(优先使用)</h3>
+            <KnowledgeSwtich
+              currentMode={settings.knowledge}
+              onModeChange={onKnowledgeModeChange}
+            />
           </div>
         </div>
       </div>

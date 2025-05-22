@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { getNextWord } from '@/utils/wordLearning';
 import styles from './English.module.scss';
 import { DictionaryEntry } from '@/types/dictionary';
+import { throttle } from 'lodash-es';
+import { THROTTLE_TIME } from '@/constants';
 
 interface WordInfo {
   word: string;
@@ -95,9 +97,13 @@ export const English = () => {
     fetchNextWords();
   }, []);
 
+  const handleRefresh = throttle(() => {
+    fetchNextWords();
+  }, THROTTLE_TIME);
+
   return (
     <div className={styles.container}>
-      <div className={styles.header} onClick={fetchNextWords}>
+      <div className={styles.header} onClick={handleRefresh}>
         {loading ? '...' : <span className={styles.refresh}>🔁</span>}
       </div>
 

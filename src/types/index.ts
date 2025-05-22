@@ -1,11 +1,3 @@
-export interface HistoricalEvent {
-  html: string;
-}
-
-export interface HolidayWikiInfo {
-  html: string;
-}
-
 export interface HolidayInfo {
   name: string;
   date: string;

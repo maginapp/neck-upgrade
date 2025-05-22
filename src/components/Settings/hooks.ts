@@ -1,4 +1,4 @@
-import { DataType, Theme, NeckMode, Settings } from '@/types/app';
+import { DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
 import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
@@ -33,6 +33,7 @@ export function useSettings() {
       cusMaxRotate: 180,
     },
     dataType: DataType.History,
+    knowledge: KnowledgeMode.Wiki,
   });
 
   // 系统主题状态

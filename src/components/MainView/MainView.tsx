@@ -16,21 +16,21 @@ export function MainView(props: MainViewProps) {
   const { mode, rotate } = neckConfig;
 
   return (
-    <main
+    <div
       className={`${styles.mainView} ${styles[mode]}`}
       style={{
         transform: `rotate(${rotate}deg)`,
       }}
     >
-      <div className={styles.header}>
+      <header className={styles.header}>
         <Header />
-      </div>
-      <div className={styles.side}>
+      </header>
+      <aside className={styles.side}>
         <FamousSaying />
-      </div>
-      <div className={styles.content}>
-        <Content type={settings.dataType} />
-      </div>
-    </main>
+      </aside>
+      <main className={styles.content}>
+        <Content settings={settings} />
+      </main>
+    </div>
   );
 }

@@ -65,25 +65,4 @@ export class CacheManager<T> {
       chrome.storage.local.remove([this.key], resolve);
     });
   }
-
-  /**
-   * 获取缓存状态
-   * @returns 包含缓存存在状态、是否过期和时间戳的对象
-   */
-  async getStatus(): Promise<{ exists: boolean; isExpired: boolean; timestamp?: string }> {
-    return new Promise((resolve) => {
-      chrome.storage.local.get([this.key], (result) => {
-        const data = result[this.key] as { data: T; timestamp: string } | undefined;
-        if (!data) {
-          resolve({ exists: false, isExpired: false });
-          return;
-        }
-        resolve({
-          exists: true,
-          isExpired: this.isExpired(data.timestamp),
-          timestamp: data.timestamp,
-        });
-      });
-    });
-  }
 }

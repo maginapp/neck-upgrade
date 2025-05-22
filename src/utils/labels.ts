@@ -1,4 +1,4 @@
-import { Theme, NeckMode, DataType } from '@/types/app';
+import { Theme, NeckMode, DataType, KnowledgeMode } from '@/types/app';
 
 /**
  * 获取主题的显示标签
@@ -45,4 +45,17 @@ export const getDataTypeLabel = (type: DataType): string => {
     [DataType.English]: '英语',
   };
   return labels[type];
+};
+
+/**
+ * 获取百科数据源的显示标签
+ * @param mode 百科数据源类型
+ * @returns 百科数据源的显示标签
+ */
+export const getKnowledgeModeLabel = (mode: KnowledgeMode): string => {
+  const labels: Record<KnowledgeMode, string> = {
+    [KnowledgeMode.Wiki]: '维基百科',
+    [KnowledgeMode.Baidu]: '百度百科',
+  };
+  return labels[mode];
 };

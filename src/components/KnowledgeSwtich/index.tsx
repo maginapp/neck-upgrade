@@ -1,0 +1,1 @@
+export { KnowledgeSwtich } from './KnowledgeSwtich';

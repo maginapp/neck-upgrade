@@ -20,6 +20,12 @@ export enum NeckMode {
   Custom = 'custom',
 }
 
+// baike类型
+export enum KnowledgeMode {
+  Wiki = 'wiki',
+  Baidu = 'baidu',
+}
+
 export interface NeckModeConfig {
   rotate: number;
   duration: number;
@@ -32,4 +38,5 @@ export interface Settings {
   theme: Theme;
   neck: NeckModeConfig;
   dataType: DataType;
+  knowledge: KnowledgeMode;
 }

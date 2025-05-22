@@ -22,7 +22,13 @@
     color: var(--text-color);
   }
   a:hover {
-    color: var(-primary-color);
+    color: var(--primary-color);
+  }
+  [class*=lemmaPicture] {
+    margin-bottom: 5px;
+  }
+  img[class*=picture] {
+    margin: 5px 5px 0;
   }
 }
 

@@ -1,31 +1,26 @@
 import { HolidayToday, KnowledgeData, HistoricalEventWithCategory } from '../types/knowledge';
 import { CacheManager } from './cacheManager';
 import {
-  WIKI_BASE_URL,
+  BAIDU_BASE_URL,
   CACHE_KEYS,
-  WIKI_MAX_EVENTS_COUNT,
-  WIKI_HOLIDAY_COUNT,
-  WIKI_MATCH_CATEGORY,
+  BAIDU_MAX_EVENTS_COUNT,
+  BAIDU_HOLIDAY_COUNT,
+  BAIDU_MATCH_CATEGORY,
 } from '../constants';
 import { fetchWithTimeout } from './fetch';
 
-// 创建维基数据缓存管理器
-const wikiCache = new CacheManager<KnowledgeData>(CACHE_KEYS.WIKI_DATA);
+// 创建百度数据缓存管理器
+const baiduCache = new CacheManager<KnowledgeData>(CACHE_KEYS.BAIDU_DATA);
 
-// 处理维基百科链接，将/wiki开头的路径转换为完整URL/ //upload图片添加 https, 引用链接移除
-const processWikiLinks = (html: string): string => {
+// 处理百度百科链接，转换为完整URL, 引用链接移除
+const processBaiduLinks = (html: string): string => {
   return html
-    .replace(/href="\/wiki\/([^"]+)"/g, 'href="https://zh.wikipedia.org/wiki/$1"')
-    .replace(/<a[^>]*href="#cite_note-[^"]*"[^>]*>.*?<\/a>/g, '')
-    .replace(/src="\/\/upload\.wikimedia\.org\/([^"]+)"/g, 'src="https://upload.wikimedia.org/$1"')
-    .replace(
-      /srcset="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
-      'src="https://upload.wikimedia.org/$1"'
-    );
+    .replace(/href="\/item\/([^"]+)"/g, `href="${BAIDU_BASE_URL}/item/$1"`)
+    .replace(/<sup[^>]*>.*?<\/sup>/g, '');
 };
 
 // 解析HTML内容，提取大事记和节假日信息
-const parseWikiEvents = (
+const parseBaiduEvents = (
   html: string
 ): { events: HistoricalEventWithCategory[]; holidays: HolidayToday[] } => {
   const events: HistoricalEventWithCategory[] = [];
@@ -33,7 +28,8 @@ const parseWikiEvents = (
 
   // 使用正则表达式匹配h2标签和其内容，提取id属性作为分类
   const sectionRegex =
-    /<h2[^>]*id="([^"]*)"[^>]*>.*?<span[^>]*>.*?<\/span>(.*?)<\/h2>(.*?)(?=<h2|$)/gs;
+    // const sectionRegex = /<div><h2[^>]*>(.*?)<\/h2>(.*?)(?=<h2|$)/gs;
+    /<div[^>]*data-name="([^"]*)"[^>]*>.*?<h2[^>]*>(.*?)<\/h2>(.*?)(?=<div[^>]*><h2|$)/gs;
 
   let sectionMatch;
 
@@ -42,11 +38,13 @@ const parseWikiEvents = (
     const title = sectionMatch[2].trim();
     const content = sectionMatch[3];
 
-    const list = new DOMParser().parseFromString(content, 'text/html').querySelectorAll('li');
+    const list = new DOMParser()
+      .parseFromString(content, 'text/html')
+      .querySelectorAll('[data-tag="paragraph"]');
 
     if (
-      WIKI_MATCH_CATEGORY.bigEvent.includes(category) ||
-      WIKI_MATCH_CATEGORY.bigEvent.includes(title)
+      BAIDU_MATCH_CATEGORY.bigEvent.includes(category) ||
+      BAIDU_MATCH_CATEGORY.bigEvent.includes(title)
     ) {
       // 处理历史事件
       const eventRegex = /(\d{4})年.*?/;
@@ -54,21 +52,20 @@ const parseWikiEvents = (
         const eventMatch = item.innerHTML.match(eventRegex);
         if (eventMatch !== null) {
           events.push({
-            html: processWikiLinks(item.innerHTML ?? ''),
+            html: processBaiduLinks(item.innerHTML ?? ''),
             category,
           });
         }
       }
     } else if (
-      WIKI_MATCH_CATEGORY.holiday.includes(category) ||
-      WIKI_MATCH_CATEGORY.holiday.includes(title)
+      BAIDU_MATCH_CATEGORY.holiday.includes(category) ||
+      BAIDU_MATCH_CATEGORY.holiday.includes(title)
     ) {
       // 处理节假日信息
       for (const item of list) {
-        const text = item.textContent ?? '';
-        if (text.includes('节') || text.includes('日')) {
+        if (item.querySelector('span[class*="bold"]')) {
           holidays.push({
-            html: processWikiLinks(item.innerHTML),
+            html: processBaiduLinks(item.innerHTML),
           });
         }
       }
@@ -78,15 +75,15 @@ const parseWikiEvents = (
   return { events, holidays };
 };
 
-// 获取维基百科页面内容
-const fetchWikiPage = async (): Promise<{ html: string; data: KnowledgeData }> => {
+// 获取百度百科页面内容
+const fetchBaiduPage = async (): Promise<{ html: string; data: KnowledgeData }> => {
   try {
     const today = new Date();
     const dateStr = `${today.getMonth() + 1}月${today.getDate()}日`;
     // 检查缓存
-    const cacheData = await wikiCache.get();
+    const cacheData = await baiduCache.get();
     if (cacheData) {
-      console.log('使用缓存的维基数据');
+      console.log('使用缓存的百度数据');
       return {
         html: '', // 缓存命中时不需要HTML内容
         data: cacheData,
@@ -94,22 +91,22 @@ const fetchWikiPage = async (): Promise<{ html: string; data: KnowledgeData }> =
     }
 
     // 缓存未命中，请求新数据
-    const response = await fetchWithTimeout(`${WIKI_BASE_URL}/${dateStr}`);
+    const response = await fetchWithTimeout(`${BAIDU_BASE_URL}/item/${dateStr}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const html = await response.text();
 
     // 解析数据
-    const { events: allHistoricalEvents, holidays: allHolidays } = parseWikiEvents(html);
+    const { events: allHistoricalEvents, holidays: allHolidays } = parseBaiduEvents(html);
 
     // 更新缓存
     const wikiData: KnowledgeData = {
       allHistoricalEvents,
       allHolidays,
     };
-    await wikiCache.set(wikiData);
-    console.log('更新维基数据缓存');
+    await baiduCache.set(wikiData);
+    console.log('更新百度数据缓存');
 
     return {
       html,
@@ -122,12 +119,12 @@ const fetchWikiPage = async (): Promise<{ html: string; data: KnowledgeData }> =
 };
 
 // 获取历史上的今天的大事记
-export const getHistoricalEvents = async (): Promise<HistoricalEventWithCategory[]> => {
+export const getBaiduHistoricalEvents = async (): Promise<HistoricalEventWithCategory[]> => {
   try {
-    const { data } = await fetchWikiPage();
+    const { data } = await fetchBaiduPage();
 
     // 返回随机选择的记录
-    return selectRandomEvents(data.allHistoricalEvents, WIKI_MAX_EVENTS_COUNT);
+    return selectRandomEvents(data.allHistoricalEvents, BAIDU_MAX_EVENTS_COUNT);
   } catch (error) {
     console.error('Error fetching historical events:', error);
     return [];
@@ -135,21 +132,21 @@ export const getHistoricalEvents = async (): Promise<HistoricalEventWithCategory
 };
 
 // 获取节假日信息
-export const getHolidays = async (): Promise<HolidayToday[]> => {
+export const getBaiduHolidays = async (): Promise<HolidayToday[]> => {
   try {
-    const { data } = await fetchWikiPage();
+    const { data } = await fetchBaiduPage();
 
     // 返回随机选择的记录
-    return selectRandomHolidays(data.allHolidays, WIKI_HOLIDAY_COUNT);
+    return selectRandomHolidays(data.allHolidays, BAIDU_HOLIDAY_COUNT);
   } catch (error) {
     console.error('Error fetching holidays:', error);
     return [];
   }
 };
 
-// 清除维基数据缓存
-export const clearWikiCache = async (): Promise<void> => {
-  await wikiCache.clear();
+// 清除百度数据缓存
+export const clearBaiduCache = async (): Promise<void> => {
+  await baiduCache.clear();
 };
 
 // 从所有事件中随机选择指定数量的事件，确保每个分类至少有一条
