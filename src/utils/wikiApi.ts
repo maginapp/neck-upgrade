@@ -3,8 +3,8 @@ import { CacheManager } from './cacheManager';
 import {
   WIKI_BASE_URL,
   CACHE_KEYS,
-  MAX_EVENTS_PER_PAGE,
-  MAX_HOLIDAYS_PER_PAGE,
+  WIKI_MAX_EVENTS_COUNT,
+  WIKI_HOLIDAY_COUNT,
   WIKI_MATCH_CATEGORY,
 } from '../constants';
 
@@ -100,7 +100,7 @@ const fetchWikiPage = async (dateStr: string): Promise<{ html: string; data: Wik
     }
 
     // 缓存未命中，请求新数据
-    const response = await fetch(`${WIKI_BASE_URL}${dateStr}`);
+    const response = await fetch(`${WIKI_BASE_URL}/${dateStr}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -135,7 +135,7 @@ export const getHistoricalEvents = async (): Promise<HistoricalEventWithCategory
     const { data } = await fetchWikiPage(dateStr);
 
     // 返回随机选择的记录
-    return selectRandomEvents(data.allHistoricalEvents, MAX_EVENTS_PER_PAGE);
+    return selectRandomEvents(data.allHistoricalEvents, WIKI_MAX_EVENTS_COUNT);
   } catch (error) {
     console.error('Error fetching historical events:', error);
     return [];
@@ -150,7 +150,7 @@ export const getHolidays = async (): Promise<HolidayWikiInfo[]> => {
     const { data } = await fetchWikiPage(dateStr);
 
     // 返回随机选择的记录
-    return selectRandomHolidays(data.allHolidays, MAX_HOLIDAYS_PER_PAGE);
+    return selectRandomHolidays(data.allHolidays, WIKI_HOLIDAY_COUNT);
   } catch (error) {
     console.error('Error fetching holidays:', error);
     return [];

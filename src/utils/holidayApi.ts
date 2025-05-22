@@ -2,6 +2,7 @@ import { HOLIDAY_API_BASE_URL, CACHE_KEYS } from '@/constants';
 import { HolidayInfo } from '../types';
 import { CacheManager } from './cacheManager';
 import { HolidayApiResponse } from '@/types/timor';
+import { getCurrentDate } from './base';
 
 // const CACHE_KEY = 'holiday_data_cache';
 
@@ -23,8 +24,7 @@ export const getNextHoliday = async (): Promise<HolidayInfo | null> => {
       return cacheData.nextHoliday;
     }
 
-    const today = new Date();
-    const dateStr = today.toISOString().split('T')[0];
+    const dateStr = getCurrentDate();
     const response = await fetch(`${HOLIDAY_API_BASE_URL}/next/${dateStr}?type=Y&week=Y`);
 
     if (!response.ok) {

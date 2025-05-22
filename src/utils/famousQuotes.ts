@@ -1,13 +1,15 @@
-import { limitConcurrency } from './base';
+import { getCurrentDate, limitConcurrency, ResultType } from './base';
 import { CacheManager } from './cacheManager';
 import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '../types/famous';
-
-const ZEN_QUOTES_API = 'https://zenquotes.io/api/random';
-const HITOKOTO_API = 'https://v1.hitokoto.cn/?c=i';
-
-const MAX_CACHE_LENGTH = 30;
-const MAX_REQ_COUNT = 3;
-const CONCURRENT_LIMIT = 2;
+import {
+  FAMOUS_ZEN_QUOTES_API,
+  FAMOUS_HITOKOTO_API,
+  FAMOUS_MAX_CACHE_COUNT,
+  FAMOUS_MAX_REQ_COUNT,
+  FAMOUS_CON_LIMIT,
+  FAMOUS_HI_MAX_REQ_COUNT,
+  FAMOUS_HI_CON_LIMIT,
+} from '@/constants';
 
 class FamouseStorage extends CacheManager<FamousRecords> {
   constructor() {
@@ -16,7 +18,10 @@ class FamouseStorage extends CacheManager<FamousRecords> {
 
   // 重写过期检查方法，设置项永不过期
   protected isExpired(timestamp: string) {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getCurrentDate();
+    if (!timestamp) {
+      return true;
+    }
     const cache = new Date(timestamp).toISOString().split('T')[0];
     return cache !== today;
   }
@@ -33,7 +38,7 @@ const convertZenquotesRsp = (data: ZenquotesRsp): FamousInfo[] => {
 
 const fetchZenquotesRsp = async (): Promise<FamousInfo[]> => {
   try {
-    const response = await fetch(ZEN_QUOTES_API);
+    const response = await fetch(FAMOUS_ZEN_QUOTES_API);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     return convertZenquotesRsp(data);
@@ -55,7 +60,7 @@ const convertHitokotoData = (data: HitokotoData): FamousInfo => {
 
 const fetchHitokotoData = async (): Promise<FamousInfo[]> => {
   try {
-    const response = await fetch(HITOKOTO_API);
+    const response = await fetch(FAMOUS_HITOKOTO_API);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     return [convertHitokotoData(data)];
@@ -66,7 +71,7 @@ const fetchHitokotoData = async (): Promise<FamousInfo[]> => {
 };
 
 export const getFamousQuotes = async (): Promise<FamousInfo[]> => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = getCurrentDate();
   const cached = await cacheManager.get();
 
   if (cached && cached.currentDate === today) {
@@ -74,17 +79,20 @@ export const getFamousQuotes = async (): Promise<FamousInfo[]> => {
   }
 
   const zenAndHitokotoTask = await Promise.all([
-    limitConcurrency(fetchZenquotesRsp, Array(MAX_REQ_COUNT), CONCURRENT_LIMIT),
-    limitConcurrency(fetchHitokotoData, Array(MAX_REQ_COUNT), CONCURRENT_LIMIT),
+    limitConcurrency(fetchZenquotesRsp, Array(FAMOUS_MAX_REQ_COUNT), FAMOUS_CON_LIMIT),
+    limitConcurrency(fetchHitokotoData, Array(FAMOUS_HI_MAX_REQ_COUNT), FAMOUS_HI_CON_LIMIT),
   ]);
 
-  const results = zenAndHitokotoTask.flat(2);
+  const results = zenAndHitokotoTask.flat();
 
-  const newRecords = results.filter(
-    (record): record is FamousInfo => record !== null && record !== undefined
-  );
+  const newRecords = results
+    .filter(
+      (record) => record.status === ResultType.OK && record.data !== null && record !== undefined
+    )
+    .map((item) => item.data)
+    .flat();
   const existingRecords = cached?.records || [];
-  const allRecords = [...existingRecords, ...newRecords].slice(-MAX_CACHE_LENGTH);
+  const allRecords = [...existingRecords, ...newRecords].slice(-FAMOUS_MAX_CACHE_COUNT);
 
   await cacheManager.set({
     records: allRecords,

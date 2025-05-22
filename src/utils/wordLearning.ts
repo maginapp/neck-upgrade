@@ -1,11 +1,13 @@
-import { CACHE_KEYS } from '@/constants';
+import {
+  CACHE_KEYS,
+  WORD_API_BASE_URL,
+  WORD_BATCH_SIZE,
+  WORD_CON_LIMIT,
+  WORD_UNIT_COUNT,
+} from '@/constants';
 import { DictionaryEntry, Meaning } from '../types/dictionary';
 import { getNextRecord } from './generateNext';
-import { limitConcurrency } from './base';
-
-const BATCH_SIZE = 5;
-const MAX_CONCURRENT_REQUESTS = 3;
-const SELECTED_COUNT = 15; // 每天选择的数量
+import { limitConcurrency, ResultType } from './base';
 
 interface WordInfo {
   word: string;
@@ -42,15 +44,14 @@ const getWordListFromFile = async (): Promise<WordInfo[]> => {
     return [];
   }
 };
-
 // 获取单词定义
 const getWordDefinition = async (word: string): Promise<DictionaryEntry> => {
   try {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+    const response = await fetch(`${WORD_API_BASE_URL}/${word}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
+    const data: DictionaryEntry[] = await response.json();
     return data[0];
   } catch (error) {
     console.error(`Error fetching definition for ${word}:`, error);
@@ -62,15 +63,20 @@ const getWordDefinition = async (word: string): Promise<DictionaryEntry> => {
 
 // 批量获取单词定义
 const getWordDefinitions = async (words: WordInfo[]): Promise<WordInfo[]> => {
-  const results = await limitConcurrency(
-    getWordDefinition,
-    words.map((word) => word.word),
-    MAX_CONCURRENT_REQUESTS
-  );
-  return results.map((result) => ({
-    word: result.word,
-    definition: result,
-  }));
+  try {
+    const results = await limitConcurrency(
+      getWordDefinition,
+      words.map((word) => word.word),
+      WORD_CON_LIMIT
+    );
+    return results.map((result) => ({
+      word: result.params,
+      definition: result.status === ResultType.OK ? result.data : undefined,
+    }));
+  } catch (error) {
+    console.error('Error fetching word definitions:', error);
+    return words;
+  }
 };
 
 /**
@@ -143,8 +149,8 @@ export const getNextWord = async (): Promise<WordInfo[] | null> => {
     cacheKey: CACHE_KEYS.EN_WORD_LEARNING_RECORD, // 缓存key
     compareFn: (a: WordInfo, b: WordInfo) => a.word === b.word, // 比较函数
     getData: getWordList, // 数据源
-    unitCount: SELECTED_COUNT, // 每次选择的数量
-    batchSize: BATCH_SIZE,
+    unitCount: WORD_UNIT_COUNT, // 每次选择的数量
+    batchSize: WORD_BATCH_SIZE,
     formatRecord: getWordDefinitions,
   }).then((wordList) => {
     return sliceWordList(wordList);

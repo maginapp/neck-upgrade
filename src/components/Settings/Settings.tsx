@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { ThemeToggle } from '../ThemeToggle';
+import React, { useEffect, useState } from 'react';
+import { ThemeToggle } from '../Theme';
 import { NeckMode } from '../NeckMode';
 import { DataSwitch } from '../DataSwitch';
 import styles from './Settings.module.scss';
 import { DataType, Theme, NeckModeConfig, Settings as SettingsType } from '@/types/app';
+import { MESSAGE_TYPES } from '@/constants/events';
 
 interface SettingsProps {
   settings: SettingsType;
@@ -23,6 +24,27 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
   const onDataTypeChange = (dataType: DataType) => {
     setSettings({ ...settings, dataType });
   };
+
+  useEffect(() => {
+    // todo 策略模式
+    const messageListener = (message: any) => {
+      if (message.type === MESSAGE_TYPES.TOGGLE_ACTIVE_SETTINGS) {
+        const nextStatus = message.isOpen ?? !isOpen;
+        setIsOpen(nextStatus);
+        chrome.runtime.sendMessage({
+          type: MESSAGE_TYPES.SETTINGS_OPEN_STATUS,
+          isOpen: nextStatus,
+        });
+      }
+      if (message.type === MESSAGE_TYPES.GET_SETTINGS_OPEN_STATUS) {
+        chrome.runtime.sendMessage({ type: MESSAGE_TYPES.SETTINGS_OPEN_STATUS, isOpen: isOpen });
+      }
+    };
+    chrome.runtime.onMessage.addListener(messageListener);
+    return () => {
+      chrome.runtime.onMessage.removeListener(messageListener);
+    };
+  }, [isOpen]);
 
   return (
     <>

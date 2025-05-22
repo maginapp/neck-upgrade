@@ -16,6 +16,7 @@ export const History: React.FC = () => {
         setEvents(historicalEvents);
         const holiday = await getHolidays();
         setHolidays(holiday);
+        console.log('🚀 ~ fetchData ~:  ', historicalEvents, holiday);
       } catch (error) {
         console.error('获取数据失败:', error);
       } finally {

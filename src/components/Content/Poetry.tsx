@@ -12,6 +12,7 @@ export const PoetryComponent: React.FC = () => {
       setLoading(true);
       try {
         const nextPoem = await getNextPoem();
+        console.log('🚀 ~ fetchPoem ~ nextPoem:  ', nextPoem);
         setPoems(nextPoem || []);
       } catch (error) {
         console.error('获取诗词失败:', error);

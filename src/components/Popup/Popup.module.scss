@@ -1,0 +1,60 @@
+.popup {
+  width: 300px;
+  min-height: 200px;
+  padding: 16px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 24px;
+    margin: 0 0 16px;
+    color: var(--text-color);
+    text-align: center;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.button {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--button-background);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+
+  &:hover {
+    background-color: var(--button-hover-background);
+  }
+
+  &:active {
+    background-color: var(--button-active-background);
+  }
+}

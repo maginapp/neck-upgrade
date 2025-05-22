@@ -1,0 +1,11 @@
+.app {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  min-width: 600px;
+  button {
+    color: var(--text-color);
+  }
+}

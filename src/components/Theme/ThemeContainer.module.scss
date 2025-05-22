@@ -1,19 +1,11 @@
-.app {
-  height: 100vh;
+.themeContainer {
+  height: 100%;
+  width: 100%;
   background-color: var(--background-color);
   transition:
     background-color 0.3s,
     color 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--text-color);
-  overflow: auto;
-  min-width: 600px;
-
-  button {
-    color: var(--text-color);
-  }
 
   &.light {
     --header-bg: #ffffff;
@@ -21,7 +13,7 @@
     --settings-bg: #f8f2e4;
     --text-color: #333333;
     --text-secondary: #666666;
-    --border-color: #e0e0e0;
+    --border-color: #d9d9d9;
     --hover-bg: #f0f0f0;
     --primary-color: #007bff;
     --background-color: #f0e4c8;
@@ -34,7 +26,7 @@
     --settings-bg: #1a1a1a;
     --text-color: #eeeeee;
     --text-secondary: #b3b3b3;
-    --border-color: #404040;
+    --border-color: #424206;
     --hover-bg: #333333;
     --primary-color: #0d6efd;
     --background-color: #121212;
