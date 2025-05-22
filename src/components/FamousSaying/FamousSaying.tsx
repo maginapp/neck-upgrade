@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getRandomFamousQuote } from '../../utils/famousQuotes';
 import { FamousInfo } from '../../types/famous';
 import styles from './FamousSaying.module.scss';
+import { Loading } from '../Tools';
 
 export const FamousSaying: React.FC = () => {
   const [quote, setQuote] = useState<FamousInfo | null>(null);
@@ -27,22 +28,17 @@ export const FamousSaying: React.FC = () => {
     fetchQuote();
   }, []);
 
-  if (loading) {
-    return <div className={styles.container}>加载中...</div>;
-  }
-
-  if (!quote) {
-    return null;
-  }
-
   return (
     <div className={styles.container}>
-      <div className={styles.quote}>
-        <p className={styles.content}>{quote.content}</p>
-        <div className={styles.author}>
-          {quote.source && <span className={styles.source}> -- {quote.source}</span>}
+      {loading && <Loading />}
+      {quote && (
+        <div className={styles.quote}>
+          <p className={styles.content}>{quote.content}</p>
+          <div className={styles.author}>
+            {quote.source && <span className={styles.source}> -- {quote.source}</span>}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

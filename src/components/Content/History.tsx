@@ -4,14 +4,13 @@ import { getHistoricalEvents, getHolidays } from '@/utils/wikiApi';
 import { HistoricalEvent, HolidayToday } from '@/types/knowledge';
 import { getBaiduHistoricalEvents, getBaiduHolidays } from '@/utils/baiduApi';
 import { KnowledgeMode } from '@/types/app';
+import { Toolbar } from '../Tools';
 
 const useHistory = (knowledgeMode: KnowledgeMode) => {
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
   const [holiday, setHolidays] = useState<HolidayToday[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const successRef = useRef(false);
-
-  console.log('🚀 ~ useHistory ~:  ', knowledgeMode, events.length, holiday.length, loading);
 
   const fetchWiki = async () => {
     setLoading(true);
@@ -68,59 +67,12 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
     fetchData();
   }, []);
 
-  return { events, holiday, loading };
+  return { events, holiday, loading, fetchData };
 };
 
 export const History: React.FC<{ knowledgeMode: KnowledgeMode }> = (props) => {
   const { knowledgeMode } = props;
-  const { events, holiday, loading } = useHistory(knowledgeMode);
-  // const [events, setEvents] = useState<HistoricalEvent[]>([]);
-  // const [holiday, setHolidays] = useState<HolidayToday[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
-
-  // const fetchWiki = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const historicalEvents = await getHistoricalEvents();
-  //     setEvents(historicalEvents);
-  //     const holiday = await getHolidays();
-  //     setHolidays(holiday);
-  //     console.log('🚀 ~ fetchData wiki ~:  ', historicalEvents, holiday);
-  //     if (historicalEvents.length <= 0 && holiday.length <= 0) {
-  //       throw new Error('wiki数据空');
-  //     }
-  //   } catch (error) {
-  //     console.error('获取wiki数据失败:', error);
-  //     await fetchBaidu();
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const fetchBaidu = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const baiduHistoricalEvents = await getBaiduHistoricalEvents();
-  //     const baiduHolidays = await getBaiduHolidays();
-  //     setEvents(baiduHistoricalEvents);
-  //     setHolidays(baiduHolidays);
-  //     console.log('🚀 ~ fetchData baidu ~:  ', baiduHistoricalEvents, baiduHolidays);
-  //   } catch (error) {
-  //     console.error('获取baidu数据失败:', error);
-  //     // 重置缓存
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const fetchData = async () => {
-  //   await fetchWiki();
-  //   console.log('🚀 ~ fetchData ~:  ', events.length, holiday.length, knowledgeMode);
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const { events, holiday, loading, fetchData } = useHistory(knowledgeMode);
 
   const title = useMemo(() => {
     if (events.length > 0 && holiday.length > 0) {
@@ -136,12 +88,9 @@ export const History: React.FC<{ knowledgeMode: KnowledgeMode }> = (props) => {
     }
   }, [events, holiday]);
 
-  if (loading) {
-    return <div className="loading">加载中...</div>;
-  }
-
   return (
     <>
+      <Toolbar loading={loading} onRefresh={fetchData} />
       <h2>{title}</h2>
       <section className={styles.historicalSection}>
         <ul>

@@ -2,38 +2,30 @@ import React, { useEffect, useState } from 'react';
 import styles from './Poetry.module.scss';
 import { getNextPoem } from '@/utils/poetryLearning';
 import { Poetry } from '@/types/poetry';
+import { Toolbar } from '../Tools';
 
 export const PoetryComponent: React.FC = () => {
   const [poems, setPoems] = useState<Poetry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const fetchPoem = async () => {
+    setLoading(true);
+    try {
+      const nextPoem = await getNextPoem();
+      console.log('🚀 ~ fetchPoem ~ nextPoem:  ', nextPoem);
+      setPoems(nextPoem || []);
+    } catch (error) {
+      console.error('获取诗词失败:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchPoem = async () => {
-      setLoading(true);
-      try {
-        const nextPoem = await getNextPoem();
-        console.log('🚀 ~ fetchPoem ~ nextPoem:  ', nextPoem);
-        setPoems(nextPoem || []);
-      } catch (error) {
-        console.error('获取诗词失败:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPoem();
   }, []);
 
-  if (loading) {
-    return <div className="loading">加载中...</div>;
-  }
-
-  if (!poems.length) {
-    return null;
-  }
-
   return (
     <>
+      <Toolbar loading={loading} onRefresh={fetchPoem} />
       {poems.map((poem, index) => {
         return (
           <div key={index} className={styles.poetryContainer}>
