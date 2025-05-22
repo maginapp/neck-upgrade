@@ -66,3 +66,71 @@ export class CacheManager<T> {
     });
   }
 }
+
+/**
+ * 通用缓存管理类
+ * 支持数据缓存、过期检查、清除和状态查询
+ */
+export class LocalManager<T> {
+  private key: string;
+
+  constructor(key: string) {
+    this.key = key;
+  }
+
+  /**
+   * 检查缓存是否过期
+   * 通过比较日期判断是否在同一天
+   * @param timestamp 缓存时间戳
+   * @returns 是否过期
+   */
+  protected isExpired(timestamp: string): boolean {
+    const cacheDate = new Date(timestamp);
+    const now = new Date();
+    return (
+      cacheDate.getDate() !== now.getDate() ||
+      cacheDate.getMonth() !== now.getMonth() ||
+      cacheDate.getFullYear() !== now.getFullYear()
+    );
+  }
+
+  /**
+   * 获取缓存数据
+   * 如果数据存在且未过期则返回数据，否则返回null
+   */
+  get(): T | null {
+    try {
+      const str = localStorage.getItem(this.key);
+      let data =
+        typeof str === 'string' ? (JSON.parse(str) as { data: T; timestamp: string }) : null;
+      if (data && !this.isExpired(data.timestamp)) {
+        return data.data;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      console.error('localStorage 获取数据失败', e);
+      return null;
+    }
+  }
+
+  /**
+   * 设置缓存数据
+   * 将数据和时间戳一起存储
+   * @param data 要缓存的数据
+   */
+  set(data: T): void {
+    const cacheData = {
+      data,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem(this.key, JSON.stringify(cacheData));
+  }
+
+  /**
+   * 清除缓存数据
+   */
+  clear(): void {
+    localStorage.removeItem(this.key);
+  }
+}

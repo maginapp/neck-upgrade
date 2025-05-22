@@ -2,13 +2,13 @@ import { DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app'
 import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
-import { CacheManager } from '@/utils/cacheManager';
+import { LocalManager } from '@/utils/cacheManager';
 
 /**
  * 设置存储类
  * 继承自CacheManager，用于管理设置的持久化存储
  */
-class SettingsStorage extends CacheManager<Settings> {
+class SettingsStorage extends LocalManager<Settings> {
   constructor() {
     super(CACHE_KEYS.EXTENSION_SETTINGS);
   }
@@ -23,18 +23,20 @@ class SettingsStorage extends CacheManager<Settings> {
 const settingsStorage = new SettingsStorage();
 
 export function useSettings() {
-  const [settings, setSettings] = useState<Settings>({
-    theme: Theme.System,
-    neck: {
-      mode: NeckMode.Normal,
-      rotate: 0,
-      duration: 0,
-      cusDuration: 15,
-      cusMaxRotate: 180,
-    },
-    dataType: DataType.History,
-    knowledge: KnowledgeMode.Wiki,
-  });
+  const [settings, setSettings] = useState<Settings>(
+    settingsStorage.get() || {
+      theme: Theme.System,
+      neck: {
+        mode: NeckMode.Normal,
+        rotate: 0,
+        duration: 0,
+        cusDuration: 15,
+        cusMaxRotate: 180,
+      },
+      dataType: DataType.History,
+      knowledge: KnowledgeMode.Wiki,
+    }
+  );
 
   // 系统主题状态
   const [systemTheme, setSystemTheme] = useState<Theme>(() => {
@@ -46,17 +48,6 @@ export function useSettings() {
   const currentTheme = useMemo(() => {
     return settings.theme === Theme.System ? systemTheme : settings.theme;
   }, [settings.theme, systemTheme]);
-
-  // 组件挂载时从存储中加载设置
-  useEffect(() => {
-    const loadSettings = async () => {
-      const savedSettings = await settingsStorage.get();
-      if (savedSettings) {
-        setSettings(savedSettings);
-      }
-    };
-    loadSettings();
-  }, []);
 
   // 监听系统主题变化
   useEffect(() => {
@@ -76,10 +67,7 @@ export function useSettings() {
 
   // 当设置发生变化时保存到存储中
   useEffect(() => {
-    const saveSettings = async () => {
-      await settingsStorage.set(settings);
-    };
-    saveSettings();
+    settingsStorage.set(settings);
   }, [settings]);
 
   return { settings, setSettings, currentTheme };

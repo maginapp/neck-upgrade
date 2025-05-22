@@ -6,7 +6,6 @@ import { ThemeContainer } from '@/components/Theme/ThemeContainer';
 export function App() {
   // 状态管理：主题、颈椎模式和内容类型
   const { settings, setSettings, currentTheme } = useSettings();
-  console.log('????? currentTheme', currentTheme);
   return (
     <ThemeContainer currentTheme={currentTheme}>
       <div className={styles.app}>
