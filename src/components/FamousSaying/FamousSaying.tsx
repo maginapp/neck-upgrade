@@ -29,7 +29,7 @@ export const FamousSaying: React.FC = () => {
   }, []);
   return (
     <div className={styles.container}>
-      {<Loading writingMode="initial" />}
+      {loading && <Loading writingMode="initial" />}
       {quote && (
         <div className={styles.quote}>
           <p className={styles.content}>{quote.content}</p>
