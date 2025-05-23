@@ -1,4 +1,4 @@
-import { Poetry } from '@/types/poetry';
+import { Poetry } from '@/types';
 import { CACHE_KEYS } from '@/constants';
 import { getNextRecord } from './generateNext';
 

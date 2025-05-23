@@ -7,7 +7,7 @@ export interface DictionaryEntry {
   sourceUrls?: string[];
 }
 
-export interface Phonetic {
+interface Phonetic {
   text: string;
   audio: string;
   sourceUrl?: string;

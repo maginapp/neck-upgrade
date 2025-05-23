@@ -3,6 +3,7 @@ export enum DataType {
   Poetry = 'poetry',
   History = 'history',
   English = 'english',
+  News = 'news',
 }
 
 // 主题类型
@@ -39,4 +40,20 @@ export interface Settings {
   neck: NeckModeConfig;
   dataType: DataType;
   knowledge: KnowledgeMode;
+}
+
+export interface PageInfo {
+  pageSize: number;
+  page: number;
+}
+
+export enum NewsType {
+  WeiboAmuse = 'weibo_amuse',
+  WeiboHot = 'weibo_hot',
+  Xiaohongshu = 'xiaohongshu',
+  Toutiao = 'toutiao',
+  GgEnForYou = 'gg_en_for_you',
+  GgZhForYou = 'gg_zh_for_you',
+  GgEnGlobal = 'gg_en_global',
+  GgZhGlobal = 'gg_zh_global',
 }

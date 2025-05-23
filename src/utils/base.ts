@@ -8,12 +8,6 @@ export enum ResultType {
   ERROR = 'error',
 }
 
-// interface LimitConcurrencyItem<P, R> {
-//   status: ResultType;
-//   data: R | null;
-//   params: P;
-// }
-
 type LimitConcurrencyItem<P, R> =
   | {
       status: ResultType.OK;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getRandomFamousQuote } from '../../utils/famousQuotes';
-import { FamousInfo } from '../../types/famous';
+import { FamousInfo } from '@/types';
 import styles from './FamousSaying.module.scss';
 import { Loading } from '../Tools';
 

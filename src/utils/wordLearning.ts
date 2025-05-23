@@ -5,7 +5,7 @@ import {
   WORD_CON_LIMIT,
   WORD_UNIT_COUNT,
 } from '@/constants';
-import { DictionaryEntry, Meaning } from '../types/dictionary';
+import { DictionaryEntry, Meaning } from '@/types';
 import { getNextRecord } from './generateNext';
 import { limitConcurrency, ResultType } from './base';
 

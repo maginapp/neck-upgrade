@@ -1,16 +1,19 @@
-export interface HistoricalEvent {
-  html: string;
-}
-
 export interface HolidayToday {
   html: string;
 }
 
-export interface HistoricalEventWithCategory extends HistoricalEvent {
+export interface HistoricalEvent {
   category: string;
+  html: string;
 }
 
 export interface KnowledgeData {
-  allHistoricalEvents: HistoricalEventWithCategory[];
+  allHistoricalEvents: HistoricalEvent[];
   allHolidays: HolidayToday[];
+}
+
+// 组件展示的数据
+export interface KnowledgeDisplay {
+  events: HistoricalEvent[];
+  holidays: HolidayToday[];
 }

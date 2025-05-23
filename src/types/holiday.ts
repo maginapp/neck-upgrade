@@ -41,3 +41,9 @@ export interface HolidayApiResponse {
   workday: WorkdayInfo | null;
   type?: TypeInfo;
 }
+
+export interface HolidayDisplayInfo {
+  name: string;
+  date: string;
+  rest: number;
+}

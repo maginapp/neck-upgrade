@@ -1,13 +1,12 @@
 import { HOLIDAY_API_BASE_URL, CACHE_KEYS } from '@/constants';
-import { HolidayInfo } from '../types';
 import { CacheManager } from './cacheManager';
-import { HolidayApiResponse } from '@/types/timor';
+import { HolidayApiResponse, HolidayDisplayInfo } from '@/types';
 import { getCurrentDate } from './base';
 
 // const CACHE_KEY = 'holiday_data_cache';
 
 interface HolidayCacheData {
-  nextHoliday: HolidayInfo | null;
+  nextHoliday: HolidayDisplayInfo | null;
   timestamp: string;
 }
 
@@ -15,7 +14,7 @@ interface HolidayCacheData {
 const holidayCache = new CacheManager<HolidayCacheData>(CACHE_KEYS.TIMOR_TECH_API_HOLIDAY);
 
 // 获取下一个节假日信息
-export const getNextHoliday = async (): Promise<HolidayInfo | null> => {
+export const getNextHoliday = async (): Promise<HolidayDisplayInfo | null> => {
   try {
     // 检查缓存
     const cacheData = await holidayCache.get();
@@ -33,7 +32,7 @@ export const getNextHoliday = async (): Promise<HolidayInfo | null> => {
 
     const data: HolidayApiResponse = await response.json();
 
-    let nextHoliday: HolidayInfo | null = null;
+    let nextHoliday: HolidayDisplayInfo | null = null;
     if (data.code === 0 && data.holiday) {
       nextHoliday = {
         name: data.holiday.name,

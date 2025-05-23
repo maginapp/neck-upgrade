@@ -1,4 +1,4 @@
-import { Theme, NeckMode, DataType, KnowledgeMode } from '@/types/app';
+import { Theme, NeckMode, DataType, KnowledgeMode, NewsType } from '@/types/app';
 
 /**
  * 获取主题的显示标签
@@ -43,6 +43,7 @@ export const getDataTypeLabel = (type: DataType): string => {
     [DataType.Poetry]: '诗词',
     [DataType.History]: '历史',
     [DataType.English]: '英语',
+    [DataType.News]: '热榜',
   };
   return labels[type];
 };
@@ -58,4 +59,23 @@ export const getKnowledgeModeLabel = (mode: KnowledgeMode): string => {
     [KnowledgeMode.Baidu]: '百度百科',
   };
   return labels[mode];
+};
+
+/**
+ * 获取新闻类型的显示标签
+ * @param type 新闻类型
+ * @returns 新闻类型的显示标签
+ */
+export const getNewsTypeLabel = (type: NewsType): string => {
+  const labels: Record<NewsType, string> = {
+    [NewsType.WeiboAmuse]: '微博文娱',
+    [NewsType.WeiboHot]: '微博热搜',
+    [NewsType.Xiaohongshu]: '小红书',
+    [NewsType.Toutiao]: '头条热搜',
+    [NewsType.GgEnForYou]: 'G For You',
+    [NewsType.GgZhForYou]: 'G 推荐',
+    [NewsType.GgEnGlobal]: 'G Global',
+    [NewsType.GgZhGlobal]: 'G 全球',
+  };
+  return labels[type];
 };

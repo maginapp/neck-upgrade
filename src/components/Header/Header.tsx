@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getNextHoliday } from '../../utils/holidayApi';
-import { HolidayInfo } from '../../types';
+import { HolidayDisplayInfo } from '@/types';
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>('');
   const [currentDate, setCurrentDate] = useState<string>('');
-  const [nextHoliday, setNextHoliday] = useState<HolidayInfo | null>(null);
+  const [nextHoliday, setNextHoliday] = useState<HolidayDisplayInfo | null>(null);
 
   useEffect(() => {
     const updateDateTime = () => {

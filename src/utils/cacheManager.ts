@@ -15,7 +15,7 @@ export class CacheManager<T> {
    * @param timestamp 缓存时间戳
    * @returns 是否过期
    */
-  protected isExpired(timestamp: string): boolean {
+  isExpired(timestamp: string): boolean {
     const cacheDate = new Date(timestamp);
     const now = new Date();
     return (
@@ -84,7 +84,7 @@ export class LocalManager<T> {
    * @param timestamp 缓存时间戳
    * @returns 是否过期
    */
-  protected isExpired(timestamp: string): boolean {
+  isExpired(timestamp: string): boolean {
     const cacheDate = new Date(timestamp);
     const now = new Date();
     return (

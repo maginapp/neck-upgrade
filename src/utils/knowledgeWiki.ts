@@ -1,12 +1,8 @@
-import { HolidayToday, KnowledgeData, HistoricalEventWithCategory } from '../types/knowledge';
+import { createKnowledgeManager } from './knowledgeManager';
+
+import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
 import { CacheManager } from './cacheManager';
-import {
-  WIKI_BASE_URL,
-  CACHE_KEYS,
-  WIKI_MAX_EVENTS_COUNT,
-  WIKI_HOLIDAY_COUNT,
-  WIKI_MATCH_CATEGORY,
-} from '../constants';
+import { WIKI_BASE_URL, CACHE_KEYS, WIKI_MATCH_CATEGORY } from '../constants';
 import { fetchWithTimeout } from './fetch';
 
 // 创建维基数据缓存管理器
@@ -25,10 +21,8 @@ const processWikiLinks = (html: string): string => {
 };
 
 // 解析HTML内容，提取大事记和节假日信息
-const parseWikiEvents = (
-  html: string
-): { events: HistoricalEventWithCategory[]; holidays: HolidayToday[] } => {
-  const events: HistoricalEventWithCategory[] = [];
+const parseWikiEvents = (html: string): { events: HistoricalEvent[]; holidays: HolidayToday[] } => {
+  const events: HistoricalEvent[] = [];
   const holidays: HolidayToday[] = [];
 
   // 使用正则表达式匹配h2标签和其内容，提取id属性作为分类
@@ -79,20 +73,10 @@ const parseWikiEvents = (
 };
 
 // 获取维基百科页面内容
-const fetchWikiPage = async (): Promise<{ html: string; data: KnowledgeData }> => {
+const fetchWikiPage = async (): Promise<KnowledgeData> => {
   try {
     const today = new Date();
     const dateStr = `${today.getMonth() + 1}月${today.getDate()}日`;
-    // 检查缓存
-    const cacheData = await wikiCache.get();
-    if (cacheData) {
-      console.log('使用缓存的维基数据');
-      return {
-        html: '', // 缓存命中时不需要HTML内容
-        data: cacheData,
-      };
-    }
-
     // 缓存未命中，请求新数据
     const response = await fetchWithTimeout(`${WIKI_BASE_URL}/${dateStr}`);
     if (!response.ok) {
@@ -111,78 +95,11 @@ const fetchWikiPage = async (): Promise<{ html: string; data: KnowledgeData }> =
     await wikiCache.set(wikiData);
     console.log('更新维基数据缓存');
 
-    return {
-      html,
-      data: wikiData,
-    };
+    return wikiData;
   } catch (error) {
     console.error('Error fetching wiki page:', error);
     throw error;
   }
 };
 
-// 获取历史上的今天的大事记
-export const getHistoricalEvents = async (): Promise<HistoricalEventWithCategory[]> => {
-  try {
-    const { data } = await fetchWikiPage();
-
-    // 返回随机选择的记录
-    return selectRandomEvents(data.allHistoricalEvents, WIKI_MAX_EVENTS_COUNT);
-  } catch (error) {
-    console.error('Error fetching historical events:', error);
-    return [];
-  }
-};
-
-// 获取节假日信息
-export const getHolidays = async (): Promise<HolidayToday[]> => {
-  try {
-    const { data } = await fetchWikiPage();
-
-    // 返回随机选择的记录
-    return selectRandomHolidays(data.allHolidays, WIKI_HOLIDAY_COUNT);
-  } catch (error) {
-    console.error('Error fetching holidays:', error);
-    return [];
-  }
-};
-
-// 清除维基数据缓存
-export const clearWikiCache = async (): Promise<void> => {
-  await wikiCache.clear();
-};
-
-// 从所有事件中随机选择指定数量的事件，确保每个分类至少有一条
-const selectRandomEvents = (
-  allEvents: HistoricalEventWithCategory[],
-  count: number
-): HistoricalEventWithCategory[] => {
-  const categories = [...new Set(allEvents.map((event) => event.category))];
-  const selectedEvents: HistoricalEventWithCategory[] = [];
-
-  // 确保每个分类至少有一条记录
-  categories.forEach((category) => {
-    const categoryEvents = allEvents.filter((event) => event.category === category);
-    if (categoryEvents.length > 0) {
-      selectedEvents.push(categoryEvents[Math.floor(Math.random() * categoryEvents.length)]);
-    }
-  });
-
-  // 如果还需要更多记录，从剩余事件中随机选择
-  const remainingEvents = allEvents.filter((event) => !selectedEvents.includes(event));
-  const remainingCount = count - selectedEvents.length;
-
-  if (remainingCount > 0 && remainingEvents.length > 0) {
-    const additionalEvents = remainingEvents
-      .sort(() => Math.random() - 0.5)
-      .slice(0, remainingCount);
-    selectedEvents.push(...additionalEvents);
-  }
-
-  return selectedEvents;
-};
-
-// 从所有节假日中随机选择指定数量的节假日
-const selectRandomHolidays = (allHolidays: HolidayToday[], count: number): HolidayToday[] => {
-  return allHolidays.sort(() => Math.random() - 0.5).slice(0, count);
-};
+export const wikiManager = createKnowledgeManager(CACHE_KEYS.WIKI_DATA, fetchWikiPage);

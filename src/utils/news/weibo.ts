@@ -1,0 +1,58 @@
+import { NewsItem } from '@/types';
+import { fetchWithTimeout } from '../fetch';
+import { NEWS_URL, CACHE_KEYS } from '@/constants';
+import { createNewsManager } from './newsManager';
+
+const fetchWeiboNews = async (url: string) => {
+  try {
+    const timeStr = new Date().toISOString();
+    // 通过 background 脚本获取新闻
+    const response = await fetchWithTimeout(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const html = await response.text();
+
+    // 创建临时 DOM 解析 HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    const newsItems: NewsItem[] = [];
+    // 获取新闻列表
+    const articles = doc.querySelectorAll('table tr');
+
+    articles.forEach((article) => {
+      const linkElement: HTMLAnchorElement | null = article.querySelector('td:nth-child(2) a');
+      const tagElement = article.querySelector('td:nth-child(3)');
+
+      if (linkElement) {
+        // 处理相对链接
+        const link = linkElement.href.startsWith('/')
+          ? `https://s.weibo.com/${linkElement.href}`
+          : linkElement.href;
+
+        newsItems.push({
+          title: linkElement.textContent?.trim() || '',
+          link,
+          source: '',
+          time: timeStr,
+          tag: tagElement?.textContent?.trim() || '',
+        });
+      }
+    });
+
+    return newsItems;
+  } catch (error) {
+    console.error('获取新闻失败:', error);
+    return [];
+  }
+};
+
+export const weiboAmuseNews = createNewsManager(CACHE_KEYS.WEIBO_AMUSE_NEWS, () => {
+  return fetchWeiboNews(NEWS_URL.WEIBO_AMUSE);
+});
+
+export const weiboHotNews = createNewsManager(CACHE_KEYS.WEIBO_HOT_NEWS, () => {
+  return fetchWeiboNews(NEWS_URL.WEIBO_HOT);
+});

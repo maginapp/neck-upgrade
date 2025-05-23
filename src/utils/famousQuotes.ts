@@ -1,6 +1,6 @@
 import { getCurrentDate, limitConcurrency, ResultType } from './base';
 import { CacheManager } from './cacheManager';
-import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '../types/famous';
+import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '@/types';
 import {
   FAMOUS_ZEN_QUOTES_API,
   FAMOUS_HITOKOTO_API,
@@ -17,13 +17,8 @@ class FamouseStorage extends CacheManager<FamousRecords> {
   }
 
   // 重写过期检查方法，设置项永不过期
-  protected isExpired(timestamp: string) {
-    const today = getCurrentDate();
-    if (!timestamp) {
-      return true;
-    }
-    const cache = new Date(timestamp).toISOString().split('T')[0];
-    return cache !== today;
+  isExpired(_: string) {
+    return false;
   }
 }
 

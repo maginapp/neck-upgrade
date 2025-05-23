@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Poetry.module.scss';
 import { getNextPoem } from '@/utils/poetryLearning';
-import { Poetry } from '@/types/poetry';
+import { Poetry } from '@/types';
 import { Toolbar } from '../Tools';
 
 export const PoetryComponent: React.FC = () => {

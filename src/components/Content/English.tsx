@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { getNextWord } from '@/utils/wordLearning';
 import styles from './English.module.scss';
-import { DictionaryEntry } from '@/types/dictionary';
+import { DictionaryEntry } from '@/types';
 import { Toolbar } from '../Tools';
 
 interface WordInfo {
@@ -27,7 +27,7 @@ const WordCard = ({ wordInfo }: { wordInfo: WordInfo }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div key={wordInfo.word} className={styles.wordCard}>
+    <div>
       <div className={styles.wordHeader}>
         <h3 className={styles.word}>{wordInfo.word}</h3>
         {phonetic && <span className={styles.phonetic}>/{phonetic}/</span>}

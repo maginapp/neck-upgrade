@@ -9,7 +9,12 @@
     "https://timor.tech/*",
     "https://api.dictionaryapi.dev/*",
     "https://zenquotes.io/*",
-    "https://v1.hitokoto.cn/*"
+    "https://v1.hitokoto.cn/*",
+    "https://s.weibo.com/*",
+    "https://www.xiaohongshu.com/*",
+    "https://so.toutiao.com/*",
+    "https://api.toutiaoapi.com/*",
+    "https://news.google.com/*"
   ],
   "action": {
     "default_popup": "pages/popup.html",

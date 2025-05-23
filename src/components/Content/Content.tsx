@@ -4,6 +4,7 @@ import { DataType, Settings } from '@/types/app';
 import { History } from './History';
 import { PoetryComponent } from './Poetry';
 import { English } from './English';
+import { News } from './News';
 
 interface ContentProps {
   settings: Settings;
@@ -20,6 +21,8 @@ export const Content: React.FC<ContentProps> = (props) => {
         return <PoetryComponent />;
       case DataType.English:
         return <English />;
+      case DataType.News:
+        return <News />;
       default:
         return null;
     }

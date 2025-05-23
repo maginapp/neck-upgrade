@@ -1,12 +1,20 @@
 // 维基百科相关
 export const WIKI_BASE_URL = `https://zh.wikipedia.org/wiki`;
-export const WIKI_MAX_EVENTS_COUNT = 8; // 组件events展示数量
-export const WIKI_HOLIDAY_COUNT = 2; // 组件holiday展示数量
 // wiki match
 export const WIKI_MATCH_CATEGORY = {
   bigEvent: ['大事记', '大事記'],
   holiday: ['节假日和习俗', '節假日和習俗'],
 };
+
+// 百度百科相关
+export const BAIDU_BASE_URL = `https://baike.baidu.com`;
+export const BAIDU_MATCH_CATEGORY = {
+  bigEvent: ['重大事记', '重大事件'],
+  holiday: ['节日风俗', '节日习俗'],
+};
+
+export const KNOWLEDGE_MAX_EVENTS_COUNT = 8; // 组件events展示数量
+export const KNOWLEDGE_MAX_HOLIDAY_COUNT = 2; // 组件holiday展示数量
 
 // 节假日相关
 export const HOLIDAY_API_BASE_URL = 'https://timor.tech/api/holiday';
@@ -35,17 +43,42 @@ export const CACHE_KEYS = {
   POETRY_LEARNING_RECORD: 'poetry_learning_record',
   EN_WORD_LEARNING_RECORD: 'en_word_learning_record',
   EXTENSION_SETTINGS: 'extension_settings',
+
+  WEIBO_AMUSE_NEWS: 'weibo_amuse_news',
+  WEIBO_HOT_NEWS: 'weibo_hot_news',
+  XIAOHONGSHU_NEWS: 'xiaohongshu_news',
+  TOUTIAO_NEWS: 'toutiao_news',
+  GOOGLE_EN_FOR_YOU_NEWS: 'google_en_for_you_news',
+  GOOGLE_EN_GLOBAL_NEWS: 'google_en_global_news',
+  GOOGLE_ZH_FOR_YOU_NEWS: 'google_zh_for_you_news',
+  GOOGLE_ZH_GLOBAL_NEWS: 'google_zh_global_news',
 } as const;
 
 export const THROTTLE_TIME = 1000; // 节流时间
 
-// 百度百科相关
-export const BAIDU_BASE_URL = `https://baike.baidu.com`;
-export const BAIDU_MAX_EVENTS_COUNT = 8; // 组件events展示数量
-export const BAIDU_HOLIDAY_COUNT = 2; //
-export const BAIDU_MATCH_CATEGORY = {
-  bigEvent: ['重大事记', '重大事件'],
-  holiday: ['节日风俗', '节日习俗'],
+export const FETCH_TIMEOUT = 6000;
+
+export const NEWS_CONFIG = {};
+
+export const NEWS_URL = {
+  WEIBO_AMUSE: 'https://s.weibo.com/top/summary?cate=entrank',
+  WEIBO_HOT: 'https://s.weibo.com/top/summary?cate=realtimehot',
+  XIAOHONGSHU: 'https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend',
+  TOUTIAO:
+    'https://api.toutiaoapi.com/hot-event/hot-board/?only_hot_list=1&tab_name=stream&origin=hot_board',
+  // 'https://api.toutiaoapi.com/feoffline/hotspot_and_local/html/hot_list/index.html?only_hot_list=1&tab_name=stream', // csr
+  // 'https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=', // ssr 数量少
+  GOOGLE_EN_FOR_YOU: 'https://news.google.com/foryou?hl=en-US&gl=US&ceid=US:en',
+  GOOGLE_EN_GLOBAL:
+    'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen',
+  GOOGLE_ZH_FOR_YOU: 'https://news.google.com/foryou?hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans',
+  GOOGLE_ZH_GLOBAL:
+    'https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRGx1YlY4U0JYcG9MVU5PR2dKRFRpZ0FQAQ?hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans',
 };
 
-export const FETCH_TIMEOUT = 6000;
+export const NEWS_CACHE_EXPIRY = 1000 * 60 * 5; // 5分钟 // 24小时
+
+export const DEFAULT_PAGE_INFO = {
+  page: 0,
+  pageSize: 10,
+};
