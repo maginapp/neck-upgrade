@@ -156,3 +156,13 @@ export const getNextWord = async (): Promise<WordInfo[] | null> => {
     return sliceWordList(wordList);
   });
 };
+
+export const getSourceName = (sourceUrl: string) => {
+  try {
+    const url = new URL(sourceUrl);
+    const pathList = url.pathname.split('/');
+    return pathList[pathList.length - 1];
+  } catch (error) {
+    return 'source';
+  }
+};

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { getNextWord } from '@/utils/wordLearning';
+import { getNextWord, getSourceName } from '@/utils/wordLearning';
 import styles from './English.module.scss';
 import { DictionaryEntry } from '@/types';
 import { Toolbar } from '../Tools';
@@ -39,7 +39,7 @@ const WordCard = ({ wordInfo }: { wordInfo: WordInfo }) => {
             <audio className={styles.audioPlayer} src={audioUrl} controls ref={audioRef} />
           </span>
         )}
-        {wordInfo.definition?.sourceUrls?.map((sourceUrl, index) => {
+        {wordInfo.definition?.sourceUrls?.map((sourceUrl) => {
           return (
             <a
               key={sourceUrl}
@@ -48,7 +48,7 @@ const WordCard = ({ wordInfo }: { wordInfo: WordInfo }) => {
               rel="noopener noreferrer"
               className={styles.source}
             >
-              {`source${Number(wordInfo.definition?.sourceUrls?.length) > 1 ? `-${index + 1}` : ''}`}
+              {getSourceName(sourceUrl)}
             </a>
           );
         })}

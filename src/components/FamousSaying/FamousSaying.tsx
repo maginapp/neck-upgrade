@@ -16,10 +16,6 @@ export const FamousSaying: React.FC = () => {
         setQuote(newQuote);
       } catch (err) {
         console.error('Failed to fetch famous quote:', err);
-        setQuote({
-          content: '获取名言失败，请稍后重试',
-          source: '2222',
-        });
       } finally {
         setLoading(false);
       }
@@ -33,8 +29,9 @@ export const FamousSaying: React.FC = () => {
       {quote && (
         <div className={styles.quote}>
           <p className={styles.content}>{quote.content}</p>
-          <div className={styles.author}>
+          <div className={styles.info}>
             {quote.source && <span className={styles.source}> -- {quote.source}</span>}
+            {quote.website && <span className={styles.website}>[{quote.website}]</span>}
           </div>
         </div>
       )}

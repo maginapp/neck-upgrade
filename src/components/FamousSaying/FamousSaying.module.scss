@@ -9,12 +9,13 @@
     font-style: italic;
   }
 
-  .author {
+  .info {
     color: var(--text-secondary);
     text-align: right;
 
-    .source {
+    .website {
       opacity: 0.8;
+      margin-top: 4px;
     }
   }
 }

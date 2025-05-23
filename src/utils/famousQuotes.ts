@@ -28,6 +28,7 @@ const convertZenquotesRsp = (data: ZenquotesRsp): FamousInfo[] => {
   return data.map((item) => ({
     content: item.q,
     source: item.a,
+    website: 'zenquotes',
   }));
 };
 
@@ -50,6 +51,7 @@ const convertHitokotoData = (data: HitokotoData): FamousInfo => {
       data.from_who && data.from
         ? data.from_who + ' - ' + data.from
         : data.from_who || data.from || '',
+    website: '一言',
   };
 };
 
