@@ -4,10 +4,10 @@
 
 ## 功能特点
 
-- 从维基百科获取历史上的今天的大事记
-- 显示节假日信息
-- 展示下一个节假日的详细信息
-- 支持本地数据缓存
+- 多种内容倾斜模式，支持自定义
+- 显示当前时间与下一个节假日信息
+- 支持展示**历史上的今天**，**古诗词**，**英语单词**，**热搜新闻**
+- 支持黑暗模式
 
 ## 使用
 
@@ -27,13 +27,15 @@ pnpm install
 2. 开发模式：
 
 ```bash
-pnpm run dev
+# pnpm run dev
+pnpm run build
+# 上传chrome extension
 ```
 
 3. 构建：
 
 ```bash
-pnpm run build
+pnpm run build:prod
 ```
 
 ## 鸣谢
@@ -47,3 +49,4 @@ pnpm run build
 5. 名人名言数据源是 [ZenQuotes](https://zenquotes.io/) 和 [一言](https://v1.hitokoto.cn/?c=i)
 6. 英语单词使用[google-10000-english](https://github.com/first20hours/google-10000-english)的no-swears高频单词
 7. 热榜消息来自于[Google New](https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans)、[头条热搜](https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=)、[微博热搜](https://s.weibo.com/top/summary?cate=realtimehot)和[小红书推荐](https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend)
+8. 项目功能参考[wai](https://github.com/dukeluo/wai)
