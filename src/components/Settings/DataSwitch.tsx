@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './DataSwitch.module.scss';
+import styles from './Settings.module.scss';
 import { DataType } from '@/types/app';
 import { getDataTypeLabel } from '@/utils/labels';
 
@@ -12,7 +12,7 @@ export const DataSwitch: React.FC<DataSwitchProps> = ({ currentType, onTypeChang
   const types = Object.values(DataType);
 
   return (
-    <div className={styles.dataSwitch}>
+    <div className={styles.buttonSwitch}>
       {types.map((type) => (
         <button
           key={type}

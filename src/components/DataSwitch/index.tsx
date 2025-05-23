@@ -1,1 +1,0 @@
-export { DataSwitch } from './DataSwitch';

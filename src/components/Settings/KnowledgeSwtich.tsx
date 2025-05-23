@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './KnowledgeSwtich.module.scss';
+import styles from './Settings.module.scss';
 import { KnowledgeMode } from '@/types/app';
 import { getKnowledgeModeLabel } from '@/utils/labels';
 
@@ -12,7 +12,7 @@ export const KnowledgeSwtich: React.FC<KnowledgeModeProps> = ({ currentMode, onM
   const types = Object.values(KnowledgeMode);
 
   return (
-    <div className={styles.dataSwitch}>
+    <div className={styles.buttonSwitch}>
       {types.map((type) => (
         <button
           key={type}

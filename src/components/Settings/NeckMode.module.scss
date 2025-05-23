@@ -1,29 +1,3 @@
-.neckMode {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-
-.modeButton {
-  padding: 8px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background: none;
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover {
-    background-color: var(--hover-bg);
-  }
-
-  &.active {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-  }
-}
-
 .customConfig {
   margin-top: 16px;
   padding: 16px;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { ThemeToggle } from '../Theme';
-import { NeckMode } from '../NeckMode';
-import { DataSwitch } from '../DataSwitch';
+import { ThemeToggle } from './ThemeToggle';
+import { NeckMode } from './NeckMode';
+import { DataSwitch } from './DataSwitch';
+import { KnowledgeSwtich } from './KnowledgeSwtich';
 import styles from './Settings.module.scss';
 import {
   DataType,
@@ -11,7 +12,6 @@ import {
   KnowledgeMode,
 } from '@/types/app';
 import { MESSAGE_TYPES } from '@/constants/events';
-import { KnowledgeSwtich } from '../KnowledgeSwtich';
 
 interface SettingsProps {
   settings: SettingsType;

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import styles from './NeckMode.module.scss';
+import settingStyles from './Settings.module.scss';
 import { getNeckModeLabel } from '@/utils/labels';
 import { formatIntNumber, getRandomNumber } from '@/utils/base';
 import { NeckMode as NeckModeType, NeckModeConfig } from '@/types/app';
@@ -89,11 +90,11 @@ export const NeckMode = (props: NeckModeProps) => {
 
   return (
     <>
-      <div className={styles.neckMode}>
+      <div className={settingStyles.buttonSwitch}>
         {modes.map((currentMode) => (
           <button
             key={currentMode}
-            className={`${styles.modeButton} ${currentMode === mode ? styles.active : ''}`}
+            className={`${settingStyles.typeButton} ${currentMode === mode ? settingStyles.active : ''}`}
             onClick={() => handleModeChange(currentMode)}
           >
             {getNeckModeLabel(currentMode)}
