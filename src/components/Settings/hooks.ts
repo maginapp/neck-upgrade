@@ -39,7 +39,7 @@ export function useSettings() {
   );
 
   // 系统主题状态
-  const [systemTheme, setSystemTheme] = useState<Theme>(() => {
+  const [systemTheme, setSystemTheme] = useState<Theme.Dark | Theme.Light>(() => {
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     return isDark ? Theme.Dark : Theme.Light;
   });

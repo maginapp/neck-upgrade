@@ -12,13 +12,16 @@ import {
   KnowledgeMode,
 } from '@/types/app';
 import { MESSAGE_TYPES } from '@/constants/events';
+import { Appreciation } from './Appreciation';
 
 interface SettingsProps {
   settings: SettingsType;
   setSettings: React.Dispatch<React.SetStateAction<SettingsType>>;
+  currentTheme: Theme.Dark | Theme.Light;
 }
 
-export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => {
+export const Settings: React.FC<SettingsProps> = (props) => {
+  const { setSettings, settings, currentTheme } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   const onThemeChange = (theme: Theme) => {
@@ -94,6 +97,11 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
               currentMode={settings.knowledge}
               onModeChange={onKnowledgeModeChange}
             />
+          </div>
+          <div className={styles.settingsGroup}>
+            <h3>赞赏支持</h3>
+            <p className={styles.description}>如果这个扩展对你有帮助，欢迎赞赏支持</p>
+            <Appreciation currentTheme={currentTheme} />
           </div>
         </div>
       </div>

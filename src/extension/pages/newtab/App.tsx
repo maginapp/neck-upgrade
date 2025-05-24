@@ -10,7 +10,7 @@ export function App() {
     <ThemeContainer currentTheme={currentTheme}>
       <div className={styles.app}>
         <MainView settings={settings} />
-        <Settings setSettings={setSettings} settings={settings} />
+        <Settings setSettings={setSettings} settings={settings} currentTheme={currentTheme} />
       </div>
     </ThemeContainer>
   );
