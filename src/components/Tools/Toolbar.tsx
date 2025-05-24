@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Toolbar.module.scss';
 import { Loading } from './Loading';
+import RefreshIcon from '@/assets/refresh.svg?react';
 
 interface ToolbarProps {
   size?: 'small' | 'medium' | 'large';
@@ -13,11 +14,10 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
 
   return (
     <div className={styles.toolbar}>
-      {loading && <Loading size={size} />}
-      {!loading && (
-        <span className={styles.refresh} onClick={onRefresh}>
-          🔁
-        </span>
+      {loading ? (
+        <Loading size={size} />
+      ) : (
+        <RefreshIcon className={styles.refresh} onClick={onRefresh} />
       )}
     </div>
   );
