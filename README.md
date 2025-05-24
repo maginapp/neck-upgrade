@@ -42,7 +42,7 @@ pnpm run build:prod
 
 本插件使用了以下资源：
 
-1. Logo图标为 [小羊快跑ya](https://www.iconfont.cn/user/detail?uid=6930945&nid=JPSbnJbK5Uuz)发布在[iconfont](https://www.iconfont.cn/collections/detail?cid=40379)的资源
+1. Logo与部分图标为 [小羊快跑ya](https://www.iconfont.cn/user/detail?uid=6930945&nid=JPSbnJbK5Uuz)发布在[iconfont](https://www.iconfont.cn/collections/detail?cid=40379)的资源
 2. 假期数据使用了[timer](https://timor.tech/)的[免费节假日 API](https://timor.tech/api/holiday)
 3. 历史上的今日数据来自于[wikipedia](https://zh.m.wikipedia.org/zh-cn/%E5%8E%86%E5%8F%B2%E4%B8%8A%E7%9A%84%E4%BB%8A%E5%A4%A9)和[百度百科](https://baike.baidu.com/item/4%E6%9C%8828%E6%97%A5)
 4. 古诗词数据来源于githun开源古诗词项目[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)

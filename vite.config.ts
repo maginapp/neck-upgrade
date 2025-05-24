@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import fs from 'fs';
 import { version } from './package.json';
+import svgr from 'vite-plugin-svgr';
 
 // 读取并处理 manifest.json
 const manifestPath = resolve(__dirname, 'src/extension/manifest.json');
@@ -94,7 +95,13 @@ export default defineConfig((_) => {
   const removeConsole = process.env.REMOVE_CONSOLE === 'true';
 
   return {
-    plugins: [react(), removeConsolePlugin(removeConsole), updateManifestConfig, transHtmlConfig],
+    plugins: [
+      react(),
+      removeConsolePlugin(removeConsole),
+      updateManifestConfig,
+      transHtmlConfig,
+      svgr(),
+    ],
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
