@@ -1,7 +1,7 @@
 {
   "name": "neck-upgrade",
   "version": "1.0.0",
-  "description": "Chrome extension for historical events and holidays",
+  "description": "Chrome extension for neck health",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -19,7 +19,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release:extension": "tsx scripts/publish-extension.ts",
-    "trans-dark-img": "tsx scripts/invert-dark-mode.ts"
+    "trans-dark-img": "tsx scripts/invert-dark-mode.ts",
+    "resize-public-img": "tsx scripts/resize-public-img.ts"
   },
   "keywords": [
     "chrome-extension",

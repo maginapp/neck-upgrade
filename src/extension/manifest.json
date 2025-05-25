@@ -3,7 +3,7 @@
   "name": "Neck Upgrade",
   "version": "1.0.0",
   "description": "A Chrome extension for neck health",
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "activeTab"],
   "host_permissions": [
     "https://zh.wikipedia.org/*",
     "https://timor.tech/*",
