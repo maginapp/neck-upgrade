@@ -25,17 +25,17 @@ export const Settings: React.FC<SettingsProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onThemeChange = (theme: Theme) => {
-    setSettings({ ...settings, theme });
+    setSettings((prev) => ({ ...prev, theme }));
   };
 
   const onNeckModeChange = (neck: NeckModeConfig) => {
-    setSettings({ ...settings, neck });
+    setSettings((prev) => ({ ...prev, neck }));
   };
   const onDataTypeChange = (dataType: DataType) => {
-    setSettings({ ...settings, dataType });
+    setSettings((prev) => ({ ...prev, dataType }));
   };
-  const onKnowledgeModeChange = (knowledgeMode: KnowledgeMode) => {
-    setSettings({ ...settings, knowledge: knowledgeMode });
+  const onKnowledgeModeChange = (knowledge: KnowledgeMode) => {
+    setSettings((prev) => ({ ...prev, knowledge }));
   };
 
   useEffect(() => {

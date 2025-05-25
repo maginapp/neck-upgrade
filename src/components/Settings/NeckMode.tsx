@@ -108,12 +108,13 @@ export const NeckMode = (props: NeckModeProps) => {
             <label>切换间隔（秒）</label>
             <input
               type="number"
-              min="5"
+              min="0"
               max="60"
+              placeholder="0-60"
               value={cusDuration}
               onChange={(e) => {
                 handleCustomConfigChange({
-                  nextCurDuration: formatIntNumber(e.target.value, 5, 60),
+                  nextCurDuration: formatIntNumber(e.target.value, 0, 60),
                 });
               }}
             />
@@ -124,6 +125,7 @@ export const NeckMode = (props: NeckModeProps) => {
               type="number"
               min="0"
               max="360"
+              placeholder="0-360"
               value={cusMaxRotate}
               onChange={(e) => {
                 handleCustomConfigChange({
