@@ -1,104 +1,63 @@
-.container {
-  padding: 1rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--text-color);
-}
-
-.button {
-  padding: 0.5rem 1rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.button:hover {
-  background-color: var(--primary-color);
-  opacity: 0.9;
-}
-
-.button:disabled {
-  background-color: var(--text-secondary);
-  cursor: not-allowed;
-}
-
 .wordList {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
-
-.wordCard {
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  background-color: var(--content-bg);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-
 
 .wordHeader {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
 .word {
-  font-size: 1.25rem;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-color);
 }
 
 .phonetic {
   color: var(--text-secondary);
-  font-size: 0.875rem;
+}
+
+.audioMananger {
+  cursor: pointer;
+}
+
+.audioPlayer {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.source {
+  color: var(--text-secondary);
+  text-decoration: underline;
 }
 
 .meanings {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 8px;
 }
 
 .meaning {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 4px;
 }
 
 .partOfSpeech {
   color: var(--text-secondary);
   font-style: italic;
-  font-size: 0.875rem;
 }
-
 
 .definitions {
   list-style-type: disc;
-  padding-left: 1.5rem;
-  margin: 0;
+  padding-left: 20px;
 }
 
 .definition {
   color: var(--text-color);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 0.25rem;
 }

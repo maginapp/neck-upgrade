@@ -1,4 +1,4 @@
-import { Poetry } from '@/types/poetry';
+import { Poetry } from '@/types';
 import { CACHE_KEYS } from '@/constants';
 import { getNextRecord } from './generateNext';
 
@@ -44,5 +44,6 @@ export const getNextPoem = async (): Promise<Poetry[] | null> => {
     getData: getPoetryData, // 数据源
     unitCount: SELECTED_POEMS_COUNT, // 每次选择的数量
     reviewDays: REVIEW_COUNT, // 复习天数
+    batchSize: 2,
   });
 };

@@ -1,0 +1,64 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.bounceContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bounce {
+  width: 8px;
+  height: 24px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  animation: wave 1.4s infinite ease-in-out;
+}
+
+.bounce:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.bounce:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+// 尺寸变体
+.small {
+  .bounce {
+    width: 6px;
+    height: 18px;
+  }
+}
+
+.medium {
+  .bounce {
+    width: 8px;
+    height: 24px;
+  }
+}
+
+.large {
+  .bounce {
+    width: 10px;
+    height: 32px;
+  }
+} 
+
+.writingMode__initial {
+  writing-mode: initial;
+}

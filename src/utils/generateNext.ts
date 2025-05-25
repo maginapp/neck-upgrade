@@ -69,14 +69,17 @@ const generateReviews = <T>(
 };
 
 // 获取学习记录
-const getLearningRecords = async <T>(key: string): Promise<LearningRecords<T>> => {
+const getLearningRecords = async <T>(
+  key: string,
+  currentDate: string
+): Promise<LearningRecords<T>> => {
   const result = await chrome.storage.local.get(key);
   return (
     result[key] || {
       history: [],
       todayNew: { records: [], currentIndex: 0 },
       todayReview: { records: [], currentIndex: 0 },
-      currentDate: '',
+      currentDate,
     }
   );
 };
@@ -170,7 +173,7 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     batchSize = 1,
   } = params;
   const currentDate = getCurrentDate();
-  const records = await getLearningRecords<T>(cacheKey);
+  const records = await getLearningRecords<T>(cacheKey, currentDate);
 
   // 检查是否需要重置当天的记录
   if (
@@ -184,70 +187,78 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
       .flatMap((record) => record.records)
       .filter((item) => item);
 
-    // 选择与历史记录不重复的诗词
+    // 选择与历史记录不重复的诗词 数量 unitCount
     let selectedRecords: T[];
     if (allPreviousRecords.length + unitCount > data.length) {
-      selectedRecords = selectRandom(batchSize, data, compareFn, []);
+      selectedRecords = selectRandom(unitCount, data, compareFn, []);
     } else {
-      selectedRecords = selectRandom(batchSize, data, compareFn, allPreviousRecords);
-    }
-
-    let formattedRecords: T[] = selectedRecords;
-    if (formatRecord) {
-      formattedRecords = await formatRecord(selectedRecords);
+      selectedRecords = selectRandom(unitCount, data, compareFn, allPreviousRecords);
     }
 
     // 更新当天新增的诗词
     records.todayNew = {
-      records: formattedRecords,
+      records: selectedRecords,
       currentIndex: 0,
     };
 
     // 生成当天需要复习的诗词
     records.todayReview = {
-      records: generateReviews(records.history, formattedRecords, forgetIntervals, todayRatio),
+      records: generateReviews(records.history, selectedRecords, forgetIntervals, todayRatio),
       currentIndex: 0,
     };
-    await saveLearningRecords(cacheKey, records);
   }
 
-  const result: T[] = [];
-  let remainingCount = batchSize;
+  let formattedRecords: T[] = [];
 
-  // 优先返回当天新增的
-  while (remainingCount > 0 && records.todayNew.currentIndex < records.todayNew.records.length) {
+  // 优先返回当天新增的，未访问过的
+  while (
+    formattedRecords.length < batchSize &&
+    records.todayNew.records &&
+    records.todayNew.currentIndex < records.todayNew.records.length
+  ) {
     const record = records.todayNew.records[records.todayNew.currentIndex];
     records.todayNew.currentIndex++;
-    result.push(record);
+    formattedRecords.push(record);
+  }
+
+  // 格式化当天数据，修改review列表为格式化后数据，history添加访问后数据
+  if (formattedRecords.length && formatRecord) {
+    formattedRecords = await formatRecord(formattedRecords);
 
     // 如果已经展示过这首，将其添加到历史记录
-    const historyRecord = records.history.find((record) => record.date === currentDate);
+    let historyRecord = records.history.find((record) => record.date === currentDate);
 
     if (!historyRecord) {
-      records.history.unshift({
+      historyRecord = {
         date: currentDate,
-        records: [record],
-      });
+        records: [],
+      };
+      records.history.unshift(historyRecord);
       // 保持历史记录不超过指定天数
       if (records.history.length > reviewDays) {
         records.history = records.history.slice(0, reviewDays);
       }
-    } else {
-      historyRecord.records.push(record);
     }
-
-    remainingCount--;
+    records.todayReview.records = records.todayReview.records.map((record) => {
+      const formattedRecord = formattedRecords.find((item) => compareFn(item, record));
+      const curRecord = formattedRecord ? formattedRecord : record;
+      historyRecord.records.push(curRecord);
+      return curRecord;
+    });
   }
 
   // 如果还需要更多记录，从复习列表中获取
-  while (remainingCount > 0 && records.todayReview.records.length > 0) {
+  while (
+    formattedRecords.length < batchSize &&
+    records.todayReview.records &&
+    records.todayReview.records.length > 0
+  ) {
     const record = records.todayReview.records[records.todayReview.currentIndex];
     records.todayReview.currentIndex++;
     records.todayReview.currentIndex =
       records.todayReview.currentIndex % records.todayReview.records.length;
-    result.push(record);
-    remainingCount--;
+    formattedRecords.push(record);
   }
   await saveLearningRecords(cacheKey, records);
-  return [...new Set(result)];
+  return [...new Set(formattedRecords)];
 };

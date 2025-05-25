@@ -1,27 +1,32 @@
 import React from 'react';
 import styles from './Content.module.scss';
-import { DataType } from '@/types/app';
+import { DataType, Settings } from '@/types/app';
 import { History } from './History';
 import { PoetryComponent } from './Poetry';
 import { English } from './English';
+import { News } from './News';
 
 interface ContentProps {
-  type: DataType;
+  settings: Settings;
 }
 
-export const Content: React.FC<ContentProps> = ({ type }) => {
+export const Content: React.FC<ContentProps> = (props) => {
+  const { settings } = props;
+  const { dataType, knowledge } = settings;
   const renderContent = () => {
-    switch (type) {
+    switch (dataType) {
       case DataType.History:
-        return <History />;
+        return <History knowledgeMode={knowledge} />;
       case DataType.Poetry:
         return <PoetryComponent />;
       case DataType.English:
         return <English />;
+      case DataType.News:
+        return <News />;
       default:
         return null;
     }
   };
 
-  return <main className={styles.content}>{renderContent()}</main>;
+  return <div className={styles.content}>{renderContent()}</div>;
 };

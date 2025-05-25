@@ -13,7 +13,7 @@ interface Phonetic {
   sourceUrl?: string;
 }
 
-interface Meaning {
+export interface Meaning {
   partOfSpeech: string;
   definitions: Definition[];
   synonyms: string[];

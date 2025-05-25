@@ -1,55 +1,132 @@
-import { defineConfig } from 'vite';
+import { defineConfig, PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import fs from 'fs';
 import { version } from './package.json';
+import svgr from 'vite-plugin-svgr';
 
 // 读取并处理 manifest.json
 const manifestPath = resolve(__dirname, 'src/extension/manifest.json');
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 manifest.version = version;
 
-export default defineConfig({
-  plugins: [
-    react(),
-    {
-      name: 'manifest',
-      apply: 'build',
-      closeBundle() {
-        // 确保 dist 目录存在
-        if (!fs.existsSync('dist')) {
-          fs.mkdirSync('dist');
-        }
-        // 写入处理后的 manifest.json
-        fs.writeFileSync(
-          resolve(__dirname, 'dist/manifest.json'),
-          JSON.stringify(manifest, null, 2)
-        );
-      },
-    },
-  ],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-    },
+// 创建移除 console.log 的插件
+const removeConsolePlugin = (removeConsole: boolean) => ({
+  name: 'remove-console',
+  transform(code: string) {
+    if (!removeConsole) return code;
+    return code.replace(/console\.log\([^)]*\);?/g, '');
   },
-  build: {
-    outDir: 'dist',
-    rollupOptions: {
-      input: {
-        index: resolve(__dirname, 'index.html'),
-        background: resolve(__dirname, 'src/extension/background/index.ts'),
-        content: resolve(__dirname, 'src/extension/content/index.ts'),
+});
+
+// 更新 manifest.json
+const updateManifestConfig: PluginOption = {
+  name: 'manifest',
+  apply: 'build',
+  closeBundle() {
+    // 确保 dist 目录存在
+    if (!fs.existsSync('dist')) {
+      fs.mkdirSync('dist');
+    }
+    // 写入处理后的 manifest.json
+    fs.writeFileSync(resolve(__dirname, 'dist/manifest.json'), JSON.stringify(manifest, null, 2));
+
+    // 移动 entries 目录到正确的位置
+    const sourceDir = resolve(__dirname, 'dist/src');
+    const sourceDirEntries = resolve(__dirname, 'dist/src/extension/entries');
+    const targetDir = resolve(__dirname, 'dist/entries');
+
+    if (fs.existsSync(sourceDirEntries)) {
+      // 确保目标目录存在
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+
+      // 移动文件
+      fs.readdirSync(sourceDirEntries).forEach((file) => {
+        const sourcePath = resolve(sourceDirEntries, file);
+        const targetPath = resolve(targetDir, file);
+        fs.copyFileSync(sourcePath, targetPath);
+      });
+
+      // 删除源目录
+      fs.rmSync(sourceDir, { recursive: true, force: true });
+    }
+  },
+};
+
+// 移动 html 文件到正确的位置
+// dist/src/extension/pages/[name]/index.html -> dist/pages/[name].html
+const transHtmlConfig: PluginOption = {
+  name: 'trans-html',
+  apply: 'build',
+  closeBundle() {
+    // 确保 dist 目录存在
+    if (!fs.existsSync('dist')) {
+      fs.mkdirSync('dist');
+    }
+
+    // 移动 entries 目录到正确的位置
+    const sourceDir = resolve(__dirname, 'dist/src');
+    const sourceDirEntries = resolve(__dirname, 'dist/src/extension/pages');
+    const targetDir = resolve(__dirname, 'dist/pages');
+
+    if (fs.existsSync(sourceDirEntries)) {
+      // 确保目标目录存在
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+
+      // 移动文件
+      fs.readdirSync(sourceDirEntries).forEach((file) => {
+        const sourcePath = resolve(sourceDirEntries, file, 'index.html');
+        const targetPath = resolve(targetDir, `${file}.html`);
+        fs.copyFileSync(sourcePath, targetPath);
+      });
+
+      // 删除源目录
+      fs.rmSync(sourceDir, { recursive: true, force: true });
+    }
+  },
+};
+
+export default defineConfig((_) => {
+  // const isProd = mode === 'production';
+  const removeConsole = process.env.REMOVE_CONSOLE === 'true';
+
+  return {
+    plugins: [
+      react(),
+      removeConsolePlugin(removeConsole),
+      updateManifestConfig,
+      transHtmlConfig,
+      svgr(),
+    ],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
       },
-      output: {
-        entryFileNames: (chunkInfo) => {
-          return chunkInfo.name === 'background' || chunkInfo.name === 'content'
-            ? 'assets/[name].js'
-            : 'assets/[name]-[hash].js';
+    },
+    build: {
+      outDir: 'dist',
+      rollupOptions: {
+        input: {
+          popup: resolve(__dirname, 'src/extension/pages/popup/index.html'),
+          newtab: resolve(__dirname, 'src/extension/pages/newtab/index.html'),
+          background: resolve(__dirname, 'src/extension/background/index.ts'),
+          content: resolve(__dirname, 'src/extension/content/index.ts'),
         },
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        output: {
+          entryFileNames: (chunkInfo) => {
+            return chunkInfo.name === 'background' || chunkInfo.name === 'content'
+              ? 'assets/[name].js'
+              : 'assets/[name]-[hash].js';
+          },
+          chunkFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]',
+        },
       },
+      emptyOutDir: true,
     },
-  },
-}); 
+  };
+});

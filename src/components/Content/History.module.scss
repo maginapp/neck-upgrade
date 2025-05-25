@@ -1,0 +1,43 @@
+.historicalSection {
+  margin-top: 16px;
+  color: var(--text-secondary);
+
+  li,
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    background-color: var(--item-bg);
+    margin-bottom: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  a:visited {
+    color: var(--text-color);
+  }
+  a:hover {
+    color: var(--primary-color);
+  }
+  [class*='lemmaPicture'] {
+    margin-bottom: 5px;
+  }
+  img[class*='picture'] {
+    margin: 5px 5px 0;
+  }
+}
+.title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.source {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-left: 10px;
+}

@@ -1,0 +1,76 @@
+.mainView {
+  display: grid;
+  width: 60vh;
+  height: 60vh;
+  grid-template-columns: 5fr 1fr;
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas: 'h  s' 'c  s';
+  margin: auto;
+  overflow: hidden;
+
+  &.custom,
+  &.intense {
+    .content {
+      transform: rotate(180deg);
+    }
+  }
+
+  .side {
+    grid-area: s;
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    justify-self: center;
+    // 计算所得 width: 60vh / (5 + 1);
+    width: 10vh;
+    overflow: hidden;
+  }
+
+  .content {
+    grid-area: c;
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  }
+
+  .header {
+    grid-area: h;
+  }
+}
+
+@media screen and (max-width: 848px) {
+  .mainView {
+    min-width: 600px;
+    min-height: 600px;
+    transform: rotate(0) !important;
+    .side {
+      // 计算所得 min-width: 600px / (5 + 1);
+      min-width: 100px;
+    }
+  }
+}
+
+// 其他可能的组合示例
+.verticalUpright {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
+.verticalSideways {
+  writing-mode: vertical-lr;
+  text-orientation: sideways;
+}
+
+.sidewaysRight {
+  writing-mode: sideways-rl;
+  text-orientation: sideways-right;
+}
+
+.mixedOrientation {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}

@@ -26,6 +26,7 @@ export type ZenquotesRsp = Zenquotes[];
 export interface FamousInfo {
   content: string;
   source: string;
+  website: 'zenquotes' | '一言';
 }
 
 export interface FamousRecords {

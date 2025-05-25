@@ -1,0 +1,31 @@
+.themeContainer {
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-color);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  color: var(--text-color);
+
+  &.light {
+    --settings-bg: #f8f2e4;
+    --text-color: #333333;
+    --text-secondary: #666666;
+    --border-color: #d9d9d9;
+    --hover-bg: #f0f0f0;
+    --primary-color: #007bff;
+    --background-color: #f0e4c8;
+    --accent-color: #222222;
+  }
+
+  &.dark {
+    --settings-bg: rgb(31, 31, 31);
+    --text-color: rgba(255, 255, 255, 0.8);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --border-color:  rgba(253, 253, 253, 0.12);
+    --hover-bg: rgba(255, 255, 255, 0.08);
+    --primary-color:  rgb(22, 104, 220);
+    --background-color: rgb(20, 20, 20);
+    --accent-color: rgba(255, 255, 255, 0.95);
+  }
+}

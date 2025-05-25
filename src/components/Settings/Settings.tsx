@@ -1,28 +1,63 @@
-import React, { useState } from 'react';
-import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
-import { NeckModeSelector } from '../NeckMode/NeckMode';
-import { DataSwitch } from '../DataSwitch/DataSwitch';
+import React, { useEffect, useState } from 'react';
+import { ThemeToggle } from './ThemeToggle';
+import { NeckMode } from './NeckMode';
+import { DataSwitch } from './DataSwitch';
+import { KnowledgeSwtich } from './KnowledgeSwtich';
 import styles from './Settings.module.scss';
-import { DataType, Theme, NeckMode, Settings as SettingsType } from '@/types/app';
+import {
+  DataType,
+  Theme,
+  NeckModeConfig,
+  Settings as SettingsType,
+  KnowledgeMode,
+} from '@/types/app';
+import { MESSAGE_TYPES } from '@/constants/events';
+import { Appreciation } from './Appreciation';
 
 interface SettingsProps {
   settings: SettingsType;
-  setSettings: (settings: SettingsType) => void;
+  setSettings: React.Dispatch<React.SetStateAction<SettingsType>>;
+  currentTheme: Theme.Dark | Theme.Light;
 }
 
-export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => {
+export const Settings: React.FC<SettingsProps> = (props) => {
+  const { setSettings, settings, currentTheme } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   const onThemeChange = (theme: Theme) => {
-    setSettings({ ...settings, theme });
+    setSettings((prev) => ({ ...prev, theme }));
   };
 
-  const onNeckModeChange = (neckMode: NeckMode) => {
-    setSettings({ ...settings, neckMode });
+  const onNeckModeChange = (neck: NeckModeConfig) => {
+    setSettings((prev) => ({ ...prev, neck }));
   };
   const onDataTypeChange = (dataType: DataType) => {
-    setSettings({ ...settings, dataType });
+    setSettings((prev) => ({ ...prev, dataType }));
   };
+  const onKnowledgeModeChange = (knowledge: KnowledgeMode) => {
+    setSettings((prev) => ({ ...prev, knowledge }));
+  };
+
+  useEffect(() => {
+    // todo 策略模式
+    const messageListener = (message: any) => {
+      if (message.type === MESSAGE_TYPES.TOGGLE_ACTIVE_SETTINGS) {
+        const nextStatus = message.isOpen ?? !isOpen;
+        setIsOpen(nextStatus);
+        chrome.runtime.sendMessage({
+          type: MESSAGE_TYPES.SETTINGS_OPEN_STATUS,
+          isOpen: nextStatus,
+        });
+      }
+      if (message.type === MESSAGE_TYPES.GET_SETTINGS_OPEN_STATUS) {
+        chrome.runtime.sendMessage({ type: MESSAGE_TYPES.SETTINGS_OPEN_STATUS, isOpen: isOpen });
+      }
+    };
+    chrome.runtime.onMessage.addListener(messageListener);
+    return () => {
+      chrome.runtime.onMessage.removeListener(messageListener);
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -50,11 +85,23 @@ export const Settings: React.FC<SettingsProps> = ({ setSettings, settings }) => 
           </div>
           <div className={styles.settingsGroup}>
             <h3>颈椎模式</h3>
-            <NeckModeSelector currentMode={settings.neckMode} onModeChange={onNeckModeChange} />
+            <NeckMode neckConfig={settings.neck} onModeChange={onNeckModeChange} />
           </div>
           <div className={styles.settingsGroup}>
             <h3>内容类型</h3>
             <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
+          </div>
+          <div className={styles.settingsGroup}>
+            <h3>百科数据源(优先使用)</h3>
+            <KnowledgeSwtich
+              currentMode={settings.knowledge}
+              onModeChange={onKnowledgeModeChange}
+            />
+          </div>
+          <div className={styles.settingsGroup}>
+            <h3>赞赏支持</h3>
+            <p className={styles.description}>如果这个扩展对你有帮助，欢迎赞赏支持</p>
+            <Appreciation currentTheme={currentTheme} />
           </div>
         </div>
       </div>

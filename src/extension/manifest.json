@@ -1,20 +1,31 @@
 {
   "manifest_version": 3,
-  "name": "neck-upgrade",
-  "version": "__VERSION__",
-  "description": "保护颈椎",
-  "permissions": ["storage", "activeTab", "unlimitedStorage"],
-  "host_permissions": ["https://zh.wikipedia.org/*", "https://timor.tech/*"],
+  "name": "Neck Upgrade",
+  "version": "1.0.0",
+  "description": "A Chrome extension for neck health",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://zh.wikipedia.org/*",
+    "https://timor.tech/*",
+    "https://api.dictionaryapi.dev/*",
+    "https://zenquotes.io/*",
+    "https://v1.hitokoto.cn/*",
+    "https://s.weibo.com/*",
+    "https://www.xiaohongshu.com/*",
+    "https://so.toutiao.com/*",
+    "https://api.toutiaoapi.com/*",
+    "https://news.google.com/*"
+  ],
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "pages/popup.html",
     "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
   "chrome_url_overrides": {
-    "newtab": "index.html"
+    "newtab": "pages/newtab.html"
   },
   "background": {
     "service_worker": "assets/background.js",
@@ -33,8 +44,8 @@
     }
   ],
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   }
 }

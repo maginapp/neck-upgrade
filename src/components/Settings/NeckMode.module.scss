@@ -1,0 +1,36 @@
+.customConfig {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.configItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    min-width: 100px;
+    color: var(--text-color);
+  }
+
+  input {
+    width: 100px;
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+  }
+}

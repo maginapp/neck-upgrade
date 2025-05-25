@@ -1,0 +1,23 @@
+.themeToggleContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--hover-bg);
+  }
+}
+
+.themeLabel {
+  color: var(--text-color);
+}
