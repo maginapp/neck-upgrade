@@ -31,7 +31,7 @@
 }
 
 
-html:has(.themeContainer.light), :root:has(.themeContainer.light) {
+:root:has(.themeContainer.light) {
   --settings-bg: #f8f2e4;
   --text-color: #333333;
   --text-secondary: #666666;
@@ -42,7 +42,7 @@ html:has(.themeContainer.light), :root:has(.themeContainer.light) {
   --accent-color: #222222;
 }
 
-html:has(.themeContainer.dark), :root:has(.themeContainer.dark) {
+:root:has(.themeContainer.dark) {
   --settings-bg: rgb(31, 31, 31);
   --text-color: rgba(255, 255, 255, 0.8);
   --text-secondary: rgba(255, 255, 255, 0.6);
