@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   width: 100%;
   align-items: center;
-  position: relative;
 }
 
 .currentTime {
@@ -21,17 +20,18 @@
 .lunarInfoSection {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .lunarInfo {
   color: var(--text-secondary);
-  cursor: pointer;
 }
 
 .findMoreIcon  {
   width: 14px;
   height: 14px;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .lunarInfoContent {
