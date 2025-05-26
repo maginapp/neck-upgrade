@@ -1,3 +1,4 @@
+// 发布插件：打包，创建zip包，生成tag
 import { execSync } from 'child_process';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';

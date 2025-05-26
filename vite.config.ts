@@ -19,6 +19,26 @@ const removeConsolePlugin = (removeConsole: boolean) => ({
   },
 });
 
+// 复制目录的辅助函数
+const copyDir = (src: string, dest: string) => {
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const srcPath = resolve(src, entry.name);
+    const destPath = resolve(dest, entry.name);
+
+    if (entry.isDirectory()) {
+      copyDir(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+};
+
 // 更新 manifest.json
 const updateManifestConfig: PluginOption = {
   name: 'manifest',
@@ -51,6 +71,13 @@ const updateManifestConfig: PluginOption = {
 
       // 删除源目录
       fs.rmSync(sourceDir, { recursive: true, force: true });
+    }
+
+    // 复制 _locales 目录到 dist
+    const localesSrc = resolve(__dirname, 'src/extension/_locales');
+    const localesDest = resolve(__dirname, 'dist/_locales');
+    if (fs.existsSync(localesSrc)) {
+      copyDir(localesSrc, localesDest);
     }
   },
 };

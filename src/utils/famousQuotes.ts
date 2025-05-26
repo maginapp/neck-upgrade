@@ -1,4 +1,4 @@
-import { getCurrentDate, limitConcurrency, ResultType } from './base';
+import { getCurrentDate } from './base';
 import { CacheManager } from './cacheManager';
 import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '@/types';
 import {
@@ -10,6 +10,7 @@ import {
   FAMOUS_HI_MAX_REQ_COUNT,
   FAMOUS_HI_CON_LIMIT,
 } from '@/constants';
+import { limitConcurrency, ResultType } from './concurrency';
 
 class FamouseStorage extends CacheManager<FamousRecords> {
   constructor() {

@@ -1,0 +1,10 @@
+{
+  "extension_name": {
+    "message": "颈椎保护器",
+    "description": "扩展名称"
+  },
+  "extension_description": {
+    "message": "一款守护颈椎健康的 Chrome 插件",
+    "description": "扩展描述"
+  }
+}

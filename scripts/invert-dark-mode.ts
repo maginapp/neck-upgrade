@@ -1,3 +1,4 @@
+// 自动生成暗黑模式图片
 import { Jimp } from 'jimp';
 import fs from 'fs';
 import path from 'path';

@@ -8,13 +8,13 @@ import { Theme, NeckMode, DataType, KnowledgeMode, NewsType } from '@/types/app'
 export const getThemeLabel = (theme: Theme): string => {
   switch (theme) {
     case Theme.System:
-      return '跟随系统';
+      return '系统';
     case Theme.Light:
-      return '浅色';
+      return '亮色';
     case Theme.Dark:
-      return '深色';
+      return '暗黑';
     default:
-      return '跟随系统';
+      return '系统';
   }
 };
 
@@ -28,7 +28,7 @@ export const getNeckModeLabel = (mode: NeckMode): string => {
     [NeckMode.Normal]: '普通',
     [NeckMode.Training]: '训练',
     [NeckMode.Intense]: '强化',
-    [NeckMode.Custom]: '自定义',
+    [NeckMode.Custom]: '高级',
   };
   return labels[mode];
 };

@@ -19,12 +19,12 @@ const MOD_CONFIG = {
   [NeckModeType.Training]: {
     min: 15,
     max: 60,
-    duration: 10,
+    duration: 5,
   },
   [NeckModeType.Intense]: {
     min: 80,
     max: 180,
-    duration: 20,
+    duration: 10,
   },
   [NeckModeType.Custom]: {
     min: 0,

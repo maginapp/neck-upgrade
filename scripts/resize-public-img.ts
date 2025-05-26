@@ -1,3 +1,4 @@
+// 协助生成，发布插件的介绍图片
 import { Jimp } from 'jimp';
 import fs from 'fs';
 import path from 'path';

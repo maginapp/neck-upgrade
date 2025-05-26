@@ -1,3 +1,26 @@
+import en from '@/extension/_locales/en/messages.json';
+import zhCN from '@/extension/_locales/zh_CN/messages.json';
+
+// 定义消息类型
+type Messages = {
+  [key: string]: {
+    message: string;
+    description: string;
+  };
+};
+
+// 模拟 Chrome 扩展的 i18n 消息
+const messages: Record<string, Messages> = {
+  en,
+  zh_CN: zhCN,
+};
+
+// 获取当前浏览器语言
+const getBrowserLanguage = (): 'zh' | 'en' => {
+  const lang = navigator.language.toLowerCase();
+  return lang.startsWith('zh') ? 'zh' : 'en';
+};
+
 // 模拟 Chrome API
 const mockChrome = {
   runtime: {
@@ -43,6 +66,16 @@ const mockChrome = {
         console.log('Mock chrome.storage.local.set:', items);
         if (callback) callback();
       },
+    },
+  },
+  i18n: {
+    getMessage: (messageName: string): string => {
+      const lang = getBrowserLanguage();
+      const locale = lang === 'zh' ? 'zh_CN' : 'en';
+      return messages[locale][messageName].message || messageName;
+    },
+    getUILanguage: (): string => {
+      return navigator.language;
     },
   },
 };
