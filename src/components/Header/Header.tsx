@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getNextHoliday } from '../../utils/holidayApi';
 import { HolidayDisplayInfo } from '@/types';
 import styles from './Header.module.scss';
@@ -14,6 +14,7 @@ export const Header: React.FC = () => {
   const [nextHoliday, setNextHoliday] = useState<HolidayDisplayInfo | null>(null);
   const [lunarInfo, setLunarInfo] = useState<LunarInfo | null>(null);
   const [showLunarInfo, setShowLunarInfo] = useState<boolean>(false);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -51,6 +52,24 @@ export const Header: React.FC = () => {
     fetchNextHoliday();
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popupRef.current &&
+        event.target instanceof Node &&
+        !popupRef.current.contains(event.target)
+      ) {
+        setShowLunarInfo(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className={styles.timeSection}>
@@ -62,11 +81,14 @@ export const Header: React.FC = () => {
           <span className={styles.lunarInfo}>{lunarInfo.lunarDate}</span>
           <FindMoreIcon
             className={styles.findMoreIcon}
-            onClick={() => setShowLunarInfo(!showLunarInfo)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowLunarInfo(!showLunarInfo);
+            }}
           />
           {/* hover */}
           {showLunarInfo && (
-            <div className={styles.lunarInfoContent}>
+            <div className={styles.lunarInfoContent} ref={popupRef}>
               <div className={styles.lunarInfoContentTitle}>{currentDate}</div>
               {lunarInfo.festivals.length ? (
                 <div className={styles.lunarInfoItem}>
