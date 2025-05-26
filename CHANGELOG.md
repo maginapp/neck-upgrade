@@ -1,5 +1,11 @@
 # Neck Upgrade ChangeLog
 
+## 1.1.1
+
+### Patch Changes
+
+- 修复农历 popup bugs
+
 ## 1.1.0
 
 ### Minor Changes
