@@ -141,7 +141,7 @@ export default defineConfig((_) => {
           popup: resolve(__dirname, 'src/extension/pages/popup/index.html'),
           newtab: resolve(__dirname, 'src/extension/pages/newtab/index.html'),
           background: resolve(__dirname, 'src/extension/background/index.ts'),
-          content: resolve(__dirname, 'src/extension/content/index.ts'),
+          // content: resolve(__dirname, 'src/extension/content/index.ts'),
         },
         output: {
           entryFileNames: (chunkInfo) => {

@@ -32,12 +32,6 @@
     "service_worker": "assets/background.js",
     "type": "module"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["assets/content.js"]
-    }
-  ],
   "web_accessible_resources": [
     {
       "resources": ["src/data/*.json"],
