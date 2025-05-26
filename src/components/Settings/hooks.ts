@@ -27,7 +27,7 @@ export function useSettings() {
     settingsStorage.get() || {
       theme: Theme.System,
       neck: {
-        mode: NeckMode.Normal,
+        mode: NeckMode.Training,
         rotate: 0,
         duration: 0,
         cusDuration: 15,

@@ -7,7 +7,7 @@ import {
 } from '@/constants';
 import { DictionaryEntry, Meaning } from '@/types';
 import { getNextRecord } from './generateNext';
-import { limitConcurrency, ResultType } from './base';
+import { limitConcurrency, ResultType } from './concurrency';
 
 interface WordInfo {
   word: string;

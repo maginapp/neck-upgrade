@@ -84,7 +84,7 @@ export const Settings: React.FC<SettingsProps> = (props) => {
             <ThemeToggle currentTheme={settings.theme} onThemeChange={onThemeChange} />
           </div>
           <div className={styles.settingsGroup}>
-            <h3>颈椎模式</h3>
+            <h3>颈椎倾斜模式</h3>
             <NeckMode neckConfig={settings.neck} onModeChange={onNeckModeChange} />
           </div>
           <div className={styles.settingsGroup}>

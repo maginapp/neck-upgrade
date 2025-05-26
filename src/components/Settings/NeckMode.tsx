@@ -19,17 +19,17 @@ const MOD_CONFIG = {
   [NeckModeType.Training]: {
     min: 15,
     max: 60,
-    duration: 10,
+    duration: 5,
   },
   [NeckModeType.Intense]: {
     min: 80,
     max: 180,
-    duration: 20,
+    duration: 5,
   },
   [NeckModeType.Custom]: {
     min: 0,
     max: 360,
-    duration: 10,
+    duration: 5,
   },
 };
 
@@ -40,7 +40,7 @@ interface CustomProps {
 
 export const NeckMode = (props: NeckModeProps) => {
   const { neckConfig, onModeChange } = props;
-  const { mode, duration, cusMaxRotate, cusDuration } = neckConfig;
+  const { mode, duration, cusMaxRotate, cusDuration, rotate } = neckConfig;
   const modes = Object.values(NeckModeType);
 
   const handleModeChange = (newMode: NeckModeType) => {
@@ -49,7 +49,7 @@ export const NeckMode = (props: NeckModeProps) => {
     if (newMode !== NeckModeType.Custom) {
       onModeChange({
         mode: newMode,
-        rotate: getRandomNumber(config.min, config.max, true),
+        rotate: getRandomNumber(config.min, config.max, rotate),
         duration: config.duration,
         cusDuration,
         cusMaxRotate,
@@ -68,7 +68,7 @@ export const NeckMode = (props: NeckModeProps) => {
 
     onModeChange({
       mode: NeckModeType.Custom,
-      rotate: getRandomNumber(config.min, maxRotate, true),
+      rotate: getRandomNumber(config.min, maxRotate, rotate),
       duration,
       cusDuration: duration,
       cusMaxRotate: maxRotate,
@@ -82,7 +82,7 @@ export const NeckMode = (props: NeckModeProps) => {
       }, duration * 1000);
       return () => clearInterval(timer);
     }
-  }, [duration, mode, cusMaxRotate]);
+  }, [duration, mode, cusMaxRotate, rotate]);
 
   useEffect(() => {
     handleModeChange(mode);

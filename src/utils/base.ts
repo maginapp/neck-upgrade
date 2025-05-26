@@ -1,78 +1,13 @@
-// 获取当前日期（YYYY-MM-DD格式）
-export const getCurrentDate = (): string => {
-  return new Date().toISOString().split('T')[0];
-};
-
-export enum ResultType {
-  OK = 'ok',
-  ERROR = 'error',
-}
-
-type LimitConcurrencyItem<P, R> =
-  | {
-      status: ResultType.OK;
-      data: R;
-      params: P;
-    }
-  | {
-      status: ResultType.ERROR;
-      data: null;
-      params: P;
-    };
-
-export function limitConcurrency<P, R>(
-  fn: (input: P) => Promise<R>,
-  inputs: P[],
-  limit: number
-): Promise<LimitConcurrencyItem<P, R>[]> {
-  return new Promise((resolve, _) => {
-    const results: LimitConcurrencyItem<P, R>[] = new Array(inputs.length);
-    let inProgress = 0;
-    let currentIndex = 0;
-    let resolvedCount = 0;
-
-    function next(): void {
-      if (resolvedCount === inputs.length) {
-        resolve(results);
-        return;
-      }
-
-      while (inProgress < limit && currentIndex < inputs.length) {
-        const i = currentIndex++;
-        inProgress++;
-
-        Promise.resolve(fn(inputs[i]))
-          .then((res) => {
-            results[i] = {
-              status: ResultType.OK,
-              data: res,
-              params: inputs[i],
-            };
-          })
-          .catch((err) => {
-            // reject(err);
-            results[i] = {
-              status: ResultType.ERROR,
-              data: null,
-              params: inputs[i],
-            };
-            console.error('Error fetching data:', err);
-          })
-          .finally(() => {
-            inProgress--;
-            resolvedCount++;
-            next();
-          });
-      }
-    }
-
-    next();
-  });
-}
-
-export function getRandomNumber(min: number, max: number, allowNegative: boolean = false): number {
+export function getRandomNumber(min: number, max: number, preRotate: number): number {
   let base = Math.floor(Math.random() * (max - min + 1)) + min;
-  let tag = allowNegative ? (Math.random() > 0.5 ? 1 : -1) : 1;
+  let isPositive = Math.random() >= 0.5;
+  if (preRotate > 0) {
+    isPositive = false;
+  } else if (preRotate < 0) {
+    isPositive = true;
+  }
+
+  let tag = isPositive ? 1 : -1;
   return base * tag;
 }
 
@@ -88,4 +23,13 @@ export function formatIntNumber(num: number | string, min: number, max: number):
     return max;
   }
   return value;
+}
+
+// 获取当前日期（YYYY-MM-DD格式）
+export const getCurrentDate = (): string => {
+  return new Date().toISOString().split('T')[0];
+};
+
+export function padZero(num: number): string {
+  return num.toString().padStart(2, '0');
 }

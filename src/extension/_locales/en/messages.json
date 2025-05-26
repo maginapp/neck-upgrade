@@ -1,0 +1,10 @@
+{
+  "extension_name": {
+    "message": "Neck Upgrade",
+    "description": "The name of the extension"
+  },
+  "extension_description": {
+    "message": "A Chrome extension that looks after your neck health",
+    "description": "The description of the extension"
+  }
+}
