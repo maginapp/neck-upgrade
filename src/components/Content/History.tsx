@@ -35,7 +35,7 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
   };
 
   const fetchData = async () => {
-    if (showMode === KnowledgeMode.Wiki) {
+    if (knowledgeMode === KnowledgeMode.Wiki) {
       await fetchKnowledge(wikiManager);
       if (!successRef.current) {
         setShowMode(KnowledgeMode.Baidu);
@@ -51,8 +51,9 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
   };
 
   useEffect(() => {
+    setShowMode(knowledgeMode);
     fetchData();
-  }, []);
+  }, [knowledgeMode]);
 
   return { events: data.events, holidays: data.holidays, loading, fetchData, showMode };
 };

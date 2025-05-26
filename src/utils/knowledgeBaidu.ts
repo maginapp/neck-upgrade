@@ -8,6 +8,7 @@ import { createKnowledgeManager } from './knowledgeManager';
 const processBaiduLinks = (html: string): string => {
   return html
     .replace(/href="\/item\/([^"]+)"/g, `href="${BAIDU_BASE_URL}/item/$1"`)
+    .replace(/href="\/pic\/([^"]+)"/g, `href="${BAIDU_BASE_URL}/pic/$1"`)
     .replace(/<sup[^>]*>.*?<\/sup>/g, '');
 };
 

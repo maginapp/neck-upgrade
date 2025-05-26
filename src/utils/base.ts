@@ -1,6 +1,13 @@
-export function getRandomNumber(min: number, max: number, allowNegative: boolean = false): number {
+export function getRandomNumber(min: number, max: number, preRotate: number): number {
   let base = Math.floor(Math.random() * (max - min + 1)) + min;
-  let tag = allowNegative ? (Math.random() > 0.5 ? 1 : -1) : 1;
+  let isPositive = Math.random() >= 0.5;
+  if (preRotate > 0) {
+    isPositive = false;
+  } else if (preRotate < 0) {
+    isPositive = true;
+  }
+
+  let tag = isPositive ? 1 : -1;
   return base * tag;
 }
 
