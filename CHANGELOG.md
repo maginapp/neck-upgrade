@@ -4,7 +4,12 @@
 
 ### Patch Changes
 
-- 修复农历 popup bugs
+- 优化农历和UI
+
+  1. 优化项目UI，支持较小屏幕展示
+  2. 修复农历 popup bugs，丰富农历日期信息
+  3. 优化图片resize脚本
+  4. 优化项目工程架构
 
 ## 1.1.0
 
