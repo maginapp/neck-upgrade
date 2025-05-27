@@ -5,6 +5,7 @@ module.exports = {
     'length-zero-no-unit': [true, { ignore: ['custom-properties'] }],
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
+    'media-feature-range-notation': null,
     'order/order': [
       'custom-properties',
       'dollar-variables',
