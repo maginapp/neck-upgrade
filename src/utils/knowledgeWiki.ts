@@ -3,7 +3,7 @@ import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
 import { WIKI_BASE_URL, CACHE_KEYS, WIKI_MATCH_CATEGORY } from '../constants';
 
 import { CacheManager } from './cacheManager';
-import { fetchWithTimeout } from './fetch';
+import { fetchUtils } from './fetch';
 import { createKnowledgeManager } from './knowledgeManager';
 
 // 创建维基数据缓存管理器
@@ -79,7 +79,7 @@ const fetchWikiPage = async (): Promise<KnowledgeData> => {
     const today = new Date();
     const dateStr = `${today.getMonth() + 1}月${today.getDate()}日`;
     // 缓存未命中，请求新数据
-    const response = await fetchWithTimeout(`${WIKI_BASE_URL}/${dateStr}`);
+    const response = await fetchUtils(`${WIKI_BASE_URL}/${dateStr}`, { cacheFetch: true });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

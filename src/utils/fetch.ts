@@ -2,7 +2,33 @@ import { FETCH_TIMEOUT } from '@/constants';
 
 interface FetchOptions extends RequestInit {
   timeout?: number;
+  cacheFetch?: boolean;
 }
+
+const cacheMap = new Map<string, Promise<Response>>();
+
+const fetchCache = (
+  url: string,
+  options: Omit<FetchOptions, 'timeout'> = {}
+): Promise<Response> => {
+  const { cacheFetch = false, ...fetchOptions } = options;
+
+  if (cacheFetch) {
+    const cache = cacheMap.get(url);
+    if (cache) {
+      return cache;
+    }
+  }
+  const promise = fetch(url, fetchOptions).finally(() => {
+    if (cacheFetch) {
+      cacheMap.delete(url);
+    }
+  });
+  if (cacheFetch) {
+    cacheMap.set(url, promise);
+  }
+  return promise;
+};
 
 /**
  * 封装fetch请求，添加超时和错误处理
@@ -10,7 +36,7 @@ interface FetchOptions extends RequestInit {
  * @param options 请求配置，包含超时时间
  * @returns Promise<Response>
  */
-export async function fetchWithTimeout(url: string, options: FetchOptions = {}): Promise<Response> {
+export async function fetchUtils(url: string, options: FetchOptions = {}): Promise<Response> {
   const { timeout = FETCH_TIMEOUT, ...fetchOptions } = options;
 
   const controller = new AbortController();
@@ -22,7 +48,7 @@ export async function fetchWithTimeout(url: string, options: FetchOptions = {}):
   }, timeout);
 
   try {
-    const response = await fetch(url, {
+    const response = await fetchCache(url, {
       ...fetchOptions,
       signal,
     });

@@ -2,7 +2,7 @@ import { NEWS_URL, CACHE_KEYS } from '@/constants';
 import { NewsItem } from '@/types';
 import { ToutiaoHotResponse } from '@/types/news';
 
-import { fetchWithTimeout } from '../fetch';
+import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
 
@@ -10,7 +10,7 @@ export const fetchToutiaoPage = async (url: string) => {
   try {
     const timeStr = new Date().toISOString();
     // 通过 background 脚本获取新闻
-    const response = await fetchWithTimeout(url);
+    const response = await fetchUtils(url, { cacheFetch: true });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -55,7 +55,7 @@ const fetchToutiaoNews = async (url: string) => {
   try {
     const timeStr = new Date().toISOString();
     // 通过 background 脚本获取新闻
-    const response = await fetchWithTimeout(url);
+    const response = await fetchUtils(url);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

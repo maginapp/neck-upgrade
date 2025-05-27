@@ -2,7 +2,7 @@ import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
 
 import { BAIDU_BASE_URL, CACHE_KEYS, BAIDU_MATCH_CATEGORY } from '../constants';
 
-import { fetchWithTimeout } from './fetch';
+import { fetchUtils } from './fetch';
 import { createKnowledgeManager } from './knowledgeManager';
 
 // 处理百度百科链接，转换为完整URL, 引用链接移除
@@ -79,7 +79,7 @@ const fetchBaiduPage = async (): Promise<KnowledgeData> => {
   try {
     const dateStr = getTodayDateStr();
     // 缓存未命中，请求新数据
-    const response = await fetchWithTimeout(`${BAIDU_BASE_URL}/item/${dateStr}`);
+    const response = await fetchUtils(`${BAIDU_BASE_URL}/item/${dateStr}`, { cacheFetch: true });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
