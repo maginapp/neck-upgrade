@@ -1,7 +1,7 @@
-import { DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
 import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
+import { DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
 import { LocalManager } from '@/utils/cacheManager';
 
 /**

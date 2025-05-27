@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { getRandomFamousQuote } from '../../utils/famousQuotes';
+import { useEffect, useState } from 'react';
+
 import { FamousInfo } from '@/types';
-import styles from './FamousSaying.module.scss';
+
+import { getRandomFamousQuote } from '../../utils/famousQuotes';
 import { Loading } from '../Tools';
+
+import styles from './FamousSaying.module.scss';
 
 export const FamousSaying: React.FC = () => {
   const [quote, setQuote] = useState<FamousInfo | null>(null);
@@ -24,7 +27,7 @@ export const FamousSaying: React.FC = () => {
     fetchQuote();
   }, []);
   return (
-    <div className={styles.container}>
+    <>
       {loading && <Loading writingMode="initial" />}
       {quote && (
         <div className={styles.quote}>
@@ -35,6 +38,6 @@ export const FamousSaying: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

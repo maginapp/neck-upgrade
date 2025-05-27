@@ -1,4 +1,5 @@
 import { HistoryRecord, LearningRecords } from '@/types';
+
 import { getCurrentDate } from './base';
 
 const REVIEW_RATIO = 5; // 每5次复习，插入1次当天学习的
@@ -242,7 +243,7 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     records.todayReview.records = records.todayReview.records.map((record) => {
       const formattedRecord = formattedRecords.find((item) => compareFn(item, record));
       const curRecord = formattedRecord ? formattedRecord : record;
-      historyRecord.records.push(curRecord);
+      historyRecord!.records.push(curRecord);
       return curRecord;
     });
   }

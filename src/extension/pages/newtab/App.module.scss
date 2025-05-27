@@ -1,6 +1,15 @@
+@use '../../../styles/tools';
+
+// 使用断点函数设置响应式字体
+@include tools.responsive-fonts(750px, 16px, 20px);
+@include tools.responsive-fonts(600px, 20px, 20px);
+@include tools.responsive-fonts(480px, 26px, 24px);
+@include tools.responsive-fonts(400px, 30px, 28px);
+
 .app {
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
+
   button {
     color: var(--text-color);
   }

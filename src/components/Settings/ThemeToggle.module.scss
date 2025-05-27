@@ -6,12 +6,12 @@
 }
 
 .themeToggle {
-  background: none;
   border: none;
-  font-size: 24px;
-  cursor: pointer;
   border-radius: 50%;
+  background: none;
+  font-size: var(--font-size-heading-3);
   transition: background-color 0.3s;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--hover-bg);

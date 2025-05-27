@@ -1,6 +1,8 @@
-import { NewsItem } from '@/types';
-import { fetchWithTimeout } from '../fetch';
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
+import { NewsItem } from '@/types';
+
+import { fetchWithTimeout } from '../fetch';
+
 import { createNewsManager } from './newsManager';
 
 const fetchGoogleNews = async (url: string) => {

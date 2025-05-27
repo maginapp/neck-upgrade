@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styles from './News.module.scss';
+import { useEffect, useState } from 'react';
 
-import { NewsType, PageInfo } from '@/types/app';
+import { DEFAULT_PAGE_INFO } from '@/constants';
 import { NewsDisplay } from '@/types';
+import { NewsType, PageInfo } from '@/types/app';
 import { getNewsTypeLabel } from '@/utils/labels';
 import { newsManagerMap } from '@/utils/news';
+
 import { Toolbar } from '../Tools';
-import { DEFAULT_PAGE_INFO } from '@/constants';
+
+import styles from './News.module.scss';
 
 interface NewsTypeInfoProps {
   newsType: NewsType;
@@ -16,7 +18,7 @@ interface NewsTypeInfoProps {
 const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
   const { newsType, isActive } = props;
   const manager = newsManagerMap[newsType];
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [newsData, setNewsData] = useState<NewsDisplay>({
     news: [],
     pageInfo: DEFAULT_PAGE_INFO,
@@ -43,6 +45,7 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
     }
     // 初始化 首次active 请求一次
     fetchNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, hasFetched]);
 
   const handleRefresh = async () => {
@@ -114,8 +117,11 @@ export const News: React.FC = () => {
       </div>
 
       {types.map((type) => (
-        <div className={`${styles.newsList} ${activeType === type ? styles.activeList : ''}`}>
-          <NewsTypeInfo key={type} newsType={type} isActive={activeType === type} />
+        <div
+          key={type}
+          className={`${styles.newsList} ${activeType === type ? styles.activeList : ''}`}
+        >
+          <NewsTypeInfo newsType={type} isActive={activeType === type} />
         </div>
       ))}
     </div>

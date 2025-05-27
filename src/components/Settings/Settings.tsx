@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { ThemeToggle } from './ThemeToggle';
-import { NeckMode } from './NeckMode';
-import { DataSwitch } from './DataSwitch';
-import { KnowledgeSwtich } from './KnowledgeSwtich';
-import styles from './Settings.module.scss';
+import { useEffect, useState } from 'react';
+
+import { MESSAGE_TYPES } from '@/constants/events';
 import {
   DataType,
   Theme,
@@ -11,8 +8,14 @@ import {
   Settings as SettingsType,
   KnowledgeMode,
 } from '@/types/app';
-import { MESSAGE_TYPES } from '@/constants/events';
+import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
+
 import { Appreciation } from './Appreciation';
+import { DataSwitch } from './DataSwitch';
+import { KnowledgeSwtich } from './KnowledgeSwtich';
+import { NeckMode } from './NeckMode';
+import styles from './Settings.module.scss';
+import { ThemeToggle } from './ThemeToggle';
 
 interface SettingsProps {
   settings: SettingsType;
@@ -40,9 +43,10 @@ export const Settings: React.FC<SettingsProps> = (props) => {
 
   useEffect(() => {
     // todo 策略模式
-    const messageListener = (message: any) => {
+    const messageListener = (message: ChromeMessage) => {
       if (message.type === MESSAGE_TYPES.TOGGLE_ACTIVE_SETTINGS) {
-        const nextStatus = message.isOpen ?? !isOpen;
+        const toggleMessage = message as ToggleActiveSettingsMessage;
+        const nextStatus = toggleMessage.isOpen ?? !isOpen;
         setIsOpen(nextStatus);
         chrome.runtime.sendMessage({
           type: MESSAGE_TYPES.SETTINGS_OPEN_STATUS,
@@ -78,28 +82,28 @@ export const Settings: React.FC<SettingsProps> = (props) => {
           >
             ×
           </button>
-          <h2>设置</h2>
+          <h3>设置</h3>
           <div className={styles.settingsGroup}>
-            <h3>主题</h3>
+            <h4>主题</h4>
             <ThemeToggle currentTheme={settings.theme} onThemeChange={onThemeChange} />
           </div>
           <div className={styles.settingsGroup}>
-            <h3>颈椎倾斜模式</h3>
+            <h4>颈椎倾斜模式</h4>
             <NeckMode neckConfig={settings.neck} onModeChange={onNeckModeChange} />
           </div>
           <div className={styles.settingsGroup}>
-            <h3>内容类型</h3>
+            <h4>内容类型</h4>
             <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
           </div>
           <div className={styles.settingsGroup}>
-            <h3>百科数据源(优先使用)</h3>
+            <h4>百科数据源(优先使用)</h4>
             <KnowledgeSwtich
               currentMode={settings.knowledge}
               onModeChange={onKnowledgeModeChange}
             />
           </div>
           <div className={styles.settingsGroup}>
-            <h3>赞赏支持</h3>
+            <h4>赞赏支持</h4>
             <p className={styles.description}>如果这个扩展对你有帮助，欢迎赞赏支持</p>
             <Appreciation currentTheme={currentTheme} />
           </div>

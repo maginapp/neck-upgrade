@@ -1,13 +1,13 @@
 .timeSection {
-  text-align: center;
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
+  text-align: center;
+  flex-wrap: wrap;
   align-items: center;
 }
 
 .currentTime {
-  font-size: 36px;
+  font-size: var(--font-size-heading-1);
   font-weight: bold;
   margin-right: 10px;
 }
@@ -16,18 +16,17 @@
   color: var(--text-secondary);
 }
 
-
 .lunarInfoSection {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .lunarInfo {
   color: var(--text-secondary);
 }
 
-.findMoreIcon  {
+.findMoreIcon {
   width: 14px;
   height: 14px;
   margin-left: 10px;
@@ -39,15 +38,15 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-  border-radius: 8px;
-  padding: 12px;
-  width: 320px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  margin-top: 8px;
+  width: 320px;
+  padding: 12px;
+  border-radius: 8px;
   background: var(--settings-bg);
-  font-size: 14px;
+  font-size: var(--font-size);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  transform: translateX(-50%) translateY(-10px);
+  margin-top: 8px;
 
   &::before {
     content: '';
@@ -73,15 +72,24 @@
 }
 
 .lunarInfoContentTitle {
-  font-size: 16px;
+  font-size: var(--font-size-lg);
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.lunarInfoContentSubTitle {
+  margin-bottom: 14px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 6px;
 }
 
 .lunarInfoItem {
-  margin-bottom: 8px;
-  text-align: left;
   display: flex;
+  text-align: left;
+  margin-bottom: 8px;
 
   &:last-child {
     margin-bottom: 0;
@@ -89,15 +97,14 @@
 }
 
 .lunarInfoItemTitle {
-  margin-right: 8px;
-  width: 72px;
   flex-shrink: 0;
+  width: 72px;
+  margin-right: 8px;
 }
 
-
 .holidayHighlight {
-  color: var(--accent-color);
-  font-weight: bold;
-  font-size: 20px;
   margin: 0 5px;
+  font-size: var(--font-size-heading-4);
+  font-weight: bold;
+  color: var(--accent-color);
 }

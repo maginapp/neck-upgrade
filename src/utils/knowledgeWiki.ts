@@ -1,9 +1,10 @@
-import { createKnowledgeManager } from './knowledgeManager';
-
 import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
-import { CacheManager } from './cacheManager';
+
 import { WIKI_BASE_URL, CACHE_KEYS, WIKI_MATCH_CATEGORY } from '../constants';
+
+import { CacheManager } from './cacheManager';
 import { fetchWithTimeout } from './fetch';
+import { createKnowledgeManager } from './knowledgeManager';
 
 // 创建维基数据缓存管理器
 const wikiCache = new CacheManager<KnowledgeData>(CACHE_KEYS.WIKI_DATA);

@@ -15,7 +15,8 @@
     "https://www.xiaohongshu.com/*",
     "https://so.toutiao.com/*",
     "https://api.toutiaoapi.com/*",
-    "https://news.google.com/*"
+    "https://news.google.com/*",
+    "https://baike.baidu.com/*"
   ],
   "action": {
     "default_popup": "pages/popup.html",

@@ -1,4 +1,4 @@
-import { SolarDay } from 'tyme4ts';
+import { EarthBranch, SolarDay } from 'tyme4ts';
 
 export type LunarInfo = ReturnType<typeof getLunarInfo>;
 
@@ -14,6 +14,8 @@ export type LunarInfo = ReturnType<typeof getLunarInfo>;
 //   solar: any; // 阳历
 // }
 
+// https://wannianrili.bmcx.com/
+// https://6tail.cn/tyme.html
 export const getLunarInfo = (date: Date) => {
   const solar = SolarDay.fromYmd(date.getFullYear(), date.getMonth() + 1, date.getDate());
   const lunar = solar.getLunarDay();
@@ -44,6 +46,19 @@ export const getLunarInfo = (date: Date) => {
   const daySuit = lunar.getRecommends().map((item) => item.getName());
   const dayAvoid = lunar.getAvoids().map((item) => item.getName());
 
+  // 干支年月日
+
+  const ganZhiDay = lunar.getSixtyCycleDay();
+  const ganZhiMonth = ganZhiDay.getSixtyCycleMonth();
+  const ganZhiYear = ganZhiMonth.getSixtyCycleYear();
+
+  let ganZhiYearName = ganZhiYear.getName();
+  const diZhi = ganZhiYearName[1];
+  const zodiac = EarthBranch.fromName(diZhi).getZodiac().getName();
+  ganZhiYearName = ganZhiYearName.replace(diZhi, `${diZhi}(${zodiac})`);
+
+  const lunarDanZhiDate = `${ganZhiYearName} ${ganZhiMonth.getName()} ${ganZhiDay.getName()}`;
+
   return {
     lunarDate,
     term: solarTerm.getName(), // 节气
@@ -55,9 +70,6 @@ export const getLunarInfo = (date: Date) => {
     rainDay: solar.getPlumRainDay()?.toString() || '', // 雨天
     julianDay: solar.getJulianDay().toString(), // 儒略日
     solar: solar,
+    lunarDanZhiDate, // 农历地支日
   };
 };
-
-// https://wannianrili.bmcx.com/
-
-// https://6tail.cn/tyme.html

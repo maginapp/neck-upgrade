@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Toolbar.module.scss';
-import { Loading } from './Loading';
 import RefreshIcon from '@/assets/images/refresh.svg?react';
+
+import { Loading } from './Loading';
+import styles from './Toolbar.module.scss';
 
 interface ToolbarProps {
   size?: 'small' | 'medium' | 'large';

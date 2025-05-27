@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './ThemeToggle.module.scss';
 import { Theme } from '@/types/app';
 import { getThemeLabel } from '@/utils/labels';
+
+import styles from './ThemeToggle.module.scss';
 
 interface ThemeToggleProps {
   currentTheme: Theme;

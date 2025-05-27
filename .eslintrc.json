@@ -8,6 +8,9 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -21,11 +24,50 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // 或 "off"
+      {
+        "varsIgnorePattern": "^_", // 变量名以 _ 开头就忽略
+        "argsIgnorePattern": "^_", // 参数名以 _ 开头也忽略
+        "caughtErrors": "all" // try/catch 的 error 参数同理
+      }
+    ]
   },
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {}
     }
   }
-} 
+}

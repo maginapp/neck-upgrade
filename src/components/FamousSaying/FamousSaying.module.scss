@@ -1,7 +1,3 @@
-.container {
-  padding: 10px 0 10px 10px;
-}
-
 .quote {
   .content {
     line-height: 1.6;
@@ -10,8 +6,8 @@
   }
 
   .info {
-    color: var(--text-secondary);
     text-align: right;
+    color: var(--text-secondary);
 
     .website {
       opacity: 0.8;

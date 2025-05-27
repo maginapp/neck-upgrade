@@ -1,6 +1,8 @@
-import { NewsItem } from '@/types';
-import { fetchWithTimeout } from '../fetch';
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
+import { NewsItem } from '@/types';
+
+import { fetchWithTimeout } from '../fetch';
+
 import { createNewsManager } from './newsManager';
 
 const fetchXhsNews = async (url: string) => {
@@ -34,7 +36,7 @@ const fetchXhsNews = async (url: string) => {
         // 处理相对链接
         const link = linkElement?.href?.startsWith('/')
           ? `https://www.xiaohongshu.com${linkElement.href}`
-          : (linkElement?.href ?? '');
+          : linkElement?.href ?? '';
 
         newsItems.push({
           title,

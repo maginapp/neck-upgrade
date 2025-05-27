@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Poetry.module.scss';
-import { getNextPoem } from '@/utils/poetryLearning';
+import { useEffect, useState } from 'react';
+
 import { Poetry } from '@/types';
+import { getNextPoem } from '@/utils/poetryLearning';
+
 import { Toolbar } from '../Tools';
+
+import styles from './Poetry.module.scss';
 
 export const PoetryComponent: React.FC = () => {
   const [poems, setPoems] = useState<Poetry[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const fetchPoem = async () => {
     setLoading(true);
     try {
@@ -29,8 +32,8 @@ export const PoetryComponent: React.FC = () => {
       {poems.map((poem, index) => {
         return (
           <div key={index} className={styles.poetryContainer}>
-            <h2>{poem.title}</h2>
-            <h3>{poem.author}</h3>
+            <h3>{poem.title}</h3>
+            <div className={styles.author}>{poem.author}</div>
             {poem.tags && poem.tags.length > 0 && (
               <div className={styles.tags}>
                 {poem.tags.map((tag, index) => (

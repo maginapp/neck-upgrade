@@ -1,0 +1,25 @@
+// 字体大小设置函数
+@function set-font-sizes($base-size, $heading-size) {
+  @return (
+    '--font-size': $base-size,
+    '--font-size-xs': $base-size - 4px,
+    '--font-size-sm': $base-size - 2px,
+    '--font-size-lg': $base-size + 2px,
+    '--font-size-xl': $base-size + 4px,
+    '--font-size-heading-1': $heading-size * 1.5 + 8px,
+    '--font-size-heading-2': $heading-size * 1.5,
+    '--font-size-heading-3': $heading-size + 4px,
+    '--font-size-heading-4': $heading-size
+  );
+}
+
+// 媒体查询断点设置函数
+@mixin responsive-fonts($breakpoint, $base-size, $heading-size) {
+  @media screen and (max-width: $breakpoint), screen and (max-height: $breakpoint) {
+    :root {
+      @each $property, $value in set-font-sizes($base-size, $heading-size) {
+        #{$property}: $value;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import en from '@/extension/_locales/en/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
 
