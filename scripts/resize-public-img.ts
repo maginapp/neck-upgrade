@@ -42,6 +42,57 @@ async function getDominantColor(image: any): Promise<number> {
   return dominantColor;
 }
 
+function getOptimalSize(
+  originalWidth: number,
+  originalHeight: number,
+  targetWidth: number,
+  targetHeight: number
+) {
+  const targetRatio = targetWidth / targetHeight;
+  const originalRatio = originalWidth / originalHeight;
+
+  let scaleHeight: number;
+  let scaleWidth: number;
+
+  // 原图更宽，需要按宽度缩放
+  if (originalRatio > targetRatio) {
+    if (originalWidth > targetWidth) {
+      const scale = Math.ceil(originalWidth / targetWidth);
+      scaleHeight = originalHeight / scale;
+      scaleWidth = originalWidth / scale;
+    } else {
+      const scale = Math.floor(targetWidth / originalWidth);
+      scaleHeight = originalHeight * scale;
+      scaleWidth = originalWidth * scale;
+    }
+  } else {
+    if (originalWidth > targetWidth) {
+      const scale = Math.ceil(originalHeight / targetHeight);
+      scaleHeight = originalHeight / scale;
+      scaleWidth = originalWidth / scale;
+    } else {
+      const scale = Math.floor(targetHeight / originalHeight);
+      scaleHeight = originalHeight * scale;
+      scaleWidth = originalWidth * scale;
+    }
+  }
+
+  if (scaleHeight >= targetHeight * 0.8 || scaleWidth >= targetWidth * 0.8) {
+    return {
+      width: scaleWidth,
+      height: scaleHeight,
+    };
+  }
+
+  // 计算缩放比例
+  const scale = Math.min(targetWidth / originalWidth, targetHeight / originalHeight);
+
+  return {
+    width: Math.round(originalWidth * scale),
+    height: Math.round(originalHeight * scale),
+  };
+}
+
 async function resizeImage(inputPath: string, targetWidth: number, targetHeight: number) {
   try {
     // 读取图片
@@ -49,18 +100,18 @@ async function resizeImage(inputPath: string, targetWidth: number, targetHeight:
     const originalWidth = image.width;
     const originalHeight = image.height;
 
-    // 计算缩放比例
-    const scale = Math.min(targetWidth / originalWidth, targetHeight / originalHeight);
-
-    // 计算缩放后的尺寸
-    const newWidth = Math.round(originalWidth * scale);
-    const newHeight = Math.round(originalHeight * scale);
+    const { width: newWidth, height: newHeight } = getOptimalSize(
+      originalWidth,
+      originalHeight,
+      targetWidth,
+      targetHeight
+    );
 
     // 创建新图片
     const newImage = new Jimp({ width: targetWidth, height: targetHeight });
 
-    // 获取原图主要颜色作为背景色
-    const bgColor = await getDominantColor(image);
+    // 获取原图主要颜色作为背景色 透明 -> 4007971839
+    const bgColor = (await getDominantColor(image)) || 4007971839;
     newImage.scan(0, 0, targetWidth, targetHeight, function (x, y) {
       this.setPixelColor(bgColor, x, y);
     });
