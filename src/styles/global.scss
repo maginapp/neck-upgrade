@@ -1,17 +1,19 @@
 @use 'tools';
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 :root {
   background-color: var(--background-color);
   color: var(--text-color);
+
   @each $property, $value in tools.set-font-sizes(14px, 20px) {
     #{$property}: $value;
   }
+
   // --font-size: 14px;
   // --font-size-xs: 10px;
   // --font-size-sm: 12px;
@@ -24,10 +26,9 @@
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-    'SimHei', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.5;
-  font-variant-numeric: tabular-nums; /* 让非等宽字体中的数字表现为等宽 */
   font-size: var(--font-size);
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', SimHei, 'Helvetica Neue', Arial, sans-serif;
+  font-variant-numeric: tabular-nums; /* 让非等宽字体中的数字表现为等宽 */
 }

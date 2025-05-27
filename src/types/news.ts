@@ -57,7 +57,7 @@ interface HotItem {
 
 export interface ToutiaoHotResponse {
   data: HotItem[];
-  fixed_top_data: any; // 如果有具体结构，可进一步定义
+  fixed_top_data: unknown; // 如果有具体结构，可进一步定义
   fixed_top_style: string;
   impr_id: string;
   status: string;

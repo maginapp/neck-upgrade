@@ -1,6 +1,6 @@
 .historicalSection {
-  margin-top: 16px;
   color: var(--text-secondary);
+  margin-top: 16px;
 
   li,
   ul {
@@ -15,27 +15,33 @@
   }
 
   a {
-    text-decoration: none;
     color: var(--text-color);
+    text-decoration: none;
   }
+
   a:visited {
     color: var(--text-color);
   }
+
   a:hover {
     color: var(--primary-color);
   }
+
   [class*='lemmaPicture'] {
     margin-bottom: 5px;
   }
+
   img[class*='picture'] {
     margin: 5px 5px 0;
   }
 }
+
 .title {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
+
 .source {
   font-size: var(--font-size-xs);
   color: var(--text-secondary);

@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Settings.module.scss';
 import { KnowledgeMode } from '@/types/app';
 import { getKnowledgeModeLabel } from '@/utils/labels';
+
+import styles from './Settings.module.scss';
 
 interface KnowledgeModeProps {
   currentMode: KnowledgeMode;

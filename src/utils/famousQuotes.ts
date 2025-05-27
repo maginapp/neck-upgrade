@@ -1,6 +1,3 @@
-import { getCurrentDate } from './base';
-import { CacheManager } from './cacheManager';
-import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '@/types';
 import {
   FAMOUS_ZEN_QUOTES_API,
   FAMOUS_HITOKOTO_API,
@@ -10,6 +7,10 @@ import {
   FAMOUS_HI_MAX_REQ_COUNT,
   FAMOUS_HI_CON_LIMIT,
 } from '@/constants';
+import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '@/types';
+
+import { getCurrentDate } from './base';
+import { CacheManager } from './cacheManager';
 import { limitConcurrency, ResultType } from './concurrency';
 
 class FamouseStorage extends CacheManager<FamousRecords> {
@@ -90,7 +91,9 @@ export const getFamousQuotes = async (): Promise<FamousInfo[]> => {
     .map((item) => item.data)
     .flat();
   const existingRecords = cached?.records || [];
-  const allRecords = [...existingRecords, ...newRecords].slice(-FAMOUS_MAX_CACHE_COUNT);
+  const allRecords = [...existingRecords, ...newRecords]
+    .slice(-FAMOUS_MAX_CACHE_COUNT)
+    .map((item) => item as FamousInfo);
 
   await cacheManager.set({
     records: allRecords,

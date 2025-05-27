@@ -1,8 +1,8 @@
 .timeSection {
-  text-align: center;
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
+  text-align: center;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -17,9 +17,9 @@
 }
 
 .lunarInfoSection {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .lunarInfo {
@@ -38,15 +38,15 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-  border-radius: 8px;
-  padding: 12px;
-  width: 320px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  margin-top: 8px;
+  width: 320px;
+  padding: 12px;
+  border-radius: 8px;
   background: var(--settings-bg);
   font-size: var(--font-size);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  transform: translateX(-50%) translateY(-10px);
+  margin-top: 8px;
 
   &::before {
     content: '';
@@ -87,9 +87,9 @@
 }
 
 .lunarInfoItem {
-  margin-bottom: 8px;
-  text-align: left;
   display: flex;
+  text-align: left;
+  margin-bottom: 8px;
 
   &:last-child {
     margin-bottom: 0;
@@ -97,14 +97,14 @@
 }
 
 .lunarInfoItemTitle {
-  margin-right: 8px;
-  width: 72px;
   flex-shrink: 0;
+  width: 72px;
+  margin-right: 8px;
 }
 
 .holidayHighlight {
-  color: var(--accent-color);
-  font-weight: bold;
-  font-size: var(--font-size-heading-4);
   margin: 0 5px;
+  font-size: var(--font-size-heading-4);
+  font-weight: bold;
+  color: var(--accent-color);
 }

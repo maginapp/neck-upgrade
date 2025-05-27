@@ -1,9 +1,9 @@
-import React from 'react';
 import { DataType, Settings } from '@/types/app';
-import { History } from './History';
-import { PoetryComponent } from './Poetry';
+
 import { English } from './English';
+import { History } from './History';
 import { News } from './News';
+import { PoetryComponent } from './Poetry';
 
 interface ContentProps {
   settings: Settings;

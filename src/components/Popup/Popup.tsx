@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Popup.module.scss';
+import { useEffect, useState } from 'react';
+
 import { MESSAGE_TYPES } from '@/constants/events';
+import { ChromeMessage, SettingsOpenStatusMessage } from '@/types/message';
+
+import styles from './Popup.module.scss';
 
 export const Popup: React.FC = () => {
   const [isNewTab, setIsNewTab] = useState(false);
@@ -22,9 +25,10 @@ export const Popup: React.FC = () => {
 
   useEffect(() => {
     // 监听来自 content script 的消息
-    const messageListener = (message: any) => {
+    const messageListener = (message: ChromeMessage) => {
       if (message.type === MESSAGE_TYPES.SETTINGS_OPEN_STATUS) {
-        setIsSettingsOpen(message.isOpen);
+        const toggleMessage = message as SettingsOpenStatusMessage;
+        setIsSettingsOpen(toggleMessage.isOpen);
       }
     };
 

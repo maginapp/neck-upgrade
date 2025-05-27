@@ -1,5 +1,6 @@
-import { CacheManager } from './cacheManager';
 import { PageInfo } from '@/types/app';
+
+import { CacheManager } from './cacheManager';
 
 export class CrawlerManager<T, R> {
   cache: CacheManager<T>;

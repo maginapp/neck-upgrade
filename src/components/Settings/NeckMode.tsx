@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+
+import { NeckMode as NeckModeType, NeckModeConfig } from '@/types/app';
+import { formatIntNumber, getRandomNumber } from '@/utils/base';
+import { getNeckModeLabel } from '@/utils/labels';
+
 import styles from './NeckMode.module.scss';
 import settingStyles from './Settings.module.scss';
-import { getNeckModeLabel } from '@/utils/labels';
-import { formatIntNumber, getRandomNumber } from '@/utils/base';
-import { NeckMode as NeckModeType, NeckModeConfig } from '@/types/app';
 
 interface NeckModeProps {
   neckConfig: NeckModeConfig;

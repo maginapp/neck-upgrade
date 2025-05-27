@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Settings.module.scss';
 import { DataType } from '@/types/app';
 import { getDataTypeLabel } from '@/utils/labels';
+
+import styles from './Settings.module.scss';
 
 interface DataSwitchProps {
   currentType: DataType;

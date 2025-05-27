@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { ThemeToggle } from './ThemeToggle';
-import { NeckMode } from './NeckMode';
-import { DataSwitch } from './DataSwitch';
-import { KnowledgeSwtich } from './KnowledgeSwtich';
-import styles from './Settings.module.scss';
+import { useEffect, useState } from 'react';
+
+import { MESSAGE_TYPES } from '@/constants/events';
 import {
   DataType,
   Theme,
@@ -11,8 +8,14 @@ import {
   Settings as SettingsType,
   KnowledgeMode,
 } from '@/types/app';
-import { MESSAGE_TYPES } from '@/constants/events';
+import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
+
 import { Appreciation } from './Appreciation';
+import { DataSwitch } from './DataSwitch';
+import { KnowledgeSwtich } from './KnowledgeSwtich';
+import { NeckMode } from './NeckMode';
+import styles from './Settings.module.scss';
+import { ThemeToggle } from './ThemeToggle';
 
 interface SettingsProps {
   settings: SettingsType;
@@ -40,9 +43,10 @@ export const Settings: React.FC<SettingsProps> = (props) => {
 
   useEffect(() => {
     // todo 策略模式
-    const messageListener = (message: any) => {
+    const messageListener = (message: ChromeMessage) => {
       if (message.type === MESSAGE_TYPES.TOGGLE_ACTIVE_SETTINGS) {
-        const nextStatus = message.isOpen ?? !isOpen;
+        const toggleMessage = message as ToggleActiveSettingsMessage;
+        const nextStatus = toggleMessage.isOpen ?? !isOpen;
         setIsOpen(nextStatus);
         chrome.runtime.sendMessage({
           type: MESSAGE_TYPES.SETTINGS_OPEN_STATUS,

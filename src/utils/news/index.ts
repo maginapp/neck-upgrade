@@ -1,10 +1,12 @@
-import { NewsType } from '@/types/app';
-import { ggEnForYouNews, ggEnGlobalNews, ggZhForYouNews, ggZhGlobalNews } from './google';
-import { weiboAmuseNews, weiboHotNews } from './weibo';
-import { toutiaoNews } from './toutiao';
-import { xhsNews } from './xiaohongshu';
-import { CrawlerManager } from '../crawlerManager';
 import { NewsItem, NewsDisplay } from '@/types';
+import { NewsType } from '@/types/app';
+
+import { CrawlerManager } from '../crawlerManager';
+
+import { ggEnForYouNews, ggEnGlobalNews, ggZhForYouNews, ggZhGlobalNews } from './google';
+import { toutiaoNews } from './toutiao';
+import { weiboAmuseNews, weiboHotNews } from './weibo';
+import { xhsNews } from './xiaohongshu';
 
 export const newsManagerMap: Record<NewsType, CrawlerManager<NewsItem[], NewsDisplay>> = {
   [NewsType.GgEnForYou]: ggEnForYouNews,

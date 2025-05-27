@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Poetry.module.scss';
-import { getNextPoem } from '@/utils/poetryLearning';
+import { useEffect, useState } from 'react';
+
 import { Poetry } from '@/types';
+import { getNextPoem } from '@/utils/poetryLearning';
+
 import { Toolbar } from '../Tools';
+
+import styles from './Poetry.module.scss';
 
 export const PoetryComponent: React.FC = () => {
   const [poems, setPoems] = useState<Poetry[]>([]);

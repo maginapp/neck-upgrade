@@ -1,6 +1,7 @@
 import { HolidayToday, KnowledgeData, HistoricalEvent, KnowledgeDisplay } from '@/types';
 
 import { KNOWLEDGE_MAX_EVENTS_COUNT, KNOWLEDGE_MAX_HOLIDAY_COUNT } from '../constants';
+
 import { CrawlerManager } from './crawlerManager';
 
 // 从所有历史事件中随机选择指定数量的历史事件

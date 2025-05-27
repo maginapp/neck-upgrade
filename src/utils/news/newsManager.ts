@@ -1,15 +1,13 @@
-import { NewsItem } from '@/types';
-
+import { DEFAULT_PAGE_INFO, NEWS_CACHE_EXPIRY } from '@/constants';
+import { NewsItem, NewsDisplay } from '@/types';
 import { PageInfo } from '@/types/app';
 
 import { CrawlerManager } from '../crawlerManager';
-import { DEFAULT_PAGE_INFO, NEWS_CACHE_EXPIRY } from '@/constants';
-import { NewsDisplay } from '@/types';
 
 const selectRandom = (list: NewsItem[], pageInfo: PageInfo = DEFAULT_PAGE_INFO): NewsDisplay => {
   const { page, pageSize } = pageInfo;
-  let start = page * pageSize;
-  let end = (page + 1) * pageSize;
+  const start = page * pageSize;
+  const end = (page + 1) * pageSize;
   if (start >= list.length) {
     return {
       news: list.slice(0, pageSize),

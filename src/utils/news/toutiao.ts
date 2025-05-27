@@ -1,8 +1,10 @@
-import { NewsItem } from '@/types';
-import { fetchWithTimeout } from '../fetch';
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
-import { createNewsManager } from './newsManager';
+import { NewsItem } from '@/types';
 import { ToutiaoHotResponse } from '@/types/news';
+
+import { fetchWithTimeout } from '../fetch';
+
+import { createNewsManager } from './newsManager';
 
 export const fetchToutiaoPage = async (url: string) => {
   try {

@@ -1,5 +1,6 @@
-import { Poetry } from '@/types';
 import { CACHE_KEYS } from '@/constants';
+import { Poetry } from '@/types';
+
 import { getNextRecord } from './generateNext';
 
 const SELECTED_POEMS_COUNT = 4;

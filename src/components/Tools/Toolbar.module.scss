@@ -1,15 +1,15 @@
 .toolbar {
+  height: 18px;
   text-align: right;
   padding-right: 16px;
   flex-wrap: wrap;
-  height: 18px;
 }
 
 .refresh {
-  cursor: pointer;
   width: 16px;
   height: 16px;
   transition: all 0.3s ease;
+  cursor: pointer;
   fill: var(--text-secondary);
 
   &:hover {

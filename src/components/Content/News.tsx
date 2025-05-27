@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styles from './News.module.scss';
+import { useEffect, useState } from 'react';
 
-import { NewsType, PageInfo } from '@/types/app';
+import { DEFAULT_PAGE_INFO } from '@/constants';
 import { NewsDisplay } from '@/types';
+import { NewsType, PageInfo } from '@/types/app';
 import { getNewsTypeLabel } from '@/utils/labels';
 import { newsManagerMap } from '@/utils/news';
+
 import { Toolbar } from '../Tools';
-import { DEFAULT_PAGE_INFO } from '@/constants';
+
+import styles from './News.module.scss';
 
 interface NewsTypeInfoProps {
   newsType: NewsType;
@@ -114,8 +116,11 @@ export const News: React.FC = () => {
       </div>
 
       {types.map((type) => (
-        <div className={`${styles.newsList} ${activeType === type ? styles.activeList : ''}`}>
-          <NewsTypeInfo key={type} newsType={type} isActive={activeType === type} />
+        <div
+          key={type}
+          className={`${styles.newsList} ${activeType === type ? styles.activeList : ''}`}
+        >
+          <NewsTypeInfo newsType={type} isActive={activeType === type} />
         </div>
       ))}
     </div>

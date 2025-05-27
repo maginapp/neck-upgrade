@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { getNextWord, getSourceName } from '@/utils/wordLearning';
-import styles from './English.module.scss';
+
 import { DictionaryEntry } from '@/types';
+import { getNextWord, getSourceName } from '@/utils/wordLearning';
+
 import { Toolbar } from '../Tools';
+
+import styles from './English.module.scss';
 
 interface WordInfo {
   word: string;
@@ -94,6 +97,7 @@ export const English = () => {
 
   useEffect(() => {
     fetchNextWords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

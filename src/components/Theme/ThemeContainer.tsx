@@ -1,4 +1,5 @@
 import { Theme } from '@/types/app';
+
 import styles from './ThemeContainer.module.scss';
 
 interface ThemeContainerProps {

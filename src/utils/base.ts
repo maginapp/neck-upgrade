@@ -1,5 +1,5 @@
 export function getRandomNumber(min: number, max: number, preRotate: number): number {
-  let base = Math.floor(Math.random() * (max - min + 1)) + min;
+  const base = Math.floor(Math.random() * (max - min + 1)) + min;
   let isPositive = Math.random() >= 0.5;
   if (preRotate > 0) {
     isPositive = false;
@@ -7,12 +7,12 @@ export function getRandomNumber(min: number, max: number, preRotate: number): nu
     isPositive = true;
   }
 
-  let tag = isPositive ? 1 : -1;
+  const tag = isPositive ? 1 : -1;
   return base * tag;
 }
 
 export function formatIntNumber(num: number | string, min: number, max: number): number {
-  let value = parseInt(num.toString());
+  const value = parseInt(num.toString());
   if (isNaN(value)) {
     return min;
   }

@@ -13,13 +13,14 @@
 
 .mainView {
   display: grid;
+  grid:
+    'h  s' 1fr
+    'c  s' 4fr
+    / 5fr 1fr;
   width: 60vh;
-  height: 60vh;
   min-width: 600px;
+  height: 60vh;
   min-height: 600px;
-  grid-template-columns: 5fr 1fr;
-  grid-template-rows: 1fr 4fr;
-  grid-template-areas: 'h  s' 'c  s';
   margin: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -27,30 +28,24 @@
     display: none; /* Chrome, Safari, Opera */
   }
 
-  &.custom,
-  &.intense {
-    .content {
-      transform: rotate(180deg);
-    }
-  }
-
   .side {
     grid-area: s;
+
+    // 计算所得 width: 60vh / (5 + 1);
+    width: 10vh;
+    padding: 10px 0 10px 10px;
+    overflow: hidden;
     writing-mode: vertical-rl;
     text-orientation: sideways;
     justify-self: center;
-    padding: 10px 0 10px 10px;
-    // 计算所得 width: 60vh / (5 + 1);
-    width: 10vh;
-    overflow: hidden;
   }
 
   .content {
     grid-area: c;
     width: 100%;
-    overflow: auto;
     height: 100%;
     padding: 5px;
+    overflow: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
     &::-webkit-scrollbar {
@@ -62,6 +57,13 @@
     grid-area: h;
     margin-bottom: 10px;
     padding: 0 10px;
+  }
+
+  &.custom,
+  &.intense {
+    .content {
+      transform: rotate(180deg);
+    }
   }
 }
 

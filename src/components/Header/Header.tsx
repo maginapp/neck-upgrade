@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { getNextHoliday } from '../../utils/holidayApi';
-import { HolidayDisplayInfo } from '@/types';
-import styles from './Header.module.scss';
-import { getLunarInfo, LunarInfo } from '@/utils/lunar';
-import { padZero } from '@/utils/base';
+import { useState, useEffect, useRef } from 'react';
+
 import FindMoreIcon from '@/assets/images/find_more.svg?react';
+import { HolidayDisplayInfo } from '@/types';
+import { padZero } from '@/utils/base';
+import { getLunarInfo, LunarInfo } from '@/utils/lunar';
+
+import { getNextHoliday } from '../../utils/holidayApi';
+
+import styles from './Header.module.scss';
 
 const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 

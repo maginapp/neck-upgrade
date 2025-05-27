@@ -101,7 +101,7 @@ export class LocalManager<T> {
   get(): T | null {
     try {
       const str = localStorage.getItem(this.key);
-      let data =
+      const data =
         typeof str === 'string' ? (JSON.parse(str) as { data: T; timestamp: string }) : null;
       if (data && !this.isExpired(data.timestamp)) {
         return data.data;

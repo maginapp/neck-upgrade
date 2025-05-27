@@ -6,8 +6,9 @@ import {
   WORD_UNIT_COUNT,
 } from '@/constants';
 import { DictionaryEntry, Meaning } from '@/types';
-import { getNextRecord } from './generateNext';
+
 import { limitConcurrency, ResultType } from './concurrency';
+import { getNextRecord } from './generateNext';
 
 interface WordInfo {
   word: string;
@@ -163,6 +164,7 @@ export const getSourceName = (sourceUrl: string) => {
     const pathList = url.pathname.split('/');
     return pathList[pathList.length - 1];
   } catch (error) {
+    console.error('Error getting source name:', error);
     return 'source';
   }
 };

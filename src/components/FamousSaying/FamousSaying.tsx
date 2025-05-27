@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { getRandomFamousQuote } from '../../utils/famousQuotes';
+import { useEffect, useState } from 'react';
+
 import { FamousInfo } from '@/types';
-import styles from './FamousSaying.module.scss';
+
+import { getRandomFamousQuote } from '../../utils/famousQuotes';
 import { Loading } from '../Tools';
+
+import styles from './FamousSaying.module.scss';
 
 export const FamousSaying: React.FC = () => {
   const [quote, setQuote] = useState<FamousInfo | null>(null);

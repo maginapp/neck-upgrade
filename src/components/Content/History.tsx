@@ -1,11 +1,14 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import styles from './History.module.scss';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
 import { KnowledgeData, KnowledgeDisplay } from '@/types';
 import { KnowledgeMode } from '@/types/app';
-import { Toolbar } from '../Tools';
+import { CrawlerManager } from '@/utils/crawlerManager';
 import { baiduManager } from '@/utils/knowledgeBaidu';
 import { wikiManager } from '@/utils/knowledgeWiki';
-import { CrawlerManager } from '@/utils/crawlerManager';
+
+import { Toolbar } from '../Tools';
+
+import styles from './History.module.scss';
 
 const useHistory = (knowledgeMode: KnowledgeMode) => {
   const [data, setData] = useState<KnowledgeDisplay>({ events: [], holidays: [] });

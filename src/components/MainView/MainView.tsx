@@ -1,9 +1,12 @@
-import { Header } from '../Header';
+import { useEffect } from 'react';
+
+import { Settings } from '@/types/app';
+
 import { Content } from '../Content';
 import { FamousSaying } from '../FamousSaying/FamousSaying';
+import { Header } from '../Header';
+
 import styles from './MainView.module.scss';
-import { Settings } from '@/types/app';
-import { useEffect } from 'react';
 
 interface MainViewProps {
   settings: Settings;

@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './Appreciation.module.scss';
-import wxZanShang from '@/assets/images/wx_zan_shang.png';
 import wxZanShangDark from '@/assets/images/wx_zan_shang.dark.png';
+import wxZanShang from '@/assets/images/wx_zan_shang.png';
 import { Theme } from '@/types/app';
+
+import styles from './Appreciation.module.scss';
 
 interface AppreciationProps {
   currentTheme: Theme.Dark | Theme.Light;
