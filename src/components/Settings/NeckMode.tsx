@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { NeckMode as NeckModeType, NeckModeConfig } from '@/types/app';
 import { formatIntNumber, getRandomNumber } from '@/utils/base';
@@ -45,37 +45,43 @@ export const NeckMode = (props: NeckModeProps) => {
   const { mode, duration, cusMaxRotate, cusDuration, rotate } = neckConfig;
   const modes = Object.values(NeckModeType);
 
-  const handleModeChange = (newMode: NeckModeType) => {
-    const config = MOD_CONFIG[newMode];
+  const handleCustomConfigChange = useCallback(
+    (params: CustomProps) => {
+      const { nextCurDuration, nextCurMaxRotate } = params;
+      const config = MOD_CONFIG[NeckModeType.Custom];
 
-    if (newMode !== NeckModeType.Custom) {
+      const duration = nextCurDuration ?? cusDuration ?? config.duration;
+      const maxRotate = nextCurMaxRotate ?? cusMaxRotate ?? config.max;
+
       onModeChange({
-        mode: newMode,
-        rotate: getRandomNumber(config.min, config.max, rotate),
-        duration: config.duration,
-        cusDuration,
-        cusMaxRotate,
+        mode: NeckModeType.Custom,
+        rotate: getRandomNumber(config.min, maxRotate, rotate),
+        duration,
+        cusDuration: duration,
+        cusMaxRotate: maxRotate,
       });
-    } else {
-      handleCustomConfigChange({});
-    }
-  };
+    },
+    [cusDuration, cusMaxRotate, onModeChange, rotate]
+  );
 
-  const handleCustomConfigChange = (params: CustomProps) => {
-    const { nextCurDuration, nextCurMaxRotate } = params;
-    const config = MOD_CONFIG[NeckModeType.Custom];
+  const handleModeChange = useCallback(
+    (newMode: NeckModeType) => {
+      const config = MOD_CONFIG[newMode];
 
-    const duration = nextCurDuration ?? cusDuration ?? config.duration;
-    const maxRotate = nextCurMaxRotate ?? cusMaxRotate ?? config.max;
-
-    onModeChange({
-      mode: NeckModeType.Custom,
-      rotate: getRandomNumber(config.min, maxRotate, rotate),
-      duration,
-      cusDuration: duration,
-      cusMaxRotate: maxRotate,
-    });
-  };
+      if (newMode !== NeckModeType.Custom) {
+        onModeChange({
+          mode: newMode,
+          rotate: getRandomNumber(config.min, config.max, rotate),
+          duration: config.duration,
+          cusDuration,
+          cusMaxRotate,
+        });
+      } else {
+        handleCustomConfigChange({});
+      }
+    },
+    [cusDuration, cusMaxRotate, onModeChange, rotate, handleCustomConfigChange]
+  );
 
   useEffect(() => {
     if (duration > 0) {
@@ -84,10 +90,12 @@ export const NeckMode = (props: NeckModeProps) => {
       }, duration * 1000);
       return () => clearInterval(timer);
     }
-  }, [duration, mode, cusMaxRotate, rotate]);
+  }, [duration, mode, handleModeChange]);
 
   useEffect(() => {
+    console.log('🚀 ~ useEffect ~ mode:  ', mode);
     handleModeChange(mode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

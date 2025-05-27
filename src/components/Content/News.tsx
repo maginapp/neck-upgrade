@@ -18,7 +18,7 @@ interface NewsTypeInfoProps {
 const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
   const { newsType, isActive } = props;
   const manager = newsManagerMap[newsType];
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [newsData, setNewsData] = useState<NewsDisplay>({
     news: [],
     pageInfo: DEFAULT_PAGE_INFO,
@@ -45,6 +45,7 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
     }
     // 初始化 首次active 请求一次
     fetchNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, hasFetched]);
 
   const handleRefresh = async () => {

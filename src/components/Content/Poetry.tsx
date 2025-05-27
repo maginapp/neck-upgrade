@@ -9,7 +9,7 @@ import styles from './Poetry.module.scss';
 
 export const PoetryComponent: React.FC = () => {
   const [poems, setPoems] = useState<Poetry[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const fetchPoem = async () => {
     setLoading(true);
     try {

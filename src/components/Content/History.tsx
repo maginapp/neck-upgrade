@@ -12,7 +12,7 @@ import styles from './History.module.scss';
 
 const useHistory = (knowledgeMode: KnowledgeMode) => {
   const [data, setData] = useState<KnowledgeDisplay>({ events: [], holidays: [] });
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const successRef = useRef(false);
   const [showMode, setShowMode] = useState<KnowledgeMode>(knowledgeMode);
   const fetchKnowledge = async (manager: CrawlerManager<KnowledgeData, KnowledgeDisplay>) => {
@@ -56,6 +56,7 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
   useEffect(() => {
     setShowMode(knowledgeMode);
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [knowledgeMode]);
 
   return { events: data.events, holidays: data.holidays, loading, fetchData, showMode };
