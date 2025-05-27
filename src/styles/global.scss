@@ -1,7 +1,26 @@
+@use 'tools';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  @each $property, $value in tools.set-font-sizes(14px, 20px) {
+    #{$property}: $value;
+  }
+  // --font-size: 14px;
+  // --font-size-xs: 10px;
+  // --font-size-sm: 12px;
+  // --font-size-lg: 16px;
+  // --font-size-xl: 18px;
+  // --font-size-heading-1: 38px;
+  // --font-size-heading-2: 30px;
+  // --font-size-heading-3: 24px;
+  // --font-size-heading-4: 20px;
 }
 
 body {
@@ -10,10 +29,5 @@ body {
     'SimHei', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-variant-numeric: tabular-nums; /* 让非等宽字体中的数字表现为等宽 */
-  font-size: 14px;
-}
-
-:root {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  font-size: var(--font-size);
 }

@@ -90,6 +90,10 @@ export const Header: React.FC = () => {
           {showLunarInfo && (
             <div className={styles.lunarInfoContent} ref={popupRef}>
               <div className={styles.lunarInfoContentTitle}>{currentDate}</div>
+              <div className={styles.lunarInfoContentSubTitle}>
+                <span>{lunarInfo.lunarDanZhiDate}</span>
+                <span>{lunarInfo.rainDay}</span>
+              </div>
               {lunarInfo.festivals.length ? (
                 <div className={styles.lunarInfoItem}>
                   <span className={styles.lunarInfoItemTitle}>节日</span>
@@ -97,19 +101,11 @@ export const Header: React.FC = () => {
                 </div>
               ) : null}
               <div className={styles.lunarInfoItem}>
-                <span className={styles.lunarInfoItemTitle}>儒略日</span>
-                <span>{lunarInfo.julianDay}</span>
-              </div>
-              <div className={styles.lunarInfoItem}>
                 <span className={styles.lunarInfoItemTitle}>节气</span>
                 <span>
                   {lunarInfo.term}
                   {lunarInfo.termDayIndex ? `第${lunarInfo.termDayIndex}天` : ''}
                 </span>
-              </div>
-              <div className={styles.lunarInfoItem}>
-                <span className={styles.lunarInfoItemTitle}>彭祖百忌</span>
-                <span>{lunarInfo.pengZu.join('， ')}</span>
               </div>
               {lunarInfo.daySuit.length ? (
                 <div className={styles.lunarInfoItem}>
@@ -123,13 +119,21 @@ export const Header: React.FC = () => {
                   <span>{lunarInfo.dayAvoid.join(' ')}</span>
                 </div>
               ) : null}
+              <div className={styles.lunarInfoItem}>
+                <span className={styles.lunarInfoItemTitle}>儒略日</span>
+                <span>{lunarInfo.julianDay}</span>
+              </div>
+              <div className={styles.lunarInfoItem}>
+                <span className={styles.lunarInfoItemTitle}>彭祖百忌</span>
+                <span>{lunarInfo.pengZu.join('， ')}</span>
+              </div>
             </div>
           )}
         </div>
       )}
       {nextHoliday && (
         <div>
-          距离下一个休息日 - <span className={styles.holidayHighlight}>{nextHoliday.name}</span>还有
+          距离下个休息日 - <span className={styles.holidayHighlight}>{nextHoliday.name}</span>还有
           <span className={styles.holidayHighlight}>{nextHoliday.rest}天</span>
         </div>
       )}

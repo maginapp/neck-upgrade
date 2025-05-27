@@ -5,13 +5,7 @@
   transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 900px) {
-  .mainViewContainer {
-    transform: translate(-50%, -50%) scale(var(--scale-main-view-ratio));
-  }
-}
-
-@media screen and (max-height: 900px) {
+@media screen and (max-width: 900px), (max-height: 900px) {
   .mainViewContainer {
     transform: translate(-50%, -50%) scale(var(--scale-main-view-ratio));
   }
@@ -45,6 +39,7 @@
     writing-mode: vertical-rl;
     text-orientation: sideways;
     justify-self: center;
+    padding: 10px 0 10px 10px;
     // 计算所得 width: 60vh / (5 + 1);
     width: 10vh;
     overflow: hidden;
@@ -55,6 +50,7 @@
     width: 100%;
     overflow: auto;
     height: 100%;
+    padding: 5px;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
     &::-webkit-scrollbar {
@@ -68,7 +64,6 @@
     padding: 0 10px;
   }
 }
-
 
 // 其他可能的组合示例
 .verticalUpright {

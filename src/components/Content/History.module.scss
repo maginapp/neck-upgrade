@@ -37,7 +37,7 @@
   flex-wrap: wrap;
 }
 .source {
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   color: var(--text-secondary);
   margin-left: 10px;
 }

@@ -8,7 +8,7 @@
 .themeToggle {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: var(--font-size-heading-3);
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.3s;

@@ -3,7 +3,7 @@ import { Content } from '../Content';
 import { FamousSaying } from '../FamousSaying/FamousSaying';
 import styles from './MainView.module.scss';
 import { Settings } from '@/types/app';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 interface MainViewProps {
   settings: Settings;
@@ -15,14 +15,13 @@ export function MainView(props: MainViewProps) {
 
   const { neck: neckConfig } = settings;
   const { mode, rotate } = neckConfig;
-  const mainViewContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function updateScale() {
       // Math.SQRT2 * 600 -> 848
       const ratio = Math.min(window.innerWidth / 900, 1, window.innerHeight / 900);
-      mainViewContainerRef.current &&
-        mainViewContainerRef.current.style.setProperty('--scale-main-view-ratio', String(ratio));
+      document.documentElement &&
+        document.documentElement.style.setProperty('--scale-main-view-ratio', String(ratio));
     }
     updateScale();
     window.addEventListener('resize', updateScale);
@@ -32,7 +31,7 @@ export function MainView(props: MainViewProps) {
   }, []);
 
   return (
-    <div className={styles.mainViewContainer} ref={mainViewContainerRef}>
+    <div className={styles.mainViewContainer}>
       <div
         className={`${styles.mainView} ${styles[mode]}`}
         style={{

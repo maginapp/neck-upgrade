@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Content.module.scss';
 import { DataType, Settings } from '@/types/app';
 import { History } from './History';
 import { PoetryComponent } from './Poetry';
@@ -28,5 +27,5 @@ export const Content: React.FC<ContentProps> = (props) => {
     }
   };
 
-  return <div className={styles.content}>{renderContent()}</div>;
+  return renderContent();
 };

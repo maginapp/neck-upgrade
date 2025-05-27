@@ -29,8 +29,8 @@ export const PoetryComponent: React.FC = () => {
       {poems.map((poem, index) => {
         return (
           <div key={index} className={styles.poetryContainer}>
-            <h2>{poem.title}</h2>
-            <h3>{poem.author}</h3>
+            <h3>{poem.title}</h3>
+            <div className={styles.author}>{poem.author}</div>
             {poem.tags && poem.tags.length > 0 && (
               <div className={styles.tags}>
                 {poem.tags.map((tag, index) => (

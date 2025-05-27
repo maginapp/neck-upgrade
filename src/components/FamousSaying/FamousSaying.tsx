@@ -24,7 +24,7 @@ export const FamousSaying: React.FC = () => {
     fetchQuote();
   }, []);
   return (
-    <div className={styles.container}>
+    <>
       {loading && <Loading writingMode="initial" />}
       {quote && (
         <div className={styles.quote}>
@@ -35,6 +35,6 @@ export const FamousSaying: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
