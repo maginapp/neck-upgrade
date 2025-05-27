@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:prod": "tsc && cross-env REMOVE_CONSOLE=true vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-    "lint:style": "stylelint \"src/**/*.{css,scss}\" --fix",
+    "lint:es": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:style": "stylelint \"src/**/*.{css,scss}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,scss}\"",
     "prepare": "husky install",
     "fetch-poetry": "tsx scripts/fetch-poetry/index.ts",
@@ -84,11 +84,11 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
+      "pnpm run lint:es",
       "prettier --write"
     ],
     "*.{css,scss}": [
-      "stylelint --fix",
+      "pnpm run lint:style",
       "prettier --write"
     ]
   },
