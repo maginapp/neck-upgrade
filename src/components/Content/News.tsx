@@ -23,7 +23,6 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
     news: [],
     pageInfo: DEFAULT_PAGE_INFO,
   });
-  const [hasFetched, setHasFetched] = useState(false);
 
   const fetchNews = async (page?: PageInfo) => {
     setLoading(true);
@@ -36,17 +35,16 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
       console.error('获取新闻失败:', error);
     } finally {
       setLoading(false);
-      setHasFetched(true);
     }
   };
   useEffect(() => {
-    if (!isActive || hasFetched) {
+    if (!isActive) {
       return;
     }
     // 初始化 首次active 请求一次
     fetchNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive, hasFetched]);
+  }, [isActive]);
 
   const handleRefresh = async () => {
     fetchNews({
