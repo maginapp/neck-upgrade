@@ -16,9 +16,14 @@ export interface NewsData {
   timestamp: number;
 }
 
+export interface NewsErrorInfo {
+  loginUrl?: string;
+}
+
 export interface NewsDisplay {
   news: NewsItem[];
   pageInfo: PageInfo;
+  loginUrl?: string;
 }
 
 interface LabelUri {

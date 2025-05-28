@@ -19,7 +19,7 @@ class FamouseStorage extends CacheManager<FamousRecords> {
   }
 
   // 重写过期检查方法，设置项永不过期
-  isExpired(_: string) {
+  isExpired(_timestamp: string, _data?: FamousRecords) {
     return false;
   }
 }

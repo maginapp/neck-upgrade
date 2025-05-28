@@ -63,9 +63,18 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
     return <span className={styles.tag}>{tag}</span>;
   };
 
+  const typeInfo = useMemo(() => {
+    return getNewsTypeInfo(newsType);
+  }, [newsType]);
+
   return (
     <>
       <Toolbar loading={loading} onRefresh={handleRefresh} />
+      {newsData.loginUrl && (
+        <a className={styles.loginUrl} href={newsData.loginUrl} target="_blank" rel="noreferrer">
+          请先登录 <img className={styles.loginIcon} src={typeInfo.icon} alt={typeInfo.label} />
+        </a>
+      )}
       {(newsData.news || []).map((item, index) => (
         <section key={index}>
           <a href={item.link} className={styles.newsItem} target="_blank" rel="noreferrer">

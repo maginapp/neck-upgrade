@@ -156,3 +156,24 @@
   object-fit: contain;
   vertical-align: middle;
 }
+
+// 登录
+.loginUrl {
+  font-size: var(--font-size-lg);
+  text-align: center;
+  color: var(--text-color);
+  text-decoration: none;
+
+  &:hover {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+}
+
+.loginIcon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  border-radius: 4px;
+  margin-left: 4px;
+}

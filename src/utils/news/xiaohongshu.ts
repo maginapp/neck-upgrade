@@ -35,9 +35,12 @@ const fetchXhsNews = async (url: string) => {
       if (titleElement) {
         const title = titleElement.textContent?.trim() ?? '';
         // 处理相对链接
-        const link = linkElement?.href?.startsWith('/')
-          ? `https://www.xiaohongshu.com${linkElement.href}`
-          : linkElement?.href ?? '';
+
+        const link =
+          linkElement?.href?.replace(
+            /^(chrome-extension:\/\/[a-z0-9A-Z]+)?\/explore/,
+            `https://www.xiaohongshu.com/explore`
+          ) ?? '';
 
         newsItems.push({
           title,

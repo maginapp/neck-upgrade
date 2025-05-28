@@ -10,4 +10,5 @@ export type {
   NewsDisplay,
   BilibiliHotResponse,
   ToutiaoHotResponse,
+  NewsErrorInfo,
 } from './news';

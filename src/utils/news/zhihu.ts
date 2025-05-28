@@ -41,6 +41,11 @@ const fetchZhihuPage = async (url: string) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
+    const needLogin = !!doc.querySelector('.Qrcode-img');
+    if (needLogin) {
+      return { loginUrl: url };
+    }
+
     const newsItems: NewsItem[] = [];
     // 获取新闻列表
     const articles = doc.querySelectorAll('.HotList-item');

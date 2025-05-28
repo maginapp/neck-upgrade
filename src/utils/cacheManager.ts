@@ -17,7 +17,7 @@ export class CacheManager<T> {
    * @param timestamp 缓存时间戳
    * @returns 是否过期
    */
-  isExpired(timestamp: string): boolean {
+  isExpired(timestamp: string, _data?: T): boolean {
     const cacheDate = new Date(timestamp);
     const now = dateUtils.getNow();
     return (
@@ -35,7 +35,7 @@ export class CacheManager<T> {
     return new Promise((resolve) => {
       chrome.storage.local.get([this.key], (result) => {
         const data = result[this.key] as { data: T; timestamp: string } | undefined;
-        if (data && !this.isExpired(data.timestamp)) {
+        if (data && !this.isExpired(data.timestamp, data.data)) {
           resolve(data.data);
         } else {
           resolve(null);

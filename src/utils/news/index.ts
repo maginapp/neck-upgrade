@@ -1,4 +1,4 @@
-import { NewsItem, NewsDisplay } from '@/types';
+import { NewsItem, NewsDisplay, NewsErrorInfo } from '@/types';
 import { NewsType } from '@/types/app';
 
 import { CrawlerManager } from '../crawlerManager';
@@ -10,7 +10,10 @@ import { weiboAmuseNews, weiboHotNews } from './weibo';
 import { xhsNews } from './xiaohongshu';
 import { zhihuHotNews } from './zhihu';
 
-export const newsManagerMap: Record<NewsType, CrawlerManager<NewsItem[], NewsDisplay>> = {
+export const newsManagerMap: Record<
+  NewsType,
+  CrawlerManager<NewsItem[] | NewsErrorInfo, NewsDisplay>
+> = {
   [NewsType.GoogleEnForYou]: ggEnForYouNews,
   [NewsType.GoogleZhForYou]: ggZhForYouNews,
   [NewsType.GoogleEnGlobal]: ggEnGlobalNews,
