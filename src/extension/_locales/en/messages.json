@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extension_description": {
-    "message": "A Chrome plugin that guards your neck health, encourages neck movement, and offers quick access to poetry, history, and live hot topics.",
+    "message": "A Chrome extension that protects your neck health, move your neck, and lets you explore poetry, history, and hot trends.",
     "description": "The description of the extension"
   }
 }
