@@ -16,7 +16,10 @@
     "https://so.toutiao.com/*",
     "https://api.toutiaoapi.com/*",
     "https://news.google.com/*",
-    "https://baike.baidu.com/*"
+    "https://baike.baidu.com/*",
+    "https://www.zhihu.com/*",
+    "https://api.bilibili.com/*",
+    "https://passport.weibo.com/*"
   ],
   "action": {
     "default_popup": "pages/popup.html",

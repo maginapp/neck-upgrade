@@ -1,14 +1,15 @@
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
-import { NewsItem } from '@/types';
-import { ToutiaoHotResponse } from '@/types/news';
+import { NewsItem, ToutiaoHotResponse } from '@/types';
 
+import { dateUtils } from '../base';
 import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
 
+// 读取page，暂未使用
 export const fetchToutiaoPage = async (url: string) => {
   try {
-    const timeStr = new Date().toISOString();
+    const timeStr = dateUtils.getCurISOString();
     // 通过 background 脚本获取新闻
     const response = await fetchUtils(url, { cacheFetch: true });
 
@@ -53,7 +54,7 @@ export const fetchToutiaoPage = async (url: string) => {
 
 const fetchToutiaoNews = async (url: string) => {
   try {
-    const timeStr = new Date().toISOString();
+    const timeStr = dateUtils.getCurISOString();
     // 通过 background 脚本获取新闻
     const response = await fetchUtils(url);
 

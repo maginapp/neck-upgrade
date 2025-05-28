@@ -25,6 +25,11 @@ declare module '*.svg?react' {
   export default ReactComponent;
 }
 
+declare module '*.ico' {
+  const src: string;
+  export default src;
+}
+
 declare module '*.png' {
   const src: string;
   export default src;

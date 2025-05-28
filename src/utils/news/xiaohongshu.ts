@@ -1,13 +1,14 @@
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
 import { NewsItem } from '@/types';
 
+import { dateUtils } from '../base';
 import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
 
 const fetchXhsNews = async (url: string) => {
   try {
-    const timeStr = new Date().toISOString();
+    const timeStr = dateUtils.getCurISOString();
     // 通过 background 脚本获取新闻
     const response = await fetchUtils(url, { cacheFetch: true });
 
@@ -34,9 +35,12 @@ const fetchXhsNews = async (url: string) => {
       if (titleElement) {
         const title = titleElement.textContent?.trim() ?? '';
         // 处理相对链接
-        const link = linkElement?.href?.startsWith('/')
-          ? `https://www.xiaohongshu.com${linkElement.href}`
-          : linkElement?.href ?? '';
+
+        const link =
+          linkElement?.href?.replace(
+            /^(chrome-extension:\/\/[a-z0-9A-Z]+)?\/explore/,
+            `https://www.xiaohongshu.com/explore`
+          ) ?? '';
 
         newsItems.push({
           title,

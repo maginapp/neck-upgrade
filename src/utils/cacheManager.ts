@@ -1,3 +1,5 @@
+import { dateUtils } from './base';
+
 /**
  * 通用缓存管理类
  * 支持数据缓存、过期检查、清除和状态查询
@@ -15,9 +17,9 @@ export class CacheManager<T> {
    * @param timestamp 缓存时间戳
    * @returns 是否过期
    */
-  isExpired(timestamp: string): boolean {
+  isExpired(timestamp: string, _data?: T): boolean {
     const cacheDate = new Date(timestamp);
-    const now = new Date();
+    const now = dateUtils.getNow();
     return (
       cacheDate.getDate() !== now.getDate() ||
       cacheDate.getMonth() !== now.getMonth() ||
@@ -33,7 +35,7 @@ export class CacheManager<T> {
     return new Promise((resolve) => {
       chrome.storage.local.get([this.key], (result) => {
         const data = result[this.key] as { data: T; timestamp: string } | undefined;
-        if (data && !this.isExpired(data.timestamp)) {
+        if (data && !this.isExpired(data.timestamp, data.data)) {
           resolve(data.data);
         } else {
           resolve(null);
@@ -50,7 +52,7 @@ export class CacheManager<T> {
   async set(data: T): Promise<void> {
     const cacheData = {
       data,
-      timestamp: new Date().toISOString(),
+      timestamp: dateUtils.getCurISOString(),
     };
     return new Promise((resolve) => {
       chrome.storage.local.set({ [this.key]: cacheData }, resolve);
@@ -86,7 +88,7 @@ export class LocalManager<T> {
    */
   isExpired(timestamp: string): boolean {
     const cacheDate = new Date(timestamp);
-    const now = new Date();
+    const now = dateUtils.getNow();
     return (
       cacheDate.getDate() !== now.getDate() ||
       cacheDate.getMonth() !== now.getMonth() ||
@@ -122,7 +124,7 @@ export class LocalManager<T> {
   set(data: T): void {
     const cacheData = {
       data,
-      timestamp: new Date().toISOString(),
+      timestamp: dateUtils.getCurISOString(),
     };
     localStorage.setItem(this.key, JSON.stringify(cacheData));
   }

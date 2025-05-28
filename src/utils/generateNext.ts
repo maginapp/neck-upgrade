@@ -1,6 +1,6 @@
 import { HistoryRecord, LearningRecords } from '@/types';
 
-import { getCurrentDate } from './base';
+import { dateUtils } from './base';
 
 const REVIEW_RATIO = 5; // 每5次复习，插入1次当天学习的
 // 艾宾浩斯遗忘曲线复习间隔（天数）
@@ -17,7 +17,7 @@ const generateReviews = <T>(
   todayRatio: number
 ): T[] => {
   const reviewsRecords: T[] = [];
-  const currentDate = getCurrentDate();
+  const currentDate = dateUtils.getCurrentDate();
 
   // 按日期对历史记录进行分组
   const listByDate = new Map<string, T[]>();
@@ -173,7 +173,7 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     getData,
     batchSize = 1,
   } = params;
-  const currentDate = getCurrentDate();
+  const currentDate = dateUtils.getCurrentDate();
   const records = await getLearningRecords<T>(cacheKey, currentDate);
 
   // 检查是否需要重置当天的记录

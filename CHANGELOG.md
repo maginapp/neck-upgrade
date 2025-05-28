@@ -1,5 +1,16 @@
 # Neck Upgrade ChangeLog
 
+## 1.1.2
+
+### Patch Changes
+
+- 丰富新闻内容，修复bug
+
+  1. 添加b站和知乎数据源
+  2. scripts目录加入lint校验
+  3. 添加统一时间管理，便于测试mock
+  4. 修复新闻跳转异常，添加知乎与微博未登录提示
+
 ## 1.1.1
 
 ### Patch Changes

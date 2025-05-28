@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import FindMoreIcon from '@/assets/images/find_more.svg?react';
 import { HolidayDisplayInfo } from '@/types';
-import { padZero } from '@/utils/base';
+import { dateUtils, padZero } from '@/utils/base';
 import { getLunarInfo, LunarInfo } from '@/utils/lunar';
 
 import { getNextHoliday } from '../../utils/holidayApi';
@@ -19,9 +19,18 @@ export const Header: React.FC = () => {
   const [showLunarInfo, setShowLunarInfo] = useState<boolean>(false);
   const popupRef = useRef<HTMLDivElement>(null);
 
+  const fetchNextHoliday = async () => {
+    try {
+      const holiday = await getNextHoliday();
+      setNextHoliday(holiday);
+    } catch (error) {
+      console.error('获取下一个节假日失败:', error);
+    }
+  };
+
   useEffect(() => {
     const updateDateTime = () => {
-      const now = new Date();
+      const now = dateUtils.getNow();
       setCurrentTime(
         `${padZero(now.getHours())}:${padZero(now.getMinutes())}:${padZero(now.getSeconds())}`
       );
@@ -31,6 +40,7 @@ export const Header: React.FC = () => {
       setCurrentDate((prev) => {
         if (prev !== ymd) {
           setLunarInfo(getLunarInfo(now));
+          fetchNextHoliday();
         }
         return ymd;
       });
@@ -40,19 +50,6 @@ export const Header: React.FC = () => {
     const timer = setInterval(updateDateTime, 1000);
 
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const fetchNextHoliday = async () => {
-      try {
-        const holiday = await getNextHoliday();
-        setNextHoliday(holiday);
-      } catch (error) {
-        console.error('获取下一个节假日失败:', error);
-      }
-    };
-
-    fetchNextHoliday();
   }, []);
 
   useEffect(() => {

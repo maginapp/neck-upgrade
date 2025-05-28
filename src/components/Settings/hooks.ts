@@ -14,7 +14,7 @@ class SettingsStorage extends LocalManager<Settings> {
   }
 
   // 重写过期检查方法，设置项永不过期
-  isExpired(): boolean {
+  isExpired(_timestamp: string, _data?: Settings): boolean {
     return false;
   }
 }

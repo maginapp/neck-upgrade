@@ -2,6 +2,7 @@ import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
 
 import { BAIDU_BASE_URL, CACHE_KEYS, BAIDU_MATCH_CATEGORY } from '../constants';
 
+import { dateUtils } from './base';
 import { fetchUtils } from './fetch';
 import { createKnowledgeManager } from './knowledgeManager';
 
@@ -70,7 +71,7 @@ const parseBaiduEvents = (
 };
 
 const getTodayDateStr = () => {
-  const today = new Date();
+  const today = dateUtils.getNow();
   return `${today.getMonth() + 1}月${today.getDate()}日`;
 };
 

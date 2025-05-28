@@ -1,8 +1,9 @@
 // 协助生成，发布插件的介绍图片
-import { Jimp } from 'jimp';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+import { Jimp } from 'jimp';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -17,6 +18,7 @@ const TARGET_SIZE_LIST = [
 ];
 
 // 获取图片的主要颜色
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function getDominantColor(image: any): Promise<number> {
   const colors = new Map<number, number>();
   const sampleSize = 100; // 采样大小

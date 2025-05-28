@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 
 interface Manifest {
   version: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // 构建项目

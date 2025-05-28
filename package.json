@@ -1,15 +1,15 @@
 {
   "name": "neck-upgrade",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Chrome extension for neck health",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "build:prod": "tsc && cross-env REMOVE_CONSOLE=true vite build",
-    "lint:es": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:es": "eslint src scripts --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:style": "stylelint \"src/**/*.{css,scss}\"",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,scss}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,scss}\" \"scripts/**/*.{ts,tsx}\"",
     "prepare": "husky install",
     "fetch-poetry": "tsx scripts/fetch-poetry/index.ts",
     "cleanup-poetry": "tsx scripts/fetch-poetry/cleanup.ts",

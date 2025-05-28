@@ -1,7 +1,8 @@
 import { DEFAULT_PAGE_INFO, NEWS_CACHE_EXPIRY } from '@/constants';
-import { NewsItem, NewsDisplay } from '@/types';
+import { NewsItem, NewsDisplay, NewsErrorInfo } from '@/types';
 import { PageInfo } from '@/types/app';
 
+import { dateUtils } from '../base';
 import { CrawlerManager } from '../crawlerManager';
 
 const selectRandom = (list: NewsItem[], pageInfo: PageInfo = DEFAULT_PAGE_INFO): NewsDisplay => {
@@ -27,18 +28,32 @@ const selectRandom = (list: NewsItem[], pageInfo: PageInfo = DEFAULT_PAGE_INFO):
   };
 };
 
-export const createNewsManager = (cacheKey: string, fetchSiteData: () => Promise<NewsItem[]>) => {
-  const manager = new CrawlerManager<NewsItem[], NewsDisplay>(
+export const createNewsManager = (
+  cacheKey: string,
+  fetchSiteData: () => Promise<NewsItem[] | NewsErrorInfo>
+) => {
+  const manager = new CrawlerManager<NewsItem[] | NewsErrorInfo, NewsDisplay>(
     cacheKey,
     fetchSiteData,
-    (data: NewsItem[], pageInfo?: PageInfo) => {
-      return selectRandom(data, pageInfo);
+    (data: NewsItem[] | NewsErrorInfo, pageInfo?: PageInfo) => {
+      if (Array.isArray(data)) {
+        return selectRandom(data, pageInfo);
+      } else {
+        return {
+          news: [],
+          pageInfo: DEFAULT_PAGE_INFO,
+          loginUrl: data.loginUrl,
+        };
+      }
     }
   );
   // 重写过期判断
-  manager.cache.isExpired = (timestamp: string) => {
+  manager.cache.isExpired = (timestamp: string, data?: NewsItem[] | NewsErrorInfo) => {
+    if (data && 'loginUrl' in data && data.loginUrl) {
+      return true;
+    }
     const cacheDate = new Date(timestamp);
-    const now = new Date();
+    const now = dateUtils.getNow();
     return !cacheDate || now.getTime() - cacheDate.getTime() > NEWS_CACHE_EXPIRY;
   };
   return manager;

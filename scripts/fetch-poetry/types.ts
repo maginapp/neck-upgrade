@@ -6,9 +6,8 @@ export interface PoetryItem {
   tags: string[];
 }
 
-
 export interface CacaoPoem {
-  title: string; 
+  title: string;
   paragraphs: string[];
 }
 
@@ -34,7 +33,6 @@ export interface TangshiPoem {
   prologue?: string;
 }
 
-
 export interface SongciPoem {
   rhythmic: string;
   author: string;
@@ -49,7 +47,3 @@ export interface ShuimotangshiPoem {
   tags: string[];
   prologue: string;
 }
-
-
-
-

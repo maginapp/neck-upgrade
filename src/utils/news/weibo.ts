@@ -1,13 +1,14 @@
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
 import { NewsItem } from '@/types';
 
+import { dateUtils } from '../base';
 import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
 
 const fetchWeiboNews = async (url: string) => {
   try {
-    const timeStr = new Date().toISOString();
+    const timeStr = dateUtils.getCurISOString();
     // 通过 background 脚本获取新闻
     const response = await fetchUtils(url, { cacheFetch: true });
 
@@ -20,6 +21,12 @@ const fetchWeiboNews = async (url: string) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
+    const needLogin = html.includes('Sina Visitor System');
+
+    if (needLogin) {
+      return { loginUrl: url };
+    }
+
     const newsItems: NewsItem[] = [];
     // 获取新闻列表
     const articles = doc.querySelectorAll('table tr');
@@ -30,9 +37,14 @@ const fetchWeiboNews = async (url: string) => {
 
       if (linkElement) {
         // 处理相对链接
-        const link = linkElement.href.startsWith('/')
-          ? `https://s.weibo.com/${linkElement.href}`
-          : linkElement.href;
+
+        // chrome-extension://kpdpgpoiejgjmokoahnkpghfohdgifjm/weibo/
+        // /weibo/
+
+        const link = linkElement.href.replace(
+          /^(chrome-extension:\/\/[a-z0-9A-Z]+)?\/weibo/,
+          `https://s.weibo.com/weibo`
+        );
 
         newsItems.push({
           title: linkElement.textContent?.trim() || '',

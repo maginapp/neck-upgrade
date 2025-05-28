@@ -52,6 +52,9 @@ export const CACHE_KEYS = {
   GOOGLE_EN_GLOBAL_NEWS: 'google_en_global_news',
   GOOGLE_ZH_FOR_YOU_NEWS: 'google_zh_for_you_news',
   GOOGLE_ZH_GLOBAL_NEWS: 'google_zh_global_news',
+  ZHIHU_HOT: 'zhihu_hot',
+  BILIBILI_ALL: 'bilibili_all',
+  BILIBILI_RANK: 'bilibili_rank',
 } as const;
 
 export const THROTTLE_TIME = 1000; // 节流时间
@@ -67,7 +70,10 @@ export const NEWS_URL = {
   TOUTIAO:
     'https://api.toutiaoapi.com/hot-event/hot-board/?only_hot_list=1&tab_name=stream&origin=hot_board',
   // 'https://api.toutiaoapi.com/feoffline/hotspot_and_local/html/hot_list/index.html?only_hot_list=1&tab_name=stream', // csr
-  // 'https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=', // ssr 数量少
+  // 'https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=', // ssr 数量少,
+  BILIBILI_ALL: 'https://api.bilibili.com/x/web-interface/popular?ps=50&pn=1',
+  BILIBILI_RANK: 'https://api.bilibili.com/x/web-interface/ranking/v2?rid=0&type=all',
+  ZHIHU_HOT: 'https://www.zhihu.com/billboard',
   GOOGLE_EN_FOR_YOU: 'https://news.google.com/foryou?hl=en-US&gl=US&ceid=US:en',
   GOOGLE_EN_GLOBAL:
     'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen',

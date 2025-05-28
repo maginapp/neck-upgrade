@@ -1,16 +1,31 @@
+import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { execSync } from 'child_process';
-import { CacaoPoem, ChuciPoem, PoetryItem, ShijingPoem, ShuimotangshiPoem, SongciPoem, TangshiPoem } from './types';
+
 import { TEMP_DIR, TARGET_DIR, POETRY_FILE, LAST_UPDATE_FILE } from './config';
-import { cleanup, getRemoteLastCommit, checkNeedUpdateGit, checkNeedUpdate, ensureTargetDir } from './utils';
+import {
+  CacaoPoem,
+  ChuciPoem,
+  PoetryItem,
+  ShijingPoem,
+  ShuimotangshiPoem,
+  SongciPoem,
+  TangshiPoem,
+} from './types';
+import {
+  cleanup,
+  getRemoteLastCommit,
+  checkNeedUpdateGit,
+  checkNeedUpdate,
+  ensureTargetDir,
+} from './utils';
 
 export async function processPoetry() {
-    try {
-      // 确保目标目录存在
-      ensureTargetDir(TARGET_DIR);
+  try {
+    // 确保目标目录存在
+    ensureTargetDir(TARGET_DIR);
 
-        // 检查是否需要更新
+    // 检查是否需要更新
     if (!checkNeedUpdate()) {
       console.log('本地数据已是最新，无需更新');
       // process.exit(0);
@@ -27,14 +42,16 @@ export async function processPoetry() {
       const lastCommit = getRemoteLastCommit();
       writeFileSync(LAST_UPDATE_FILE, lastCommit);
     }
-  
+
     // 读取诗词数据
     const caocao = JSON.parse(readFileSync(join(TEMP_DIR, '曹操诗集/caocao.json'), 'utf-8'));
     const chuci = JSON.parse(readFileSync(join(TEMP_DIR, '楚辞/chuci.json'), 'utf-8'));
     const shijing = JSON.parse(readFileSync(join(TEMP_DIR, '诗经/shijing.json'), 'utf-8'));
     const tangshi = JSON.parse(readFileSync(join(TEMP_DIR, '全唐诗/唐诗三百首.json'), 'utf-8'));
     const songci = JSON.parse(readFileSync(join(TEMP_DIR, '宋词/宋词三百首.json'), 'utf-8'));
-    const shuimotangshi = JSON.parse(readFileSync(join(TEMP_DIR, '水墨唐诗/shuimotangshi.json'), 'utf-8'));
+    const shuimotangshi = JSON.parse(
+      readFileSync(join(TEMP_DIR, '水墨唐诗/shuimotangshi.json'), 'utf-8')
+    );
 
     // 处理数据
     const result: PoetryItem[] = [];
@@ -80,7 +97,7 @@ export async function processPoetry() {
     tangshi.forEach((poem: TangshiPoem) => {
       const key = `${poem.title}-${poem.author}`;
       const shuimoPoem = shuimotangshiMap.get(key);
-      
+
       if (shuimoPoem) {
         // 合并数据
         result.push({
@@ -132,4 +149,4 @@ export async function processPoetry() {
   } catch (error) {
     console.error('处理过程中出现错误：', error);
   }
-} 
+}

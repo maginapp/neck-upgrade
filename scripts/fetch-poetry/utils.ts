@@ -1,5 +1,6 @@
 import { execSync } from 'child_process';
 import { readFileSync, existsSync, rmSync } from 'fs';
+
 // import { join } from 'path';
 import { TEMP_DIR, LAST_UPDATE_FILE, POETRY_FILE } from './config';
 
@@ -21,7 +22,9 @@ export function checkNeedUpdate(): boolean {
 
 // 获取远程仓库最新提交时间
 export function getRemoteLastCommit(): string {
-  const output = execSync('git ls-remote --sort=-v:refname https://github.com/chinese-poetry/chinese-poetry.git HEAD').toString();
+  const output = execSync(
+    'git ls-remote --sort=-v:refname https://github.com/chinese-poetry/chinese-poetry.git HEAD'
+  ).toString();
   return output.split('\t')[0];
 }
 
@@ -36,7 +39,7 @@ export function checkNeedUpdateGit(): boolean {
     const remoteCommit = getRemoteLastCommit();
     return lastCommit !== remoteCommit;
   } catch (error) {
-    console.log('检查更新时出错，将重新下载数据');
+    console.log('检查更新时出错，将重新下载数据', error);
     return true;
   }
 }
@@ -46,4 +49,4 @@ export function ensureTargetDir(targetDir: string) {
   if (!existsSync(targetDir)) {
     execSync(`mkdir -p ${targetDir}`);
   }
-} 
+}
