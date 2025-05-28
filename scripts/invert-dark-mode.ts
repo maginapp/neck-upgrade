@@ -1,8 +1,9 @@
 // 自动生成暗黑模式图片
-import { Jimp } from 'jimp';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+import { Jimp } from 'jimp';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
