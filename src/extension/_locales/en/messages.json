@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extension_description": {
-    "message": "A Chrome extension that looks after your neck health",
+    "message": "A Chrome extension that helps protect your neck health — gently reminds you to move your neck and lets you easily explore poetry, historical events, and real-time trending topics.",
     "description": "The description of the extension"
   }
 }
