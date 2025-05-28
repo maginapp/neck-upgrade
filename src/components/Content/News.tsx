@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { DEFAULT_PAGE_INFO } from '@/constants';
 import { NewsDisplay } from '@/types';
 import { NewsType, PageInfo } from '@/types/app';
-import { getNewsTypeLabel } from '@/utils/labels';
+import { getNewsTypeInfo } from '@/utils/labels';
 import { newsManagerMap } from '@/utils/news';
 
 import { Toolbar } from '../Tools';
@@ -69,6 +69,16 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
       {(newsData.news || []).map((item, index) => (
         <section key={index}>
           <a href={item.link} className={styles.newsItem} target="_blank" rel="noreferrer">
+            <div className={styles.newsItemMore}>
+              {/* google */}
+              {item.source && <span className={styles.source}>{item.source}</span>}
+              {/* xiaohongshu */}
+              {item.avatar && <img className={styles.avatar} src={item.avatar} alt={item.avatar} />}
+              {item.username && <span className={styles.username}>{item.username}</span>}
+              {item.newsImg && (
+                <img className={styles.newsImg} src={item.newsImg} alt={item.title} />
+              )}
+            </div>
             <div className={styles.newsItemContent}>
               <span className={styles.order}>
                 {index + 1 + newsData.pageInfo.page * newsData.pageInfo.pageSize}
@@ -76,13 +86,6 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
               <span className={styles.newsTitle}>{item.title}</span>
               {/* toutiao / weibo */}
               {renderTag(item.tag)}
-            </div>
-            <div className={styles.newsItemMore}>
-              {/* google */}
-              {item.source && <span className={styles.source}>{item.source}</span>}
-              {/* xiaohongshu */}
-              {item.avatar && <img className={styles.avatar} src={item.avatar} alt={item.avatar} />}
-              {item.username && <span className={styles.username}>{item.username}</span>}
             </div>
           </a>
         </section>
@@ -98,28 +101,38 @@ export const News: React.FC = () => {
     setActiveType(type);
   };
 
-  const types = Object.values(NewsType);
+  const typesInfo = useMemo(() => {
+    return Object.values(NewsType).map((item) => {
+      const { label, icon } = getNewsTypeInfo(item);
+      return {
+        label,
+        icon,
+        type: item,
+      };
+    });
+  }, []);
 
   return (
     <div className={styles.newsContainer}>
       <div className={styles.tabs}>
-        {types.map((type) => (
+        {typesInfo.map((item) => (
           <div
-            key={type}
-            className={`${styles.tab} ${activeType === type ? styles.active : ''}`}
-            onClick={() => handleTypeChange(type)}
+            key={item.type}
+            className={`${styles.tab} ${activeType === item.type ? styles.active : ''}`}
+            onClick={() => handleTypeChange(item.type)}
           >
-            {getNewsTypeLabel(type)}
+            <img src={item.icon} alt={item.label} className={styles.tabIcon} />
+            {item.label}
           </div>
         ))}
       </div>
 
-      {types.map((type) => (
+      {typesInfo.map((item) => (
         <div
-          key={type}
-          className={`${styles.newsList} ${activeType === type ? styles.activeList : ''}`}
+          key={item.type}
+          className={`${styles.newsList} ${activeType === item.type ? styles.activeList : ''}`}
         >
-          <NewsTypeInfo newsType={type} isActive={activeType === type} />
+          <NewsTypeInfo newsType={item.type} isActive={activeType === item.type} />
         </div>
       ))}
     </div>

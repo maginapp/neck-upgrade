@@ -2,6 +2,7 @@ import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
 
 import { WIKI_BASE_URL, CACHE_KEYS, WIKI_MATCH_CATEGORY } from '../constants';
 
+import { dateUtils } from './base';
 import { CacheManager } from './cacheManager';
 import { fetchUtils } from './fetch';
 import { createKnowledgeManager } from './knowledgeManager';
@@ -76,7 +77,7 @@ const parseWikiEvents = (html: string): { events: HistoricalEvent[]; holidays: H
 // 获取维基百科页面内容
 const fetchWikiPage = async (): Promise<KnowledgeData> => {
   try {
-    const today = new Date();
+    const today = dateUtils.getNow();
     const dateStr = `${today.getMonth() + 1}月${today.getDate()}日`;
     // 缓存未命中，请求新数据
     const response = await fetchUtils(`${WIKI_BASE_URL}/${dateStr}`, { cacheFetch: true });

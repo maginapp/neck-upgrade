@@ -1,13 +1,14 @@
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
 import { NewsItem } from '@/types';
 
+import { dateUtils } from '../base';
 import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
 
 const fetchWeiboNews = async (url: string) => {
   try {
-    const timeStr = new Date().toISOString();
+    const timeStr = dateUtils.getCurISOString();
     // 通过 background 脚本获取新闻
     const response = await fetchUtils(url, { cacheFetch: true });
 

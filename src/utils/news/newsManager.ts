@@ -2,6 +2,7 @@ import { DEFAULT_PAGE_INFO, NEWS_CACHE_EXPIRY } from '@/constants';
 import { NewsItem, NewsDisplay } from '@/types';
 import { PageInfo } from '@/types/app';
 
+import { dateUtils } from '../base';
 import { CrawlerManager } from '../crawlerManager';
 
 const selectRandom = (list: NewsItem[], pageInfo: PageInfo = DEFAULT_PAGE_INFO): NewsDisplay => {
@@ -38,7 +39,7 @@ export const createNewsManager = (cacheKey: string, fetchSiteData: () => Promise
   // 重写过期判断
   manager.cache.isExpired = (timestamp: string) => {
     const cacheDate = new Date(timestamp);
-    const now = new Date();
+    const now = dateUtils.getNow();
     return !cacheDate || now.getTime() - cacheDate.getTime() > NEWS_CACHE_EXPIRY;
   };
   return manager;

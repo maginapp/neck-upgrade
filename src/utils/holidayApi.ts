@@ -1,7 +1,7 @@
 import { HOLIDAY_API_BASE_URL, CACHE_KEYS } from '@/constants';
 import { HolidayApiResponse, HolidayDisplayInfo } from '@/types';
 
-import { getCurrentDate } from './base';
+import { dateUtils } from './base';
 import { CacheManager } from './cacheManager';
 
 // const CACHE_KEY = 'holiday_data_cache';
@@ -24,7 +24,7 @@ export const getNextHoliday = async (): Promise<HolidayDisplayInfo | null> => {
       return cacheData.nextHoliday;
     }
 
-    const dateStr = getCurrentDate();
+    const dateStr = dateUtils.getCurrentDate();
     const response = await fetch(`${HOLIDAY_API_BASE_URL}/next/${dateStr}?type=Y&week=Y`);
 
     if (!response.ok) {
@@ -45,7 +45,7 @@ export const getNextHoliday = async (): Promise<HolidayDisplayInfo | null> => {
     // 更新缓存
     await holidayCache.set({
       nextHoliday,
-      timestamp: new Date().toISOString(),
+      timestamp: dateUtils.getCurISOString(),
     });
 
     return nextHoliday;

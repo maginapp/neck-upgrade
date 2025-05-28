@@ -1,3 +1,9 @@
+import bilibiliIcon from '@/assets/images/favicon/bilibili.ico';
+import googleNewIcon from '@/assets/images/favicon/google_new.png';
+import toutiaoIcon from '@/assets/images/favicon/toutiao.ico';
+import weiboIcon from '@/assets/images/favicon/weibo.ico';
+import xiaohongshuIcon from '@/assets/images/favicon/xiaohongshu.ico';
+import zhihuIcon from '@/assets/images/favicon/zhihu.ico';
 import { Theme, NeckMode, DataType, KnowledgeMode, NewsType } from '@/types/app';
 
 /**
@@ -64,18 +70,66 @@ export const getKnowledgeModeLabel = (mode: KnowledgeMode): string => {
 /**
  * 获取新闻类型的显示标签
  * @param type 新闻类型
- * @returns 新闻类型的显示标签
+ * @returns 新闻类型的信息 包含标签和图标
  */
-export const getNewsTypeLabel = (type: NewsType): string => {
-  const labels: Record<NewsType, string> = {
-    [NewsType.WeiboAmuse]: '微博文娱',
-    [NewsType.WeiboHot]: '微博热搜',
-    [NewsType.Xiaohongshu]: '小红书',
-    [NewsType.Toutiao]: '头条热搜',
-    [NewsType.GgEnForYou]: 'G For You',
-    [NewsType.GgZhForYou]: 'G 推荐',
-    [NewsType.GgEnGlobal]: 'G Global',
-    [NewsType.GgZhGlobal]: 'G 全球',
+export const getNewsTypeInfo = (
+  type: NewsType
+): {
+  label: string;
+  icon: string;
+} => {
+  const labels: Record<
+    NewsType,
+    {
+      label: string;
+      icon: string;
+    }
+  > = {
+    [NewsType.WeiboAmuse]: {
+      label: '文娱',
+      icon: weiboIcon,
+    },
+    [NewsType.WeiboHot]: {
+      label: '热搜',
+      icon: weiboIcon,
+    },
+    [NewsType.Xiaohongshu]: {
+      label: '推荐',
+      icon: xiaohongshuIcon,
+    },
+    [NewsType.Toutiao]: {
+      label: '热搜',
+      icon: toutiaoIcon,
+    },
+
+    [NewsType.Zhihu]: {
+      label: '热榜',
+      icon: zhihuIcon,
+    },
+    [NewsType.BilibiliAll]: {
+      label: '综合',
+      icon: bilibiliIcon,
+    },
+    [NewsType.BilibiliRank]: {
+      label: '热榜',
+      icon: bilibiliIcon,
+    },
+    [NewsType.GoogleZhForYou]: {
+      label: '推荐',
+      icon: googleNewIcon,
+    },
+    [NewsType.GoogleZhGlobal]: {
+      label: '全球',
+      icon: googleNewIcon,
+    },
+    [NewsType.GoogleEnForYou]: {
+      label: 'For You',
+      icon: googleNewIcon,
+    },
+    [NewsType.GoogleEnGlobal]: {
+      label: 'Global',
+      icon: googleNewIcon,
+    },
   };
   return labels[type];
 };

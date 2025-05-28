@@ -25,11 +25,25 @@ export function formatIntNumber(num: number | string, min: number, max: number):
   return value;
 }
 
-// 获取当前日期（YYYY-MM-DD格式）
-export const getCurrentDate = (): string => {
-  return new Date().toISOString().split('T')[0];
+// 收敛当前时间，便于测试mock
+const getNow = (): Date => {
+  return new Date();
 };
 
+const getCurISOString = (): string => {
+  return getNow().toISOString();
+};
+
+// 获取当前日期（YYYY-MM-DD格式）
+const getCurrentDate = (): string => {
+  return getNow().toISOString().split('T')[0];
+};
+
+export const dateUtils = {
+  getNow,
+  getCurISOString,
+  getCurrentDate,
+};
 export function padZero(num: number): string {
   return num.toString().padStart(2, '0');
 }

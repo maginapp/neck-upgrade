@@ -9,7 +9,7 @@ import {
 } from '@/constants';
 import { ZenquotesRsp, HitokotoData, FamousInfo, FamousRecords } from '@/types';
 
-import { getCurrentDate } from './base';
+import { dateUtils } from './base';
 import { CacheManager } from './cacheManager';
 import { limitConcurrency, ResultType } from './concurrency';
 
@@ -70,7 +70,7 @@ const fetchHitokotoData = async (): Promise<FamousInfo[]> => {
 };
 
 export const getFamousQuotes = async (): Promise<FamousInfo[]> => {
-  const today = getCurrentDate();
+  const today = dateUtils.getCurrentDate();
   const cached = await cacheManager.get();
 
   if (cached && cached.currentDate === today) {
