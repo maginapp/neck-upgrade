@@ -1,5 +1,17 @@
 # Neck Upgrade ChangeLog
 
+## 1.2.0
+
+### Minor Changes
+
+- 丰富news组件和popup页面功能
+
+  1. 添加更多新闻源
+  2. popup页面优化支持更多插件配置
+  3. 添加赞助信息
+  4. 添加反馈模块
+  5. 优化样式
+
 ## 1.1.2
 
 ### Patch Changes
