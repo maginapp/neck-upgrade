@@ -56,10 +56,32 @@ export const Popup: React.FC = () => {
     chrome.tabs.create({ url: 'chrome://newtab/' });
   };
 
+  const handleOpenExtensionDetail = () => {
+    const extensionId = chrome.runtime.id;
+    const webstoreUrl = `chrome://extensions/?id=${extensionId}`;
+
+    chrome.tabs.create({ url: webstoreUrl });
+  };
+
+  const handleOpenWebsitePermission = () => {
+    const extensionId = chrome.runtime.id;
+    chrome.tabs.create({
+      url: `chrome://settings/content/siteDetails?site=chrome-extension%3A%2F%2F${extensionId}`,
+    });
+  };
+
+  const handleOpenShortcut = () => {
+    chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+  };
+
+  const handleOpenFeedback = () => {
+    chrome.tabs.create({ url: 'https://github.com/maginapp/neck-upgrade/issues' });
+  };
+
   return (
     <div className={styles.popup}>
-      <h1>Neck Upgrade</h1>
-      <p>保护你的颈椎健康</p>
+      <h1>{chrome.i18n.getMessage('popup_title')}</h1>
+      <p>{chrome.i18n.getMessage('popup_description')}</p>
       <div className={styles.buttonGroup}>
         {isNewTab && (
           <button className={styles.button} onClick={handleOpenSettings}>
@@ -68,6 +90,18 @@ export const Popup: React.FC = () => {
         )}
         <button className={styles.button} onClick={handleOpenNewTab}>
           打开新标签页
+        </button>
+        <button className={styles.button} onClick={handleOpenExtensionDetail}>
+          管理拓展程序
+        </button>
+        <button className={styles.button} onClick={handleOpenWebsitePermission}>
+          查看网站权限
+        </button>
+        <button className={styles.button} onClick={handleOpenShortcut}>
+          快捷键
+        </button>
+        <button className={styles.button} onClick={handleOpenFeedback}>
+          反馈与讨论
         </button>
       </div>
     </div>

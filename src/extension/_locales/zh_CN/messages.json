@@ -6,5 +6,41 @@
   "extension_description": {
     "message": "一款守护颈椎健康的 Chrome 插件，适度活动脖子，并带你轻松浏览诗词、历史大事记和实时热搜",
     "description": "扩展描述"
+  },
+  "popup_title": {
+    "message": "颈椎保护器",
+    "description": "弹窗标题"
+  },
+  "popup_description": {
+    "message": "保护你的颈椎健康",
+    "description": "弹窗描述"
+  },
+  "popup_btn_open_settings": {
+    "message": "打开设置",
+    "description": "打开设置按钮"
+  },
+  "popup_btn_close_settings": {
+    "message": "关闭设置",
+    "description": "关闭设置按钮"
+  },
+  "popup_btn_open_new_tab": {
+    "message": "打开新标签页",
+    "description": "打开新标签页按钮"
+  },
+  "popup_btn_open_extension_detail": {
+    "message": "管理拓展程序",
+    "description": "管理拓展程序按钮"
+  },
+  "popup_btn_open_website_permission": {
+    "message": "查看网站权限",
+    "description": "查看网站权限按钮"
+  },
+  "popup_btn_open_shortcut": {
+    "message": "快捷键",
+    "description": "查看谷歌插件快捷键设置按钮"
+  },
+  "popup_btn_open_feedback": {
+    "message": "反馈与讨论",
+    "description": "跳转github issues按钮"
   }
 }
