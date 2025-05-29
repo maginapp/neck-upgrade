@@ -103,8 +103,7 @@ export const Settings: React.FC<SettingsProps> = (props) => {
             />
           </div>
           <div className={styles.settingsGroup}>
-            <h4>赞赏支持</h4>
-            <p className={styles.description}>如果这个扩展对你有帮助，欢迎赞赏支持</p>
+            <h4>反馈与赞赏</h4>
             <Appreciation currentTheme={currentTheme} />
           </div>
         </div>

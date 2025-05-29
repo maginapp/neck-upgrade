@@ -1,4 +1,23 @@
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.feedback {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 10px;
+  font-size: var(--font-size-sm);
+  align-items: center;
+  justify-content: flex-start;
+
+  a {
+    color: var(--text-color);
+  }
+}
+
 .appreciation {
+  margin-top: 12px;
   display: flex;
   padding: 16px;
   border-radius: 8px;
