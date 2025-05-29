@@ -6,7 +6,7 @@ import { CrawlerManager } from '../crawlerManager';
 import { baiduHotNews, baiduTiebaNews } from './baidu';
 import { bilibiliRankNews, bilibiliAllNews } from './bilibili';
 import { ggEnForYouNews, ggEnGlobalNews, ggZhForYouNews, ggZhGlobalNews } from './google';
-import { ke36NewsAll, ke36NewsHot, ke36NewsMacro, ke36NewsStock } from './ke36';
+import { ke36NewsAll, ke36NewsHot, ke36NewsMacro, ke36NewsStock } from './kr36';
 import { toutiaoNews } from './toutiao';
 import { weiboAmuseNews, weiboHotNews, weiboLifeNews, weiboMyNews, weiboSocialNews } from './weibo';
 import { xhsNews } from './xiaohongshu';

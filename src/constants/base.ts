@@ -60,7 +60,10 @@ export const CACHE_KEYS = {
   BILIBILI_RANK_NEWS: 'bilibili_rank_news',
   BAIDU_HOT_NEWS: 'baidu_hot_news',
   BAIDU_TIEBA_NEWS: 'baidu_tieba_news',
-  KR_36_NEWS: 'three_six_kr_news',
+  KR_36_ALL_NEWS: 'three_six_kr_all_news',
+  KR_36_HOT_NEWS: 'three_six_kr_hot_news',
+  KR_36_STOCK_NEWS: 'three_six_kr_stock_news',
+  KR_36_MACRO_NEWS: 'three_six_kr_macro_news',
 } as const;
 
 export const THROTTLE_TIME = 1000; // 节流时间
