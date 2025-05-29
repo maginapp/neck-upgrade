@@ -2,8 +2,8 @@
   display: flex;
   padding: 16px;
   border-radius: 8px;
-  background: var(--bg-color);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  background: var(--settings-bg-light);
+  box-shadow: 0 2px 8px var(--box-shadow-color);
   flex-direction: column;
   align-items: center;
 }
@@ -32,11 +32,13 @@
 .sponsorItem {
   display: flex;
   gap: 4px;
-  padding: 6px 10px;
-  border-radius: 4px;
-  background: var(--bg-color);
+  padding: 6px calc(var(--font-size-sm) + 6px);
+  border-radius: 30px;
+  background: var(--settings-bg-light);
+  font-size: var(--font-size-sm);
   color: var(--text-color);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  text-decoration: none;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
   align-items: center;
   justify-content: center;
 
