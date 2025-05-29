@@ -50,6 +50,9 @@ export interface PageInfo {
 export enum NewsType {
   WeiboAmuse = 'weibo_amuse',
   WeiboHot = 'weibo_hot',
+  WeiboMy = 'weibo_my',
+  WeiboLife = 'weibo_life',
+  WeiboSocial = 'weibo_social',
   Xiaohongshu = 'xiaohongshu',
   Toutiao = 'toutiao',
   Zhihu = 'zhihu',
@@ -59,4 +62,10 @@ export enum NewsType {
   GoogleZhGlobal = 'google_zh_global',
   GoogleEnForYou = 'google_en_for_you',
   GoogleEnGlobal = 'google_en_global',
+  BaiduTieba = 'baidu_tieba',
+  BaiduHot = 'baidu_hot',
+  Kr36All = 'kr36_all',
+  Kr36Hot = 'kr36_hot',
+  Kr36Stock = 'kr36_stock',
+  Kr36Macro = 'kr36_macro',
 }

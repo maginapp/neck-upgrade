@@ -70,3 +70,15 @@ export const weiboAmuseNews = createNewsManager(CACHE_KEYS.WEIBO_AMUSE_NEWS, () 
 export const weiboHotNews = createNewsManager(CACHE_KEYS.WEIBO_HOT_NEWS, () => {
   return fetchWeiboNews(NEWS_URL.WEIBO_HOT);
 });
+
+export const weiboMyNews = createNewsManager(CACHE_KEYS.WEIBO_MY_NEWS, () => {
+  return fetchWeiboNews(NEWS_URL.WEIBO_MY);
+});
+
+export const weiboLifeNews = createNewsManager(CACHE_KEYS.WEIBO_LIFE_NEWS, () => {
+  return fetchWeiboNews(NEWS_URL.WEIBO_LIFE);
+});
+
+export const weiboSocialNews = createNewsManager(CACHE_KEYS.WEIBO_SOCIAL_NEWS, () => {
+  return fetchWeiboNews(NEWS_URL.WEIBO_SOCIAL);
+});
