@@ -1,4 +1,17 @@
-# Neck Upgrade
+<p align="center" style="margin-bottom:10px">
+    <img src="./public/icons/icon128.png" alt="wx_zan_shang" width="128" height="128" />
+</p>
+
+<p align="center">
+  <a
+    href="https://chromewebstore.google.com/detail/%E9%A2%88%E6%A4%8E%E4%BF%9D%E6%8A%A4%E5%99%A8/onieefmkohombbhkiifofjlpfjaomimo"
+    ><img
+      alt="Chrome Web Store Version"
+      src="https://img.shields.io/chrome-web-store/v/onieefmkohombbhkiifofjlpfjaomimo?label=Chrome%20Version"
+  /></a>
+</p>
+
+# 颈椎保护器
 
 颈椎保护器：一款守护颈椎健康的 Chrome 插件。
 
@@ -45,13 +58,13 @@
 
 ## 开发
 
-1. 安装依赖：
+1. 安装依赖
 
 ```bash
 pnpm install
 ```
 
-2. 开发模式：
+2. 开发模式
 
 ```bash
 # pnpm run dev
@@ -59,7 +72,7 @@ pnpm run build
 # 上传 dist目录到chrome extension
 ```
 
-3. 构建上传：
+3. 构建上传
 
 ```bash
 # pnpm run build:prod
@@ -76,6 +89,16 @@ pnpm run release:extension
 4. 古诗词数据来源于githun开源古诗词项目[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)
 5. 名人名言数据源是 [ZenQuotes](https://zenquotes.io/) 和 [一言](https://v1.hitokoto.cn/?c=i)
 6. 英语单词使用[google-10000-english](https://github.com/first20hours/google-10000-english)的no-swears高频单词
-7. 热榜消息来自于[Google New](https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans)、[头条热搜](https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=)、[微博热搜](https://s.weibo.com/top/summary?cate=realtimehot)和[小红书推荐](https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend)
+7. 热榜消息来自于[Google New](https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans)、[头条热搜](https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=)、[微博热搜](https://s.weibo.com/top/summary?cate=realtimehot)和[小红书推荐](https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend)、[知乎热榜](https://www.zhihu.com/billboard)、[bilibili](https://www.bilibili.com/v/popular/all)、[36氪](https://36kr.com/newsflashes/catalog/0)、百度[热搜](https://top.baidu.com/board?tab=realtime)和[贴吧](https://tieba.baidu.com/hottopic/browse/topicList?res_type=1)等
 8. 项目功能参考[wai](https://github.com/dukeluo/wai)
 9. 使用开源日历工具库[Tyme](https://6tail.cn/tyme.html)，获取农历、干支、生肖、节气、法定假日，宜忌等
+
+## 反馈
+
+👉 [issue区](https://github.com/maginapp/neck-upgrade/issues) | [讨论区](https://github.com/maginapp/neck-upgrade/discussions) | [chrome应用商店](https://chromewebstore.google.com/detail/%E9%A2%88%E6%A4%8E%E4%BF%9D%E6%8A%A4%E5%99%A8/onieefmkohombbhkiifofjlpfjaomimo)
+
+## 赞赏
+
+<div align="center" style="margin-bottom:20px">
+    <img src="./src/assets/images/wx_zan_shang.png" alt="wx_zan_shang" width="200" height="200" />
+</div>
