@@ -19,7 +19,10 @@
     "https://baike.baidu.com/*",
     "https://www.zhihu.com/*",
     "https://api.bilibili.com/*",
-    "https://passport.weibo.com/*"
+    "https://passport.weibo.com/*",
+    "https://tieba.baidu.com/*",
+    "https://36kr.com/*",
+    "https://top.baidu.com/*"
   ],
   "action": {
     "default_popup": "pages/popup.html",

@@ -17,19 +17,16 @@
   border: none;
   background: none;
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
   transition: all 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
 
   &:hover {
-    color: var(--text-color);
     transform: scale(1.1);
   }
 
   &.active {
     position: relative;
-    color: var(--accent-color);
     transform: scale(1.1);
 
     &::after {

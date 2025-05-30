@@ -37,10 +37,10 @@ const fetchBilibili = async (url: string) => {
   }
 };
 
-export const bilibiliAllNews = createNewsManager(CACHE_KEYS.BILIBILI_ALL, () => {
+export const bilibiliAllNews = createNewsManager(CACHE_KEYS.BILIBILI_ALL_NEWS, () => {
   return fetchBilibili(NEWS_URL.BILIBILI_ALL);
 });
 
-export const bilibiliRankNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK, () => {
+export const bilibiliRankNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_NEWS, () => {
   return fetchBilibili(NEWS_URL.BILIBILI_RANK);
 });

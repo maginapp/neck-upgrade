@@ -1,9 +1,28 @@
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.feedback {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 10px;
+  font-size: var(--font-size-sm);
+  align-items: center;
+  justify-content: flex-start;
+
+  a {
+    color: var(--text-color);
+  }
+}
+
 .appreciation {
+  margin-top: 12px;
   display: flex;
   padding: 16px;
   border-radius: 8px;
-  background: var(--bg-color);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  background: var(--settings-bg-light);
+  box-shadow: 0 2px 8px var(--box-shadow-color);
   flex-direction: column;
   align-items: center;
 }
@@ -17,5 +36,32 @@
     height: 100%;
     object-fit: contain;
     border-radius: 12px;
+  }
+}
+
+.sponsor {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.sponsorItem {
+  display: flex;
+  gap: 4px;
+  padding: 6px calc(var(--font-size-sm) + 6px);
+  border-radius: 30px;
+  background: var(--settings-bg-light);
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+  text-decoration: none;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
+  align-items: center;
+  justify-content: center;
+
+  .koFiIcon {
+    height: 19px;
   }
 }

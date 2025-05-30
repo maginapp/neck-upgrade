@@ -85,6 +85,6 @@ const fetchZhihuPage = async (url: string) => {
   }
 };
 
-export const zhihuHotNews = createNewsManager(CACHE_KEYS.ZHIHU_HOT, () => {
+export const zhihuHotNews = createNewsManager(CACHE_KEYS.ZHIHU_HOT_NEWS, () => {
   return fetchZhihuPage(NEWS_URL.ZHIHU_HOT);
 });

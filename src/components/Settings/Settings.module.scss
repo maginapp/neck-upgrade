@@ -14,7 +14,7 @@
   padding: 16px;
   border-radius: 8px;
   background-color: var(--settings-bg);
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 4px var(--box-shadow-color);
 }
 
 .settingsButton {
@@ -42,7 +42,7 @@
   width: 400px;
   height: 100vh;
   background-color: var(--settings-bg);
-  box-shadow: -2px 0 5px rgb(0 0 0 / 10%);
+  box-shadow: -2px 0 5px var(--box-shadow-color);
   transition: right 0.3s ease-in-out;
 
   &.open {
@@ -81,12 +81,6 @@
     color: var(--text-color);
     margin-bottom: 8px;
   }
-
-  .description {
-    font-size: var(--font-size-sm);
-    color: var(--text-secondary);
-    margin-bottom: 12px;
-  }
 }
 
 .overlay {
@@ -121,5 +115,5 @@
 .typeButton.active {
   border-color: var(--primary-color);
   background-color: var(--primary-color);
-  color: white;
+  color: var(--primary-bg-text-color);
 }

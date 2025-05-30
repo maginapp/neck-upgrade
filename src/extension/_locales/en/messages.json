@@ -6,5 +6,41 @@
   "extension_description": {
     "message": "A Chrome extension that protects your neck health, move your neck, and lets you explore poetry, history, and hot trends.",
     "description": "The description of the extension"
+  },
+  "popup_title": {
+    "message": "Neck Upgrade",
+    "description": "The title of the popup"
+  },
+  "popup_description": {
+    "message": "Protect your neck health",
+    "description": "The description of the popup"
+  },
+  "popup_btn_open_settings": {
+    "message": "Open Settings",
+    "description": "The button to open the settings"
+  },
+  "popup_btn_close_settings": {
+    "message": "Close Settings",
+    "description": "The button to close the settings"
+  },
+  "popup_btn_open_new_tab": {
+    "message": "Open New Tab",
+    "description": "The button to open a new tab"
+  },
+  "popup_btn_open_extension_detail": {
+    "message": "Manage Extensions",
+    "description": "The button to manage the extensions"
+  },
+  "popup_btn_open_website_permission": {
+    "message": "View Website Permissions",
+    "description": "The button to view the website permissions"
+  },
+  "popup_btn_open_shortcut": {
+    "message": "Shortcut",
+    "description": "The button to open the shortcut"
+  },
+  "popup_btn_open_feedback": {
+    "message": "Feedback & Discussion",
+    "description": "The button to open the feedback of github issues"
   }
 }

@@ -32,22 +32,32 @@
 
 :root:has(.themeContainer.light) {
   --settings-bg: #f8f2e4;
+
+  // --settings-bg-light: #fdf9ef; // 10%
+  --settings-bg-light: #fbf7ef; // 5%
   --text-color: #333;
   --text-secondary: #666;
   --border-color: #d9d9d9;
   --hover-bg: #f0f0f0;
   --primary-color: #007bff;
+  --primary-bg-text-color: #fff;
   --background-color: #f0e4c8;
   --accent-color: #222;
+  --box-shadow-color: rgb(0 0 0 / 8%);
 }
 
 :root:has(.themeContainer.dark) {
   --settings-bg: rgb(31 31 31);
+
+  // --settings-bg-light: #2c2c2c; // 10%
+  --settings-bg-light: #262626; // 5%
   --text-color: rgb(255 255 255 / 80%);
   --text-secondary: rgb(255 255 255 / 60%);
   --border-color: rgb(253 253 253 / 12%);
   --hover-bg: rgb(255 255 255 / 8%);
   --primary-color: rgb(22 104 220);
+  --primary-bg-text-color: #fff;
   --background-color: rgb(20 20 20);
   --accent-color: rgb(255 255 255 / 95%);
+  --box-shadow-color: rgb(0 0 0 / 8%);
 }

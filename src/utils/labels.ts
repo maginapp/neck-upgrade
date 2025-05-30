@@ -1,5 +1,7 @@
+import baiduIcon from '@/assets/images/favicon/baidu.ico';
 import bilibiliIcon from '@/assets/images/favicon/bilibili.ico';
 import googleNewIcon from '@/assets/images/favicon/google_new.png';
+import kr36Icon from '@/assets/images/favicon/kr_36.ico';
 import toutiaoIcon from '@/assets/images/favicon/toutiao.ico';
 import weiboIcon from '@/assets/images/favicon/weibo.ico';
 import xiaohongshuIcon from '@/assets/images/favicon/xiaohongshu.ico';
@@ -85,23 +87,34 @@ export const getNewsTypeInfo = (
       icon: string;
     }
   > = {
-    [NewsType.WeiboAmuse]: {
-      label: '文娱',
+    [NewsType.WeiboMy]: {
+      label: '我的',
       icon: weiboIcon,
     },
     [NewsType.WeiboHot]: {
       label: '热搜',
       icon: weiboIcon,
     },
-    [NewsType.Xiaohongshu]: {
-      label: '推荐',
-      icon: xiaohongshuIcon,
+    [NewsType.WeiboAmuse]: {
+      label: '文娱',
+      icon: weiboIcon,
+    },
+    [NewsType.WeiboLife]: {
+      label: '生活',
+      icon: weiboIcon,
+    },
+    [NewsType.WeiboSocial]: {
+      label: '社会',
+      icon: weiboIcon,
     },
     [NewsType.Toutiao]: {
       label: '热搜',
       icon: toutiaoIcon,
     },
-
+    [NewsType.Xiaohongshu]: {
+      label: '推荐',
+      icon: xiaohongshuIcon,
+    },
     [NewsType.Zhihu]: {
       label: '热榜',
       icon: zhihuIcon,
@@ -113,6 +126,30 @@ export const getNewsTypeInfo = (
     [NewsType.BilibiliRank]: {
       label: '热榜',
       icon: bilibiliIcon,
+    },
+    [NewsType.BaiduTieba]: {
+      label: '贴吧',
+      icon: baiduIcon,
+    },
+    [NewsType.BaiduHot]: {
+      label: '热榜',
+      icon: baiduIcon,
+    },
+    [NewsType.Kr36All]: {
+      label: '综合',
+      icon: kr36Icon,
+    },
+    [NewsType.Kr36Hot]: {
+      label: '热榜',
+      icon: kr36Icon,
+    },
+    [NewsType.Kr36Stock]: {
+      label: '股票',
+      icon: kr36Icon,
+    },
+    [NewsType.Kr36Macro]: {
+      label: '宏观',
+      icon: kr36Icon,
     },
     [NewsType.GoogleZhForYou]: {
       label: '推荐',
