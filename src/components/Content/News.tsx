@@ -145,7 +145,15 @@ export const News: React.FC = () => {
     if (!group) {
       return null;
     }
-    return group.children.find((item) => item.type === activeType) ?? null;
+    const typeDetail = group.children.find((item) => item.type === activeType) ?? null;
+    if (!typeDetail) {
+      return null;
+    }
+    return {
+      label: typeDetail.label,
+      icon: group.icon,
+      type: typeDetail.type,
+    };
   }, [activeGroup, activeType]);
 
   useEffect(() => {

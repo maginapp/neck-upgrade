@@ -67,7 +67,13 @@ export enum NewsType {
   Kr36All = 'kr36_all',
   Kr36Hot = 'kr36_hot',
   Kr36Stock = 'kr36_stock',
+  Kr36Company = 'kr36_company',
   Kr36Macro = 'kr36_macro',
+  V2exTech = 'v2ex_tech',
+  V2exPlay = 'v2ex_play',
+  V2exCreative = 'v2ex_creative',
+  V2exHot = 'v2ex_hot',
+  V2exAll = 'v2ex_all',
 }
 
 export enum NewsGroup {

@@ -64,6 +64,11 @@ export const CACHE_KEYS = {
   KR_36_HOT_NEWS: 'three_six_kr_hot_news',
   KR_36_STOCK_NEWS: 'three_six_kr_stock_news',
   KR_36_MACRO_NEWS: 'three_six_kr_macro_news',
+  V2EX_TECH_NEWS: 'v2ex_tech_news',
+  V2EX_PLAY_NEWS: 'v2ex_play_news', //
+  V2EX_CREATIVE_NEWS: 'v2ex_creative_news',
+  V2EX_HOT_NEWS: 'v2ex_hot_news',
+  V2EX_ALL_NEWS: 'v2ex_all_news',
 } as const;
 
 export const THROTTLE_TIME = 1000; // 节流时间
@@ -95,6 +100,7 @@ export const NEWS_URL = {
   BAIDU_TOP: 'https://top.baidu.com/board?tab=realtime',
   BAIDU_TIEBA: 'https://tieba.baidu.com/hottopic/browse/topicList?res_type=1',
   KR_36: 'https://36kr.com/newsflashes/catalog',
+  V2EX: 'https://www.v2ex.com',
 };
 
 export const NEWS_CACHE_EXPIRY = 1000 * 60 * 5; // 5分钟 // 24小时

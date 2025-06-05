@@ -14,7 +14,6 @@ export const NEWS_GROUP_LABELS: Array<{
   group: NewsGroup;
   children: Array<{
     label: string;
-    icon: string;
     type: NewsType;
   }>;
 }> = [
@@ -25,27 +24,22 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '我的',
-        icon: weiboIcon,
         type: NewsType.WeiboMy,
       },
       {
         label: '热搜',
-        icon: weiboIcon,
         type: NewsType.WeiboHot,
       },
       {
         label: '文娱',
-        icon: weiboIcon,
         type: NewsType.WeiboAmuse,
       },
       {
         label: '生活',
-        icon: weiboIcon,
         type: NewsType.WeiboLife,
       },
       {
         label: '社会',
-        icon: weiboIcon,
         type: NewsType.WeiboSocial,
       },
     ],
@@ -57,7 +51,6 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '推荐',
-        icon: xiaohongshuIcon,
         type: NewsType.Xiaohongshu,
       },
     ],
@@ -69,7 +62,6 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '热搜',
-        icon: toutiaoIcon,
         type: NewsType.Toutiao,
       },
     ],
@@ -81,7 +73,6 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '热榜',
-        icon: zhihuIcon,
         type: NewsType.Zhihu,
       },
     ],
@@ -93,12 +84,10 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '综合',
-        icon: bilibiliIcon,
         type: NewsType.BilibiliAll,
       },
       {
         label: '热榜',
-        icon: bilibiliIcon,
         type: NewsType.BilibiliRank,
       },
     ],
@@ -110,22 +99,18 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '推荐',
-        icon: googleNewIcon,
         type: NewsType.GoogleZhForYou,
       },
       {
         label: '全球',
-        icon: googleNewIcon,
         type: NewsType.GoogleZhGlobal,
       },
       {
         label: 'For You',
-        icon: googleNewIcon,
         type: NewsType.GoogleEnForYou,
       },
       {
         label: 'Global',
-        icon: googleNewIcon,
         type: NewsType.GoogleEnGlobal,
       },
     ],
@@ -137,12 +122,10 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '贴吧',
-        icon: baiduIcon,
         type: NewsType.BaiduTieba,
       },
       {
         label: '热榜',
-        icon: baiduIcon,
         type: NewsType.BaiduHot,
       },
     ],
@@ -154,22 +137,22 @@ export const NEWS_GROUP_LABELS: Array<{
     children: [
       {
         label: '综合',
-        icon: kr36Icon,
         type: NewsType.Kr36All,
       },
       {
         label: '热榜',
-        icon: kr36Icon,
         type: NewsType.Kr36Hot,
       },
       {
         label: '股票',
-        icon: kr36Icon,
         type: NewsType.Kr36Stock,
       },
       {
+        label: '公司',
+        type: NewsType.Kr36Company,
+      },
+      {
         label: '宏观',
-        icon: kr36Icon,
         type: NewsType.Kr36Macro,
       },
     ],

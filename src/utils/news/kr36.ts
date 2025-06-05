@@ -66,6 +66,10 @@ export const ke36NewsStock = createNewsManager(CACHE_KEYS.KR_36_STOCK_NEWS, () =
   return fetchKr36Page(`${NEWS_URL.KR_36}/2`);
 });
 
+export const ke36NewsCompany = createNewsManager(CACHE_KEYS.KR_36_MACRO_NEWS, () => {
+  return fetchKr36Page(`${NEWS_URL.KR_36}/3`);
+});
+
 export const ke36NewsMacro = createNewsManager(CACHE_KEYS.KR_36_MACRO_NEWS, () => {
   return fetchKr36Page(`${NEWS_URL.KR_36}/4`);
 });
