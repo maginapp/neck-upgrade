@@ -85,4 +85,5 @@ export enum NewsGroup {
   Google = 'google',
   Baidu = 'baidu',
   Kr36 = 'kr36',
+  V2ex = 'v2ex',
 }

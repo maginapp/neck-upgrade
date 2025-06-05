@@ -3,6 +3,7 @@ import bilibiliIcon from '@/assets/images/favicon/bilibili.ico';
 import googleNewIcon from '@/assets/images/favicon/google_new.png';
 import kr36Icon from '@/assets/images/favicon/kr_36.ico';
 import toutiaoIcon from '@/assets/images/favicon/toutiao.ico';
+import v2exIcon from '@/assets/images/favicon/v2ex.png';
 import weiboIcon from '@/assets/images/favicon/weibo.ico';
 import xiaohongshuIcon from '@/assets/images/favicon/xiaohongshu.ico';
 import zhihuIcon from '@/assets/images/favicon/zhihu.ico';
@@ -154,6 +155,33 @@ export const NEWS_GROUP_LABELS: Array<{
       {
         label: '宏观',
         type: NewsType.Kr36Macro,
+      },
+    ],
+  },
+  {
+    label: 'V2EX',
+    icon: v2exIcon,
+    group: NewsGroup.V2ex,
+    children: [
+      {
+        label: '技术',
+        type: NewsType.V2exTech,
+      },
+      {
+        label: '好玩',
+        type: NewsType.V2exPlay,
+      },
+      {
+        label: '创意',
+        type: NewsType.V2exCreative,
+      },
+      {
+        label: '最热',
+        type: NewsType.V2exHot,
+      },
+      {
+        label: '综合',
+        type: NewsType.V2exAll,
       },
     ],
   },
