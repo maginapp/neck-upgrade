@@ -4,6 +4,8 @@
 
 ### Patch Changes
 
+- 修复当天日期计算异常
+
 - 5f33330: - 添加新闻源
 
   1. 添加更多的google news源

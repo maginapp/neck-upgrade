@@ -41,6 +41,7 @@ export const Header: React.FC = () => {
         if (prev !== ymd) {
           setLunarInfo(getLunarInfo(now));
           fetchNextHoliday();
+          console.log('????', getLunarInfo(now));
         }
         return ymd;
       });

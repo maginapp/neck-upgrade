@@ -33,7 +33,7 @@ const generateReviews = <T>(
   forgetIntervals.forEach((interval) => {
     const targetDate = new Date(currentDate);
     targetDate.setDate(targetDate.getDate() - interval);
-    const dateStr = targetDate.toISOString().split('T')[0];
+    const dateStr = dateUtils.getDate(targetDate);
     const records = listByDate.get(dateStr);
 
     if (records) {

@@ -1,6 +1,7 @@
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
 import { BilibiliHotResponse, NewsItem } from '@/types';
 
+import { dateUtils } from '../base';
 import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
@@ -24,7 +25,7 @@ const fetchBilibili = async (url: string) => {
         title,
         link,
         source: '',
-        time: time.toISOString(),
+        time: dateUtils.formatDateTime(time),
         tag: item.tnamev2,
         newsImg,
       };

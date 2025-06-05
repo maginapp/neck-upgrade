@@ -25,24 +25,42 @@ export function formatIntNumber(num: number | string, min: number, max: number):
   return value;
 }
 
+function formatDateTime(d: Date) {
+  // 提取年、月、日、时、分、秒（注意月份从0开始，需+1）
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  const seconds = String(d.getSeconds()).padStart(2, '0');
+
+  // 拼接成指定格式
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
 // 收敛当前时间，便于测试mock
 const getNow = (): Date => {
   return new Date();
 };
 
 const getCurISOString = (): string => {
-  return getNow().toISOString();
+  return formatDateTime(getNow());
 };
 
-// 获取当前日期（YYYY-MM-DD格式）
+const getDate = (d: Date): string => {
+  return formatDateTime(d).split(' ')[0];
+};
+
 const getCurrentDate = (): string => {
-  return getNow().toISOString().split('T')[0];
+  return getDate(getNow());
 };
 
 export const dateUtils = {
   getNow,
   getCurISOString,
   getCurrentDate,
+  formatDateTime,
+  getDate,
 };
 export function padZero(num: number): string {
   return num.toString().padStart(2, '0');
