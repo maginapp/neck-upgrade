@@ -37,7 +37,13 @@ const fetchV2exPage = async (url: string) => {
 
       if (titleElement) {
         const title = titleElement.textContent?.trim() ?? '';
-        const link = `https://www.v2ex.com${titleElement?.href ?? ''}`;
+
+        const link = titleElement.href.replace(
+          /^(chrome-extension:\/\/[a-z0-9A-Z]+)?\//,
+          `https://www.v2ex.com/`
+        );
+
+        console.log(titleElement.href);
 
         newsItems.push({
           title,
