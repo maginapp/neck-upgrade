@@ -1,5 +1,21 @@
 # Neck Upgrade ChangeLog
 
+## 1.2.1
+
+### Patch Changes
+
+- 5f33330: - 添加新闻源
+
+  1. 添加更多的google news源
+  2. 添加更多的B站排行数据
+  3. 优化tab弹窗ui
+
+- f8992fd: 更新内容
+
+  1. 优化 `newsTab` 显示效果
+  2. 修复 GitHub 连接异常问题
+  3. 修复知乎获取问题 ID 异常
+
 ## 1.2.0
 
 ### Minor Changes
