@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 
-import { DEFAULT_PAGE_INFO } from '@/constants';
+import { DEFAULT_PAGE_INFO, NEWS_TAB_TYTPE_LIST_POP_WIDTH } from '@/constants';
 import { NEWS_GROUP_LABELS } from '@/constants/labels';
 import { NewsDisplay } from '@/types';
 import { NewsGroup, NewsType, PageInfo } from '@/types/app';
@@ -110,6 +110,7 @@ export const News: React.FC = () => {
   const [activeGroup, setActiveGroup] = useState<NewsGroup>(NewsGroup.Toutiao);
   const [showGroup, setShowGroup] = useState<NewsGroup | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const [rightAlign, setRightAlign] = useState<boolean>(false);
 
   const handleTypeChange = (group: NewsGroup, type: NewsType) => {
@@ -134,7 +135,12 @@ export const News: React.FC = () => {
           const tabRect = tab.getBoundingClientRect();
           const tabRight = tabRect.right;
           const spaceToRight = containerRight - tabRight;
-          setRightAlign(tabRect.width + spaceToRight < 100);
+          const globalStyle = window.getComputedStyle(document.documentElement);
+          let globalRatio = parseFloat(
+            globalStyle.getPropertyValue('--scale-main-view-ratio') ?? '1'
+          );
+          globalRatio = globalRatio >= 1 ? 1 : globalRatio;
+          setRightAlign(tabRect.width + spaceToRight < NEWS_TAB_TYTPE_LIST_POP_WIDTH * globalRatio);
         }
       }
     }
@@ -159,9 +165,9 @@ export const News: React.FC = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        containerRef.current &&
+        tabsRef.current &&
         event.target instanceof Node &&
-        !containerRef.current.contains(event.target)
+        !tabsRef.current.contains(event.target)
       ) {
         setShowGroup(null);
       }
@@ -175,8 +181,8 @@ export const News: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.newsContainer}>
-      <div className={styles.tabs} ref={containerRef}>
+    <div className={styles.newsContainer} ref={containerRef}>
+      <div className={styles.tabs} ref={tabsRef}>
         {NEWS_GROUP_LABELS.map((item) => (
           <div
             key={item.group}
@@ -199,7 +205,6 @@ export const News: React.FC = () => {
                       e.stopPropagation();
                     }}
                   >
-                    <img src={item.icon} alt={item.label} className={styles.tabIcon} />
                     {child.label}
                   </div>
                 ))}

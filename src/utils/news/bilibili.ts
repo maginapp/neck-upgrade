@@ -42,5 +42,57 @@ export const bilibiliAllNews = createNewsManager(CACHE_KEYS.BILIBILI_ALL_NEWS, (
 });
 
 export const bilibiliRankNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_NEWS, () => {
-  return fetchBilibili(NEWS_URL.BILIBILI_RANK);
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=0&type=all`);
 });
+
+export const bilibiliRankDougaNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_DOUGA_NEWS, () => {
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1005&type=all`);
+});
+
+export const bilibiliRankSportsNews = createNewsManager(
+  CACHE_KEYS.BILIBILI_RANK_SPORTS_NEWS,
+  () => {
+    return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1018&type=all`);
+  }
+);
+
+export const bilibiliRankFoodNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_FOOD_NEWS, () => {
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1020&type=all`);
+});
+
+export const bilibiliRankTechNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_TECH_NEWS, () => {
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1012&type=all`);
+});
+
+export const bilibiliRankKnowledgeNews = createNewsManager(
+  CACHE_KEYS.BILIBILI_RANK_KNOWLEDGE_NEWS,
+  () => {
+    return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1010&type=all`);
+  }
+);
+
+export const bilibiliRankEntNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_ENT_NEWS, () => {
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1002&type=all`);
+});
+
+export const bilibiliRankMusicNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_MUSIC_NEWS, () => {
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1003&type=all`);
+});
+
+export const bilibiliRankKichikuNews = createNewsManager(
+  CACHE_KEYS.BILIBILI_RANK_KICHIKU_NEWS,
+  () => {
+    return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1007&type=all`);
+  }
+);
+
+export const bilibiliRankDanceNews = createNewsManager(CACHE_KEYS.BILIBILI_RANK_DANCE_NEWS, () => {
+  return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1004&type=all`);
+});
+
+export const bilibiliRankCinephileNews = createNewsManager(
+  CACHE_KEYS.BILIBILI_RANK_CINEPHILE_NEWS,
+  () => {
+    return fetchBilibili(`${NEWS_URL.BILIBILI_RANK}?rid=1001&type=all`);
+  }
+);

@@ -91,6 +91,46 @@ export const NEWS_GROUP_LABELS: Array<{
         label: '热榜',
         type: NewsType.BilibiliRank,
       },
+      {
+        label: '动画',
+        type: NewsType.BilibiliRankDouga,
+      },
+      {
+        label: '鬼畜',
+        type: NewsType.BilibiliRankKichiku,
+      },
+      {
+        label: '音乐',
+        type: NewsType.BilibiliRankMusic,
+      },
+      {
+        label: '舞蹈',
+        type: NewsType.BilibiliRankDance,
+      },
+      {
+        label: '影视',
+        type: NewsType.BilibiliRankCinephile,
+      },
+      {
+        label: '娱乐',
+        type: NewsType.BilibiliRankEnt,
+      },
+      {
+        label: '知识',
+        type: NewsType.BilibiliRankKnowledge,
+      },
+      {
+        label: '科技',
+        type: NewsType.BilibiliRankTech,
+      },
+      {
+        label: '美食',
+        type: NewsType.BilibiliRankFood,
+      },
+      {
+        label: '体育',
+        type: NewsType.BilibiliRankSports,
+      },
     ],
   },
   {
@@ -103,16 +143,60 @@ export const NEWS_GROUP_LABELS: Array<{
         type: NewsType.GoogleZhForYou,
       },
       {
+        label: '中国',
+        type: NewsType.GoogleZhChina,
+      },
+      {
         label: '全球',
         type: NewsType.GoogleZhGlobal,
+      },
+      {
+        label: '娱乐',
+        type: NewsType.GoogleZhEntertainment,
+      },
+      {
+        label: '体育',
+        type: NewsType.GoogleZhSports,
+      },
+      {
+        label: '商业',
+        type: NewsType.GoogleZhBussiness,
       },
       {
         label: 'For You',
         type: NewsType.GoogleEnForYou,
       },
       {
+        label: 'U.S.',
+        type: NewsType.GoogleEnUs,
+      },
+      {
         label: 'Global',
         type: NewsType.GoogleEnGlobal,
+      },
+      {
+        label: 'Technology',
+        type: NewsType.GoogleEnTech,
+      },
+      {
+        label: 'Entertainment',
+        type: NewsType.GoogleEnEntertainment,
+      },
+      {
+        label: 'Sports',
+        type: NewsType.GoogleEnSports,
+      },
+      {
+        label: 'Business',
+        type: NewsType.GoogleEnBusiness,
+      },
+      {
+        label: 'Science',
+        type: NewsType.GoogleEnScience,
+      },
+      {
+        label: 'Health',
+        type: NewsType.GoogleEnHealth,
       },
     ],
   },
