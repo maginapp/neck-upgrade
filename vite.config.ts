@@ -1,9 +1,11 @@
-import { defineConfig, PluginOption } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 import fs from 'fs';
-import { version } from './package.json';
+import { resolve } from 'path';
+
+import react from '@vitejs/plugin-react';
+import { defineConfig, PluginOption } from 'vite';
 import svgr from 'vite-plugin-svgr';
+
+import { version } from './package.json';
 
 // 读取并处理 manifest.json
 const manifestPath = resolve(__dirname, 'src/extension/manifest.json');
@@ -15,7 +17,8 @@ const removeConsolePlugin = (removeConsole: boolean) => ({
   name: 'remove-console',
   transform(code: string) {
     if (!removeConsole) return code;
-    return code.replace(/console\.log\([^)]*\);?/g, '');
+    // 改进的正则表达式，可以处理嵌套括号
+    return code.replace(/console\.log\(((?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*)\);?/g, '');
   },
 });
 
