@@ -22,7 +22,8 @@
     "https://passport.weibo.com/*",
     "https://tieba.baidu.com/*",
     "https://36kr.com/*",
-    "https://top.baidu.com/*"
+    "https://top.baidu.com/*",
+    "https://www.v2ex.com/*"
   ],
   "action": {
     "default_popup": "pages/popup.html",
