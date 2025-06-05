@@ -17,9 +17,9 @@ const getZhihuQuestionId = (linkElement: CustomHTMLElement | null) => {
     if (!linkElement) return '';
     const zaExtraModule = linkElement.dataset.zaExtraModule;
     if (!zaExtraModule) return '';
-    const attachedInfoBytes = JSON.parse(zaExtraModule).attached_info_bytes;
-
-    return attachedInfoBytes.matchAll(/\d{18,20}/g)[0];
+    const attachedInfoBytes = atob(JSON.parse(zaExtraModule).attached_info_bytes);
+    const numArr = attachedInfoBytes.match(/\d{5,}/g) || [];
+    return numArr[numArr.length - 1];
   } catch (error) {
     console.error('获取知乎问题ID失败:', error, linkElement?.dataset?.zaExtraModule);
     return '';

@@ -8,22 +8,20 @@
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 12px;
+  width: 100%;
 }
 
+// 切换group 或者单个type
 .tab {
+  position: relative;
   flex: 0 0 auto;
   margin: 0 4px;
   padding: 2px;
   border: none;
   background: none;
-  font-size: var(--font-size-sm);
   transition: all 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
-
-  &:hover {
-    transform: scale(1.1);
-  }
 
   &.active {
     position: relative;
@@ -42,11 +40,57 @@
   }
 
   .tabIcon {
-    width: 14px;
-    height: 14px;
-    border-radius: 3px;
-    margin-right: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    margin-right: 6px;
     vertical-align: middle;
+  }
+}
+
+// 切换type
+.typeList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  box-sizing: border-box;
+  width: 200px;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--settings-bg);
+  font-size: var(--font-sm);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  transform: translateY(-10px);
+  overflow: hidden;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 8px;
+
+  &.rightAlign {
+    right: 0;
+    left: auto;
+  }
+
+  .typeItem {
+    box-sizing: border-box;
+    max-width: 80px;
+    padding: 4px 8px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    &.active {
+      font-weight: bold;
+      transform: scale(1.1);
+    }
+
+    &:hover {
+      background-color: var(--hover-bg);
+      transform: scale(1.1);
+    }
   }
 }
 
