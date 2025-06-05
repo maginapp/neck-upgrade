@@ -17,7 +17,7 @@ export const Appreciation: React.FC<AppreciationProps> = (props) => {
       <p className={styles.description}>如果你对本项目感兴趣或反馈问题，欢迎与我们交流。</p>
       <div className={styles.feedback}>
         👉
-        <a href="https://github.com/magina/neck-upgrade/issues" target="_blank" rel="noreferrer">
+        <a href="https://github.com/maginapp/neck-upgrade/issues" target="_blank" rel="noreferrer">
           提交 Issue
         </a>
         ｜
@@ -29,7 +29,7 @@ export const Appreciation: React.FC<AppreciationProps> = (props) => {
           交流区
         </a>
         ｜
-        <a href="https://github.com/magina/neck-upgrade" target="_blank" rel="noreferrer">
+        <a href="https://github.com/maginapp/neck-upgrade" target="_blank" rel="noreferrer">
           项目主页
         </a>
       </div>

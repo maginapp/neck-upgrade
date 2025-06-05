@@ -94,7 +94,7 @@ export const NEWS_URL = {
     'https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRGx1YlY4U0JYcG9MVU5PR2dKRFRpZ0FQAQ?hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans',
   BAIDU_TOP: 'https://top.baidu.com/board?tab=realtime',
   BAIDU_TIEBA: 'https://tieba.baidu.com/hottopic/browse/topicList?res_type=1',
-  KR_36: 'https://36kr.com/newsflashes/catalog/',
+  KR_36: 'https://36kr.com/newsflashes/catalog',
 };
 
 export const NEWS_CACHE_EXPIRY = 1000 * 60 * 5; // 5分钟 // 24小时

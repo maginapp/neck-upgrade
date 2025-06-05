@@ -69,3 +69,14 @@ export enum NewsType {
   Kr36Stock = 'kr36_stock',
   Kr36Macro = 'kr36_macro',
 }
+
+export enum NewsGroup {
+  Weibo = 'weibo',
+  Xiaohongshu = 'xiaohongshu',
+  Toutiao = 'toutiao',
+  Zhihu = 'zhihu',
+  Bilibili = 'bilibili',
+  Google = 'google',
+  Baidu = 'baidu',
+  Kr36 = 'kr36',
+}

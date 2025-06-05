@@ -10,7 +10,9 @@
   padding-bottom: 12px;
 }
 
+// 切换group 或者单个type
 .tab {
+  position: relative;
   flex: 0 0 auto;
   margin: 0 4px;
   padding: 2px;
@@ -20,10 +22,6 @@
   transition: all 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
-
-  &:hover {
-    transform: scale(1.1);
-  }
 
   &.active {
     position: relative;
@@ -45,8 +43,49 @@
     width: 14px;
     height: 14px;
     border-radius: 3px;
-    margin-right: 2px;
+    margin-right: 4px;
     vertical-align: middle;
+  }
+}
+
+// 切换type
+.typeList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  min-width: 60px;
+  max-width: 100px;
+  border-radius: 8px;
+  background: var(--settings-bg);
+  font-size: var(--font-sm);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  transform: translateY(-10px);
+  margin-top: 8px;
+  overflow: hidden;
+
+  &.rightAlign {
+    right: 0;
+    left: auto;
+  }
+
+  .typeItem {
+    padding: 4px 12px;
+    cursor: pointer;
+    transform-origin: left center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &.active {
+      font-weight: bold;
+      transform: scale(1.1);
+    }
+
+    &:hover {
+      background-color: var(--hover-bg);
+      transform: scale(1.1);
+    }
   }
 }
 
