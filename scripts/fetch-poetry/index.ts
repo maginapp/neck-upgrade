@@ -1,4 +1,7 @@
-// 从https://github.com/chinese-poetry/chinese-poetry.git读取诗词数据
-import { processPoetry } from './processor';
+import { run } from './bin';
 
-processPoetry();
+const args = process.argv.slice(2);
+
+console.log('args is', args);
+
+run(args);

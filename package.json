@@ -1,6 +1,6 @@
 {
   "name": "neck-upgrade",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Chrome extension for neck health",
   "type": "module",
   "scripts": {
@@ -11,8 +11,9 @@
     "lint:style": "stylelint \"src/**/*.{css,scss}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,scss}\" \"scripts/**/*.{ts,tsx}\"",
     "prepare": "husky install",
-    "fetch-poetry": "tsx scripts/fetch-poetry/index.ts",
-    "cleanup-poetry": "tsx scripts/fetch-poetry/cleanup.ts",
+    "poetry:download": "tsx scripts/fetch-poetry/index.ts -- download",
+    "poetry:process": "tsx scripts/fetch-poetry/index.ts -- process",
+    "poetry:cleanup": "tsx scripts/fetch-poetry/index.ts -- cleanup",
     "test": "vitest",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
@@ -47,6 +48,7 @@
     "chinese-poetry": "^1.4.1",
     "jimp": "1.6.0",
     "lodash-es": "4.17.21",
+    "opencc": "1.1.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tyme4ts": "1.3.3"

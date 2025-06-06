@@ -209,6 +209,7 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     };
   }
 
+  // 当次请求展示给用户的
   let formattedRecords: T[] = [];
 
   // 优先返回当天新增的，未访问过的
@@ -223,8 +224,8 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
   }
 
   // 格式化当天数据，修改review列表为格式化后数据，history添加访问后数据
-  if (formattedRecords.length && formatRecord) {
-    formattedRecords = await formatRecord(formattedRecords);
+  if (formattedRecords.length) {
+    formattedRecords = formatRecord ? await formatRecord(formattedRecords) : formattedRecords;
 
     // 如果已经展示过这首，将其添加到历史记录
     let historyRecord = records.history.find((record) => record.date === currentDate);
@@ -240,10 +241,10 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
         records.history = records.history.slice(0, reviewDays);
       }
     }
+    historyRecord!.records.push(...formattedRecords);
     records.todayReview.records = records.todayReview.records.map((record) => {
       const formattedRecord = formattedRecords.find((item) => compareFn(item, record));
       const curRecord = formattedRecord ? formattedRecord : record;
-      historyRecord!.records.push(curRecord);
       return curRecord;
     });
   }
