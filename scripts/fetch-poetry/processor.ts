@@ -1,16 +1,22 @@
 import { execSync } from 'child_process';
-import { readFileSync, writeFileSync } from 'fs';
+import crypto from 'crypto';
+import { appendFileSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 import { TEMP_DIR, TARGET_DIR, POETRY_FILE, LAST_UPDATE_FILE } from './config';
 import {
   CacaoPoem,
   ChuciPoem,
+  CommonArticle,
+  NaLanXingDe,
   PoetryItem,
+  QianJiaShi,
   ShijingPoem,
   ShuimotangshiPoem,
   SongciPoem,
   TangshiPoem,
+  YouMengYing,
+  ZengGuangXianWen,
 } from './types';
 import {
   cleanup,
@@ -18,6 +24,8 @@ import {
   checkNeedUpdateGit,
   checkNeedUpdate,
   ensureTargetDir,
+  getPoemKey,
+  checkNeedUpdatePoem,
 } from './utils';
 
 export async function processPoetry() {
@@ -29,7 +37,6 @@ export async function processPoetry() {
     if (!checkNeedUpdate()) {
       console.log('本地数据已是最新，无需更新');
       // process.exit(0);
-      return;
     } else if (checkNeedUpdateGit()) {
       console.log('检测到新版本，开始更新数据...');
       // 清理之前的临时文件
@@ -87,47 +94,66 @@ export async function processPoetry() {
     });
 
     // 创建水墨唐诗的查找映射
-    const shuimotangshiMap = new Map<string, ShuimotangshiPoem>();
+    const tangShiMap = new Map<string, PoetryItem>();
     shuimotangshi.forEach((poem: ShuimotangshiPoem) => {
-      const key = `${poem.title}-${poem.author}`;
-      shuimotangshiMap.set(key, poem);
-    });
-
-    // 处理唐诗三百首，并合并水墨唐诗数据
-    tangshi.forEach((poem: TangshiPoem) => {
-      const key = `${poem.title}-${poem.author}`;
-      const shuimoPoem = shuimotangshiMap.get(key);
-
-      if (shuimoPoem) {
-        // 合并数据
-        result.push({
-          title: poem.title,
-          author: poem.author || shuimoPoem.author || '佚名',
-          paragraphs: poem.paragraphs,
-          prologue: shuimoPoem.prologue,
-          tags: ['水墨唐诗', ...poem.tags],
-        });
-        // 从映射中删除已处理的项
-        shuimotangshiMap.delete(key);
-      } else {
-        // 没有对应的水墨唐诗，直接添加原数据
-        result.push({
-          title: poem.title,
-          author: poem.author || '佚名',
-          paragraphs: poem.paragraphs,
-          tags: poem.tags,
-        });
-      }
-    });
-
-    // 处理剩余的未匹配的水墨唐诗
-    shuimotangshiMap.forEach((poem: ShuimotangshiPoem) => {
-      result.push({
+      const item = {
         title: poem.title,
         author: poem.author || '佚名',
         paragraphs: poem.paragraphs,
         tags: ['水墨唐诗'],
         prologue: poem.prologue,
+      };
+      result.push(item);
+      tangShiMap.set(getPoemKey(poem.title, poem.author), poem);
+    });
+
+    // 处理唐诗三百首，并合并水墨唐诗数据
+    tangshi.forEach((poem: TangshiPoem) => {
+      const key = getPoemKey(poem.title, poem.author);
+      const prevPoem = tangShiMap.get(key);
+      if (prevPoem) {
+        prevPoem.tags = prevPoem.tags || [];
+        prevPoem.tags.push(...poem.tags);
+      } else {
+        // 没有对应的水墨唐诗，直接添加原数据
+        const item = {
+          title: poem.title,
+          author: poem.author || '佚名',
+          paragraphs: poem.paragraphs,
+          tags: poem.tags,
+        };
+        tangShiMap.set(key, item);
+        result.push(item);
+      }
+    });
+
+    // 蒙学千家诗
+    const qianJiaShi = JSON.parse(
+      readFileSync(join(TEMP_DIR, '蒙学/qianjiashi.json'), 'utf-8')
+    ) as QianJiaShi;
+    qianJiaShi.content.forEach((groupInfo) => {
+      groupInfo.content.forEach((item) => {
+        const { chapter, author: authorDynasty, paragraphs } = item;
+        const dynasty = authorDynasty.split('）')[0].slice(1);
+        const author = authorDynasty.split('）')[1];
+        const key = getPoemKey(chapter, author);
+        const prevPoem = tangShiMap.get(key);
+        if (prevPoem) {
+          prevPoem.tags = prevPoem.tags || [];
+          if (!prevPoem.tags.find((item) => item.includes(dynasty))) {
+            // 唐宋元明 未使用繁体
+            prevPoem.tags.unshift(dynasty);
+          }
+        } else {
+          const item = {
+            title: chapter,
+            author: author || '佚名',
+            paragraphs,
+            tags: [dynasty],
+          };
+          result.push(item);
+          tangShiMap.set(key, item);
+        }
       });
     });
 
@@ -141,8 +167,112 @@ export async function processPoetry() {
       });
     });
 
+    //  增广贤文 千家詩 纳兰性德前20  四书五经 / 论语 幽梦影
+    const zengGuangXianWen = JSON.parse(
+      readFileSync(join(TEMP_DIR, '蒙学/zengguangxianwen.json'), 'utf-8')
+    ) as ZengGuangXianWen;
+    zengGuangXianWen.content.forEach((item) => {
+      for (let i = 0; i < item.paragraphs.length; i += 6) {
+        let paragraphs = item.paragraphs.slice(0, 6);
+        if (paragraphs[paragraphs.length - 1].endsWith('；')) {
+          paragraphs = item.paragraphs.slice(0, 5);
+          i--;
+        }
+        result.push({
+          title: `增广贤文 · ${item.chapter}`,
+          author: zengGuangXianWen.author || '佚名',
+          paragraphs,
+          tags: [],
+        });
+      }
+    });
+
+    const nianLaXingDe = JSON.parse(
+      readFileSync(join(TEMP_DIR, '纳兰性德/纳兰性德诗集.json'), 'utf-8')
+    ) as NaLanXingDe;
+    nianLaXingDe.slice(0, 30).forEach((item) => {
+      result.push({
+        title: item.title,
+        author: '纳兰性德',
+        paragraphs: item.para,
+        tags: [],
+      });
+    });
+
+    // 幽梦影
+
+    const lunyu = JSON.parse(
+      readFileSync(join(TEMP_DIR, '论语/lunyu.json'), 'utf-8')
+    ) as CommonArticle[];
+
+    lunyu.forEach((item) => {
+      result.push({
+        title: item.chapter,
+        author: '',
+        paragraphs: item.paragraphs,
+        tags: ['论语'],
+      });
+    });
+
+    const daxue = JSON.parse(
+      readFileSync(join(TEMP_DIR, '四书五经/daxue.json'), 'utf-8')
+    ) as CommonArticle;
+
+    result.push({
+      title: daxue.chapter,
+      author: '曾子',
+      paragraphs: daxue.paragraphs,
+      tags: ['大学'],
+    });
+
+    const mengzi = JSON.parse(
+      readFileSync(join(TEMP_DIR, '四书五经/mengzi.json'), 'utf-8')
+    ) as CommonArticle[];
+
+    mengzi.forEach((item) => {
+      result.push({
+        title: item.chapter,
+        author: '',
+        paragraphs: item.paragraphs,
+        tags: ['孟子'],
+      });
+    });
+
+    const zhongyong = JSON.parse(
+      readFileSync(join(TEMP_DIR, '四书五经/zhongyong.json'), 'utf-8')
+    ) as CommonArticle;
+    result.push({
+      title: zhongyong.chapter,
+      author: '',
+      paragraphs: zhongyong.paragraphs,
+      tags: ['中庸'],
+    });
+
+    const youMengYing = JSON.parse(
+      readFileSync(join(TEMP_DIR, '幽梦影/youmengying.json'), 'utf-8')
+    ) as YouMengYing[];
+
+    youMengYing.forEach((item) => {
+      result.push({
+        title: '',
+        author: '张潮',
+        paragraphs: [item.content, ''].concat(item.comment),
+        tags: ['幽梦影'],
+      });
+    });
+
+    // 保存处理后的数据
+    console.log('技术poemhash...');
+    const nameStr = result.map((item) => item.title).join('');
+    const nameHash = crypto.createHash('md5').update(nameStr).digest('hex');
+
+    if (!checkNeedUpdatePoem(nameHash)) {
+      console.log('本地诗词数据已是最新，无需更新');
+      return;
+    }
     // 保存处理后的数据
     console.log('正在保存处理后的数据...');
+    appendFileSync(LAST_UPDATE_FILE, '\n' + nameHash, 'utf8');
     writeFileSync(POETRY_FILE, JSON.stringify(result, null, 2));
 
     console.log('数据处理完成！');
