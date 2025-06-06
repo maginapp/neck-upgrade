@@ -68,7 +68,7 @@ const fetchToutiaoNews = async (url: string) => {
 
       return {
         title,
-        link,
+        link: link.includes('?') ? `${link}&dvpf=pc` : `${link}?dvpf=pc`,
         source: '',
         time: timeStr,
         tag: tag,
