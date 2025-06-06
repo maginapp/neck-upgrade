@@ -34,6 +34,11 @@ export const FAMOUS_CON_LIMIT = 2;
 export const FAMOUS_HI_MAX_REQ_COUNT = 2;
 export const FAMOUS_HI_CON_LIMIT = 1;
 
+// 诗词相关
+
+export const POEM_SELECTED_POEMS_COUNT = 10; // 每天选择诗词数量
+export const POEM_REVIEW_COUNT = 30; // 复习天数
+
 // 缓存相关
 export const CACHE_KEYS = {
   WIKI_DATA: 'wiki_data_cache_new_tab',
