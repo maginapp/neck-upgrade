@@ -50,7 +50,6 @@ export function getRemoteLastCommit(): string {
 
 // 检查是否需要更新git
 export function checkNeedUpdateGit(): boolean {
-  return false;
   if (!existsSync(TEMP_DIR) || !existsSync(LAST_UPDATE_FILE)) {
     return true;
   }

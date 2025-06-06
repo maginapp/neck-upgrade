@@ -17,7 +17,7 @@ import {
  * 下载诗词数据
  * @param targetDir 目标目录
  */
-export async function downloadPoetryData() {
+export function downloadPoetryData() {
   try {
     // 确保目标目录存在
     ensureTargetDir(TARGET_DIR);
@@ -29,7 +29,7 @@ export async function downloadPoetryData() {
       return false;
     } else if (checkNeedUpdateGit()) {
       console.log('检测到新版本，开始更新数据...');
-      // 清理之前的临时文件
+      // 清理之前的临时文件;
       cleanup();
       // 克隆仓库
       console.log('正在下载诗词数据...');
@@ -51,7 +51,7 @@ export async function downloadPoetryData() {
  * 保存诗词数据
  * @param data 诗词数据
  */
-export async function savePoetryData(data: PoetryItem[]) {
+export function savePoetryData(data: PoetryItem[]) {
   try {
     console.log('生成诗词hash...');
     const nameStr = data.map((item) => item.title).join('');
@@ -64,7 +64,8 @@ export async function savePoetryData(data: PoetryItem[]) {
 
     // 保存处理后的数据
     console.log('正在保存处理后的数据...', data.length, nameHash, nameStr.length);
-    const first = readFileSync(LAST_UPDATE_FILE, 'utf8').split('\n');
+    const first = readFileSync(LAST_UPDATE_FILE, 'utf8').split('\n')[0].trim();
+
     writeFileSync(LAST_UPDATE_FILE, first + '\n' + nameHash, 'utf8');
     writeFileSync(POETRY_FILE, JSON.stringify(data, null, 2));
 
