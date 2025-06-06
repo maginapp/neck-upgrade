@@ -1,3 +1,7 @@
-import { processor } from './processor';
+import { run } from './bin';
 
-processor();
+const args = process.argv.slice(2);
+
+console.log('args is', args);
+
+run(args);

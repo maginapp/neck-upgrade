@@ -1,5 +1,6 @@
 import { execSync } from 'child_process';
-import { readFileSync, existsSync, rmSync, readdirSync } from 'fs';
+import crypto from 'crypto';
+import { readFileSync, existsSync, rmSync, readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 
 import * as opencc from 'opencc';
@@ -14,7 +15,7 @@ import {
   MAX_SPECIAL_ADD_COUNT,
   MAX_SPECIAL_THROTTLE_NUMERATOR,
 } from './config';
-import { SongciPoem, TangshiPoem } from './types';
+import { SongciPoem, TangshiPoem, PoetryItem } from './types';
 
 import type { OpenCC as OpenCCTypings } from 'opencc';
 
@@ -31,20 +32,12 @@ export function cleanup() {
   }
 }
 
-// 检查是否需要更新
-export function checkNeedUpdate(): boolean {
-  if (!existsSync(POETRY_FILE) || checkNeedUpdateGit()) {
-    return true;
-  }
-
-  return false;
-}
-
 // 获取远程仓库最新提交时间
 export function getRemoteLastCommit(): string {
   const output = execSync(
     'git ls-remote --sort=-v:refname https://github.com/chinese-poetry/chinese-poetry.git HEAD'
   ).toString();
+  console.log(output);
   return output.split('\t')[0];
 }
 
@@ -57,7 +50,9 @@ export function checkNeedUpdateGit(): boolean {
   try {
     let lastCommit = readFileSync(LAST_UPDATE_FILE, 'utf-8').trim();
     lastCommit = lastCommit.split('\n')[0];
+    console.log('lastCommit is', lastCommit);
     const remoteCommit = getRemoteLastCommit();
+    console.log('remoteCommit is', remoteCommit);
     return lastCommit !== remoteCommit;
   } catch (error) {
     console.log('检查更新时出错，将重新下载数据', error);
@@ -72,18 +67,22 @@ export function ensureTargetDir(targetDir: string) {
   }
 }
 
+// 繁体转简体
 async function transFan2Jian(str: string) {
   const converter = new OpenCC('t2s.json');
   const result: string = await converter.convertPromise(str);
   return result;
 }
 
+// 获取诗词的key（繁体转简体）
 export function getPoemKey(title: string, author: string) {
   return transFan2Jian(title + '#' + author);
 }
 
-export function checkNeedUpdatePoem(hash: string): boolean {
-  if (!existsSync(LAST_UPDATE_FILE)) {
+// 检查是否需要更新
+function checkNeedUpdatePoem(hash: string): boolean {
+  // 无诗词结果文件，无更新文件，需要更新
+  if (!existsSync(POETRY_FILE) || !existsSync(LAST_UPDATE_FILE)) {
     return true;
   }
 
@@ -96,6 +95,7 @@ export function checkNeedUpdatePoem(hash: string): boolean {
   }
 }
 
+// 合并 JSON 文件
 function getPoemList<T>(basePath: string, prefix: string) {
   console.log(`开始处理目录：${basePath}`);
   // 获取符合条件的文件列表
@@ -126,6 +126,7 @@ function getPoemList<T>(basePath: string, prefix: string) {
   return mergedData || [];
 }
 
+// 根据作者过滤诗词
 function filterPoemWithAuthor<T extends { author: string }>(
   basePath: string,
   prefix: string,
@@ -168,4 +169,32 @@ export function fetchTangshiWithAuthor() {
     TANG_SHI_CONFIG.matches,
     SPECIAL_AUTHORS
   );
+}
+
+/**
+ * 保存诗词数据
+ * @param data 诗词数据
+ */
+export function savePoetryResult(data: PoetryItem[]) {
+  try {
+    console.log('生成诗词hash...');
+    const nameStr = data.map((item) => item.title).join('');
+    const nameHash = crypto.createHash('md5').update(nameStr).digest('hex');
+
+    if (!checkNeedUpdatePoem(nameHash)) {
+      console.log('本地诗词数据已是最新，无需更新', data.length);
+      return;
+    }
+
+    // 保存处理后的数据
+    console.log('正在保存处理后的数据...', data.length, nameHash, nameStr.length);
+    const first = readFileSync(LAST_UPDATE_FILE, 'utf8').split('\n')[0].trim();
+
+    writeFileSync(LAST_UPDATE_FILE, first + '\n' + nameHash, 'utf8');
+    writeFileSync(POETRY_FILE, JSON.stringify(data, null, 2));
+
+    console.log('数据处理完成！');
+  } catch (error) {
+    console.error('保存数据时出错：', error);
+  }
 }
