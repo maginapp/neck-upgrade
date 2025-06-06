@@ -51,3 +51,6 @@ export const SONG_CI_CONFIG = {
   basePath: '宋词',
   matches: 'ci.song',
 };
+
+export const MAX_SPECIAL_ADD_COUNT = 30;
+export const MAX_SPECIAL_THROTTLE_NUMERATOR = 10;

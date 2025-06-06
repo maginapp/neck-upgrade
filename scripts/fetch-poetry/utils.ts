@@ -2,6 +2,8 @@ import { execSync } from 'child_process';
 import { readFileSync, existsSync, rmSync, readdirSync } from 'fs';
 import path from 'path';
 
+import * as opencc from 'opencc';
+
 import {
   SONG_CI_CONFIG,
   SPECIAL_AUTHORS,
@@ -9,7 +11,15 @@ import {
   LAST_UPDATE_FILE,
   POETRY_FILE,
   TANG_SHI_CONFIG,
+  MAX_SPECIAL_ADD_COUNT,
+  MAX_SPECIAL_THROTTLE_NUMERATOR,
 } from './config';
+import { SongciPoem, TangshiPoem } from './types';
+
+import type { OpenCC as OpenCCTypings } from 'opencc';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const OpenCC = (opencc as unknown as any).default.OpenCC as new (config: string) => OpenCCTypings;
 
 // 清理函数
 export function cleanup() {
@@ -40,7 +50,8 @@ export function getRemoteLastCommit(): string {
 
 // 检查是否需要更新git
 export function checkNeedUpdateGit(): boolean {
-  if (!existsSync(LAST_UPDATE_FILE)) {
+  return false;
+  if (!existsSync(TEMP_DIR) || !existsSync(LAST_UPDATE_FILE)) {
     return true;
   }
 
@@ -62,8 +73,14 @@ export function ensureTargetDir(targetDir: string) {
   }
 }
 
+async function transFan2Jian(str: string) {
+  const converter = new OpenCC('t2s.json');
+  const result: string = await converter.convertPromise(str);
+  return result;
+}
+
 export function getPoemKey(title: string, author: string) {
-  return title + '#' + author;
+  return transFan2Jian(title + '#' + author);
 }
 
 export function checkNeedUpdatePoem(hash: string): boolean {
@@ -82,14 +99,14 @@ export function checkNeedUpdatePoem(hash: string): boolean {
 
 function getPoemList<T>(basePath: string, prefix: string) {
   console.log(`开始处理目录：${basePath}`);
-  // ✅ 获取符合条件的文件列表
+  // 获取符合条件的文件列表
   const files = readdirSync(basePath).filter(
     (file) => file.endsWith('.json') && file.startsWith(prefix)
   );
 
-  console.log(`共找到 ${files.length} 个文件：`, files);
+  console.log(`共找到 ${files.length} 个文件：`);
 
-  // ✅ 合并 JSON 数据
+  // 合并 JSON 数据
   const mergedData: T[] = [];
 
   for (const file of files) {
@@ -110,23 +127,46 @@ function getPoemList<T>(basePath: string, prefix: string) {
   return mergedData || [];
 }
 
-export function filterPoemWithAuthor<T extends { author: string }>(
+function filterPoemWithAuthor<T extends { author: string }>(
   basePath: string,
   prefix: string,
   authors: string[]
 ) {
+  const authorMap = new Map();
+  authors.forEach((author) => {
+    authorMap.set(author, { count: 0 });
+  });
   const list = getPoemList<T>(path.join(TEMP_DIR, basePath), prefix);
   return list.filter((item) => {
-    return authors.includes(item.author);
+    if (!authors.includes(item.author)) return false;
+    const data = authorMap.get(item.author)!;
+    data.count++;
+    if (data.count <= MAX_SPECIAL_ADD_COUNT) {
+      return true;
+    }
+    if (
+      !(
+        data.count %
+        (Math.ceil(data.count / MAX_SPECIAL_ADD_COUNT) * MAX_SPECIAL_THROTTLE_NUMERATOR)
+      )
+    ) {
+      return true;
+    }
   });
 }
 
 export function fetchSongCiWithAuthor() {
-  return filterPoemWithAuthor(SONG_CI_CONFIG.basePath, SONG_CI_CONFIG.matches, SPECIAL_AUTHORS);
+  return filterPoemWithAuthor<SongciPoem>(
+    SONG_CI_CONFIG.basePath,
+    SONG_CI_CONFIG.matches,
+    SPECIAL_AUTHORS
+  );
 }
 
 export function fetchTangshiWithAuthor() {
-  return filterPoemWithAuthor(TANG_SHI_CONFIG.basePath, TANG_SHI_CONFIG.matches, SPECIAL_AUTHORS);
+  return filterPoemWithAuthor<TangshiPoem>(
+    TANG_SHI_CONFIG.basePath,
+    TANG_SHI_CONFIG.matches,
+    SPECIAL_AUTHORS
+  );
 }
-
-// getList(path.join(TEMP_DIR, '全唐诗'), 'poet.');
