@@ -1,5 +1,3 @@
-// 从https://github.com/chinese-poetry/chinese-poetry.git读取诗词数据
-import { processPoetry } from './processor';
+import { processor } from './processor';
 
-console.log('开始 processPoetry...');
-processPoetry();
+processor();
