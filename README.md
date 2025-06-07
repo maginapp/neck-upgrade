@@ -39,15 +39,15 @@
 
 ✔️普通模式：轻微角度倾斜，舒适自然
 ✔️训练模式：小角度倾斜，5 秒间隔自动切换角度（默认）
-✔️强化模式：大角度倾斜，5 秒间隔自动切换角度
-✔️高级模式：支持用户自定义最大倾斜角度及切换时间
+✔️强化模式：大角度倾斜，中心内容旋转180°，5 秒间隔自动切换角度
+✔️高级模式：支持用户自定义最大倾斜角度及切换时间，中心内容旋转180°
 
 ### 👉 内容分类
 
-✔️诗词：每日更新 4 首新诗，存储近 30 天诗词记录，随机展示 2 首
+✔️诗词：每日更新 10 篇诗词古文，存储近 30 天诗词记录，随机展示 2 首
 ✔️历史：展示“历史上的今天”重要事件、当天假日与习俗（默认）
 ✔️英语：每日推送 15 个新单词，支持近 30 天词库，随机展示 5 个
-✔️热榜：整合多个平台热搜新闻，每 5 分钟实时更新
+✔️热榜：整合多个平台热搜新闻，支持每 5 分钟更新
 
 ### 👉 百科数据源（可设置优先级）
 
@@ -89,7 +89,7 @@ pnpm run release:extension
 4. 古诗词数据来源于githun开源古诗词项目[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)
 5. 名人名言数据源是 [ZenQuotes](https://zenquotes.io/) 和 [一言](https://v1.hitokoto.cn/?c=i)
 6. 英语单词使用[google-10000-english](https://github.com/first20hours/google-10000-english)的no-swears高频单词
-7. 热榜消息来自于[Google New](https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans)、[头条热搜](https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=)、[微博热搜](https://s.weibo.com/top/summary?cate=realtimehot)和[小红书推荐](https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend)、[知乎热榜](https://www.zhihu.com/billboard)、[bilibili](https://www.bilibili.com/v/popular/all)、[36氪](https://36kr.com/newsflashes/catalog/0)、百度[热搜](https://top.baidu.com/board?tab=realtime)和[贴吧](https://tieba.baidu.com/hottopic/browse/topicList?res_type=1)等
+7. 热榜消息来自于[Google New](https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans)、[头条热搜](https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=)、[微博热搜](https://s.weibo.com/top/summary?cate=realtimehot)、[小红书推荐](https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend)、[知乎热榜](https://www.zhihu.com/billboard)、[bilibili](https://www.bilibili.com/v/popular/all)、[36氪](https://36kr.com/newsflashes/catalog/0)、[百度热搜](https://top.baidu.com/board?tab=realtime)、[百度贴吧](https://tieba.baidu.com/hottopic/browse/topicList?res_type=1)和[v2ex](http://v2ex.com/)等
 8. 项目功能参考[wai](https://github.com/dukeluo/wai)
 9. 使用开源日历工具库[Tyme](https://6tail.cn/tyme.html)，获取农历、干支、生肖、节气、法定假日，宜忌等
 
