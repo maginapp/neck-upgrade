@@ -164,13 +164,15 @@
 
   // overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
 .tagImg {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-left: 4px;
 }
 
 .avatar {
@@ -192,9 +194,9 @@
 
 .newsImg {
   width: 75px;
-  height: 40px;
   height: auto;
-  object-fit: contain;
+  max-height: 48px;
+  object-fit: cover;
   vertical-align: middle;
 }
 

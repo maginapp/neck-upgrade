@@ -49,7 +49,12 @@ export const createNewsManager = (
   );
   // 重写过期判断
   manager.cache.isExpired = (timestamp: string, data?: NewsItem[] | NewsErrorInfo) => {
+    // 部分新闻源未登录提示
     if (data && 'loginUrl' in data && data.loginUrl) {
+      return true;
+    }
+    // 未数据判断失效
+    if (Array.isArray(data) && data.length === 0) {
       return true;
     }
     const cacheDate = new Date(timestamp);

@@ -1,3 +1,5 @@
+import { NeckMode as NeckModeType } from '@/types/app';
+
 // 维基百科相关
 export const WIKI_BASE_URL = `https://zh.wikipedia.org/wiki`;
 // wiki match
@@ -35,7 +37,6 @@ export const FAMOUS_HI_MAX_REQ_COUNT = 2;
 export const FAMOUS_HI_CON_LIMIT = 1;
 
 // 诗词相关
-
 export const POEM_SELECTED_POEMS_COUNT = 10; // 每天选择诗词数量
 export const POEM_REVIEW_COUNT = 30; // 复习天数
 
@@ -129,8 +130,10 @@ export const NEWS_URL = {
   V2EX: 'https://www.v2ex.com',
 };
 
+// 新闻超时时间ms
 export const NEWS_CACHE_EXPIRY = 1000 * 60 * 5; // 5分钟 // 24小时
 
+// 默认新闻单页数量
 export const DEFAULT_PAGE_INFO = {
   page: 0,
   pageSize: 10,
@@ -138,3 +141,27 @@ export const DEFAULT_PAGE_INFO = {
 
 // 与typeList css宽度一致
 export const NEWS_TAB_TYTPE_LIST_POP_WIDTH = 200;
+
+// 颈椎训练模式配置
+export const MOD_CONFIG = {
+  [NeckModeType.Normal]: {
+    min: 15,
+    max: 60,
+    duration: 0,
+  },
+  [NeckModeType.Training]: {
+    min: 15,
+    max: 60,
+    duration: 5,
+  },
+  [NeckModeType.Intense]: {
+    min: 80,
+    max: 180,
+    duration: 5,
+  },
+  [NeckModeType.Custom]: {
+    min: 0,
+    max: 360,
+    duration: 5,
+  },
+};

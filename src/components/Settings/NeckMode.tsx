@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
+import { MOD_CONFIG } from '@/constants';
 import { NeckMode as NeckModeType, NeckModeConfig } from '@/types/app';
 import { formatIntNumber, getRandomNumber } from '@/utils/base';
 import { getNeckModeLabel } from '@/utils/labels';
@@ -11,29 +12,6 @@ interface NeckModeProps {
   neckConfig: NeckModeConfig;
   onModeChange: (mode: NeckModeConfig) => void;
 }
-
-const MOD_CONFIG = {
-  [NeckModeType.Normal]: {
-    min: 15,
-    max: 60,
-    duration: 0,
-  },
-  [NeckModeType.Training]: {
-    min: 15,
-    max: 60,
-    duration: 5,
-  },
-  [NeckModeType.Intense]: {
-    min: 80,
-    max: 180,
-    duration: 5,
-  },
-  [NeckModeType.Custom]: {
-    min: 0,
-    max: 360,
-    duration: 5,
-  },
-};
 
 interface CustomProps {
   nextCurDuration?: number;

@@ -94,9 +94,11 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
               <span className={styles.order}>
                 {index + 1 + newsData.pageInfo.page * newsData.pageInfo.pageSize}
               </span>
-              <span className={styles.newsTitle}>{item.title}</span>
-              {/* toutiao / weibo */}
-              {renderTag(item.tag)}
+              <span className={styles.newsTitle}>
+                {item.title}
+                {/* toutiao / weibo */}
+                {renderTag(item.tag)}
+              </span>
             </div>
           </a>
         </section>
