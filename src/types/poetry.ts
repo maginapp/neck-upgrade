@@ -1,7 +1,8 @@
-// 诗词类型
 export interface Poetry {
-  title: string;
+  title: string; // 标题 宋词使用rhythmic
   author: string;
   paragraphs: string[];
+  prologue?: string;
   tags?: string[];
+  align?: 'center' | 'left';
 }

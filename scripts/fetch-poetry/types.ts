@@ -3,7 +3,8 @@ export interface PoetryItem {
   author: string;
   paragraphs: string[];
   prologue?: string;
-  tags: string[];
+  tags?: string[];
+  align?: 'center' | 'left';
 }
 
 // 曹操诗集

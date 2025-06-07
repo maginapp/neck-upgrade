@@ -86,37 +86,103 @@ function processLunyu(lunyu: CommonArticle[]): PoetryItem[] {
     author: '',
     paragraphs: item.paragraphs,
     tags: ['论语'],
+    align: 'left',
   }));
 }
 
 // 处理大学
-function processDaxue(daxue: CommonArticle): PoetryItem {
-  return {
+function processDaxue(daxue: CommonArticle): PoetryItem[] {
+  return daxue.paragraphs.map((paragraph) => ({
     title: daxue.chapter,
     author: '曾子',
-    paragraphs: daxue.paragraphs,
+    paragraphs: paragraph.split(/(?<=[；！。](」|』|))/g).filter((p) => p),
     tags: ['大学'],
-  };
+    align: 'left',
+  }));
 }
 
 // 处理孟子
 function processMengzi(mengzi: CommonArticle[]): PoetryItem[] {
-  return mengzi.map((item) => ({
-    title: item.chapter,
-    author: '',
-    paragraphs: item.paragraphs,
-    tags: ['孟子'],
-  }));
+  return mengzi
+    .map((item) => {
+      const base: PoetryItem = {
+        title: item.chapter,
+        author: '',
+        paragraphs: [],
+        tags: ['孟子'],
+        align: 'left',
+      };
+      const result: PoetryItem[] = [];
+      let prev = 0;
+      for (let i = 0; i < item.paragraphs.length; i++) {
+        const paragraph = item.paragraphs[i];
+        if (
+          [
+            '見梁惠王',
+            '梁惠王曰',
+            '梁襄王',
+            '齊宣王問',
+            '莊暴見孟子',
+            '齊宣王見',
+            '孟子謂',
+            '孟子見',
+            '見孟子',
+            '問曰',
+            '孟子曰：「以力假仁者霸',
+            '孟子將',
+            '不得已而之景丑氏宿',
+            '孟子之',
+            '孟子為',
+            '孟子自',
+            '孟子去齊。',
+            '滕文公問為國',
+            '使畢戰問井地',
+            '今也小國師大國而',
+            '淳于髡曰',
+            '魯欲使',
+            '齊宣王欲短喪。',
+          ].find((matches) => {
+            return paragraph.includes(matches);
+          })
+        ) {
+          if (
+            i + 1 < item.paragraphs.length &&
+            ['他日又求見孟子', '公孫丑問曰：「何謂也？」'].find((matches) => {
+              return item.paragraphs[i + 1].includes(matches);
+            })
+          ) {
+            continue;
+          }
+          const newItem = Object.assign({}, base, {
+            paragraphs: item.paragraphs.slice(prev, i),
+          });
+          newItem.paragraphs.length && result.push(newItem);
+          prev = i;
+        } else if (i === item.paragraphs.length - 1) {
+          const newItem = Object.assign({}, base, {
+            paragraphs: item.paragraphs.slice(prev, i + 1),
+          });
+          newItem.paragraphs.length && result.push(newItem);
+        }
+      }
+      return result;
+    })
+    .flat();
 }
 
 // 处理中庸
-function processZhongyong(zhongyong: CommonArticle): PoetryItem {
-  return {
-    title: zhongyong.chapter,
-    author: '',
-    paragraphs: zhongyong.paragraphs,
-    tags: ['中庸'],
-  };
+function processZhongyong(zhongyong: CommonArticle): PoetryItem[] {
+  const result: PoetryItem[] = [];
+  for (let i = 0; i < zhongyong.paragraphs.length; i += 5) {
+    result.push({
+      title: zhongyong.chapter,
+      author: '',
+      paragraphs: zhongyong.paragraphs.slice(i, i + 5),
+      tags: ['中庸'],
+      align: 'left',
+    });
+  }
+  return result;
 }
 
 // 处理幽梦影
@@ -126,6 +192,7 @@ function processYouMengYing(youMengYing: YouMengYing[]): PoetryItem[] {
     author: '张潮',
     paragraphs: [item.content, ''].concat(item.comment),
     tags: ['幽梦影'],
+    align: 'left',
   }));
 }
 
@@ -330,9 +397,9 @@ export async function processPoetry(): Promise<PoetryItem[]> {
       ...processZengGuangXianWen(zengGuangXianWen),
       ...processNaLanXingDe(nianLaXingDe),
       ...processLunyu(lunyu),
-      processDaxue(daxue),
+      ...processDaxue(daxue),
       ...processMengzi(mengzi),
-      processZhongyong(zhongyong),
+      ...processZhongyong(zhongyong),
       ...processYouMengYing(youMengYing),
       ...(await processTangPoems(tangshi, shuimotangshi, qianJiaShi)),
       ...(await processSongPoems(songci)),

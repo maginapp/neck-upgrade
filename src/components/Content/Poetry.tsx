@@ -43,7 +43,9 @@ export const PoetryComponent: React.FC = () => {
                 ))}
               </div>
             )}
-            <div className={styles.poemContent}>
+            <div
+              className={`${styles.poemContent} ${poem.align === 'left' ? styles.alignLeft : ''}`}
+            >
               {poem.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
