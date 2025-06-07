@@ -1,5 +1,14 @@
 # Neck Upgrade ChangeLog
 
+## 1.2.3
+
+### Patch Changes
+
+- 更新诗词模块
+
+  1. 添加部分场景左对齐
+  2. 增加部分长文本分段
+
 ## 1.2.2
 
 ### Patch Changes
