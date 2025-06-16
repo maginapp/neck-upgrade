@@ -10,7 +10,7 @@
   background-color: var(--background-color);
   color: var(--text-color);
 
-  @each $property, $value in tools.set-font-sizes(14px, 20px) {
+  @each $property, $value in tools.set-font-sizes(16px, 20px) {
     #{$property}: $value;
   }
 

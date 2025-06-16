@@ -1,10 +1,11 @@
 @use '../../../styles/tools';
 
 // 使用断点函数设置响应式字体
-@include tools.responsive-fonts(750px, 16px, 20px);
-@include tools.responsive-fonts(600px, 20px, 20px);
-@include tools.responsive-fonts(480px, 26px, 24px);
-@include tools.responsive-fonts(400px, 30px, 28px);
+$base-size: 18px;
+@include tools.responsive-fonts(750px, $base-size, $base-size + 4px);
+@include tools.responsive-fonts(600px, $base-size + 4px, $base-size + 4px);
+@include tools.responsive-fonts(480px, $base-size * 1.5 + 2px, $base-size * 1.5);
+@include tools.responsive-fonts(400px, $base-size * 2 - 2px, $base-size * 2 - 4px);
 
 .app {
   width: 100vw;
