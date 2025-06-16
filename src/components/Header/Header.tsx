@@ -92,7 +92,6 @@ export const Header: React.FC = () => {
               <div className={styles.lunarInfoContentTitle}>{currentDate}</div>
               <div className={styles.lunarInfoContentSubTitle}>
                 <span>{lunarInfo.lunarDanZhiDate}</span>
-                <span>{lunarInfo.rainDay}</span>
               </div>
               {lunarInfo.festivals.length ? (
                 <div className={styles.lunarInfoItem}>
@@ -127,6 +126,12 @@ export const Header: React.FC = () => {
                 <span className={styles.lunarInfoItemTitle}>彭祖百忌</span>
                 <span>{lunarInfo.pengZu.join('， ')}</span>
               </div>
+              {lunarInfo.rainDay ? (
+                <div className={styles.lunarInfoItem}>
+                  <span className={styles.lunarInfoItemTitle}>梅雨</span>
+                  <span>{lunarInfo.rainDay}</span>
+                </div>
+              ) : null}
             </div>
           )}
         </div>
