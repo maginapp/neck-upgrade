@@ -55,6 +55,8 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
     "@types/chrome": "^0.0.260",
     "@types/lodash-es": "4.17.12",
     "@types/node": "^22.15.19",
