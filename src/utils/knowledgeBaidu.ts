@@ -9,7 +9,7 @@ import { createKnowledgeManager } from './knowledgeManager';
 // 处理百度百科链接，转换为完整URL, 引用链接移除
 const processBaiduLinks = (html: string): string => {
   return html
-    .replace(/href="\/item\/([^"]+)"/g, `href="${BAIDU_BASE_URL}/item/$1"`)
+    .replace(/href="\/item\/([^"]+)"/g, `href="${BAIDU_BASE_URL}/item/$1" target="_blank"`)
     .replace(/href="\/pic\/([^"]+)"/g, `href="${BAIDU_BASE_URL}/pic/$1"`)
     .replace(/<sup[^>]*>.*?<\/sup>/g, '');
 };

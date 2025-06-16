@@ -12,14 +12,23 @@ const wikiCache = new CacheManager<KnowledgeData>(CACHE_KEYS.WIKI_DATA);
 
 // 处理维基百科链接，将/wiki开头的路径转换为完整URL/ //upload图片添加 https, 引用链接移除
 const processWikiLinks = (html: string): string => {
-  return html
-    .replace(/href="\/wiki\/([^"]+)"/g, 'href="https://zh.wikipedia.org/wiki/$1"')
-    .replace(/<a[^>]*href="#cite_note-[^"]*"[^>]*>.*?<\/a>/g, '')
-    .replace(/src="\/\/upload\.wikimedia\.org\/([^"]+)"/g, 'src="https://upload.wikimedia.org/$1"')
-    .replace(
-      /srcset="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
-      'src="https://upload.wikimedia.org/$1"'
-    );
+  return (
+    html
+      // 替换 /wiki 链接为完整 Wikipedia 链接
+      .replace(/href="\/wiki\/([^"]+)"/g, 'href="https://zh.wikipedia.org/wiki/$1" target="_blank"')
+      // 删除参考引用链接，如 #cite_note-*
+      .replace(/<a[^>]*href="#cite_note-[^"]*"[^>]*>.*?<\/a>/g, '')
+      // 修复图片链接的 src 协议
+      .replace(
+        /src="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
+        'src="https://upload.wikimedia.org/$1"'
+      )
+      // 修复图片链接的 srcset 协议
+      .replace(
+        /srcset="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
+        'src="https://upload.wikimedia.org/$1"'
+      )
+  );
 };
 
 // 解析HTML内容，提取大事记和节假日信息
