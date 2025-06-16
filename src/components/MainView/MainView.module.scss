@@ -34,10 +34,15 @@
     // 计算所得 width: 60vh / (5 + 1);
     width: 10vh;
     padding: 10px 0 10px 10px;
-    overflow: hidden;
     writing-mode: vertical-rl;
     text-orientation: sideways;
     justify-self: center;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
   }
 
   .content {

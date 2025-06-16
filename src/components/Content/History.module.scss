@@ -1,5 +1,5 @@
 .historicalSection {
-  color: var(--text-secondary);
+  color: var(--text-color);
   margin-top: 16px;
 
   li,
@@ -15,6 +15,7 @@
   }
 
   a {
+    font-weight: 600;
     color: var(--text-color);
     text-decoration: none;
   }
