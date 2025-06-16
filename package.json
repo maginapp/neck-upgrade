@@ -1,6 +1,6 @@
 {
   "name": "neck-upgrade",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Chrome extension for neck health",
   "type": "module",
   "scripts": {
