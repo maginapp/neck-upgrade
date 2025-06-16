@@ -21,7 +21,8 @@
     "version": "changeset version",
     "release:extension": "tsx scripts/publish-extension.ts",
     "trans-dark-img": "tsx scripts/invert-dark-mode.ts",
-    "resize-public-img": "tsx scripts/resize-public-img.ts"
+    "resize-public-img": "tsx scripts/resize-public-img.ts",
+    "commit": "cz"
   },
   "keywords": [
     "chrome-extension",
@@ -65,7 +66,9 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.0",
+    "commitizen": "4.3.1",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "4.4.1",
