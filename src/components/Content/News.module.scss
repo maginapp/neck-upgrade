@@ -19,7 +19,6 @@
   padding: 2px;
   border: none;
   background: none;
-  transition: all 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
 
@@ -89,7 +88,6 @@
 
     &:hover {
       background-color: var(--hover-bg);
-      transform: scale(1.1);
     }
   }
 }
@@ -109,14 +107,12 @@
   gap: 4px;
   color: var(--text-color);
   text-decoration: none;
-  transition: all 0.2s ease;
   align-items: center;
   flex-wrap: wrap;
 
   &:hover {
     color: var(--text-color);
     text-decoration: none;
-    transform: translateY(-2px);
   }
 
   &:visited {

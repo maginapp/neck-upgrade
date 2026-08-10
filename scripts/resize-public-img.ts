@@ -114,8 +114,8 @@ async function resizeImage(inputPath: string, targetWidth: number, targetHeight:
 
     // 获取原图主要颜色作为背景色 透明 -> 4007971839
     const bgColor = (await getDominantColor(image)) || 4007971839;
-    newImage.scan(0, 0, targetWidth, targetHeight, function (x, y) {
-      this.setPixelColor(bgColor, x, y);
+    newImage.scan(0, 0, targetWidth, targetHeight, (x, y) => {
+      newImage.setPixelColor(bgColor, x, y);
     });
 
     // 缩放原图

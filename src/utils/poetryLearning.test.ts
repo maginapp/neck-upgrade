@@ -1,39 +1,70 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
-import { getNextPoem } from './poetryLearning';
+import { PoetrySource, PoetrySourceCategory } from '@/constants/poetry';
+import { Poetry } from '@/types';
 
-// Mock poetryData
-vi.mock('@/data/poetry.json', () => ({
-  default: [
-    {
-      title: '静夜思',
-      author: '李白',
-      paragraphs: ['床前明月光', '疑是地上霜'],
-    },
-    {
-      title: '登鹳雀楼',
-      author: '王之涣',
-      paragraphs: ['白日依山尽', '黄河入海流'],
-    },
-    {
-      title: '春晓',
-      author: '孟浩然',
-      paragraphs: ['春眠不觉晓', '处处闻啼鸟'],
-    },
-  ],
-}));
+import { filterPoetryData, getNextPoem, getPoetryScopeKey } from './poetryLearning';
+
+const poetryData: Poetry[] = [
+  {
+    title: '静夜思',
+    author: '李白',
+    paragraphs: ['床前明月光', '疑是地上霜'],
+    category: PoetrySourceCategory.Poem,
+    sources: [PoetrySource.Tang300, PoetrySource.TangFamousSelected],
+  },
+  {
+    title: '登鹳雀楼',
+    author: '王之涣',
+    paragraphs: ['白日依山尽', '黄河入海流'],
+    category: PoetrySourceCategory.Poem,
+    sources: [PoetrySource.Tang300],
+  },
+  {
+    title: '千字文 · 天地宇宙',
+    author: '周兴嗣',
+    paragraphs: ['天地玄黄', '宇宙洪荒'],
+    category: PoetrySourceCategory.Primer,
+    sources: [PoetrySource.Qianziwen],
+  },
+];
 
 // Mock chrome.storage.local
 const mockStorage = {
   get: vi.fn(),
   set: vi.fn(),
 };
+const defaultCacheKey = 'poetry_learning_record:all:all';
 
 global.chrome = {
+  runtime: {
+    getURL: vi.fn((path: string) => path),
+  },
   storage: {
-    // @ts-expect-error QUOTA_BYTES, getBytesInUse, clear, remove, and 2 more.
     local: mockStorage,
   },
+} as unknown as typeof chrome;
+
+global.fetch = vi.fn().mockResolvedValue({
+  ok: true,
+  json: async () => poetryData,
+}) as unknown as typeof fetch;
+
+const getLastSavedRecords = () => {
+  const payload = mockStorage.set.mock.calls.at(-1)?.[0];
+  return payload[Object.keys(payload)[0]];
+};
+
+const mockStorageResult = (result: Record<string, unknown>, once = true) => {
+  const implementation = (_keys: unknown, callback: (items: Record<string, unknown>) => void) => {
+    callback(result);
+  };
+
+  if (once) {
+    mockStorage.get.mockImplementationOnce(implementation);
+  } else {
+    mockStorage.get.mockImplementation(implementation);
+  }
 };
 
 // Mock 日期
@@ -44,11 +75,12 @@ vi.setSystemTime(new Date(mockDate));
 describe('getNextPoem', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockStorage.set.mockImplementation((_items, callback?: () => void) => callback?.());
   });
 
   it('首次获取诗词时应该返回新的诗词', async () => {
     // 模拟空的历史记录
-    mockStorage.get.mockReturnValueOnce(Promise.resolve({ poetry_learning_record: null }));
+    mockStorageResult({ [defaultCacheKey]: null });
 
     const poems = await getNextPoem();
     const poem = poems?.[0];
@@ -84,13 +116,10 @@ describe('getNextPoem', () => {
       currentDate: mockDate,
     };
 
-    mockStorage.get.mockReturnValue(Promise.resolve({ poetry_learning_record: mockRecords }));
+    mockStorageResult({ [defaultCacheKey]: mockRecords }, false);
 
-    const poem1 = (await getNextPoem())?.[0];
-    expect(poem1).toEqual(mockRecords.todayNew.records[0]);
-
-    const poem2 = (await getNextPoem())?.[0];
-    expect(poem2).toEqual(mockRecords.todayNew.records[1]);
+    const poems = await getNextPoem();
+    expect(poems).toEqual(mockRecords.todayNew.records);
   });
 
   it('当天新增诗词展示完后应该返回复习诗词', async () => {
@@ -136,7 +165,7 @@ describe('getNextPoem', () => {
       currentDate: mockDate,
     };
 
-    mockStorage.get.mockReturnValueOnce(Promise.resolve({ poetry_learning_record: mockRecords }));
+    mockStorageResult({ [defaultCacheKey]: mockRecords });
 
     const poem = (await getNextPoem())?.[0];
     expect(poem).toEqual(mockRecords.todayReview.records[0]);
@@ -168,27 +197,59 @@ describe('getNextPoem', () => {
       currentDate: '2024-03-19', // 昨天的日期
     };
 
-    mockStorage.get.mockReturnValueOnce(Promise.resolve({ poetry_learning_record: mockRecords }));
+    mockStorageResult({ [defaultCacheKey]: mockRecords });
 
     const poem = await getNextPoem();
     expect(poem).toBeDefined();
     expect(mockStorage.set).toHaveBeenCalled();
     // 验证存储的记录中 currentDate 已更新为今天
-    const savedRecords = mockStorage.set.mock.calls[0][0].poetry_learning_record;
-    expect(savedRecords.currentDate).not.toBe(mockDate);
+    const savedRecords = getLastSavedRecords();
+    expect(savedRecords.currentDate).toBe(mockDate);
   });
 
   it('当天的诗词展示后应该被添加到历史记录', async () => {
     // 模拟空的历史记录
-    mockStorage.get.mockReturnValueOnce(Promise.resolve({ poetry_learning_record: null }));
+    mockStorageResult({ [defaultCacheKey]: null });
 
     const poems = await getNextPoem();
     const poem = poems?.[0];
     expect(poem).toBeDefined();
 
     // 验证存储的记录中包含当天的诗词
-    const savedRecords = mockStorage.set.mock.calls[0][0].poetry_learning_record;
+    const savedRecords = getLastSavedRecords();
     expect(savedRecords.history[0].date).toBe(mockDate);
     expect(savedRecords.history[0].records).toContainEqual(poem);
+  });
+
+  it('应该按一级分类过滤诗词', () => {
+    const result = filterPoetryData(poetryData, {
+      category: PoetrySourceCategory.Primer,
+      sources: [],
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].sources).toContain(PoetrySource.Qianziwen);
+  });
+
+  it('应该按多个具体来源过滤诗词', () => {
+    const result = filterPoetryData(poetryData, {
+      category: PoetrySourceCategory.Poem,
+      sources: [PoetrySource.TangFamousSelected],
+    });
+
+    expect(result.map((item) => item.title)).toEqual(['静夜思']);
+  });
+
+  it('来源顺序不应影响学习记录作用域', () => {
+    const first = getPoetryScopeKey({
+      category: PoetrySourceCategory.Poem,
+      sources: [PoetrySource.Tang300, PoetrySource.ShuimoTang],
+    });
+    const second = getPoetryScopeKey({
+      category: PoetrySourceCategory.Poem,
+      sources: [PoetrySource.ShuimoTang, PoetrySource.Tang300],
+    });
+
+    expect(first).toBe(second);
   });
 });

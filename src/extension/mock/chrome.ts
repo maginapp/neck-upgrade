@@ -26,6 +26,10 @@ const getBrowserLanguage = (): 'zh' | 'en' => {
 const mockChrome = {
   runtime: {
     id: 'mock-extension-id',
+    getURL: (path: string) => {
+      const normalizedPath = path.replace(/^\/+/, '');
+      return new URL(normalizedPath, `${window.location.origin}/`).toString();
+    },
     sendMessage: (message: any) => {
       console.log('Mock chrome.runtime.sendMessage:', message);
     },

@@ -7,6 +7,7 @@ import {
   NeckModeConfig,
   Settings as SettingsType,
   KnowledgeMode,
+  PoetrySourceConfig,
 } from '@/types/app';
 import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
 
@@ -14,6 +15,7 @@ import { Appreciation } from './Appreciation';
 import { DataSwitch } from './DataSwitch';
 import { KnowledgeSwtich } from './KnowledgeSwtich';
 import { NeckMode } from './NeckMode';
+import { PoetrySourceSwitch } from './PoetrySourceSwitch';
 import styles from './Settings.module.scss';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -39,6 +41,9 @@ export const Settings: React.FC<SettingsProps> = (props) => {
   };
   const onKnowledgeModeChange = (knowledge: KnowledgeMode) => {
     setSettings((prev) => ({ ...prev, knowledge }));
+  };
+  const onPoetrySourceChange = (poetry: PoetrySourceConfig) => {
+    setSettings((prev) => ({ ...prev, poetry }));
   };
 
   useEffect(() => {
@@ -95,6 +100,12 @@ export const Settings: React.FC<SettingsProps> = (props) => {
             <h4>内容类型</h4>
             <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
           </div>
+          {settings.dataType === DataType.Poetry && (
+            <div className={styles.settingsGroup}>
+              <h4>诗词来源</h4>
+              <PoetrySourceSwitch config={settings.poetry} onChange={onPoetrySourceChange} />
+            </div>
+          )}
           <div className={styles.settingsGroup}>
             <h4>百科数据源(优先使用)</h4>
             <KnowledgeSwtich

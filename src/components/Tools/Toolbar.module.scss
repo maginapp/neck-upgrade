@@ -8,12 +8,10 @@
 .refresh {
   width: 16px;
   height: 16px;
-  transition: all 0.3s ease;
   cursor: pointer;
   fill: var(--text-secondary);
 
   &:hover {
-    transform: rotate(180deg);
     fill: var(--text-color);
   }
 }

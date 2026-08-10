@@ -17,7 +17,7 @@ export const Content: React.FC<ContentProps> = (props) => {
       case DataType.History:
         return <History knowledgeMode={knowledge} />;
       case DataType.Poetry:
-        return <PoetryComponent />;
+        return <PoetryComponent sourceConfig={settings.poetry} />;
       case DataType.English:
         return <English />;
       case DataType.News:

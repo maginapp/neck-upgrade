@@ -154,6 +154,11 @@ export const MOD_CONFIG = {
     max: 60,
     duration: 5,
   },
+  [NeckModeType.Reading]: {
+    min: 0,
+    max: 0,
+    duration: 0,
+  },
   [NeckModeType.Intense]: {
     min: 80,
     max: 180,

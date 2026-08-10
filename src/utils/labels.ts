@@ -27,6 +27,7 @@ export const getNeckModeLabel = (mode: NeckMode): string => {
   const labels: Record<NeckMode, string> = {
     [NeckMode.Normal]: '普通',
     [NeckMode.Training]: '训练',
+    [NeckMode.Reading]: '阅读',
     [NeckMode.Intense]: '强化',
     [NeckMode.Custom]: '高级',
   };

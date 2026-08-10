@@ -178,8 +178,8 @@ export function fetchTangshiWithAuthor() {
 export function savePoetryResult(data: PoetryItem[]) {
   try {
     console.log('生成诗词hash...');
-    const nameStr = data.map((item) => item.title).join('');
-    const nameHash = crypto.createHash('md5').update(nameStr).digest('hex');
+    const content = JSON.stringify(data, null, 2);
+    const nameHash = crypto.createHash('md5').update(content).digest('hex');
 
     if (!checkNeedUpdatePoem(nameHash)) {
       console.log('本地诗词数据已是最新，无需更新', data.length);
@@ -187,11 +187,11 @@ export function savePoetryResult(data: PoetryItem[]) {
     }
 
     // 保存处理后的数据
-    console.log('正在保存处理后的数据...', data.length, nameHash, nameStr.length);
+    console.log('正在保存处理后的数据...', data.length, nameHash, content.length);
     const first = readFileSync(LAST_UPDATE_FILE, 'utf8').split('\n')[0].trim();
 
     writeFileSync(LAST_UPDATE_FILE, first + '\n' + nameHash, 'utf8');
-    writeFileSync(POETRY_FILE, JSON.stringify(data, null, 2));
+    writeFileSync(POETRY_FILE, content);
 
     console.log('数据处理完成！');
   } catch (error) {

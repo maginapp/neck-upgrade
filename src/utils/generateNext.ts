@@ -74,7 +74,11 @@ const getLearningRecords = async <T>(
   key: string,
   currentDate: string
 ): Promise<LearningRecords<T>> => {
-  const result = await chrome.storage.local.get(key);
+  const result = await new Promise<Record<string, LearningRecords<T>>>((resolve) => {
+    chrome.storage.local.get(key, (items) => {
+      resolve(items as Record<string, LearningRecords<T>>);
+    });
+  });
   return (
     result[key] || {
       history: [],
@@ -87,7 +91,9 @@ const getLearningRecords = async <T>(
 
 // 保存学习记录
 const saveLearningRecords = async <T>(key: string, records: LearningRecords<T>): Promise<void> => {
-  await chrome.storage.local.set({ [key]: records });
+  await new Promise<void>((resolve) => {
+    chrome.storage.local.set({ [key]: records }, resolve);
+  });
 };
 
 interface NextRecordParams<T> {
@@ -114,6 +120,10 @@ const selectRandom = <T>(
       ? data.filter((record) => !excludeRecords.some((exclude) => compareFn(exclude, record)))
       : data;
 
+  if (availableRecords.length === 0 || batchSize <= 0) {
+    return [];
+  }
+
   const result: Set<T> = new Set();
   let retryCount = 0;
 
@@ -121,7 +131,9 @@ const selectRandom = <T>(
     for (let i = 0; i < batchSize; i++) {
       const randomIndex = Math.floor(Math.random() * availableRecords.length);
       const selectedRecord = availableRecords[randomIndex];
-      result.add(selectedRecord);
+      if (selectedRecord !== undefined) {
+        result.add(selectedRecord);
+      }
     }
     retryCount++;
   }
@@ -181,6 +193,7 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
     currentDate !== records.currentDate ||
     (records.todayNew.currentIndex === 0 && records.todayNew.records.length === 0)
   ) {
+    records.currentDate = currentDate;
     const data = await getData();
 
     // 需要选择新的诗词

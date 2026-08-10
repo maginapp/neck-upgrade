@@ -17,6 +17,7 @@ export enum Theme {
 export enum NeckMode {
   Normal = 'normal',
   Training = 'training',
+  Reading = 'reading',
   Intense = 'intense',
   Custom = 'custom',
 }
@@ -35,11 +36,17 @@ export interface NeckModeConfig {
   cusDuration: number;
 }
 
+export interface PoetrySourceConfig {
+  category: PoetrySourceCategory;
+  sources: PoetrySource[];
+}
+
 export interface Settings {
   theme: Theme;
   neck: NeckModeConfig;
   dataType: DataType;
   knowledge: KnowledgeMode;
+  poetry: PoetrySourceConfig;
 }
 
 export interface PageInfo {
@@ -118,3 +125,4 @@ export enum NewsGroup {
   Kr36 = 'kr36',
   V2ex = 'v2ex',
 }
+import { PoetrySource, PoetrySourceCategory } from '@/constants/poetry';

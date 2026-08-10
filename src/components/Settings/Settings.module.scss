@@ -117,3 +117,20 @@
   background-color: var(--primary-color);
   color: var(--primary-bg-text-color);
 }
+
+.poetrySourceConfig {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.poetrySourceDetail {
+  padding-left: 10px;
+  border-left: 2px solid var(--border-color);
+}
+
+.settingHint {
+  margin-bottom: 6px;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
+import { PoetrySourceCategory } from '@/constants/poetry';
 import { DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
 import { LocalManager } from '@/utils/cacheManager';
 
@@ -23,8 +24,8 @@ class SettingsStorage extends LocalManager<Settings> {
 const settingsStorage = new SettingsStorage();
 
 export function useSettings() {
-  const [settings, setSettings] = useState<Settings>(
-    settingsStorage.get() || {
+  const [settings, setSettings] = useState<Settings>(() => {
+    const defaultSettings: Settings = {
       theme: Theme.System,
       neck: {
         mode: NeckMode.Training,
@@ -35,8 +36,30 @@ export function useSettings() {
       },
       dataType: DataType.History,
       knowledge: KnowledgeMode.Wiki,
+      poetry: {
+        category: PoetrySourceCategory.All,
+        sources: [],
+      },
+    };
+    const storedSettings = settingsStorage.get();
+
+    if (!storedSettings) {
+      return defaultSettings;
     }
-  );
+
+    return {
+      ...defaultSettings,
+      ...storedSettings,
+      neck: {
+        ...defaultSettings.neck,
+        ...storedSettings.neck,
+      },
+      poetry: {
+        ...defaultSettings.poetry,
+        ...storedSettings.poetry,
+      },
+    };
+  });
 
   // 系统主题状态
   const [systemTheme, setSystemTheme] = useState<Theme.Dark | Theme.Light>(() => {
