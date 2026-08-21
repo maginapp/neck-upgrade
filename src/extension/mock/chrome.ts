@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import en from '@/extension/_locales/en/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
+import zhTW from '@/extension/_locales/zh_TW/messages.json';
 
 // 定义消息类型
 type Messages = {
@@ -14,6 +15,7 @@ type Messages = {
 const messages: Record<string, Messages> = {
   en,
   zh_CN: zhCN,
+  zh_TW: zhTW,
 };
 
 let mockWobbleStatus = {
@@ -25,9 +27,12 @@ let mockWobbleStatus = {
 };
 
 // 获取当前浏览器语言
-const getBrowserLanguage = (): 'zh' | 'en' => {
+const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' => {
   const lang = navigator.language.toLowerCase();
-  return lang.startsWith('zh') ? 'zh' : 'en';
+  if (/^zh(?:-|_)(?:tw|hk|mo|hant)/.test(lang)) {
+    return 'zh_TW';
+  }
+  return lang.startsWith('zh') ? 'zh_CN' : 'en';
 };
 
 // 模拟 Chrome API
@@ -103,8 +108,7 @@ const mockChrome = {
   i18n: {
     getMessage: (messageName: string): string => {
       const lang = getBrowserLanguage();
-      const locale = lang === 'zh' ? 'zh_CN' : 'en';
-      return messages[locale][messageName]?.message || messageName;
+      return messages[lang][messageName]?.message || messageName;
     },
     getUILanguage: (): string => {
       return navigator.language;

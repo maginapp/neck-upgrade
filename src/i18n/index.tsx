@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo } from 'react';
 
 import en from '@/extension/_locales/en/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
+import zhTW from '@/extension/_locales/zh_TW/messages.json';
 import { AppLanguage } from '@/types/app';
 
 type MessageCatalog = Record<string, { message: string }>;
@@ -13,6 +14,7 @@ interface I18nContextValue {
 
 const catalogs: Record<AppLanguage, MessageCatalog> = {
   [AppLanguage.ZhCN]: zhCN,
+  [AppLanguage.ZhTW]: zhTW,
   [AppLanguage.En]: en,
 };
 
@@ -28,7 +30,12 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ language, children }) => {
   useEffect(() => {
-    document.documentElement.lang = language === AppLanguage.ZhCN ? 'zh-CN' : 'en';
+    const htmlLanguage = {
+      [AppLanguage.ZhCN]: 'zh-CN',
+      [AppLanguage.ZhTW]: 'zh-TW',
+      [AppLanguage.En]: 'en',
+    }[language];
+    document.documentElement.lang = htmlLanguage;
   }, [language]);
 
   const value = useMemo<I18nContextValue>(

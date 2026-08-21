@@ -22,4 +22,11 @@ describe('颈椎阅读模式', () => {
     expect(getNewsLabel('美食', AppLanguage.En)).toBe('Food');
     expect(getNewsLabel('Bilibili', AppLanguage.En)).toBe('Bilibili');
   });
+
+  it('应该返回繁体中文界面标签', () => {
+    expect(getThemeLabel(Theme.System, AppLanguage.ZhTW)).toBe('系統');
+    expect(getNeckModeLabel(NeckMode.Reading, AppLanguage.ZhTW)).toBe('閱讀');
+    expect(getDataTypeLabel(DataType.News, AppLanguage.ZhTW)).toBe('熱榜');
+    expect(getNewsLabel('社会', AppLanguage.ZhTW)).toBe('社會');
+  });
 });

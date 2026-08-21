@@ -15,6 +15,7 @@ export enum Theme {
 
 export enum AppLanguage {
   ZhCN = 'zh_CN',
+  ZhTW = 'zh_TW',
   En = 'en',
 }
 

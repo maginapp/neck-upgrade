@@ -15,21 +15,29 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   compact = false,
 }) => {
   const { t } = useI18n();
-  const nextLanguage = language === AppLanguage.ZhCN ? AppLanguage.En : AppLanguage.ZhCN;
+  const languageSequence = [AppLanguage.ZhCN, AppLanguage.ZhTW, AppLanguage.En];
+  const currentIndex = languageSequence.indexOf(language);
+  const nextLanguage = languageSequence[(currentIndex + 1) % languageSequence.length];
+  const switchLabelKey = {
+    [AppLanguage.ZhCN]: 'language_switch_to_simplified_chinese',
+    [AppLanguage.ZhTW]: 'language_switch_to_traditional_chinese',
+    [AppLanguage.En]: 'language_switch_to_english',
+  }[nextLanguage];
+  const languageLabel = {
+    [AppLanguage.ZhCN]: '简',
+    [AppLanguage.ZhTW]: '繁',
+    [AppLanguage.En]: 'EN',
+  }[language];
 
   return (
     <button
       type="button"
       className={`${styles.languageToggle} ${compact ? styles.compact : ''}`}
-      aria-label={t(
-        nextLanguage === AppLanguage.ZhCN
-          ? 'language_switch_to_chinese'
-          : 'language_switch_to_english'
-      )}
+      aria-label={t(switchLabelKey)}
       onClick={() => onChange(nextLanguage)}
     >
       <span aria-hidden="true">🌐</span>
-      <span>{language === AppLanguage.ZhCN ? '中' : 'EN'}</span>
+      <span>{languageLabel}</span>
     </button>
   );
 };

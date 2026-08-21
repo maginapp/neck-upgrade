@@ -10,6 +10,7 @@ import {
   formatLunarDate,
   formatLunarGanZhiDate,
   formatSolarTerm,
+  translateFestival,
   translateHolidayName,
   translateLunarActivity,
   translatePengZuTaboo,
@@ -45,10 +46,12 @@ export const Header: React.FC = () => {
       );
 
       const ymd =
-        language === AppLanguage.ZhCN
+        language !== AppLanguage.En
           ? `${now.getFullYear()}年${padZero(now.getMonth() + 1)}月${padZero(
               now.getDate()
-            )}日 ${new Intl.DateTimeFormat('zh-CN', { weekday: 'long' }).format(now)}`
+            )}日 ${new Intl.DateTimeFormat(language === AppLanguage.ZhTW ? 'zh-TW' : 'zh-CN', {
+              weekday: 'long',
+            }).format(now)}`
           : new Intl.DateTimeFormat('en-US', {
               year: 'numeric',
               month: '2-digit',
@@ -120,7 +123,11 @@ export const Header: React.FC = () => {
               {lunarInfo.festivals.length ? (
                 <div className={styles.lunarInfoItem}>
                   <span className={styles.lunarInfoItemTitle}>{t('header_festivals')}</span>
-                  <span>{lunarInfo.festivals.join(' ')}</span>
+                  <span>
+                    {lunarInfo.festivals
+                      .map((item) => translateFestival(item, language, t))
+                      .join(' ')}
+                  </span>
                 </div>
               ) : null}
               <div className={styles.lunarInfoItem}>
@@ -156,7 +163,7 @@ export const Header: React.FC = () => {
                 <span>
                   {lunarInfo.pengZu
                     .map((item) => translatePengZuTaboo(item, language, t))
-                    .join(language === AppLanguage.ZhCN ? '， ' : '; ')}
+                    .join(language === AppLanguage.En ? '; ' : '， ')}
                 </span>
               </div>
               {lunarInfo.rainDay ? (

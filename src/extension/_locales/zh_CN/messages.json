@@ -11,9 +11,13 @@
     "message": "保护你的颈椎健康",
     "description": "弹窗描述"
   },
-  "language_switch_to_chinese": {
-    "message": "切换到中文",
-    "description": "切换到中文的按钮说明"
+  "language_switch_to_simplified_chinese": {
+    "message": "切换到简体中文",
+    "description": "切换到简体中文的按钮说明"
+  },
+  "language_switch_to_traditional_chinese": {
+    "message": "切换到繁体中文",
+    "description": "切换到繁体中文的按钮说明"
   },
   "language_switch_to_english": {
     "message": "切换到英文",
@@ -420,6 +424,53 @@
   "holiday_national_day": {
     "message": "国庆节"
   },
+  "holiday_weekday_monday": {
+    "message": "周一"
+  },
+  "holiday_weekday_tuesday": {
+    "message": "周二"
+  },
+  "holiday_weekday_wednesday": {
+    "message": "周三"
+  },
+  "holiday_weekday_thursday": {
+    "message": "周四"
+  },
+  "holiday_weekday_friday": {
+    "message": "周五"
+  },
+  "holiday_weekday_saturday": {
+    "message": "周六"
+  },
+  "holiday_weekday_sunday": {
+    "message": "周日"
+  },
+  "lunar_calendar_prefix": {
+    "message": "农历"
+  },
+  "lunar_festival_0": { "message": "春节" },
+  "lunar_festival_1": { "message": "元宵节" },
+  "lunar_festival_2": { "message": "龙头节" },
+  "lunar_festival_3": { "message": "上巳节" },
+  "lunar_festival_4": { "message": "清明节" },
+  "lunar_festival_5": { "message": "端午节" },
+  "lunar_festival_6": { "message": "七夕节" },
+  "lunar_festival_7": { "message": "中元节" },
+  "lunar_festival_8": { "message": "中秋节" },
+  "lunar_festival_9": { "message": "重阳节" },
+  "lunar_festival_10": { "message": "冬至节" },
+  "lunar_festival_11": { "message": "腊八节" },
+  "lunar_festival_12": { "message": "除夕" },
+  "solar_festival_0": { "message": "元旦" },
+  "solar_festival_1": { "message": "三八妇女节" },
+  "solar_festival_2": { "message": "植树节" },
+  "solar_festival_3": { "message": "五一劳动节" },
+  "solar_festival_4": { "message": "五四青年节" },
+  "solar_festival_5": { "message": "六一儿童节" },
+  "solar_festival_6": { "message": "建党节" },
+  "solar_festival_7": { "message": "八一建军节" },
+  "solar_festival_8": { "message": "教师节" },
+  "solar_festival_9": { "message": "国庆节" },
   "lunar_activity_0": {
     "message": "祭祀"
   },

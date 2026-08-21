@@ -23,14 +23,21 @@ class SettingsStorage extends LocalManager<Settings> {
 // 导出设置存储实例
 const settingsStorage = new SettingsStorage();
 
-const createDefaultSettings = (): Settings => {
-  const browserLanguage =
-    typeof navigator !== 'undefined' && navigator.language.toLowerCase().startsWith('zh')
-      ? AppLanguage.ZhCN
-      : AppLanguage.En;
+const getBrowserLanguage = (): AppLanguage => {
+  if (typeof navigator === 'undefined') {
+    return AppLanguage.En;
+  }
 
+  const browserLanguage = navigator.language.toLowerCase();
+  if (/^zh(?:-|_)(?:tw|hk|mo|hant)/.test(browserLanguage)) {
+    return AppLanguage.ZhTW;
+  }
+  return browserLanguage.startsWith('zh') ? AppLanguage.ZhCN : AppLanguage.En;
+};
+
+const createDefaultSettings = (): Settings => {
   return {
-    language: browserLanguage,
+    language: getBrowserLanguage(),
     theme: Theme.System,
     neck: {
       mode: NeckMode.Training,
@@ -59,7 +66,9 @@ const normalizeSettings = (storedSettings: Settings | null): Settings => {
     ...defaultSettings,
     ...storedSettings,
     language:
-      storedSettings.language === AppLanguage.ZhCN || storedSettings.language === AppLanguage.En
+      storedSettings.language === AppLanguage.ZhCN ||
+      storedSettings.language === AppLanguage.ZhTW ||
+      storedSettings.language === AppLanguage.En
         ? storedSettings.language
         : defaultSettings.language,
     neck: {

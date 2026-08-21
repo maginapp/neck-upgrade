@@ -1,4 +1,12 @@
-import { PengZuEarthBranch, PengZuHeavenStem, SolarTerm, Taboo, Zodiac } from 'tyme4ts';
+import {
+  LunarFestival,
+  PengZuEarthBranch,
+  PengZuHeavenStem,
+  SolarFestival,
+  SolarTerm,
+  Taboo,
+  Zodiac,
+} from 'tyme4ts';
 
 import { AppLanguage } from '@/types/app';
 
@@ -34,15 +42,15 @@ const EARTHLY_BRANCH_ROMANIZATION: Record<string, string> = {
   亥: 'hai',
 };
 
-const WEEKDAY_TRANSLATIONS: Record<string, string> = {
-  周一: 'Monday',
-  周二: 'Tuesday',
-  周三: 'Wednesday',
-  周四: 'Thursday',
-  周五: 'Friday',
-  周六: 'Saturday',
-  周日: 'Sunday',
-  周天: 'Sunday',
+const WEEKDAY_MESSAGE_KEYS: Record<string, string> = {
+  周一: 'holiday_weekday_monday',
+  周二: 'holiday_weekday_tuesday',
+  周三: 'holiday_weekday_wednesday',
+  周四: 'holiday_weekday_thursday',
+  周五: 'holiday_weekday_friday',
+  周六: 'holiday_weekday_saturday',
+  周日: 'holiday_weekday_sunday',
+  周天: 'holiday_weekday_sunday',
 };
 
 const HOLIDAY_MESSAGE_KEYS: Record<string, string> = {
@@ -105,6 +113,12 @@ export const formatLunarDate = (info: LunarInfo, language: AppLanguage, t: Trans
     return info.lunarDate;
   }
 
+  if (language === AppLanguage.ZhTW) {
+    return `${t('lunar_calendar_prefix')}${info.lunarDate
+      .replace(/^农历/, '')
+      .replace(/闰/g, '閏')}`;
+  }
+
   const zodiac = translateIndexedName(info.zodiac, Zodiac.NAMES, 'lunar_zodiac', t);
   const month = `${info.isLeapMonth ? 'Leap ' : ''}${toOrdinal(Math.abs(info.lunarMonth))}`;
 
@@ -116,6 +130,13 @@ export const formatLunarDate = (info: LunarInfo, language: AppLanguage, t: Trans
 export const formatLunarGanZhiDate = (info: LunarInfo, language: AppLanguage, t: Translate) => {
   if (language === AppLanguage.ZhCN) {
     return info.lunarDanZhiDate;
+  }
+
+  if (language === AppLanguage.ZhTW) {
+    const zodiac = translateIndexedName(info.zodiac, Zodiac.NAMES, 'lunar_zodiac', t);
+    return `${info.ganZhiYearName.replace(/年$/, '')}(${zodiac})年 ${info.ganZhiMonthName} ${
+      info.ganZhiDayName
+    }`;
   }
 
   const zodiac = translateIndexedName(info.zodiac, Zodiac.NAMES, 'lunar_zodiac', t);
@@ -130,8 +151,11 @@ export const formatSolarTerm = (
   language: AppLanguage,
   t: Translate
 ) => {
-  if (language === AppLanguage.ZhCN) {
-    return `${term}${dayIndex ? `${t('header_term_day_prefix')}${dayIndex}${t('header_day')}` : ''}`;
+  if (language !== AppLanguage.En) {
+    const translatedTerm = translateIndexedName(term, SolarTerm.NAMES, 'lunar_solar_term', t);
+    return `${translatedTerm}${
+      dayIndex ? `${t('header_term_day_prefix')}${dayIndex}${t('header_day')}` : ''
+    }`;
   }
 
   const translatedTerm = translateIndexedName(term, SolarTerm.NAMES, 'lunar_solar_term', t);
@@ -142,6 +166,18 @@ export const translateLunarActivity = (name: string, language: AppLanguage, t: T
   language === AppLanguage.ZhCN
     ? name
     : translateIndexedName(name, Taboo.NAMES, 'lunar_activity', t);
+
+export const translateFestival = (name: string, language: AppLanguage, t: Translate) => {
+  if (language !== AppLanguage.ZhTW) {
+    return name;
+  }
+
+  if (LunarFestival.NAMES.includes(name)) {
+    return translateIndexedName(name, LunarFestival.NAMES, 'lunar_festival', t);
+  }
+
+  return translateIndexedName(name, SolarFestival.NAMES, 'solar_festival', t);
+};
 
 export const translatePengZuTaboo = (name: string, language: AppLanguage, t: Translate) => {
   if (language === AppLanguage.ZhCN) {
@@ -160,9 +196,10 @@ export const translateHolidayName = (name: string, language: AppLanguage, t: Tra
     return name;
   }
 
-  const weekday = WEEKDAY_TRANSLATIONS[name];
-  if (weekday) {
-    return weekday;
+  const weekdayKey = WEEKDAY_MESSAGE_KEYS[name];
+  if (weekdayKey) {
+    const translatedWeekday = t(weekdayKey);
+    return translatedWeekday === weekdayKey ? name : translatedWeekday;
   }
 
   const key = HOLIDAY_MESSAGE_KEYS[name];

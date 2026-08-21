@@ -3,6 +3,7 @@ import { AppLanguage, Theme, NeckMode, DataType, KnowledgeMode } from '@/types/a
 
 interface LocalizedLabel {
   [AppLanguage.ZhCN]: string;
+  [AppLanguage.ZhTW]: string;
   [AppLanguage.En]: string;
 }
 
@@ -13,9 +14,9 @@ interface LocalizedLabel {
  */
 export const getThemeLabel = (theme: Theme, language = AppLanguage.ZhCN): string => {
   const labels: Record<Theme, LocalizedLabel> = {
-    [Theme.System]: { zh_CN: '系统', en: 'System' },
-    [Theme.Light]: { zh_CN: '亮色', en: 'Light' },
-    [Theme.Dark]: { zh_CN: '暗黑', en: 'Dark' },
+    [Theme.System]: { zh_CN: '系统', zh_TW: '系統', en: 'System' },
+    [Theme.Light]: { zh_CN: '亮色', zh_TW: '亮色', en: 'Light' },
+    [Theme.Dark]: { zh_CN: '暗黑', zh_TW: '暗黑', en: 'Dark' },
   };
   return labels[theme]?.[language] ?? labels[Theme.System][language];
 };
@@ -27,11 +28,11 @@ export const getThemeLabel = (theme: Theme, language = AppLanguage.ZhCN): string
  */
 export const getNeckModeLabel = (mode: NeckMode, language = AppLanguage.ZhCN): string => {
   const labels: Record<NeckMode, LocalizedLabel> = {
-    [NeckMode.Normal]: { zh_CN: '普通', en: 'Normal' },
-    [NeckMode.Training]: { zh_CN: '训练', en: 'Training' },
-    [NeckMode.Reading]: { zh_CN: '阅读', en: 'Reading' },
-    [NeckMode.Intense]: { zh_CN: '强化', en: 'Intense' },
-    [NeckMode.Custom]: { zh_CN: '高级', en: 'Advanced' },
+    [NeckMode.Normal]: { zh_CN: '普通', zh_TW: '普通', en: 'Normal' },
+    [NeckMode.Training]: { zh_CN: '训练', zh_TW: '訓練', en: 'Training' },
+    [NeckMode.Reading]: { zh_CN: '阅读', zh_TW: '閱讀', en: 'Reading' },
+    [NeckMode.Intense]: { zh_CN: '强化', zh_TW: '強化', en: 'Intense' },
+    [NeckMode.Custom]: { zh_CN: '高级', zh_TW: '高級', en: 'Advanced' },
   };
   return labels[mode][language];
 };
@@ -43,10 +44,10 @@ export const getNeckModeLabel = (mode: NeckMode, language = AppLanguage.ZhCN): s
  */
 export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): string => {
   const labels: Record<DataType, LocalizedLabel> = {
-    [DataType.Poetry]: { zh_CN: '诗词', en: 'Poetry' },
-    [DataType.History]: { zh_CN: '历史', en: 'History' },
-    [DataType.English]: { zh_CN: '英语', en: 'English' },
-    [DataType.News]: { zh_CN: '热榜', en: 'Trending' },
+    [DataType.Poetry]: { zh_CN: '诗词', zh_TW: '詩詞', en: 'Poetry' },
+    [DataType.History]: { zh_CN: '历史', zh_TW: '歷史', en: 'History' },
+    [DataType.English]: { zh_CN: '英语', zh_TW: '英語', en: 'English' },
+    [DataType.News]: { zh_CN: '热榜', zh_TW: '熱榜', en: 'Trending' },
   };
   return labels[type][language];
 };
@@ -58,8 +59,8 @@ export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): s
  */
 export const getKnowledgeModeLabel = (mode: KnowledgeMode, language = AppLanguage.ZhCN): string => {
   const labels: Record<KnowledgeMode, LocalizedLabel> = {
-    [KnowledgeMode.Wiki]: { zh_CN: '维基百科', en: 'Wikipedia' },
-    [KnowledgeMode.Baidu]: { zh_CN: '百度百科', en: 'Baidu Baike' },
+    [KnowledgeMode.Wiki]: { zh_CN: '维基百科', zh_TW: '維基百科', en: 'Wikipedia' },
+    [KnowledgeMode.Baidu]: { zh_CN: '百度百科', zh_TW: '百度百科', en: 'Baidu Baike' },
   };
   return labels[mode][language];
 };
@@ -69,35 +70,71 @@ export const getPoetryCategoryLabel = (
   language = AppLanguage.ZhCN
 ) => {
   const labels: Record<PoetrySourceCategory, LocalizedLabel> = {
-    [PoetrySourceCategory.All]: { zh_CN: '全部', en: 'All' },
-    [PoetrySourceCategory.Poem]: { zh_CN: '诗歌', en: 'Poems' },
-    [PoetrySourceCategory.Ci]: { zh_CN: '词', en: 'Ci Poetry' },
-    [PoetrySourceCategory.Classic]: { zh_CN: '经典', en: 'Classics' },
-    [PoetrySourceCategory.Primer]: { zh_CN: '蒙学', en: 'Primers' },
-    [PoetrySourceCategory.Essay]: { zh_CN: '文人小品', en: 'Essays' },
+    [PoetrySourceCategory.All]: { zh_CN: '全部', zh_TW: '全部', en: 'All' },
+    [PoetrySourceCategory.Poem]: { zh_CN: '诗歌', zh_TW: '詩歌', en: 'Poems' },
+    [PoetrySourceCategory.Ci]: { zh_CN: '词', zh_TW: '詞', en: 'Ci Poetry' },
+    [PoetrySourceCategory.Classic]: { zh_CN: '经典', zh_TW: '經典', en: 'Classics' },
+    [PoetrySourceCategory.Primer]: { zh_CN: '蒙学', zh_TW: '蒙學', en: 'Primers' },
+    [PoetrySourceCategory.Essay]: { zh_CN: '文人小品', zh_TW: '文人小品', en: 'Essays' },
   };
   return labels[category][language];
 };
 
 export const getPoetrySourceLabel = (source: PoetrySource, language = AppLanguage.ZhCN) => {
   const labels: Record<PoetrySource, LocalizedLabel> = {
-    [PoetrySource.Shijing]: { zh_CN: '诗经', en: 'Book of Songs' },
-    [PoetrySource.Chuci]: { zh_CN: '楚辞', en: 'Songs of Chu' },
-    [PoetrySource.Caocao]: { zh_CN: '曹操诗集', en: "Cao Cao's Poems" },
-    [PoetrySource.Tang300]: { zh_CN: '唐诗三百首', en: '300 Tang Poems' },
-    [PoetrySource.TangFamousSelected]: { zh_CN: '全唐诗·名家精选', en: 'Selected Tang Poets' },
-    [PoetrySource.ShuimoTang]: { zh_CN: '水墨唐诗', en: 'Ink-Wash Tang Poems' },
-    [PoetrySource.Qianjiashi]: { zh_CN: '千家诗', en: 'Poems of a Thousand Masters' },
-    [PoetrySource.Songci300]: { zh_CN: '宋词三百首', en: '300 Song Ci Poems' },
-    [PoetrySource.SongciFamousSelected]: { zh_CN: '全宋词·名家精选', en: 'Selected Song Ci Poets' },
-    [PoetrySource.Nalan]: { zh_CN: '纳兰性德词集', en: "Nalan Xingde's Ci" },
-    [PoetrySource.Lunyu]: { zh_CN: '论语', en: 'Analects' },
-    [PoetrySource.Mengzi]: { zh_CN: '孟子', en: 'Mencius' },
-    [PoetrySource.Daxue]: { zh_CN: '大学', en: 'Great Learning' },
-    [PoetrySource.Zhongyong]: { zh_CN: '中庸', en: 'Doctrine of the Mean' },
-    [PoetrySource.Zengguang]: { zh_CN: '增广贤文', en: 'Zengguang Xianwen' },
-    [PoetrySource.Qianziwen]: { zh_CN: '千字文', en: 'Thousand Character Classic' },
-    [PoetrySource.Youmengying]: { zh_CN: '幽梦影', en: 'Quiet Dream Shadows' },
+    [PoetrySource.Shijing]: { zh_CN: '诗经', zh_TW: '詩經', en: 'Book of Songs' },
+    [PoetrySource.Chuci]: { zh_CN: '楚辞', zh_TW: '楚辭', en: 'Songs of Chu' },
+    [PoetrySource.Caocao]: { zh_CN: '曹操诗集', zh_TW: '曹操詩集', en: "Cao Cao's Poems" },
+    [PoetrySource.Tang300]: { zh_CN: '唐诗三百首', zh_TW: '唐詩三百首', en: '300 Tang Poems' },
+    [PoetrySource.TangFamousSelected]: {
+      zh_CN: '全唐诗·名家精选',
+      zh_TW: '全唐詩·名家精選',
+      en: 'Selected Tang Poets',
+    },
+    [PoetrySource.ShuimoTang]: {
+      zh_CN: '水墨唐诗',
+      zh_TW: '水墨唐詩',
+      en: 'Ink-Wash Tang Poems',
+    },
+    [PoetrySource.Qianjiashi]: {
+      zh_CN: '千家诗',
+      zh_TW: '千家詩',
+      en: 'Poems of a Thousand Masters',
+    },
+    [PoetrySource.Songci300]: {
+      zh_CN: '宋词三百首',
+      zh_TW: '宋詞三百首',
+      en: '300 Song Ci Poems',
+    },
+    [PoetrySource.SongciFamousSelected]: {
+      zh_CN: '全宋词·名家精选',
+      zh_TW: '全宋詞·名家精選',
+      en: 'Selected Song Ci Poets',
+    },
+    [PoetrySource.Nalan]: {
+      zh_CN: '纳兰性德词集',
+      zh_TW: '納蘭性德詞集',
+      en: "Nalan Xingde's Ci",
+    },
+    [PoetrySource.Lunyu]: { zh_CN: '论语', zh_TW: '論語', en: 'Analects' },
+    [PoetrySource.Mengzi]: { zh_CN: '孟子', zh_TW: '孟子', en: 'Mencius' },
+    [PoetrySource.Daxue]: { zh_CN: '大学', zh_TW: '大學', en: 'Great Learning' },
+    [PoetrySource.Zhongyong]: { zh_CN: '中庸', zh_TW: '中庸', en: 'Doctrine of the Mean' },
+    [PoetrySource.Zengguang]: {
+      zh_CN: '增广贤文',
+      zh_TW: '增廣賢文',
+      en: 'Zengguang Xianwen',
+    },
+    [PoetrySource.Qianziwen]: {
+      zh_CN: '千字文',
+      zh_TW: '千字文',
+      en: 'Thousand Character Classic',
+    },
+    [PoetrySource.Youmengying]: {
+      zh_CN: '幽梦影',
+      zh_TW: '幽夢影',
+      en: 'Quiet Dream Shadows',
+    },
   };
   return labels[source][language];
 };
@@ -139,6 +176,46 @@ const ENGLISH_NEWS_LABELS: Record<string, string> = {
   创意: 'Creative',
 };
 
+const TRADITIONAL_NEWS_LABELS: Record<string, string> = {
+  微博: '微博',
+  我的: '我的',
+  热搜: '熱搜',
+  文娱: '文娛',
+  生活: '生活',
+  社会: '社會',
+  小红书: '小紅書',
+  推荐: '推薦',
+  头条: '頭條',
+  知乎: '知乎',
+  热榜: '熱榜',
+  综合: '綜合',
+  动画: '動畫',
+  鬼畜: '鬼畜',
+  音乐: '音樂',
+  舞蹈: '舞蹈',
+  影视: '影視',
+  娱乐: '娛樂',
+  知识: '知識',
+  科技: '科技',
+  美食: '美食',
+  体育: '體育',
+  中国: '中國',
+  全球: '全球',
+  商业: '商業',
+  百度: '百度',
+  贴吧: '貼吧',
+  '36氪': '36氪',
+  股票: '股票',
+  公司: '公司',
+  宏观: '宏觀',
+  技术: '技術',
+  好玩: '好玩',
+  创意: '創意',
+};
+
 export const getNewsLabel = (label: string, language = AppLanguage.ZhCN) => {
-  return language === AppLanguage.En ? ENGLISH_NEWS_LABELS[label] ?? label : label;
+  if (language === AppLanguage.En) {
+    return ENGLISH_NEWS_LABELS[label] ?? label;
+  }
+  return language === AppLanguage.ZhTW ? TRADITIONAL_NEWS_LABELS[label] ?? label : label;
 };

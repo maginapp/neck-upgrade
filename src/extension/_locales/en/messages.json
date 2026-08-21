@@ -11,9 +11,13 @@
     "message": "Protect your neck health",
     "description": "The description of the popup"
   },
-  "language_switch_to_chinese": {
-    "message": "Switch to Chinese",
-    "description": "The button label for switching to Chinese"
+  "language_switch_to_simplified_chinese": {
+    "message": "Switch to Simplified Chinese",
+    "description": "The button label for switching to Simplified Chinese"
+  },
+  "language_switch_to_traditional_chinese": {
+    "message": "Switch to Traditional Chinese",
+    "description": "The button label for switching to Traditional Chinese"
   },
   "language_switch_to_english": {
     "message": "Switch to English",
@@ -420,6 +424,53 @@
   "holiday_national_day": {
     "message": "National Day"
   },
+  "holiday_weekday_monday": {
+    "message": "Monday"
+  },
+  "holiday_weekday_tuesday": {
+    "message": "Tuesday"
+  },
+  "holiday_weekday_wednesday": {
+    "message": "Wednesday"
+  },
+  "holiday_weekday_thursday": {
+    "message": "Thursday"
+  },
+  "holiday_weekday_friday": {
+    "message": "Friday"
+  },
+  "holiday_weekday_saturday": {
+    "message": "Saturday"
+  },
+  "holiday_weekday_sunday": {
+    "message": "Sunday"
+  },
+  "lunar_calendar_prefix": {
+    "message": "Chinese calendar"
+  },
+  "lunar_festival_0": { "message": "春节" },
+  "lunar_festival_1": { "message": "元宵节" },
+  "lunar_festival_2": { "message": "龙头节" },
+  "lunar_festival_3": { "message": "上巳节" },
+  "lunar_festival_4": { "message": "清明节" },
+  "lunar_festival_5": { "message": "端午节" },
+  "lunar_festival_6": { "message": "七夕节" },
+  "lunar_festival_7": { "message": "中元节" },
+  "lunar_festival_8": { "message": "中秋节" },
+  "lunar_festival_9": { "message": "重阳节" },
+  "lunar_festival_10": { "message": "冬至节" },
+  "lunar_festival_11": { "message": "腊八节" },
+  "lunar_festival_12": { "message": "除夕" },
+  "solar_festival_0": { "message": "元旦" },
+  "solar_festival_1": { "message": "三八妇女节" },
+  "solar_festival_2": { "message": "植树节" },
+  "solar_festival_3": { "message": "五一劳动节" },
+  "solar_festival_4": { "message": "五四青年节" },
+  "solar_festival_5": { "message": "六一儿童节" },
+  "solar_festival_6": { "message": "建党节" },
+  "solar_festival_7": { "message": "八一建军节" },
+  "solar_festival_8": { "message": "教师节" },
+  "solar_festival_9": { "message": "国庆节" },
   "lunar_activity_0": {
     "message": "Ritual offerings「祭祀」"
   },
