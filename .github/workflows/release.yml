@@ -1,0 +1,30 @@
+name: Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Zip
+        run: |
+          zip -r chrome-extension-${{ github.ref_name }}.zip dist
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            chrome-extension-${{ github.ref_name }}.zip
+          body_path: CHANGELOG.md
