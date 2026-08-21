@@ -2,11 +2,14 @@ import { describe, expect, it } from 'vitest';
 
 import {
   DEFAULT_PAGE_WOBBLE_CONFIG,
+  getPageWobbleDomainAccess,
   getPageWobbleCyclePosition,
   getPageWobbleCycleSeconds,
   getPageWobbleRemainingSeconds,
   isPageWobbleSupportedUrl,
+  normalizePageWobbleDomain,
   normalizePageWobbleConfig,
+  normalizePageWobbleDomainRules,
   PAGE_WOBBLE_CYCLE_SLIDER_MAX,
 } from './pageWobble';
 
@@ -83,5 +86,33 @@ describe('页面摇摆配置', () => {
     expect(isPageWobbleSupportedUrl('http://localhost:5173')).toBe(true);
     expect(isPageWobbleSupportedUrl('chrome://extensions/')).toBe(false);
     expect(isPageWobbleSupportedUrl('chrome-extension://extension-id/page.html')).toBe(false);
+  });
+
+  it('应该归一化域名和黑白名单', () => {
+    expect(normalizePageWobbleDomain(' HTTPS://WWW.Example.com/path ')).toBe('www.example.com');
+    expect(normalizePageWobbleDomain('*.example.com')).toBe('example.com');
+    expect(
+      normalizePageWobbleDomainRules({
+        whitelist: ['Example.com', 'https://example.com/path', ''],
+        blacklist: ['ads.example.com', 'ADS.EXAMPLE.COM'],
+      })
+    ).toEqual({
+      whitelist: ['example.com'],
+      blacklist: ['ads.example.com'],
+    });
+  });
+
+  it('黑名单优先且父域名规则应该匹配子域名', () => {
+    const rules = {
+      whitelist: ['example.com'],
+      blacklist: ['ads.example.com'],
+    };
+
+    expect(getPageWobbleDomainAccess('www.example.com', rules)).toBe('allowed');
+    expect(getPageWobbleDomainAccess('news.ads.example.com', rules)).toBe('blacklisted');
+    expect(getPageWobbleDomainAccess('other.com', rules)).toBe('not-whitelisted');
+    expect(getPageWobbleDomainAccess('other.com', { whitelist: [], blacklist: [] })).toBe(
+      'allowed'
+    );
   });
 });

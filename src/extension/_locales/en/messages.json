@@ -79,6 +79,70 @@
     "message": "Unable to control this page. Refresh it and try again.",
     "description": "The page wobble activation error"
   },
+  "popup_wobble_current_domain": {
+    "message": "Current domain",
+    "description": "The current regular website domain label"
+  },
+  "popup_wobble_domain_allowed": {
+    "message": "Allowed",
+    "description": "The allowed page wobble domain status"
+  },
+  "popup_wobble_domain_blocked": {
+    "message": "Blocked",
+    "description": "The blocked page wobble domain status"
+  },
+  "popup_wobble_add_whitelist": {
+    "message": "Add to allowlist",
+    "description": "The button to add the current domain to the allowlist"
+  },
+  "popup_wobble_add_blacklist": {
+    "message": "Add to blocklist",
+    "description": "The button to add the current domain to the blocklist"
+  },
+  "popup_wobble_remove_current_rule": {
+    "message": "Remove current rule",
+    "description": "The button to remove exact rules for the current domain"
+  },
+  "popup_wobble_manage_domains": {
+    "message": "Manage domain lists",
+    "description": "The domain allowlist and blocklist manager title"
+  },
+  "popup_wobble_domain_rules_hint": {
+    "message": "An empty allowlist permits all regular websites. A non-empty allowlist permits listed domains only. The blocklist always wins, and parent domains include their subdomains.",
+    "description": "The domain allowlist and blocklist matching rules"
+  },
+  "popup_wobble_whitelist": {
+    "message": "Allowlist",
+    "description": "The page wobble domain allowlist title"
+  },
+  "popup_wobble_blacklist": {
+    "message": "Blocklist",
+    "description": "The page wobble domain blocklist title"
+  },
+  "popup_wobble_domain_placeholder": {
+    "message": "For example, example.com",
+    "description": "The domain input placeholder"
+  },
+  "popup_wobble_add_domain": {
+    "message": "Add",
+    "description": "The button to add a domain rule"
+  },
+  "popup_wobble_domain_list_empty": {
+    "message": "No domains",
+    "description": "The empty domain rule list hint"
+  },
+  "popup_wobble_remove_domain": {
+    "message": "Remove domain",
+    "description": "The accessible label for the remove domain rule button"
+  },
+  "popup_wobble_domain_blacklisted": {
+    "message": "This domain matches the blocklist. The switch can remain on, but this page will not wobble.",
+    "description": "The current domain blocklist match notice"
+  },
+  "popup_wobble_domain_not_whitelisted": {
+    "message": "The allowlist is active and does not include this domain. The switch can remain on, but this page will not wobble.",
+    "description": "The current domain allowlist miss notice"
+  },
   "popup_btn_open_settings": {
     "message": "Open Settings",
     "description": "The button to open the settings"

@@ -47,6 +47,11 @@ export interface PageWobbleStatus extends PageWobbleConfig {
   nextChangeAt: number | null;
 }
 
+export interface PageWobbleDomainRules {
+  whitelist: string[];
+  blacklist: string[];
+}
+
 export interface PoetrySourceConfig {
   category: PoetrySourceCategory;
   sources: PoetrySource[];

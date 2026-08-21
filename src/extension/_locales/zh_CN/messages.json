@@ -79,6 +79,70 @@
     "message": "无法控制当前页面，请刷新页面后重试",
     "description": "网页摇摆启用失败提示"
   },
+  "popup_wobble_current_domain": {
+    "message": "当前域名",
+    "description": "当前普通网页域名标签"
+  },
+  "popup_wobble_domain_allowed": {
+    "message": "允许",
+    "description": "当前域名允许网页摇摆状态"
+  },
+  "popup_wobble_domain_blocked": {
+    "message": "已阻止",
+    "description": "当前域名禁止网页摇摆状态"
+  },
+  "popup_wobble_add_whitelist": {
+    "message": "加入白名单",
+    "description": "将当前域名加入白名单按钮"
+  },
+  "popup_wobble_add_blacklist": {
+    "message": "加入黑名单",
+    "description": "将当前域名加入黑名单按钮"
+  },
+  "popup_wobble_remove_current_rule": {
+    "message": "移除当前规则",
+    "description": "移除当前域名精确规则按钮"
+  },
+  "popup_wobble_manage_domains": {
+    "message": "管理域名黑白名单",
+    "description": "域名黑白名单管理区域标题"
+  },
+  "popup_wobble_domain_rules_hint": {
+    "message": "白名单为空时允许所有普通网页；白名单非空时仅允许名单内域名。黑名单始终优先，父域名规则同时匹配其子域名。",
+    "description": "域名黑白名单匹配规则说明"
+  },
+  "popup_wobble_whitelist": {
+    "message": "白名单",
+    "description": "网页摇摆域名白名单标题"
+  },
+  "popup_wobble_blacklist": {
+    "message": "黑名单",
+    "description": "网页摇摆域名黑名单标题"
+  },
+  "popup_wobble_domain_placeholder": {
+    "message": "例如 example.com",
+    "description": "域名输入框占位内容"
+  },
+  "popup_wobble_add_domain": {
+    "message": "添加",
+    "description": "添加域名规则按钮"
+  },
+  "popup_wobble_domain_list_empty": {
+    "message": "暂无域名",
+    "description": "域名规则列表为空提示"
+  },
+  "popup_wobble_remove_domain": {
+    "message": "移除域名",
+    "description": "移除域名规则按钮的无障碍标签"
+  },
+  "popup_wobble_domain_blacklisted": {
+    "message": "当前域名命中黑名单",
+    "description": "当前域名命中黑名单提示"
+  },
+  "popup_wobble_domain_not_whitelisted": {
+    "message": "白名单已启用，但当前域名不在白名单中",
+    "description": "当前域名未命中白名单提示"
+  },
   "popup_btn_open_settings": {
     "message": "打开设置",
     "description": "打开设置按钮"

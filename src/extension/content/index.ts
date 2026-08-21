@@ -1,6 +1,7 @@
 (() => {
   const GET_STATUS_MESSAGE = 'popup:get-page-wobble-status';
   const SET_CONFIG_MESSAGE = 'popup:set-page-wobble-config';
+  const DOMAIN_RULES_STORAGE_KEY = 'page_wobble_domain_rules';
   const TRANSITION = 'transform 800ms cubic-bezier(0.22, 1, 0.36, 1)';
 
   interface WobbleConfig {
@@ -16,7 +17,12 @@
 
   interface WobbleController {
     getStatus: () => WobbleStatus;
-    update: (enabled: boolean, config: WobbleConfig) => WobbleStatus;
+    update: (enabled: boolean, config: WobbleConfig, domainAllowed: boolean) => WobbleStatus;
+  }
+
+  interface WobbleDomainRules {
+    whitelist: string[];
+    blacklist: string[];
   }
 
   interface ContentScriptHost {
@@ -48,6 +54,7 @@
     const baseTransform = computedTransform === 'none' ? '' : computedTransform;
 
     let enabled = false;
+    let domainAllowed = true;
     let angle = 15;
     let cycleSeconds = 60;
     let randomAngle = false;
@@ -61,6 +68,25 @@
       cycleSeconds: Math.min(3600, Math.max(1, Math.round(Number(config?.cycleSeconds) || 60))),
       randomAngle: config?.randomAngle === true,
     });
+
+    const normalizeDomainList = (value: unknown) => {
+      if (!Array.isArray(value)) {
+        return [];
+      }
+      return value.filter((item): item is string => typeof item === 'string');
+    };
+
+    const isCurrentDomainAllowed = (value: unknown) => {
+      const storedRules =
+        value && typeof value === 'object' ? (value as Partial<WobbleDomainRules>) : {};
+      const whitelist = normalizeDomainList(storedRules.whitelist);
+      const blacklist = normalizeDomainList(storedRules.blacklist);
+      const currentDomain = window.location.hostname.toLowerCase();
+      const matches = (rule: string) =>
+        currentDomain === rule || currentDomain.endsWith(`.${rule}`);
+
+      return !blacklist.some(matches) && (whitelist.length === 0 || whitelist.some(matches));
+    };
 
     const getStatus = (): WobbleStatus => ({
       enabled,
@@ -114,7 +140,7 @@
 
     const scheduleNextChange = () => {
       stopTimer();
-      if (!enabled) {
+      if (!enabled || !domainAllowed) {
         return;
       }
 
@@ -136,19 +162,22 @@
       });
     };
 
-    const update = (nextEnabled: boolean, config: WobbleConfig) => {
+    const update = (nextEnabled: boolean, config: WobbleConfig, nextDomainAllowed: boolean) => {
       const normalizedConfig = normalizeConfig(config);
-      const wasEnabled = enabled;
+      const wasActive = enabled && domainAllowed;
       const cycleChanged = cycleSeconds !== normalizedConfig.cycleSeconds;
       angle = normalizedConfig.angle;
       cycleSeconds = normalizedConfig.cycleSeconds;
       randomAngle = normalizedConfig.randomAngle;
       enabled = nextEnabled;
+      domainAllowed = nextDomainAllowed;
 
-      if (!enabled) {
+      if (!enabled || !domainAllowed) {
         stopTimer();
-        direction = 1;
-        currentRotation = 0;
+        if (!enabled) {
+          direction = 1;
+          currentRotation = 0;
+        }
         restorePageStyles();
         return getStatus();
       }
@@ -158,7 +187,7 @@
       page.style.setProperty('will-change', 'transform', 'important');
       applyAngle();
 
-      if (!wasEnabled || cycleChanged || timer === undefined) {
+      if (!wasActive || cycleChanged || timer === undefined) {
         scheduleNextChange();
       }
       return getStatus();
@@ -172,9 +201,25 @@
         sendResponse(controller.getStatus());
       }
       if (message?.type === SET_CONFIG_MESSAGE) {
-        sendResponse(controller.update(Boolean(message.enabled), message.config));
+        sendResponse(
+          controller.update(
+            Boolean(message.enabled),
+            message.config,
+            message.domainAllowed !== false
+          )
+        );
       }
       return false;
+    });
+
+    chrome.storage.onChanged.addListener((changes, areaName) => {
+      const domainRulesChange = changes[DOMAIN_RULES_STORAGE_KEY];
+      if (areaName === 'local' && enabled && domainRulesChange) {
+        const nextDomainAllowed = isCurrentDomainAllowed(domainRulesChange.newValue);
+        if (domainAllowed !== nextDomainAllowed) {
+          controller.update(true, { angle, cycleSeconds, randomAngle }, nextDomainAllowed);
+        }
+      }
     });
   }
 })();

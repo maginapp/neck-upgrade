@@ -28,6 +28,7 @@ export interface GetPageWobbleStatusMessage extends BaseMessage {
 export interface SetPageWobbleConfigMessage extends BaseMessage {
   type: typeof MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG;
   enabled: boolean;
+  domainAllowed: boolean;
   config: PageWobbleConfig;
 }
 

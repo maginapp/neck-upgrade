@@ -1,16 +1,22 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import { MESSAGE_TYPES } from '@/constants/events';
-import { PageWobbleConfig, PageWobbleStatus } from '@/types/app';
+import { PageWobbleConfig, PageWobbleDomainRules, PageWobbleStatus } from '@/types/app';
 import { ChromeMessage, SettingsOpenStatusMessage } from '@/types/message';
 import {
   DEFAULT_PAGE_WOBBLE_CONFIG,
+  DEFAULT_PAGE_WOBBLE_DOMAIN_RULES,
+  getPageWobbleDomainAccess,
   getPageWobbleCyclePosition,
   getPageWobbleCycleSeconds,
   getPageWobbleRemainingSeconds,
+  isPageWobbleDomainAllowed,
   isPageWobbleSupportedUrl,
   normalizePageWobbleConfig,
+  normalizePageWobbleDomain,
+  normalizePageWobbleDomainRules,
   PAGE_WOBBLE_CYCLE_SLIDER_MAX,
+  PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY,
   PAGE_WOBBLE_LIMITS,
   PAGE_WOBBLE_STORAGE_KEY,
 } from '@/utils/pageWobble';
@@ -37,6 +43,22 @@ const getStoredWobbleConfig = () => {
 
 const saveWobbleConfig = (config: PageWobbleConfig) => {
   chrome.storage.local.set({ [PAGE_WOBBLE_STORAGE_KEY]: config });
+};
+
+const getStoredDomainRules = () => {
+  return new Promise<PageWobbleDomainRules>((resolve) => {
+    chrome.storage.local.get(PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY, (items) => {
+      const rules = normalizePageWobbleDomainRules(items[PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY]);
+      chrome.storage.local.set({ [PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY]: rules });
+      resolve(rules);
+    });
+  });
+};
+
+const saveDomainRules = (rules: PageWobbleDomainRules) => {
+  return new Promise<void>((resolve) => {
+    chrome.storage.local.set({ [PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY]: rules }, resolve);
+  });
 };
 
 const sendTabMessage = <T,>(tabId: number, message: ChromeMessage) => {
@@ -70,6 +92,11 @@ export const Popup: React.FC = () => {
   const [currentTabId, setCurrentTabId] = useState<number | undefined>();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isPageSupported, setIsPageSupported] = useState(false);
+  const [currentDomain, setCurrentDomain] = useState('');
+  const [domainRules, setDomainRules] = useState(DEFAULT_PAGE_WOBBLE_DOMAIN_RULES);
+  const [whitelistInput, setWhitelistInput] = useState('');
+  const [blacklistInput, setBlacklistInput] = useState('');
+  const [showDomainRules, setShowDomainRules] = useState(false);
   const [wobbleEnabled, setWobbleEnabled] = useState(false);
   const [wobbleConfig, setWobbleConfig] = useState(DEFAULT_PAGE_WOBBLE_CONFIG);
   const [wobblePending, setWobblePending] = useState(true);
@@ -81,16 +108,20 @@ export const Popup: React.FC = () => {
     let cancelled = false;
 
     const initialize = async () => {
-      const [currentTab, storedConfig] = await Promise.all([
+      const [currentTab, storedConfig, storedRules] = await Promise.all([
         getActiveTab(),
         getStoredWobbleConfig(),
+        getStoredDomainRules(),
       ]);
       if (cancelled) {
         return;
       }
 
       setWobbleConfig(storedConfig);
+      setDomainRules(storedRules);
       setCurrentTabId(currentTab?.id);
+      const domain = normalizePageWobbleDomain(currentTab?.url);
+      setCurrentDomain(domain);
 
       const newTab = currentTab?.url === 'chrome://newtab/';
       setIsNewTab(newTab);
@@ -111,10 +142,23 @@ export const Popup: React.FC = () => {
         type: MESSAGE_TYPES.GET_PAGE_WOBBLE_STATUS,
       });
       if (!cancelled && status) {
-        setWobbleEnabled(status.enabled);
-        setNextChangeAt(status.nextChangeAt);
-        if (status.enabled) {
-          setWobbleConfig(normalizePageWobbleConfig(status));
+        const activeConfig = normalizePageWobbleConfig(status);
+        if (status.enabled && !isPageWobbleDomainAllowed(domain, storedRules)) {
+          const suspendedStatus = await sendTabMessage<PageWobbleStatus>(currentTab.id, {
+            type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
+            enabled: true,
+            domainAllowed: false,
+            config: activeConfig,
+          });
+          setWobbleEnabled(suspendedStatus?.enabled ?? true);
+          setNextChangeAt(suspendedStatus?.nextChangeAt ?? null);
+          setWobbleConfig(activeConfig);
+        } else {
+          setWobbleEnabled(status.enabled);
+          setNextChangeAt(status.nextChangeAt);
+          if (status.enabled) {
+            setWobbleConfig(activeConfig);
+          }
         }
       }
       if (!cancelled) {
@@ -161,6 +205,7 @@ export const Popup: React.FC = () => {
       void sendTabMessage<PageWobbleStatus>(currentTabId, {
         type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
         enabled: true,
+        domainAllowed: isDomainAllowed,
         config: normalizedConfig,
       }).then((status) => {
         if (status) {
@@ -170,6 +215,76 @@ export const Popup: React.FC = () => {
       });
     }
   };
+
+  const updateDomainRules = async (nextRules: PageWobbleDomainRules) => {
+    const normalizedRules = normalizePageWobbleDomainRules(nextRules);
+    setDomainRules(normalizedRules);
+    await saveDomainRules(normalizedRules);
+
+    if (wobbleEnabled && currentTabId) {
+      const domainAllowed = isPageWobbleDomainAllowed(currentDomain, normalizedRules);
+      const status = await sendTabMessage<PageWobbleStatus>(currentTabId, {
+        type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
+        enabled: true,
+        domainAllowed,
+        config: wobbleConfig,
+      });
+      if (status) {
+        setWobbleEnabled(status.enabled);
+        setNextChangeAt(status.nextChangeAt);
+        setClock(Date.now());
+      }
+    }
+  };
+
+  const addDomainRule = async (list: keyof PageWobbleDomainRules, value: string) => {
+    const domain = normalizePageWobbleDomain(value);
+    if (!domain) {
+      return false;
+    }
+
+    const otherList = list === 'whitelist' ? 'blacklist' : 'whitelist';
+    await updateDomainRules({
+      ...domainRules,
+      [list]: [...domainRules[list], domain],
+      [otherList]: domainRules[otherList].filter((item) => item !== domain),
+    });
+    return true;
+  };
+
+  const removeDomainRule = async (list: keyof PageWobbleDomainRules, domain: string) => {
+    await updateDomainRules({
+      ...domainRules,
+      [list]: domainRules[list].filter((item) => item !== domain),
+    });
+  };
+
+  const removeCurrentDomainRule = async () => {
+    await updateDomainRules({
+      whitelist: domainRules.whitelist.filter((item) => item !== currentDomain),
+      blacklist: domainRules.blacklist.filter((item) => item !== currentDomain),
+    });
+  };
+
+  const handleDomainSubmit = async (
+    event: FormEvent<HTMLFormElement>,
+    list: keyof PageWobbleDomainRules
+  ) => {
+    event.preventDefault();
+    const input = list === 'whitelist' ? whitelistInput : blacklistInput;
+    if (await addDomainRule(list, input)) {
+      if (list === 'whitelist') {
+        setWhitelistInput('');
+      } else {
+        setBlacklistInput('');
+      }
+    }
+  };
+
+  const domainAccess = getPageWobbleDomainAccess(currentDomain, domainRules);
+  const isDomainAllowed = domainAccess === 'allowed';
+  const hasCurrentDomainRule =
+    domainRules.whitelist.includes(currentDomain) || domainRules.blacklist.includes(currentDomain);
 
   const handleToggleWobble = async () => {
     if (!currentTabId || !isPageSupported || wobblePending) {
@@ -191,6 +306,7 @@ export const Popup: React.FC = () => {
       const status = await sendTabMessage<PageWobbleStatus>(currentTabId, {
         type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
         enabled: nextEnabled,
+        domainAllowed: isDomainAllowed,
         config: wobbleConfig,
       });
       if (!status) {
@@ -199,6 +315,7 @@ export const Popup: React.FC = () => {
       setWobbleEnabled(status.enabled);
       setNextChangeAt(status.nextChangeAt);
       setClock(Date.now());
+      setShowDomainRules(status.enabled);
     } catch {
       setWobbleEnabled(false);
       setWobbleError(chrome.i18n.getMessage('popup_wobble_error'));
@@ -311,9 +428,18 @@ export const Popup: React.FC = () => {
             {chrome.i18n.getMessage('popup_wobble_unsupported')}
           </p>
         )}
+        {isPageSupported && !isDomainAllowed && !wobblePending && (
+          <p className={styles.featureNotice}>
+            {chrome.i18n.getMessage(
+              domainAccess === 'blacklisted'
+                ? 'popup_wobble_domain_blacklisted'
+                : 'popup_wobble_domain_not_whitelisted'
+            )}
+          </p>
+        )}
         {wobbleError && <p className={styles.featureError}>{wobbleError}</p>}
 
-        {wobbleEnabled && isPageSupported && (
+        {wobbleEnabled && isPageSupported && isDomainAllowed && (
           <div className={styles.wobbleControls}>
             <div className={styles.randomMode}>
               <div>
@@ -416,6 +542,114 @@ export const Popup: React.FC = () => {
               <span>{chrome.i18n.getMessage('popup_wobble_next_change')}</span>
               <strong className={styles.countdown}>{formatCountdown(remainingSeconds)}</strong>
             </div>
+          </div>
+        )}
+
+        {isPageSupported && currentDomain && (wobbleEnabled || showDomainRules) && (
+          <div className={styles.domainControl}>
+            <div className={styles.domainHeader}>
+              <div>
+                <span className={styles.domainLabel}>
+                  {chrome.i18n.getMessage('popup_wobble_current_domain')}
+                </span>
+                <code title={currentDomain}>{currentDomain}</code>
+              </div>
+              <span
+                className={`${styles.domainStatus} ${
+                  isDomainAllowed ? styles.domainAllowed : styles.domainBlocked
+                }`}
+              >
+                {chrome.i18n.getMessage(
+                  isDomainAllowed ? 'popup_wobble_domain_allowed' : 'popup_wobble_domain_blocked'
+                )}
+              </span>
+            </div>
+
+            <div className={styles.domainQuickActions}>
+              <button
+                type="button"
+                aria-pressed={domainRules.whitelist.includes(currentDomain)}
+                className={
+                  domainRules.whitelist.includes(currentDomain) ? styles.domainActionActive : ''
+                }
+                onClick={() => void addDomainRule('whitelist', currentDomain)}
+              >
+                {chrome.i18n.getMessage('popup_wobble_add_whitelist')}
+              </button>
+              <button
+                type="button"
+                aria-pressed={domainRules.blacklist.includes(currentDomain)}
+                className={
+                  domainRules.blacklist.includes(currentDomain) ? styles.domainActionDanger : ''
+                }
+                onClick={() => void addDomainRule('blacklist', currentDomain)}
+              >
+                {chrome.i18n.getMessage('popup_wobble_add_blacklist')}
+              </button>
+              {hasCurrentDomainRule && (
+                <button type="button" onClick={() => void removeCurrentDomainRule()}>
+                  {chrome.i18n.getMessage('popup_wobble_remove_current_rule')}
+                </button>
+              )}
+            </div>
+
+            <details className={styles.domainManager}>
+              <summary>{chrome.i18n.getMessage('popup_wobble_manage_domains')}</summary>
+              <p className={styles.domainHint}>
+                {chrome.i18n.getMessage('popup_wobble_domain_rules_hint')}
+              </p>
+
+              {(['whitelist', 'blacklist'] as const).map((list) => {
+                const input = list === 'whitelist' ? whitelistInput : blacklistInput;
+                const setInput = list === 'whitelist' ? setWhitelistInput : setBlacklistInput;
+                return (
+                  <div className={styles.domainList} key={list}>
+                    <strong>
+                      {chrome.i18n.getMessage(
+                        list === 'whitelist' ? 'popup_wobble_whitelist' : 'popup_wobble_blacklist'
+                      )}
+                    </strong>
+                    <form
+                      className={styles.domainForm}
+                      onSubmit={(event) => void handleDomainSubmit(event, list)}
+                    >
+                      <input
+                        type="text"
+                        value={input}
+                        placeholder={chrome.i18n.getMessage('popup_wobble_domain_placeholder')}
+                        aria-label={chrome.i18n.getMessage('popup_wobble_domain_placeholder')}
+                        onChange={(event) => setInput(event.target.value)}
+                      />
+                      <button type="submit">
+                        {chrome.i18n.getMessage('popup_wobble_add_domain')}
+                      </button>
+                    </form>
+                    <div className={styles.domainChips}>
+                      {domainRules[list].length === 0 ? (
+                        <span className={styles.domainEmpty}>
+                          {chrome.i18n.getMessage('popup_wobble_domain_list_empty')}
+                        </span>
+                      ) : (
+                        domainRules[list].map((domain) => (
+                          <span className={styles.domainChip} key={domain}>
+                            <span title={domain}>{domain}</span>
+                            <button
+                              type="button"
+                              aria-label={`${chrome.i18n.getMessage(
+                                'popup_wobble_remove_domain'
+                              )} ${domain}`}
+                              onClick={() => void removeDomainRule(list, domain)}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </details>
           </div>
         )}
       </section>

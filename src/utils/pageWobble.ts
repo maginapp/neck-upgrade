@@ -1,6 +1,7 @@
-import { PageWobbleConfig } from '@/types/app';
+import { PageWobbleConfig, PageWobbleDomainRules } from '@/types/app';
 
 export const PAGE_WOBBLE_STORAGE_KEY = 'page_wobble_config';
+export const PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY = 'page_wobble_domain_rules';
 
 export const PAGE_WOBBLE_LIMITS = {
   angle: { min: 0, max: 180 },
@@ -24,6 +25,11 @@ export const DEFAULT_PAGE_WOBBLE_CONFIG: PageWobbleConfig = {
   angle: 15,
   cycleSeconds: 60,
   randomAngle: false,
+};
+
+export const DEFAULT_PAGE_WOBBLE_DOMAIN_RULES: PageWobbleDomainRules = {
+  whitelist: [],
+  blacklist: [],
 };
 
 const normalizeNumber = (value: unknown, min: number, max: number, fallback: number) => {
@@ -116,6 +122,72 @@ export const getPageWobbleRemainingSeconds = (
 
   const elapsedAfterChange = Math.abs(remainingMilliseconds) % cycleMilliseconds;
   return Math.ceil((cycleMilliseconds - elapsedAfterChange) / 1000);
+};
+
+export const normalizePageWobbleDomain = (value: unknown) => {
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  const input = value.trim().toLowerCase().replace(/^\*\./u, '');
+  if (!input) {
+    return '';
+  }
+
+  try {
+    const url = new URL(/^[a-z][a-z\d+.-]*:\/\//iu.test(input) ? input : `https://${input}`);
+    return url.hostname.replace(/^\.+|\.+$/gu, '');
+  } catch {
+    return '';
+  }
+};
+
+const normalizeDomainList = (value: unknown) => {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return [...new Set(value.map(normalizePageWobbleDomain).filter(Boolean))].sort();
+};
+
+export const normalizePageWobbleDomainRules = (value: unknown): PageWobbleDomainRules => {
+  const rules = value && typeof value === 'object' ? (value as Record<string, unknown>) : {};
+  return {
+    whitelist: normalizeDomainList(rules.whitelist),
+    blacklist: normalizeDomainList(rules.blacklist),
+  };
+};
+
+const matchesDomainRule = (domain: string, rule: string) => {
+  return domain === rule || domain.endsWith(`.${rule}`);
+};
+
+export type PageWobbleDomainAccess = 'allowed' | 'blacklisted' | 'not-whitelisted';
+
+export const getPageWobbleDomainAccess = (
+  domain: string,
+  rules: PageWobbleDomainRules
+): PageWobbleDomainAccess => {
+  const normalizedDomain = normalizePageWobbleDomain(domain);
+  const normalizedRules = normalizePageWobbleDomainRules(rules);
+  if (
+    normalizedDomain &&
+    normalizedRules.blacklist.some((rule) => matchesDomainRule(normalizedDomain, rule))
+  ) {
+    return 'blacklisted';
+  }
+  if (
+    normalizedRules.whitelist.length > 0 &&
+    (!normalizedDomain ||
+      !normalizedRules.whitelist.some((rule) => matchesDomainRule(normalizedDomain, rule)))
+  ) {
+    return 'not-whitelisted';
+  }
+  return 'allowed';
+};
+
+export const isPageWobbleDomainAllowed = (domain: string, rules: PageWobbleDomainRules) => {
+  return getPageWobbleDomainAccess(domain, rules) === 'allowed';
 };
 
 export const isPageWobbleSupportedUrl = (url?: string) => {
