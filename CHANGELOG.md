@@ -1,5 +1,15 @@
 # Neck Upgrade ChangeLog
 
+## 1.3.0
+
+### Minor Changes
+
+- 功能优化与修复
+
+  1. 添加诗词 - 多级分类选择逻辑
+  2. 取消hover效果
+  3. 修复缓存展示逻辑
+
 ## 1.2.5
 
 ### Patch Changes

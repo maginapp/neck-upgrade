@@ -3,7 +3,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { PoetrySource, PoetrySourceCategory } from '@/constants/poetry';
 import { Poetry } from '@/types';
 
-import { filterPoetryData, getNextPoem, getPoetryScopeKey } from './poetryLearning';
+import { getNextRecord } from './generateNext';
+import { filterPoetryData, getNextPoem, getPoetryScopeKey, isSamePoetry } from './poetryLearning';
 
 const poetryData: Poetry[] = [
   {
@@ -251,5 +252,72 @@ describe('getNextPoem', () => {
     });
 
     expect(first).toBe(second);
+  });
+
+  it('使用正文行数及首、中、末行的前三个非空字符区分同名蒙学记录', () => {
+    const first: Poetry = {
+      title: '增广贤文 · 上集',
+      author: '佚名',
+      paragraphs: ['  昔 时 贤文，诲汝谆谆', '观今宜鉴古', '无古不成今'],
+      category: PoetrySourceCategory.Primer,
+      sources: [PoetrySource.Zengguang],
+    };
+    const differentFirstLine: Poetry = {
+      ...first,
+      paragraphs: ['集韵增广，多见多闻', '观今宜鉴古', '无古不成今'],
+    };
+    const sameSamples: Poetry = {
+      ...first,
+      paragraphs: ['昔时贤，其他文字', '观今宜，其他文字', '无古不，其他文字'],
+    };
+
+    expect(isSamePoetry(first, differentFirstLine)).toBe(false);
+    expect(
+      isSamePoetry(first, {
+        ...first,
+        paragraphs: [first.paragraphs[0], '察今宜鉴古', first.paragraphs[2]],
+      })
+    ).toBe(false);
+    expect(
+      isSamePoetry(first, {
+        ...first,
+        paragraphs: [first.paragraphs[0], first.paragraphs[1], '今古无不成'],
+      })
+    ).toBe(false);
+    expect(isSamePoetry(first, sameSamples)).toBe(true);
+    expect(isSamePoetry(first, { ...first, paragraphs: [...first.paragraphs, '新增一行'] })).toBe(
+      false
+    );
+  });
+
+  it('历史记录覆盖全部等价候选时应该自动开始新一轮', async () => {
+    const cacheKey = 'duplicate-record-learning';
+    const data = Array.from({ length: 20 }, (_, index) => ({
+      id: index,
+      group: index < 10 ? '上集' : '下集',
+    }));
+    const records = {
+      history: [
+        {
+          date: '2024-03-19',
+          records: [data[0], data[10]],
+        },
+      ],
+      todayNew: { records: [], currentIndex: 0 },
+      todayReview: { records: [], currentIndex: 0 },
+      currentDate: '2024-03-19',
+    };
+
+    mockStorageResult({ [cacheKey]: records });
+
+    const result = await getNextRecord({
+      cacheKey,
+      compareFn: (first, second) => first.group === second.group,
+      getData: () => data,
+      unitCount: 4,
+      batchSize: 2,
+    });
+
+    expect(result).toHaveLength(2);
   });
 });

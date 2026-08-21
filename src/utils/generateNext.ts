@@ -5,7 +5,6 @@ import { dateUtils } from './base';
 const REVIEW_RATIO = 5; // 每5次复习，插入1次当天学习的
 // 艾宾浩斯遗忘曲线复习间隔（天数）
 const EBBINGHAUS_INTERVALS = [1, 2, 4, 7, 15, 30];
-const MAX_RETRY_COUNT = 3;
 const SELECTED_COUNT = 4;
 const REVIEW_COUNT = 30; // 复习天数
 
@@ -124,21 +123,18 @@ const selectRandom = <T>(
     return [];
   }
 
-  const result: Set<T> = new Set();
-  let retryCount = 0;
+  const pool = [...availableRecords];
+  const result: T[] = [];
 
-  while (result.size < batchSize && retryCount < MAX_RETRY_COUNT) {
-    for (let i = 0; i < batchSize; i++) {
-      const randomIndex = Math.floor(Math.random() * availableRecords.length);
-      const selectedRecord = availableRecords[randomIndex];
-      if (selectedRecord !== undefined) {
-        result.add(selectedRecord);
-      }
+  while (result.length < batchSize && pool.length > 0) {
+    const randomIndex = Math.floor(Math.random() * pool.length);
+    const [selectedRecord] = pool.splice(randomIndex, 1);
+    if (!result.some((record) => compareFn(record, selectedRecord))) {
+      result.push(selectedRecord);
     }
-    retryCount++;
   }
 
-  return [...result];
+  return result;
 };
 
 /**
@@ -147,7 +143,7 @@ const selectRandom = <T>(
  * 1. 优先返回当天新增的学习记录
  * 2. 如果当天新增记录不足，则从复习列表中补充
  * 3. 如果当天没有记录，会重新生成新的学习记录和复习列表
- * 4. 使用 Set 去重确保返回的记录不重复
+ * 4. 使用 compareFn 去重确保返回的记录在业务语义上不重复
  *
  * @template T 记录类型
  * @param {Object} params 参数对象
@@ -188,11 +184,13 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
   const currentDate = dateUtils.getCurrentDate();
   const records = await getLearningRecords<T>(cacheKey, currentDate);
 
-  // 检查是否需要重置当天的记录
-  if (
-    currentDate !== records.currentDate ||
-    (records.todayNew.currentIndex === 0 && records.todayNew.records.length === 0)
-  ) {
+  const todayNewExhausted =
+    !records.todayNew.records?.length ||
+    records.todayNew.currentIndex >= records.todayNew.records.length;
+  const todayReviewEmpty = !records.todayReview.records?.length;
+
+  // 检查是否需要重置当天的记录。兼容已经写入空队列的旧缓存。
+  if (currentDate !== records.currentDate || (todayNewExhausted && todayReviewEmpty)) {
     records.currentDate = currentDate;
     const data = await getData();
 
@@ -201,12 +199,14 @@ export const getNextRecord = async <T>(params: NextRecordParams<T>): Promise<T[]
       .flatMap((record) => record.records)
       .filter((item) => item);
 
-    // 选择与历史记录不重复的诗词 数量 unitCount
-    let selectedRecords: T[];
-    if (allPreviousRecords.length + unitCount > data.length) {
-      selectedRecords = selectRandom(unitCount, data, compareFn, []);
-    } else {
-      selectedRecords = selectRandom(unitCount, data, compareFn, allPreviousRecords);
+    // 优先选择历史中未出现的内容；不足一天数量时，从新一轮数据中补齐。
+    // 不能用“历史条数 vs 数据条数”判断是否耗尽，因为多个数据项可能被 compareFn
+    // 视为同一条记录（例如同标题、同作者的古文分段）。
+    const selectedRecords = selectRandom(unitCount, data, compareFn, allPreviousRecords);
+    if (selectedRecords.length < unitCount && data.length > 0) {
+      selectedRecords.push(
+        ...selectRandom(unitCount - selectedRecords.length, data, compareFn, selectedRecords)
+      );
     }
 
     // 更新当天新增的诗词
