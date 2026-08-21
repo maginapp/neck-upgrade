@@ -1,9 +1,15 @@
 import { describe, expect, it } from 'vitest';
 
 import { MOD_CONFIG } from '@/constants';
-import { AppLanguage, DataType, NeckMode, Theme } from '@/types/app';
+import { AppLanguage, ChineseBasicsCategory, DataType, NeckMode, Theme } from '@/types/app';
 
-import { getDataTypeLabel, getNeckModeLabel, getNewsLabel, getThemeLabel } from './labels';
+import {
+  getChineseBasicsCategoryLabel,
+  getDataTypeLabel,
+  getNeckModeLabel,
+  getNewsLabel,
+  getThemeLabel,
+} from './labels';
 
 describe('颈椎阅读模式', () => {
   it('应该提供阅读标签并保持页面不旋转', () => {
@@ -38,5 +44,16 @@ describe('颈椎阅读模式', () => {
     expect(getThemeLabel(Theme.System, AppLanguage.Fr)).toBe('Système');
     expect(getDataTypeLabel(DataType.News, AppLanguage.Fr)).toBe('Tendances');
     expect(getNewsLabel('美食', AppLanguage.Fr)).toBe('Cuisine');
+  });
+
+  it('应该提供中文基础内容及分类标签', () => {
+    expect(getDataTypeLabel(DataType.ChineseBasics, AppLanguage.ZhCN)).toBe('中文基础');
+    expect(getDataTypeLabel(DataType.ChineseBasics, AppLanguage.En)).toBe('Chinese Basics');
+    expect(getChineseBasicsCategoryLabel(ChineseBasicsCategory.Idiom, AppLanguage.ZhTW)).toBe(
+      '成語'
+    );
+    expect(getChineseBasicsCategoryLabel(ChineseBasicsCategory.Xiehouyu, AppLanguage.Fr)).toBe(
+      'Proverbes à chute'
+    );
   });
 });

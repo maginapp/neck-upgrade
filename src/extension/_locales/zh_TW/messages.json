@@ -390,5 +390,20 @@
   "lunar_pengzu_earth_8": { "message": "申不安牀鬼祟入房" },
   "lunar_pengzu_earth_9": { "message": "酉不會客醉坐顛狂" },
   "lunar_pengzu_earth_10": { "message": "戌不喫犬作怪上牀" },
-  "lunar_pengzu_earth_11": { "message": "亥不嫁娶不利新郎" }
+  "lunar_pengzu_earth_11": { "message": "亥不嫁娶不利新郎" },
+  "settings_chinese_basics_category": {
+    "message": "中文基礎分類",
+    "description": "中文基礎分類設置標題"
+  },
+  "chinese_basics_source": {
+    "message": "資料來源：chinese-xinhua",
+    "description": "中文基礎資料來源連結"
+  },
+  "chinese_basics_pinyin": { "message": "拼音", "description": "拼音欄位標籤" },
+  "chinese_basics_radical": { "message": "部首", "description": "部首欄位標籤" },
+  "chinese_basics_strokes": { "message": "筆畫", "description": "筆畫欄位標籤" },
+  "chinese_basics_traditional": { "message": "繁體", "description": "繁體字欄位標籤" },
+  "chinese_basics_answer": { "message": "謎底", "description": "歇後語答案欄位標籤" },
+  "chinese_basics_derivation": { "message": "出處", "description": "成語出處欄位標籤" },
+  "chinese_basics_example": { "message": "例句", "description": "成語例句欄位標籤" }
 }

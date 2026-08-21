@@ -3,7 +3,16 @@ export enum DataType {
   Poetry = 'poetry',
   History = 'history',
   English = 'english',
+  ChineseBasics = 'chinese_basics',
   News = 'news',
+}
+
+export enum ChineseBasicsCategory {
+  All = 'all',
+  Idiom = 'idiom',
+  Character = 'character',
+  Xiehouyu = 'xiehouyu',
+  Word = 'word',
 }
 
 // 主题类型
@@ -65,6 +74,10 @@ export interface PoetrySourceConfig {
   sources: PoetrySource[];
 }
 
+export interface ChineseBasicsConfig {
+  category: ChineseBasicsCategory;
+}
+
 export interface Settings {
   language: AppLanguage;
   theme: Theme;
@@ -72,6 +85,7 @@ export interface Settings {
   dataType: DataType;
   knowledge: KnowledgeMode;
   poetry: PoetrySourceConfig;
+  chineseBasics: ChineseBasicsConfig;
 }
 
 export interface PageInfo {

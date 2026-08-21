@@ -1,5 +1,11 @@
 # Neck Upgrade ChangeLog
 
+## 1.5.0
+
+### Minor Changes
+
+- 添加中文基础模块
+
 ## 1.4.0
 
 ### Minor Changes

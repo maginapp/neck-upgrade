@@ -971,5 +971,29 @@
   },
   "lunar_pengzu_earth_11": {
     "message": "On Hai days, do not marry, or it may harm the groom「亥不嫁娶不利新郎」"
-  }
+  },
+  "settings_chinese_basics_category": {
+    "message": "Chinese basics category",
+    "description": "The Chinese basics category setting title"
+  },
+  "chinese_basics_source": {
+    "message": "Data source: chinese-xinhua",
+    "description": "The Chinese basics data source link"
+  },
+  "chinese_basics_pinyin": { "message": "Pinyin", "description": "The pinyin field label" },
+  "chinese_basics_radical": { "message": "Radical", "description": "The radical field label" },
+  "chinese_basics_strokes": { "message": "Strokes", "description": "The stroke count field label" },
+  "chinese_basics_traditional": {
+    "message": "Traditional",
+    "description": "The traditional character field label"
+  },
+  "chinese_basics_answer": {
+    "message": "Answer",
+    "description": "The two-part saying answer field label"
+  },
+  "chinese_basics_derivation": {
+    "message": "Source",
+    "description": "The idiom derivation field label"
+  },
+  "chinese_basics_example": { "message": "Example", "description": "The idiom example field label" }
 }

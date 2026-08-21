@@ -2,7 +2,15 @@ import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
 import { PoetrySourceCategory } from '@/constants/poetry';
-import { AppLanguage, DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
+import {
+  AppLanguage,
+  ChineseBasicsCategory,
+  DataType,
+  Theme,
+  NeckMode,
+  Settings,
+  KnowledgeMode,
+} from '@/types/app';
 import { LocalManager } from '@/utils/cacheManager';
 
 /**
@@ -58,6 +66,9 @@ const createDefaultSettings = (): Settings => {
       category: PoetrySourceCategory.All,
       sources: [],
     },
+    chineseBasics: {
+      category: ChineseBasicsCategory.All,
+    },
   };
 };
 
@@ -86,6 +97,10 @@ const normalizeSettings = (storedSettings: Settings | null): Settings => {
     poetry: {
       ...defaultSettings.poetry,
       ...storedSettings.poetry,
+    },
+    chineseBasics: {
+      ...defaultSettings.chineseBasics,
+      ...storedSettings.chineseBasics,
     },
   };
 };

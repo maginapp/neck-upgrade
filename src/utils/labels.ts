@@ -1,5 +1,12 @@
 import { PoetrySource, PoetrySourceCategory } from '@/constants/poetry';
-import { AppLanguage, Theme, NeckMode, DataType, KnowledgeMode } from '@/types/app';
+import {
+  AppLanguage,
+  ChineseBasicsCategory,
+  Theme,
+  NeckMode,
+  DataType,
+  KnowledgeMode,
+} from '@/types/app';
 
 interface LocalizedLabel {
   [AppLanguage.ZhCN]: string;
@@ -103,6 +110,13 @@ export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): s
       ru: 'Английский',
       fr: 'Anglais',
     },
+    [DataType.ChineseBasics]: {
+      zh_CN: '中文基础',
+      zh_TW: '中文基礎',
+      en: 'Chinese Basics',
+      ru: 'Основы китайского',
+      fr: 'Bases du chinois',
+    },
     [DataType.News]: {
       zh_CN: '热榜',
       zh_TW: '熱榜',
@@ -112,6 +126,51 @@ export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): s
     },
   };
   return labels[type][language];
+};
+
+export const getChineseBasicsCategoryLabel = (
+  category: ChineseBasicsCategory,
+  language = AppLanguage.ZhCN
+) => {
+  const labels: Record<ChineseBasicsCategory, LocalizedLabel> = {
+    [ChineseBasicsCategory.All]: {
+      zh_CN: '全部',
+      zh_TW: '全部',
+      en: 'All',
+      ru: 'Все',
+      fr: 'Tout',
+    },
+    [ChineseBasicsCategory.Idiom]: {
+      zh_CN: '成语',
+      zh_TW: '成語',
+      en: 'Idioms',
+      ru: 'Идиомы',
+      fr: 'Expressions',
+    },
+    [ChineseBasicsCategory.Character]: {
+      zh_CN: '汉字',
+      zh_TW: '漢字',
+      en: 'Characters',
+      ru: 'Иероглифы',
+      fr: 'Caractères',
+    },
+    [ChineseBasicsCategory.Xiehouyu]: {
+      zh_CN: '歇后语',
+      zh_TW: '歇後語',
+      en: 'Two-part sayings',
+      ru: 'Недоговорки',
+      fr: 'Proverbes à chute',
+    },
+    [ChineseBasicsCategory.Word]: {
+      zh_CN: '词语',
+      zh_TW: '詞語',
+      en: 'Words',
+      ru: 'Слова',
+      fr: 'Mots',
+    },
+  };
+
+  return labels[category][language];
 };
 
 /**

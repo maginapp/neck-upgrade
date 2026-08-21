@@ -1017,5 +1017,32 @@
   },
   "lunar_pengzu_earth_11": {
     "message": "Les jours Hai, ne vous mariez pas, sinon cela pourrait nuire au marié「亥不嫁娶不利新郎」"
+  },
+  "settings_chinese_basics_category": {
+    "message": "Catégorie de chinois fondamental",
+    "description": "Titre du choix de catégorie de chinois fondamental"
+  },
+  "chinese_basics_source": {
+    "message": "Source des données : chinese-xinhua",
+    "description": "Lien vers la source des données"
+  },
+  "chinese_basics_pinyin": { "message": "Pinyin", "description": "Libellé du champ pinyin" },
+  "chinese_basics_radical": { "message": "Clé", "description": "Libellé de la clé du caractère" },
+  "chinese_basics_strokes": { "message": "Traits", "description": "Libellé du nombre de traits" },
+  "chinese_basics_traditional": {
+    "message": "Forme traditionnelle",
+    "description": "Libellé du caractère traditionnel"
+  },
+  "chinese_basics_answer": {
+    "message": "Réponse",
+    "description": "Libellé de la réponse du proverbe"
+  },
+  "chinese_basics_derivation": {
+    "message": "Origine",
+    "description": "Libellé de l'origine de l'expression"
+  },
+  "chinese_basics_example": {
+    "message": "Exemple",
+    "description": "Libellé de l'exemple de l'expression"
   }
 }

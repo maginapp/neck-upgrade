@@ -1017,5 +1017,26 @@
   },
   "lunar_pengzu_earth_11": {
     "message": "В дни Хай не вступайте в брак, иначе это повредит жениху「亥不嫁娶不利新郎」"
-  }
+  },
+  "settings_chinese_basics_category": {
+    "message": "Раздел основ китайского",
+    "description": "Заголовок выбора раздела основ китайского"
+  },
+  "chinese_basics_source": {
+    "message": "Источник данных: chinese-xinhua",
+    "description": "Ссылка на источник данных"
+  },
+  "chinese_basics_pinyin": { "message": "Пиньинь", "description": "Метка поля пиньинь" },
+  "chinese_basics_radical": { "message": "Ключ", "description": "Метка поля ключа иероглифа" },
+  "chinese_basics_strokes": { "message": "Черты", "description": "Метка количества черт" },
+  "chinese_basics_traditional": {
+    "message": "Традиционное написание",
+    "description": "Метка традиционного иероглифа"
+  },
+  "chinese_basics_answer": { "message": "Ответ", "description": "Метка ответа недоговорки" },
+  "chinese_basics_derivation": {
+    "message": "Источник",
+    "description": "Метка происхождения идиомы"
+  },
+  "chinese_basics_example": { "message": "Пример", "description": "Метка примера идиомы" }
 }

@@ -10,10 +10,12 @@ import {
   Settings as SettingsType,
   KnowledgeMode,
   PoetrySourceConfig,
+  ChineseBasicsConfig,
 } from '@/types/app';
 import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
 
 import { Appreciation } from './Appreciation';
+import { ChineseBasicsSwitch } from './ChineseBasicsSwitch';
 import { DataSwitch } from './DataSwitch';
 import { KnowledgeSwtich } from './KnowledgeSwtich';
 import { LanguageToggle } from './LanguageToggle';
@@ -51,6 +53,9 @@ export const Settings: React.FC<SettingsProps> = (props) => {
   };
   const onPoetrySourceChange = (poetry: PoetrySourceConfig) => {
     setSettings((prev) => ({ ...prev, poetry }));
+  };
+  const onChineseBasicsChange = (chineseBasics: ChineseBasicsConfig) => {
+    setSettings((prev) => ({ ...prev, chineseBasics }));
   };
 
   useEffect(() => {
@@ -111,6 +116,15 @@ export const Settings: React.FC<SettingsProps> = (props) => {
             <div className={styles.settingsGroup}>
               <h4>{t('settings_poetry_source')}</h4>
               <PoetrySourceSwitch config={settings.poetry} onChange={onPoetrySourceChange} />
+            </div>
+          )}
+          {settings.dataType === DataType.ChineseBasics && (
+            <div className={styles.settingsGroup}>
+              <h4>{t('settings_chinese_basics_category')}</h4>
+              <ChineseBasicsSwitch
+                config={settings.chineseBasics}
+                onChange={onChineseBasicsChange}
+              />
             </div>
           )}
           <div className={styles.settingsGroup}>

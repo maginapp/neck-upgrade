@@ -1,5 +1,6 @@
 import { DataType, Settings } from '@/types/app';
 
+import { ChineseBasics } from './ChineseBasics';
 import { English } from './English';
 import { History } from './History';
 import { News } from './News';
@@ -20,6 +21,8 @@ export const Content: React.FC<ContentProps> = (props) => {
         return <PoetryComponent sourceConfig={settings.poetry} />;
       case DataType.English:
         return <English />;
+      case DataType.ChineseBasics:
+        return <ChineseBasics config={settings.chineseBasics} />;
       case DataType.News:
         return <News />;
       default:

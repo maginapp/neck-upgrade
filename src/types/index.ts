@@ -4,6 +4,7 @@ export type { FamousInfo, FamousRecords, ZenquotesRsp, HitokotoData } from './fa
 export type { HolidayToday, KnowledgeData, HistoricalEvent, KnowledgeDisplay } from './knowledge';
 export type { LearningRecords, HistoryRecord } from './learn';
 export type { Poetry } from './poetry';
+export type { ChineseBasicsEntry } from './chineseBasics';
 export type {
   NewsItem,
   NewsData,

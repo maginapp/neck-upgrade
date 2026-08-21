@@ -1,6 +1,6 @@
 {
   "name": "neck-upgrade",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Chrome extension for neck health",
   "type": "module",
   "scripts": {
@@ -14,6 +14,7 @@
     "poetry:download": "tsx scripts/fetch-poetry/index.ts -- download",
     "poetry:process": "tsx scripts/fetch-poetry/index.ts -- process",
     "poetry:cleanup": "tsx scripts/fetch-poetry/index.ts -- cleanup",
+    "chinese-basics:process": "tsx scripts/process-chinese-basics.ts",
     "test": "vitest",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",

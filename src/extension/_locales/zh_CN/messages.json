@@ -971,5 +971,20 @@
   },
   "lunar_pengzu_earth_11": {
     "message": "亥不嫁娶不利新郎"
-  }
+  },
+  "settings_chinese_basics_category": {
+    "message": "中文基础分类",
+    "description": "中文基础分类设置标题"
+  },
+  "chinese_basics_source": {
+    "message": "数据来源：chinese-xinhua",
+    "description": "中文基础数据来源链接"
+  },
+  "chinese_basics_pinyin": { "message": "拼音", "description": "拼音字段标签" },
+  "chinese_basics_radical": { "message": "部首", "description": "部首字段标签" },
+  "chinese_basics_strokes": { "message": "笔画", "description": "笔画字段标签" },
+  "chinese_basics_traditional": { "message": "繁体", "description": "繁体字字段标签" },
+  "chinese_basics_answer": { "message": "谜底", "description": "歇后语答案字段标签" },
+  "chinese_basics_derivation": { "message": "出处", "description": "成语出处字段标签" },
+  "chinese_basics_example": { "message": "例句", "description": "成语例句字段标签" }
 }
