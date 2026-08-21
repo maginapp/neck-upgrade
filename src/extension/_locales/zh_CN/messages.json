@@ -15,6 +15,70 @@
     "message": "保护你的颈椎健康",
     "description": "弹窗描述"
   },
+  "popup_wobble_title": {
+    "message": "网页摇摆",
+    "description": "网页摇摆功能标题"
+  },
+  "popup_wobble_description": {
+    "message": "让当前页面定时改变倾斜方向",
+    "description": "网页摇摆功能描述"
+  },
+  "popup_wobble_angle": {
+    "message": "页面角度",
+    "description": "网页摇摆角度标签"
+  },
+  "popup_wobble_fixed_angle": {
+    "message": "固定角度",
+    "description": "固定网页摇摆角度标签"
+  },
+  "popup_wobble_max_angle": {
+    "message": "最大角度",
+    "description": "随机网页摇摆最大角度标签"
+  },
+  "popup_wobble_random_angle": {
+    "message": "范围内随机",
+    "description": "随机网页摇摆开关标签"
+  },
+  "popup_wobble_fixed_angle_hint": {
+    "message": "按设定角度在左右方向间切换",
+    "description": "固定角度模式说明"
+  },
+  "popup_wobble_random_angle_hint": {
+    "message": "每次在正负最大角度之间随机",
+    "description": "随机角度模式说明"
+  },
+  "popup_wobble_cycle": {
+    "message": "变化周期",
+    "description": "网页摇摆周期标签"
+  },
+  "popup_wobble_minutes": {
+    "message": "分钟",
+    "description": "分钟单位"
+  },
+  "popup_wobble_seconds": {
+    "message": "秒",
+    "description": "秒单位"
+  },
+  "popup_wobble_minute_short": {
+    "message": "分钟",
+    "description": "滑杆刻度的分钟单位"
+  },
+  "popup_wobble_second_short": {
+    "message": "秒",
+    "description": "滑杆刻度的秒单位"
+  },
+  "popup_wobble_next_change": {
+    "message": "距下次切换",
+    "description": "下一次网页角度变化提示"
+  },
+  "popup_wobble_unsupported": {
+    "message": "当前页面不支持控制，请打开普通网页后重试",
+    "description": "无法控制 Chrome 内部页面时的提示"
+  },
+  "popup_wobble_error": {
+    "message": "无法控制当前页面，请刷新页面后重试",
+    "description": "网页摇摆启用失败提示"
+  },
   "popup_btn_open_settings": {
     "message": "打开设置",
     "description": "打开设置按钮"

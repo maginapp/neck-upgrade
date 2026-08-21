@@ -1,4 +1,5 @@
 import { MESSAGE_TYPES } from '@/constants/events';
+import { PageWobbleConfig } from '@/types/app';
 
 type MessageType = (typeof MESSAGE_TYPES)[keyof typeof MESSAGE_TYPES];
 
@@ -20,7 +21,19 @@ export interface SettingsOpenStatusMessage extends BaseMessage {
   isOpen: boolean;
 }
 
+export interface GetPageWobbleStatusMessage extends BaseMessage {
+  type: typeof MESSAGE_TYPES.GET_PAGE_WOBBLE_STATUS;
+}
+
+export interface SetPageWobbleConfigMessage extends BaseMessage {
+  type: typeof MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG;
+  enabled: boolean;
+  config: PageWobbleConfig;
+}
+
 export type ChromeMessage =
   | ToggleActiveSettingsMessage
   | GetSettingsOpenStatusMessage
-  | SettingsOpenStatusMessage;
+  | SettingsOpenStatusMessage
+  | GetPageWobbleStatusMessage
+  | SetPageWobbleConfigMessage;

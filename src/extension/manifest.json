@@ -4,7 +4,7 @@
   "description": "__MSG_extension_description__",
   "default_locale": "en",
   "version": "1.0.0",
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": [
     "https://zh.wikipedia.org/*",
     "https://timor.tech/*",

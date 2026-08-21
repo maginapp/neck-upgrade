@@ -36,6 +36,17 @@ export interface NeckModeConfig {
   cusDuration: number;
 }
 
+export interface PageWobbleConfig {
+  angle: number;
+  cycleSeconds: number;
+  randomAngle: boolean;
+}
+
+export interface PageWobbleStatus extends PageWobbleConfig {
+  enabled: boolean;
+  nextChangeAt: number | null;
+}
+
 export interface PoetrySourceConfig {
   category: PoetrySourceCategory;
   sources: PoetrySource[];

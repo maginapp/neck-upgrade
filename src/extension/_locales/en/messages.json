@@ -15,6 +15,70 @@
     "message": "Protect your neck health",
     "description": "The description of the popup"
   },
+  "popup_wobble_title": {
+    "message": "Page Wobble",
+    "description": "The title of the page wobble feature"
+  },
+  "popup_wobble_description": {
+    "message": "Periodically tilt the current page",
+    "description": "The description of the page wobble feature"
+  },
+  "popup_wobble_angle": {
+    "message": "Page Angle",
+    "description": "The page wobble angle label"
+  },
+  "popup_wobble_fixed_angle": {
+    "message": "Fixed Angle",
+    "description": "The fixed page wobble angle label"
+  },
+  "popup_wobble_max_angle": {
+    "message": "Maximum Angle",
+    "description": "The random page wobble maximum angle label"
+  },
+  "popup_wobble_random_angle": {
+    "message": "Random Within Range",
+    "description": "The random page wobble switch label"
+  },
+  "popup_wobble_fixed_angle_hint": {
+    "message": "Alternate left and right at the selected angle",
+    "description": "The fixed angle mode hint"
+  },
+  "popup_wobble_random_angle_hint": {
+    "message": "Choose a new angle within the positive and negative limit",
+    "description": "The random angle mode hint"
+  },
+  "popup_wobble_cycle": {
+    "message": "Change Cycle",
+    "description": "The page wobble cycle label"
+  },
+  "popup_wobble_minutes": {
+    "message": "min",
+    "description": "The minute unit"
+  },
+  "popup_wobble_seconds": {
+    "message": "sec",
+    "description": "The second unit"
+  },
+  "popup_wobble_minute_short": {
+    "message": "min",
+    "description": "The short minute unit on range labels"
+  },
+  "popup_wobble_second_short": {
+    "message": "sec",
+    "description": "The short second unit on range labels"
+  },
+  "popup_wobble_next_change": {
+    "message": "Next change in",
+    "description": "The next page angle change hint"
+  },
+  "popup_wobble_unsupported": {
+    "message": "This page cannot be controlled. Open a regular website and try again.",
+    "description": "The notice for unsupported Chrome internal pages"
+  },
+  "popup_wobble_error": {
+    "message": "Unable to control this page. Refresh it and try again.",
+    "description": "The page wobble activation error"
+  },
   "popup_btn_open_settings": {
     "message": "Open Settings",
     "description": "The button to open the settings"

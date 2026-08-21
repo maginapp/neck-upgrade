@@ -16,6 +16,14 @@ const messages: Record<string, Messages> = {
   zh_CN: zhCN,
 };
 
+let mockWobbleStatus = {
+  enabled: false,
+  angle: 15,
+  cycleSeconds: 60,
+  randomAngle: false,
+  nextChangeAt: null as number | null,
+};
+
 // 获取当前浏览器语言
 const getBrowserLanguage = (): 'zh' | 'en' => {
   const lang = navigator.language.toLowerCase();
@@ -26,6 +34,7 @@ const getBrowserLanguage = (): 'zh' | 'en' => {
 const mockChrome = {
   runtime: {
     id: 'mock-extension-id',
+    lastError: undefined,
     getURL: (path: string) => {
       const normalizedPath = path.replace(/^\/+/, '');
       return new URL(normalizedPath, `${window.location.origin}/`).toString();
@@ -45,11 +54,12 @@ const mockChrome = {
   tabs: {
     query: (queryInfo: any, callback: (tabs: any[]) => void) => {
       console.log('Mock chrome.tabs.query:', queryInfo);
+      const mockWebsite = new URLSearchParams(window.location.search).get('mockTab') === 'website';
       // 模拟返回当前标签页
       callback([
         {
           id: 1,
-          url: 'chrome://newtab/',
+          url: mockWebsite ? 'https://example.com/' : 'chrome://newtab/',
           active: true,
         },
       ]);
@@ -57,8 +67,25 @@ const mockChrome = {
     create: (createProperties: any) => {
       console.log('Mock chrome.tabs.create:', createProperties);
     },
-    sendMessage: (tabId: number, message: any) => {
+    sendMessage: (tabId: number, message: any, callback?: (response: any) => void) => {
       console.log('Mock chrome.tabs.sendMessage:', { tabId, message });
+      if (message.type === 'popup:get-page-wobble-status') {
+        callback?.(mockWobbleStatus);
+      }
+      if (message.type === 'popup:set-page-wobble-config') {
+        mockWobbleStatus = {
+          ...message.config,
+          enabled: message.enabled,
+          nextChangeAt: message.enabled ? Date.now() + message.config.cycleSeconds * 1000 : null,
+        };
+        callback?.(mockWobbleStatus);
+      }
+    },
+  },
+  scripting: {
+    executeScript: async (details: any) => {
+      console.log('Mock chrome.scripting.executeScript:', details);
+      return [];
     },
   },
   storage: {
@@ -77,7 +104,7 @@ const mockChrome = {
     getMessage: (messageName: string): string => {
       const lang = getBrowserLanguage();
       const locale = lang === 'zh' ? 'zh_CN' : 'en';
-      return messages[locale][messageName].message || messageName;
+      return messages[locale][messageName]?.message || messageName;
     },
     getUILanguage: (): string => {
       return navigator.language;
