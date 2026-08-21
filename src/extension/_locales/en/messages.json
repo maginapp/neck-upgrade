@@ -7,10 +7,6 @@
     "message": "A Chrome extension that protects your neck health, move your neck, and lets you explore poetry, history, and hot trends.",
     "description": "The description of the extension"
   },
-  "popup_title": {
-    "message": "Neck Upgrade",
-    "description": "The title of the popup"
-  },
   "popup_description": {
     "message": "Protect your neck health",
     "description": "The description of the popup"
@@ -34,14 +30,6 @@
   "settings_title": {
     "message": "Settings",
     "description": "The settings sidebar title"
-  },
-  "settings_language": {
-    "message": "Interface language",
-    "description": "The interface language setting title"
-  },
-  "settings_theme": {
-    "message": "Theme",
-    "description": "The theme setting title"
   },
   "settings_neck_mode": {
     "message": "Neck tilt mode",
@@ -115,24 +103,20 @@
     "message": "Day ",
     "description": "The solar term day prefix"
   },
-  "header_term_day_suffix": {
-    "message": "",
-    "description": "The solar term day suffix"
-  },
   "header_suitable": {
-    "message": "Suitable",
+    "message": "Auspicious「宜」",
     "description": "The almanac suitable activities label"
   },
   "header_avoid": {
-    "message": "Avoid",
+    "message": "Avoid「忌」",
     "description": "The almanac activities to avoid label"
   },
   "header_julian_day": {
-    "message": "Julian day",
+    "message": "Julian Date",
     "description": "The Julian day label"
   },
   "header_pengzu": {
-    "message": "Peng Zu taboos",
+    "message": "Peng Zu's Taboos「彭祖百忌」",
     "description": "The Peng Zu taboos label"
   },
   "header_plum_rain": {
@@ -179,10 +163,6 @@
     "message": "Periodically tilt the current page",
     "description": "The description of the page wobble feature"
   },
-  "popup_wobble_angle": {
-    "message": "Page Angle",
-    "description": "The page wobble angle label"
-  },
   "popup_wobble_fixed_angle": {
     "message": "Fixed Angle",
     "description": "The fixed page wobble angle label"
@@ -214,14 +194,6 @@
   "popup_wobble_seconds": {
     "message": "sec",
     "description": "The second unit"
-  },
-  "popup_wobble_minute_short": {
-    "message": "min",
-    "description": "The short minute unit on range labels"
-  },
-  "popup_wobble_second_short": {
-    "message": "sec",
-    "description": "The short second unit on range labels"
   },
   "popup_wobble_next_change": {
     "message": "Next change in",
@@ -299,14 +271,6 @@
     "message": "The allowlist is active and does not include this domain. The switch can remain on, but this page will not wobble.",
     "description": "The current domain allowlist miss notice"
   },
-  "popup_btn_open_settings": {
-    "message": "Open Settings",
-    "description": "The button to open the settings"
-  },
-  "popup_btn_close_settings": {
-    "message": "Close Settings",
-    "description": "The button to close the settings"
-  },
   "popup_btn_open_new_tab": {
     "message": "Open New Tab",
     "description": "The button to open a new tab"
@@ -326,5 +290,623 @@
   "popup_btn_open_feedback": {
     "message": "Feedback & Discussion",
     "description": "The button to open the feedback of github issues"
+  },
+  "lunar_solar_term_0": {
+    "message": "Winter Solstice"
+  },
+  "lunar_solar_term_1": {
+    "message": "Lesser Cold"
+  },
+  "lunar_solar_term_2": {
+    "message": "Greater Cold"
+  },
+  "lunar_solar_term_3": {
+    "message": "Beginning of Spring"
+  },
+  "lunar_solar_term_4": {
+    "message": "Rain Water"
+  },
+  "lunar_solar_term_5": {
+    "message": "Insects Awakening"
+  },
+  "lunar_solar_term_6": {
+    "message": "Spring Equinox"
+  },
+  "lunar_solar_term_7": {
+    "message": "Fresh Green"
+  },
+  "lunar_solar_term_8": {
+    "message": "Grain Rain"
+  },
+  "lunar_solar_term_9": {
+    "message": "Beginning of Summer"
+  },
+  "lunar_solar_term_10": {
+    "message": "Lesser Fullness"
+  },
+  "lunar_solar_term_11": {
+    "message": "Grain in Ear"
+  },
+  "lunar_solar_term_12": {
+    "message": "Summer Solstice"
+  },
+  "lunar_solar_term_13": {
+    "message": "Lesser Heat"
+  },
+  "lunar_solar_term_14": {
+    "message": "Greater Heat"
+  },
+  "lunar_solar_term_15": {
+    "message": "Beginning of Autumn"
+  },
+  "lunar_solar_term_16": {
+    "message": "End of Heat"
+  },
+  "lunar_solar_term_17": {
+    "message": "White Dew"
+  },
+  "lunar_solar_term_18": {
+    "message": "Autumnal Equinox"
+  },
+  "lunar_solar_term_19": {
+    "message": "Cold Dew"
+  },
+  "lunar_solar_term_20": {
+    "message": "First Frost"
+  },
+  "lunar_solar_term_21": {
+    "message": "Beginning of Winter"
+  },
+  "lunar_solar_term_22": {
+    "message": "Light Snow"
+  },
+  "lunar_solar_term_23": {
+    "message": "Heavy Snow"
+  },
+  "lunar_zodiac_0": {
+    "message": "Mouse"
+  },
+  "lunar_zodiac_1": {
+    "message": "Ox"
+  },
+  "lunar_zodiac_2": {
+    "message": "Tiger"
+  },
+  "lunar_zodiac_3": {
+    "message": "Rabbit"
+  },
+  "lunar_zodiac_4": {
+    "message": "Dragon"
+  },
+  "lunar_zodiac_5": {
+    "message": "Snake"
+  },
+  "lunar_zodiac_6": {
+    "message": "Horse"
+  },
+  "lunar_zodiac_7": {
+    "message": "Goat"
+  },
+  "lunar_zodiac_8": {
+    "message": "Monkey"
+  },
+  "lunar_zodiac_9": {
+    "message": "Rooster"
+  },
+  "lunar_zodiac_10": {
+    "message": "Dog"
+  },
+  "lunar_zodiac_11": {
+    "message": "Pig"
+  },
+  "holiday_new_years_day": {
+    "message": "New Year's Day"
+  },
+  "holiday_spring_festival": {
+    "message": "Spring Festival"
+  },
+  "holiday_qingming_festival": {
+    "message": "Qingming Festival"
+  },
+  "holiday_labor_day": {
+    "message": "Labor Day"
+  },
+  "holiday_dragon_boat_festival": {
+    "message": "Dragon Boat Festival"
+  },
+  "holiday_mid_autumn_festival": {
+    "message": "Mid-Autumn Festival"
+  },
+  "holiday_national_day": {
+    "message": "National Day"
+  },
+  "lunar_activity_0": {
+    "message": "Ritual offerings「祭祀」"
+  },
+  "lunar_activity_1": {
+    "message": "Praying for blessings「祈福」"
+  },
+  "lunar_activity_2": {
+    "message": "Praying for offspring「求嗣」"
+  },
+  "lunar_activity_3": {
+    "message": "Consecration「开光」"
+  },
+  "lunar_activity_4": {
+    "message": "Sculpting and painting「塑绘」"
+  },
+  "lunar_activity_5": {
+    "message": "Taoist purification rite「齐醮」"
+  },
+  "lunar_activity_6": {
+    "message": "Taoist fasting rite「斋醮」"
+  },
+  "lunar_activity_7": {
+    "message": "Bathing「沐浴」"
+  },
+  "lunar_activity_8": {
+    "message": "Thanking the deities「酬神」"
+  },
+  "lunar_activity_9": {
+    "message": "Building a temple「造庙」"
+  },
+  "lunar_activity_10": {
+    "message": "Worshipping the Kitchen God「祀灶」"
+  },
+  "lunar_activity_11": {
+    "message": "Burning incense「焚香」"
+  },
+  "lunar_activity_12": {
+    "message": "Thanking the earth deity「谢土」"
+  },
+  "lunar_activity_13": {
+    "message": "Moving the sacred flame「出火」"
+  },
+  "lunar_activity_14": {
+    "message": "Carving「雕刻」"
+  },
+  "lunar_activity_15": {
+    "message": "Marriage「嫁娶」"
+  },
+  "lunar_activity_16": {
+    "message": "Engagement「订婚」"
+  },
+  "lunar_activity_17": {
+    "message": "Presenting betrothal gifts「纳采」"
+  },
+  "lunar_activity_18": {
+    "message": "Asking the bride's name「问名」"
+  },
+  "lunar_activity_19": {
+    "message": "Taking in a son-in-law「纳婿」"
+  },
+  "lunar_activity_20": {
+    "message": "Bride visiting her parents「归宁」"
+  },
+  "lunar_activity_21": {
+    "message": "Installing a bed「安床」"
+  },
+  "lunar_activity_22": {
+    "message": "Setting up the bridal bed canopy「合帐」"
+  },
+  "lunar_activity_23": {
+    "message": "Coming-of-age ceremony「冠笄」"
+  },
+  "lunar_activity_24": {
+    "message": "Formalizing an alliance「订盟」"
+  },
+  "lunar_activity_25": {
+    "message": "Adding household members「进人口」"
+  },
+  "lunar_activity_26": {
+    "message": "Tailoring clothes「裁衣」"
+  },
+  "lunar_activity_27": {
+    "message": "Facial threading「挽面」"
+  },
+  "lunar_activity_28": {
+    "message": "Grooming the face「开容」"
+  },
+  "lunar_activity_29": {
+    "message": "Repairing a grave「修坟」"
+  },
+  "lunar_activity_30": {
+    "message": "Opening a grave「启钻」"
+  },
+  "lunar_activity_31": {
+    "message": "Breaking ground for a grave「破土」"
+  },
+  "lunar_activity_32": {
+    "message": "Burial「安葬」"
+  },
+  "lunar_activity_33": {
+    "message": "Erecting a monument「立碑」"
+  },
+  "lunar_activity_34": {
+    "message": "Donning mourning attire「成服」"
+  },
+  "lunar_activity_35": {
+    "message": "Ending mourning「除服」"
+  },
+  "lunar_activity_36": {
+    "message": "Preparing a grave in advance「开生坟」"
+  },
+  "lunar_activity_37": {
+    "message": "Preparing a coffin「合寿木」"
+  },
+  "lunar_activity_38": {
+    "message": "Placing the deceased in a coffin「入殓」"
+  },
+  "lunar_activity_39": {
+    "message": "Moving a coffin「移柩」"
+  },
+  "lunar_activity_40": {
+    "message": "Universal salvation rite「普渡」"
+  },
+  "lunar_activity_41": {
+    "message": "Moving into a new home「入宅」"
+  },
+  "lunar_activity_42": {
+    "message": "Installing an incense altar「安香」"
+  },
+  "lunar_activity_43": {
+    "message": "Installing a door「安门」"
+  },
+  "lunar_activity_44": {
+    "message": "Building and repairs「修造」"
+  },
+  "lunar_activity_45": {
+    "message": "Laying a foundation「起基」"
+  },
+  "lunar_activity_46": {
+    "message": "Breaking ground「动土」"
+  },
+  "lunar_activity_47": {
+    "message": "Raising the ridge beam「上梁」"
+  },
+  "lunar_activity_48": {
+    "message": "Erecting pillars「竖柱」"
+  },
+  "lunar_activity_49": {
+    "message": "Digging wells or ponds「开井开池」"
+  },
+  "lunar_activity_50": {
+    "message": "Building embankments and releasing water「作陂放水」"
+  },
+  "lunar_activity_51": {
+    "message": "Demolition「拆卸」"
+  },
+  "lunar_activity_52": {
+    "message": "Demolishing a house「破屋」"
+  },
+  "lunar_activity_53": {
+    "message": "Demolishing a wall「坏垣」"
+  },
+  "lunar_activity_54": {
+    "message": "Repairing a wall「补垣」"
+  },
+  "lunar_activity_55": {
+    "message": "Felling timber for beams「伐木做梁」"
+  },
+  "lunar_activity_56": {
+    "message": "Building a stove「作灶」"
+  },
+  "lunar_activity_57": {
+    "message": "Removing restrictions「解除」"
+  },
+  "lunar_activity_58": {
+    "message": "Boring pillar holes「开柱眼」"
+  },
+  "lunar_activity_59": {
+    "message": "Installing screen frames「穿屏扇架」"
+  },
+  "lunar_activity_60": {
+    "message": "Roofing and joining the ridge「盖屋合脊」"
+  },
+  "lunar_activity_61": {
+    "message": "Building a latrine「开厕」"
+  },
+  "lunar_activity_62": {
+    "message": "Building a granary「造仓」"
+  },
+  "lunar_activity_63": {
+    "message": "Sealing openings「塞穴」"
+  },
+  "lunar_activity_64": {
+    "message": "Leveling roads「平治道涂」"
+  },
+  "lunar_activity_65": {
+    "message": "Building a bridge「造桥」"
+  },
+  "lunar_activity_66": {
+    "message": "Building a toilet「作厕」"
+  },
+  "lunar_activity_67": {
+    "message": "Building a dike「筑堤」"
+  },
+  "lunar_activity_68": {
+    "message": "Digging a pond「开池」"
+  },
+  "lunar_activity_69": {
+    "message": "Felling trees「伐木」"
+  },
+  "lunar_activity_70": {
+    "message": "Digging a canal「开渠」"
+  },
+  "lunar_activity_71": {
+    "message": "Digging a well「掘井」"
+  },
+  "lunar_activity_72": {
+    "message": "Cleaning the house「扫舍」"
+  },
+  "lunar_activity_73": {
+    "message": "Releasing water「放水」"
+  },
+  "lunar_activity_74": {
+    "message": "Building a house「造屋」"
+  },
+  "lunar_activity_75": {
+    "message": "Joining the roof ridge「合脊」"
+  },
+  "lunar_activity_76": {
+    "message": "Building livestock pens「造畜稠」"
+  },
+  "lunar_activity_77": {
+    "message": "Repairing a door「修门」"
+  },
+  "lunar_activity_78": {
+    "message": "Setting foundation stones「定磉」"
+  },
+  "lunar_activity_79": {
+    "message": "Making beams「作梁」"
+  },
+  "lunar_activity_80": {
+    "message": "Repairing and decorating walls「修饰垣墙」"
+  },
+  "lunar_activity_81": {
+    "message": "Setting up trestles「架马」"
+  },
+  "lunar_activity_82": {
+    "message": "Opening for business「开市」"
+  },
+  "lunar_activity_83": {
+    "message": "Hanging a signboard「挂匾」"
+  },
+  "lunar_activity_84": {
+    "message": "Receiving wealth「纳财」"
+  },
+  "lunar_activity_85": {
+    "message": "Seeking wealth「求财」"
+  },
+  "lunar_activity_86": {
+    "message": "Opening a granary「开仓」"
+  },
+  "lunar_activity_87": {
+    "message": "Buying a vehicle「买车」"
+  },
+  "lunar_activity_88": {
+    "message": "Purchasing property「置产」"
+  },
+  "lunar_activity_89": {
+    "message": "Hiring workers「雇佣」"
+  },
+  "lunar_activity_90": {
+    "message": "Shipping goods and funds「出货财」"
+  },
+  "lunar_activity_91": {
+    "message": "Installing machinery「安机械」"
+  },
+  "lunar_activity_92": {
+    "message": "Making vehicles「造车器」"
+  },
+  "lunar_activity_93": {
+    "message": "Textile work「经络」"
+  },
+  "lunar_activity_94": {
+    "message": "Brewing「酝酿」"
+  },
+  "lunar_activity_95": {
+    "message": "Dyeing「作染」"
+  },
+  "lunar_activity_96": {
+    "message": "Casting metal「鼓铸」"
+  },
+  "lunar_activity_97": {
+    "message": "Building a boat「造船」"
+  },
+  "lunar_activity_98": {
+    "message": "Harvesting honey「割蜜」"
+  },
+  "lunar_activity_99": {
+    "message": "Planting「栽种」"
+  },
+  "lunar_activity_100": {
+    "message": "Fishing「取渔」"
+  },
+  "lunar_activity_101": {
+    "message": "Making nets「结网」"
+  },
+  "lunar_activity_102": {
+    "message": "Raising livestock「牧养」"
+  },
+  "lunar_activity_103": {
+    "message": "Installing grain-processing equipment「安碓磑」"
+  },
+  "lunar_activity_104": {
+    "message": "Learning a craft「习艺」"
+  },
+  "lunar_activity_105": {
+    "message": "Starting school「入学」"
+  },
+  "lunar_activity_106": {
+    "message": "Hairdressing「理发」"
+  },
+  "lunar_activity_107": {
+    "message": "Visiting the sick「探病」"
+  },
+  "lunar_activity_108": {
+    "message": "Meeting an influential person「见贵」"
+  },
+  "lunar_activity_109": {
+    "message": "Boarding a boat「乘船」"
+  },
+  "lunar_activity_110": {
+    "message": "Crossing water「渡水」"
+  },
+  "lunar_activity_111": {
+    "message": "Acupuncture「针灸」"
+  },
+  "lunar_activity_112": {
+    "message": "Travel「出行」"
+  },
+  "lunar_activity_113": {
+    "message": "Relocation「移徙」"
+  },
+  "lunar_activity_114": {
+    "message": "Separating households「分居」"
+  },
+  "lunar_activity_115": {
+    "message": "Shaving the head「剃头」"
+  },
+  "lunar_activity_116": {
+    "message": "Trimming fingernails and toenails「整手足甲」"
+  },
+  "lunar_activity_117": {
+    "message": "Acquiring livestock「纳畜」"
+  },
+  "lunar_activity_118": {
+    "message": "Capturing animals「捕捉」"
+  },
+  "lunar_activity_119": {
+    "message": "Hunting「畋猎」"
+  },
+  "lunar_activity_120": {
+    "message": "Training cattle and horses「教牛马」"
+  },
+  "lunar_activity_121": {
+    "message": "Meeting relatives and friends「会亲友」"
+  },
+  "lunar_activity_122": {
+    "message": "Assuming office「赴任」"
+  },
+  "lunar_activity_123": {
+    "message": "Seeking medical care「求医」"
+  },
+  "lunar_activity_124": {
+    "message": "Treating illness「治病」"
+  },
+  "lunar_activity_125": {
+    "message": "Litigation「词讼」"
+  },
+  "lunar_activity_126": {
+    "message": "Laying foundations and breaking ground「起基动土」"
+  },
+  "lunar_activity_127": {
+    "message": "Demolishing houses and walls「破屋坏垣」"
+  },
+  "lunar_activity_128": {
+    "message": "Building a house「盖屋」"
+  },
+  "lunar_activity_129": {
+    "message": "Building a warehouse「造仓库」"
+  },
+  "lunar_activity_130": {
+    "message": "Signing contracts and trading「立券交易」"
+  },
+  "lunar_activity_131": {
+    "message": "Trading「交易」"
+  },
+  "lunar_activity_132": {
+    "message": "Signing a contract「立券」"
+  },
+  "lunar_activity_133": {
+    "message": "Installing equipment「安机」"
+  },
+  "lunar_activity_134": {
+    "message": "Meeting friends「会友」"
+  },
+  "lunar_activity_135": {
+    "message": "Seeking medical treatment「求医疗病」"
+  },
+  "lunar_activity_136": {
+    "message": "Nothing is auspicious「诸事不宜」"
+  },
+  "lunar_activity_137": {
+    "message": "Avoid all other activities「馀事勿取」"
+  },
+  "lunar_activity_138": {
+    "message": "Holding a funeral「行丧」"
+  },
+  "lunar_activity_139": {
+    "message": "Pest control「断蚁」"
+  },
+  "lunar_activity_140": {
+    "message": "Returning to the mountain retreat「归岫」"
+  },
+  "lunar_pengzu_heaven_0": {
+    "message": "On Jia days, do not open the granary, or wealth will dissipate「甲不开仓财物耗散」"
+  },
+  "lunar_pengzu_heaven_1": {
+    "message": "On Yi days, do not plant, or a thousand plants will fail to grow「乙不栽植千株不长」"
+  },
+  "lunar_pengzu_heaven_2": {
+    "message": "On Bing days, do not repair the stove, or disaster will follow「丙不修灶必见灾殃」"
+  },
+  "lunar_pengzu_heaven_3": {
+    "message": "On Ding days, do not shave the head, or sores will develop「丁不剃头头必生疮」"
+  },
+  "lunar_pengzu_heaven_4": {
+    "message": "On Wu days, do not accept land, or the owner will face misfortune「戊不受田田主不祥」"
+  },
+  "lunar_pengzu_heaven_5": {
+    "message": "On Ji days, do not void contracts, or both parties will suffer loss「己不破券二比并亡」"
+  },
+  "lunar_pengzu_heaven_6": {
+    "message": "On Geng days, do not weave, or the loom will stand idle「庚不经络织机虚张」"
+  },
+  "lunar_pengzu_heaven_7": {
+    "message": "On Xin days, do not make sauces, or the host will not taste them「辛不合酱主人不尝」"
+  },
+  "lunar_pengzu_heaven_8": {
+    "message": "On Ren days, do not draw water, or danger will be hard to guard against「壬不泱水更难提防」"
+  },
+  "lunar_pengzu_heaven_9": {
+    "message": "On Gui days, do not litigate, or your case will be weak and your opponent strong「癸不词讼理弱敌强」"
+  },
+  "lunar_pengzu_earth_0": {
+    "message": "On Zi days, do not seek divination, or you may invite misfortune「子不问卜自惹祸殃」"
+  },
+  "lunar_pengzu_earth_1": {
+    "message": "On Chou days, do not hold a coming-of-age ceremony, or the traveler may not return home「丑不冠带主不还乡」"
+  },
+  "lunar_pengzu_earth_2": {
+    "message": "On Yin days, do not make ritual offerings, or the spirits will not receive them「寅不祭祀神鬼不尝」"
+  },
+  "lunar_pengzu_earth_3": {
+    "message": "On Mao days, do not dig wells, or the water will turn foul「卯不穿井水泉不香」"
+  },
+  "lunar_pengzu_earth_4": {
+    "message": "On Chen days, do not weep, or another bereavement may follow「辰不哭泣必主重丧」"
+  },
+  "lunar_pengzu_earth_5": {
+    "message": "On Si days, do not travel far, or property may be lost「巳不远行财物伏藏」"
+  },
+  "lunar_pengzu_earth_6": {
+    "message": "On Wu days, do not roof a house, or the owner may have to rebuild「午不苫盖屋主更张」"
+  },
+  "lunar_pengzu_earth_7": {
+    "message": "On Wei days, do not take medicine, or toxins may enter the body「未不服药毒气入肠」"
+  },
+  "lunar_pengzu_earth_8": {
+    "message": "On Shen days, do not install a bed, or evil spirits may enter the room「申不安床鬼祟入房」"
+  },
+  "lunar_pengzu_earth_9": {
+    "message": "On You days, do not receive guests, or drunken disorder may follow「酉不会客醉坐颠狂」"
+  },
+  "lunar_pengzu_earth_10": {
+    "message": "On Xu days, do not eat dog meat, or strange events may occur in bed「戌不吃犬作怪上床」"
+  },
+  "lunar_pengzu_earth_11": {
+    "message": "On Hai days, do not marry, or it may harm the groom「亥不嫁娶不利新郎」"
   }
 }

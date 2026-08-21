@@ -424,7 +424,7 @@ export const Popup: React.FC<PopupProps> = ({
           <LanguageToggle language={language} onChange={onLanguageChange} compact />
         </div>
         <div className={styles.heroContent}>
-          <h1>{t('popup_title')}</h1>
+          <h1>{t('extension_name')}</h1>
           <p>{t('popup_description')}</p>
         </div>
         <div className={`${styles.heroControl} ${styles.heroControlRight}`}>
@@ -557,9 +557,9 @@ export const Popup: React.FC<PopupProps> = ({
             />
             <div className={styles.rangeScale}>
               <span>
-                {PAGE_WOBBLE_LIMITS.cycleSeconds.min} {t('popup_wobble_second_short')}
+                {PAGE_WOBBLE_LIMITS.cycleSeconds.min} {t('popup_wobble_seconds')}
               </span>
-              <span>60 {t('popup_wobble_minute_short')}</span>
+              <span>60 {t('popup_wobble_minutes')}</span>
             </div>
 
             <div className={styles.nextChange}>
@@ -672,7 +672,7 @@ export const Popup: React.FC<PopupProps> = ({
       <div className={styles.buttonGroup}>
         {isNewTab && (
           <button className={styles.button} onClick={handleOpenSettings}>
-            {t(isSettingsOpen ? 'popup_btn_close_settings' : 'popup_btn_open_settings')}
+            {t(isSettingsOpen ? 'settings_close' : 'settings_open')}
           </button>
         )}
         <button className={styles.button} onClick={handleOpenNewTab}>

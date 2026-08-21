@@ -6,7 +6,7 @@ import zhCN from '@/extension/_locales/zh_CN/messages.json';
 type Messages = {
   [key: string]: {
     message: string;
-    description: string;
+    description?: string;
   };
 };
 

@@ -7,10 +7,6 @@
     "message": "一款守护颈椎健康的 Chrome 插件，适度活动脖子，并带你轻松浏览诗词、历史大事记和实时热搜",
     "description": "扩展描述"
   },
-  "popup_title": {
-    "message": "颈椎保护器",
-    "description": "弹窗标题"
-  },
   "popup_description": {
     "message": "保护你的颈椎健康",
     "description": "弹窗描述"
@@ -34,14 +30,6 @@
   "settings_title": {
     "message": "设置",
     "description": "侧边设置标题"
-  },
-  "settings_language": {
-    "message": "界面语言",
-    "description": "界面语言设置标题"
-  },
-  "settings_theme": {
-    "message": "主题",
-    "description": "主题设置标题"
   },
   "settings_neck_mode": {
     "message": "颈椎倾斜模式",
@@ -115,10 +103,6 @@
     "message": "第",
     "description": "节气天数前缀"
   },
-  "header_term_day_suffix": {
-    "message": "天",
-    "description": "节气天数后缀"
-  },
   "header_suitable": {
     "message": "宜",
     "description": "黄历宜标签"
@@ -179,10 +163,6 @@
     "message": "让当前页面定时改变倾斜方向",
     "description": "网页摇摆功能描述"
   },
-  "popup_wobble_angle": {
-    "message": "页面角度",
-    "description": "网页摇摆角度标签"
-  },
   "popup_wobble_fixed_angle": {
     "message": "固定角度",
     "description": "固定网页摇摆角度标签"
@@ -214,14 +194,6 @@
   "popup_wobble_seconds": {
     "message": "秒",
     "description": "秒单位"
-  },
-  "popup_wobble_minute_short": {
-    "message": "分钟",
-    "description": "滑杆刻度的分钟单位"
-  },
-  "popup_wobble_second_short": {
-    "message": "秒",
-    "description": "滑杆刻度的秒单位"
   },
   "popup_wobble_next_change": {
     "message": "距下次切换",
@@ -299,14 +271,6 @@
     "message": "白名单已启用，但当前域名不在白名单中",
     "description": "当前域名未命中白名单提示"
   },
-  "popup_btn_open_settings": {
-    "message": "打开设置",
-    "description": "打开设置按钮"
-  },
-  "popup_btn_close_settings": {
-    "message": "关闭设置",
-    "description": "关闭设置按钮"
-  },
   "popup_btn_open_new_tab": {
     "message": "打开新标签页",
     "description": "打开新标签页按钮"
@@ -326,5 +290,623 @@
   "popup_btn_open_feedback": {
     "message": "反馈与讨论",
     "description": "跳转github issues按钮"
+  },
+  "lunar_solar_term_0": {
+    "message": "冬至"
+  },
+  "lunar_solar_term_1": {
+    "message": "小寒"
+  },
+  "lunar_solar_term_2": {
+    "message": "大寒"
+  },
+  "lunar_solar_term_3": {
+    "message": "立春"
+  },
+  "lunar_solar_term_4": {
+    "message": "雨水"
+  },
+  "lunar_solar_term_5": {
+    "message": "惊蛰"
+  },
+  "lunar_solar_term_6": {
+    "message": "春分"
+  },
+  "lunar_solar_term_7": {
+    "message": "清明"
+  },
+  "lunar_solar_term_8": {
+    "message": "谷雨"
+  },
+  "lunar_solar_term_9": {
+    "message": "立夏"
+  },
+  "lunar_solar_term_10": {
+    "message": "小满"
+  },
+  "lunar_solar_term_11": {
+    "message": "芒种"
+  },
+  "lunar_solar_term_12": {
+    "message": "夏至"
+  },
+  "lunar_solar_term_13": {
+    "message": "小暑"
+  },
+  "lunar_solar_term_14": {
+    "message": "大暑"
+  },
+  "lunar_solar_term_15": {
+    "message": "立秋"
+  },
+  "lunar_solar_term_16": {
+    "message": "处暑"
+  },
+  "lunar_solar_term_17": {
+    "message": "白露"
+  },
+  "lunar_solar_term_18": {
+    "message": "秋分"
+  },
+  "lunar_solar_term_19": {
+    "message": "寒露"
+  },
+  "lunar_solar_term_20": {
+    "message": "霜降"
+  },
+  "lunar_solar_term_21": {
+    "message": "立冬"
+  },
+  "lunar_solar_term_22": {
+    "message": "小雪"
+  },
+  "lunar_solar_term_23": {
+    "message": "大雪"
+  },
+  "lunar_zodiac_0": {
+    "message": "鼠"
+  },
+  "lunar_zodiac_1": {
+    "message": "牛"
+  },
+  "lunar_zodiac_2": {
+    "message": "虎"
+  },
+  "lunar_zodiac_3": {
+    "message": "兔"
+  },
+  "lunar_zodiac_4": {
+    "message": "龙"
+  },
+  "lunar_zodiac_5": {
+    "message": "蛇"
+  },
+  "lunar_zodiac_6": {
+    "message": "马"
+  },
+  "lunar_zodiac_7": {
+    "message": "羊"
+  },
+  "lunar_zodiac_8": {
+    "message": "猴"
+  },
+  "lunar_zodiac_9": {
+    "message": "鸡"
+  },
+  "lunar_zodiac_10": {
+    "message": "狗"
+  },
+  "lunar_zodiac_11": {
+    "message": "猪"
+  },
+  "holiday_new_years_day": {
+    "message": "元旦"
+  },
+  "holiday_spring_festival": {
+    "message": "春节"
+  },
+  "holiday_qingming_festival": {
+    "message": "清明节"
+  },
+  "holiday_labor_day": {
+    "message": "劳动节"
+  },
+  "holiday_dragon_boat_festival": {
+    "message": "端午节"
+  },
+  "holiday_mid_autumn_festival": {
+    "message": "中秋节"
+  },
+  "holiday_national_day": {
+    "message": "国庆节"
+  },
+  "lunar_activity_0": {
+    "message": "祭祀"
+  },
+  "lunar_activity_1": {
+    "message": "祈福"
+  },
+  "lunar_activity_2": {
+    "message": "求嗣"
+  },
+  "lunar_activity_3": {
+    "message": "开光"
+  },
+  "lunar_activity_4": {
+    "message": "塑绘"
+  },
+  "lunar_activity_5": {
+    "message": "齐醮"
+  },
+  "lunar_activity_6": {
+    "message": "斋醮"
+  },
+  "lunar_activity_7": {
+    "message": "沐浴"
+  },
+  "lunar_activity_8": {
+    "message": "酬神"
+  },
+  "lunar_activity_9": {
+    "message": "造庙"
+  },
+  "lunar_activity_10": {
+    "message": "祀灶"
+  },
+  "lunar_activity_11": {
+    "message": "焚香"
+  },
+  "lunar_activity_12": {
+    "message": "谢土"
+  },
+  "lunar_activity_13": {
+    "message": "出火"
+  },
+  "lunar_activity_14": {
+    "message": "雕刻"
+  },
+  "lunar_activity_15": {
+    "message": "嫁娶"
+  },
+  "lunar_activity_16": {
+    "message": "订婚"
+  },
+  "lunar_activity_17": {
+    "message": "纳采"
+  },
+  "lunar_activity_18": {
+    "message": "问名"
+  },
+  "lunar_activity_19": {
+    "message": "纳婿"
+  },
+  "lunar_activity_20": {
+    "message": "归宁"
+  },
+  "lunar_activity_21": {
+    "message": "安床"
+  },
+  "lunar_activity_22": {
+    "message": "合帐"
+  },
+  "lunar_activity_23": {
+    "message": "冠笄"
+  },
+  "lunar_activity_24": {
+    "message": "订盟"
+  },
+  "lunar_activity_25": {
+    "message": "进人口"
+  },
+  "lunar_activity_26": {
+    "message": "裁衣"
+  },
+  "lunar_activity_27": {
+    "message": "挽面"
+  },
+  "lunar_activity_28": {
+    "message": "开容"
+  },
+  "lunar_activity_29": {
+    "message": "修坟"
+  },
+  "lunar_activity_30": {
+    "message": "启钻"
+  },
+  "lunar_activity_31": {
+    "message": "破土"
+  },
+  "lunar_activity_32": {
+    "message": "安葬"
+  },
+  "lunar_activity_33": {
+    "message": "立碑"
+  },
+  "lunar_activity_34": {
+    "message": "成服"
+  },
+  "lunar_activity_35": {
+    "message": "除服"
+  },
+  "lunar_activity_36": {
+    "message": "开生坟"
+  },
+  "lunar_activity_37": {
+    "message": "合寿木"
+  },
+  "lunar_activity_38": {
+    "message": "入殓"
+  },
+  "lunar_activity_39": {
+    "message": "移柩"
+  },
+  "lunar_activity_40": {
+    "message": "普渡"
+  },
+  "lunar_activity_41": {
+    "message": "入宅"
+  },
+  "lunar_activity_42": {
+    "message": "安香"
+  },
+  "lunar_activity_43": {
+    "message": "安门"
+  },
+  "lunar_activity_44": {
+    "message": "修造"
+  },
+  "lunar_activity_45": {
+    "message": "起基"
+  },
+  "lunar_activity_46": {
+    "message": "动土"
+  },
+  "lunar_activity_47": {
+    "message": "上梁"
+  },
+  "lunar_activity_48": {
+    "message": "竖柱"
+  },
+  "lunar_activity_49": {
+    "message": "开井开池"
+  },
+  "lunar_activity_50": {
+    "message": "作陂放水"
+  },
+  "lunar_activity_51": {
+    "message": "拆卸"
+  },
+  "lunar_activity_52": {
+    "message": "破屋"
+  },
+  "lunar_activity_53": {
+    "message": "坏垣"
+  },
+  "lunar_activity_54": {
+    "message": "补垣"
+  },
+  "lunar_activity_55": {
+    "message": "伐木做梁"
+  },
+  "lunar_activity_56": {
+    "message": "作灶"
+  },
+  "lunar_activity_57": {
+    "message": "解除"
+  },
+  "lunar_activity_58": {
+    "message": "开柱眼"
+  },
+  "lunar_activity_59": {
+    "message": "穿屏扇架"
+  },
+  "lunar_activity_60": {
+    "message": "盖屋合脊"
+  },
+  "lunar_activity_61": {
+    "message": "开厕"
+  },
+  "lunar_activity_62": {
+    "message": "造仓"
+  },
+  "lunar_activity_63": {
+    "message": "塞穴"
+  },
+  "lunar_activity_64": {
+    "message": "平治道涂"
+  },
+  "lunar_activity_65": {
+    "message": "造桥"
+  },
+  "lunar_activity_66": {
+    "message": "作厕"
+  },
+  "lunar_activity_67": {
+    "message": "筑堤"
+  },
+  "lunar_activity_68": {
+    "message": "开池"
+  },
+  "lunar_activity_69": {
+    "message": "伐木"
+  },
+  "lunar_activity_70": {
+    "message": "开渠"
+  },
+  "lunar_activity_71": {
+    "message": "掘井"
+  },
+  "lunar_activity_72": {
+    "message": "扫舍"
+  },
+  "lunar_activity_73": {
+    "message": "放水"
+  },
+  "lunar_activity_74": {
+    "message": "造屋"
+  },
+  "lunar_activity_75": {
+    "message": "合脊"
+  },
+  "lunar_activity_76": {
+    "message": "造畜稠"
+  },
+  "lunar_activity_77": {
+    "message": "修门"
+  },
+  "lunar_activity_78": {
+    "message": "定磉"
+  },
+  "lunar_activity_79": {
+    "message": "作梁"
+  },
+  "lunar_activity_80": {
+    "message": "修饰垣墙"
+  },
+  "lunar_activity_81": {
+    "message": "架马"
+  },
+  "lunar_activity_82": {
+    "message": "开市"
+  },
+  "lunar_activity_83": {
+    "message": "挂匾"
+  },
+  "lunar_activity_84": {
+    "message": "纳财"
+  },
+  "lunar_activity_85": {
+    "message": "求财"
+  },
+  "lunar_activity_86": {
+    "message": "开仓"
+  },
+  "lunar_activity_87": {
+    "message": "买车"
+  },
+  "lunar_activity_88": {
+    "message": "置产"
+  },
+  "lunar_activity_89": {
+    "message": "雇佣"
+  },
+  "lunar_activity_90": {
+    "message": "出货财"
+  },
+  "lunar_activity_91": {
+    "message": "安机械"
+  },
+  "lunar_activity_92": {
+    "message": "造车器"
+  },
+  "lunar_activity_93": {
+    "message": "经络"
+  },
+  "lunar_activity_94": {
+    "message": "酝酿"
+  },
+  "lunar_activity_95": {
+    "message": "作染"
+  },
+  "lunar_activity_96": {
+    "message": "鼓铸"
+  },
+  "lunar_activity_97": {
+    "message": "造船"
+  },
+  "lunar_activity_98": {
+    "message": "割蜜"
+  },
+  "lunar_activity_99": {
+    "message": "栽种"
+  },
+  "lunar_activity_100": {
+    "message": "取渔"
+  },
+  "lunar_activity_101": {
+    "message": "结网"
+  },
+  "lunar_activity_102": {
+    "message": "牧养"
+  },
+  "lunar_activity_103": {
+    "message": "安碓磑"
+  },
+  "lunar_activity_104": {
+    "message": "习艺"
+  },
+  "lunar_activity_105": {
+    "message": "入学"
+  },
+  "lunar_activity_106": {
+    "message": "理发"
+  },
+  "lunar_activity_107": {
+    "message": "探病"
+  },
+  "lunar_activity_108": {
+    "message": "见贵"
+  },
+  "lunar_activity_109": {
+    "message": "乘船"
+  },
+  "lunar_activity_110": {
+    "message": "渡水"
+  },
+  "lunar_activity_111": {
+    "message": "针灸"
+  },
+  "lunar_activity_112": {
+    "message": "出行"
+  },
+  "lunar_activity_113": {
+    "message": "移徙"
+  },
+  "lunar_activity_114": {
+    "message": "分居"
+  },
+  "lunar_activity_115": {
+    "message": "剃头"
+  },
+  "lunar_activity_116": {
+    "message": "整手足甲"
+  },
+  "lunar_activity_117": {
+    "message": "纳畜"
+  },
+  "lunar_activity_118": {
+    "message": "捕捉"
+  },
+  "lunar_activity_119": {
+    "message": "畋猎"
+  },
+  "lunar_activity_120": {
+    "message": "教牛马"
+  },
+  "lunar_activity_121": {
+    "message": "会亲友"
+  },
+  "lunar_activity_122": {
+    "message": "赴任"
+  },
+  "lunar_activity_123": {
+    "message": "求医"
+  },
+  "lunar_activity_124": {
+    "message": "治病"
+  },
+  "lunar_activity_125": {
+    "message": "词讼"
+  },
+  "lunar_activity_126": {
+    "message": "起基动土"
+  },
+  "lunar_activity_127": {
+    "message": "破屋坏垣"
+  },
+  "lunar_activity_128": {
+    "message": "盖屋"
+  },
+  "lunar_activity_129": {
+    "message": "造仓库"
+  },
+  "lunar_activity_130": {
+    "message": "立券交易"
+  },
+  "lunar_activity_131": {
+    "message": "交易"
+  },
+  "lunar_activity_132": {
+    "message": "立券"
+  },
+  "lunar_activity_133": {
+    "message": "安机"
+  },
+  "lunar_activity_134": {
+    "message": "会友"
+  },
+  "lunar_activity_135": {
+    "message": "求医疗病"
+  },
+  "lunar_activity_136": {
+    "message": "诸事不宜"
+  },
+  "lunar_activity_137": {
+    "message": "馀事勿取"
+  },
+  "lunar_activity_138": {
+    "message": "行丧"
+  },
+  "lunar_activity_139": {
+    "message": "断蚁"
+  },
+  "lunar_activity_140": {
+    "message": "归岫"
+  },
+  "lunar_pengzu_heaven_0": {
+    "message": "甲不开仓财物耗散"
+  },
+  "lunar_pengzu_heaven_1": {
+    "message": "乙不栽植千株不长"
+  },
+  "lunar_pengzu_heaven_2": {
+    "message": "丙不修灶必见灾殃"
+  },
+  "lunar_pengzu_heaven_3": {
+    "message": "丁不剃头头必生疮"
+  },
+  "lunar_pengzu_heaven_4": {
+    "message": "戊不受田田主不祥"
+  },
+  "lunar_pengzu_heaven_5": {
+    "message": "己不破券二比并亡"
+  },
+  "lunar_pengzu_heaven_6": {
+    "message": "庚不经络织机虚张"
+  },
+  "lunar_pengzu_heaven_7": {
+    "message": "辛不合酱主人不尝"
+  },
+  "lunar_pengzu_heaven_8": {
+    "message": "壬不泱水更难提防"
+  },
+  "lunar_pengzu_heaven_9": {
+    "message": "癸不词讼理弱敌强"
+  },
+  "lunar_pengzu_earth_0": {
+    "message": "子不问卜自惹祸殃"
+  },
+  "lunar_pengzu_earth_1": {
+    "message": "丑不冠带主不还乡"
+  },
+  "lunar_pengzu_earth_2": {
+    "message": "寅不祭祀神鬼不尝"
+  },
+  "lunar_pengzu_earth_3": {
+    "message": "卯不穿井水泉不香"
+  },
+  "lunar_pengzu_earth_4": {
+    "message": "辰不哭泣必主重丧"
+  },
+  "lunar_pengzu_earth_5": {
+    "message": "巳不远行财物伏藏"
+  },
+  "lunar_pengzu_earth_6": {
+    "message": "午不苫盖屋主更张"
+  },
+  "lunar_pengzu_earth_7": {
+    "message": "未不服药毒气入肠"
+  },
+  "lunar_pengzu_earth_8": {
+    "message": "申不安床鬼祟入房"
+  },
+  "lunar_pengzu_earth_9": {
+    "message": "酉不会客醉坐颠狂"
+  },
+  "lunar_pengzu_earth_10": {
+    "message": "戌不吃犬作怪上床"
+  },
+  "lunar_pengzu_earth_11": {
+    "message": "亥不嫁娶不利新郎"
   }
 }

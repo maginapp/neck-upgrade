@@ -6,6 +6,14 @@ import { HolidayDisplayInfo } from '@/types';
 import { AppLanguage } from '@/types/app';
 import { dateUtils, padZero } from '@/utils/base';
 import { getLunarInfo, LunarInfo } from '@/utils/lunar';
+import {
+  formatLunarDate,
+  formatLunarGanZhiDate,
+  formatSolarTerm,
+  translateHolidayName,
+  translateLunarActivity,
+  translatePengZuTaboo,
+} from '@/utils/lunarI18n';
 
 import { getNextHoliday } from '../../utils/holidayApi';
 
@@ -89,7 +97,7 @@ export const Header: React.FC = () => {
       </div>
       {lunarInfo && (
         <div className={styles.lunarInfoSection}>
-          <span className={styles.lunarInfo}>{lunarInfo.lunarDate}</span>
+          <span className={styles.lunarInfo}>{formatLunarDate(lunarInfo, language, t)}</span>
           <FindMoreIcon
             className={styles.findMoreIcon}
             onClick={(e) => {
@@ -99,10 +107,15 @@ export const Header: React.FC = () => {
           />
           {/* hover */}
           {showLunarInfo && (
-            <div className={styles.lunarInfoContent} ref={popupRef}>
+            <div
+              className={`${styles.lunarInfoContent} ${
+                language === AppLanguage.En ? styles.lunarInfoContentEnglish : ''
+              }`}
+              ref={popupRef}
+            >
               <div className={styles.lunarInfoContentTitle}>{currentDate}</div>
               <div className={styles.lunarInfoContentSubTitle}>
-                <span>{lunarInfo.lunarDanZhiDate}</span>
+                <span>{formatLunarGanZhiDate(lunarInfo, language, t)}</span>
               </div>
               {lunarInfo.festivals.length ? (
                 <div className={styles.lunarInfoItem}>
@@ -112,25 +125,26 @@ export const Header: React.FC = () => {
               ) : null}
               <div className={styles.lunarInfoItem}>
                 <span className={styles.lunarInfoItemTitle}>{t('header_solar_term')}</span>
-                <span>
-                  {lunarInfo.term}
-                  {lunarInfo.termDayIndex
-                    ? `${t('header_term_day_prefix')}${lunarInfo.termDayIndex}${t(
-                        'header_term_day_suffix'
-                      )}`
-                    : ''}
-                </span>
+                <span>{formatSolarTerm(lunarInfo.term, lunarInfo.termDayIndex, language, t)}</span>
               </div>
               {lunarInfo.daySuit.length ? (
                 <div className={styles.lunarInfoItem}>
                   <span className={styles.lunarInfoItemTitle}>{t('header_suitable')}</span>
-                  <span>{lunarInfo.daySuit.join(' ')}</span>
+                  <span>
+                    {lunarInfo.daySuit
+                      .map((item) => translateLunarActivity(item, language, t))
+                      .join(' ')}
+                  </span>
                 </div>
               ) : null}
               {lunarInfo.dayAvoid.length ? (
                 <div className={styles.lunarInfoItem}>
                   <span className={styles.lunarInfoItemTitle}>{t('header_avoid')}</span>
-                  <span>{lunarInfo.dayAvoid.join(' ')}</span>
+                  <span>
+                    {lunarInfo.dayAvoid
+                      .map((item) => translateLunarActivity(item, language, t))
+                      .join(' ')}
+                  </span>
                 </div>
               ) : null}
               <div className={styles.lunarInfoItem}>
@@ -139,7 +153,11 @@ export const Header: React.FC = () => {
               </div>
               <div className={styles.lunarInfoItem}>
                 <span className={styles.lunarInfoItemTitle}>{t('header_pengzu')}</span>
-                <span>{lunarInfo.pengZu.join('， ')}</span>
+                <span>
+                  {lunarInfo.pengZu
+                    .map((item) => translatePengZuTaboo(item, language, t))
+                    .join(language === AppLanguage.ZhCN ? '， ' : '; ')}
+                </span>
               </div>
               {lunarInfo.rainDay ? (
                 <div className={styles.lunarInfoItem}>
@@ -154,7 +172,9 @@ export const Header: React.FC = () => {
       {nextHoliday && (
         <div>
           {t('header_next_break')} -{' '}
-          <span className={styles.holidayHighlight}>{nextHoliday.name}</span>
+          <span className={styles.holidayHighlight}>
+            {translateHolidayName(nextHoliday.name, language, t)}
+          </span>
           {t('header_break_in')}
           <span className={styles.holidayHighlight}>
             {nextHoliday.rest}

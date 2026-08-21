@@ -22,6 +22,9 @@ export const getLunarInfo = (date: Date) => {
 
   // 农历日期
   const lunarDate = lunar.toString();
+  const lunarMonth = lunar.getMonth();
+  const lunarDay = lunar.getDay();
+  const isLeapMonth = lunar.getLunarMonth().isLeap();
 
   // 节气
   const solarTerm = solar.getTerm();
@@ -52,15 +55,21 @@ export const getLunarInfo = (date: Date) => {
   const ganZhiMonth = ganZhiDay.getSixtyCycleMonth();
   const ganZhiYear = ganZhiMonth.getSixtyCycleYear();
 
-  let ganZhiYearName = ganZhiYear.getName();
+  const rawGanZhiYearName = ganZhiYear.getName();
+  const ganZhiMonthName = ganZhiMonth.getName();
+  const ganZhiDayName = ganZhiDay.getName();
+  let ganZhiYearName = rawGanZhiYearName;
   const diZhi = ganZhiYearName[1];
   const zodiac = EarthBranch.fromName(diZhi).getZodiac().getName();
   ganZhiYearName = ganZhiYearName.replace(diZhi, `${diZhi}(${zodiac})`);
 
-  const lunarDanZhiDate = `${ganZhiYearName} ${ganZhiMonth.getName()} ${ganZhiDay.getName()}`;
+  const lunarDanZhiDate = `${ganZhiYearName} ${ganZhiMonthName} ${ganZhiDayName}`;
 
   return {
     lunarDate,
+    lunarMonth,
+    lunarDay,
+    isLeapMonth,
     term: solarTerm.getName(), // 节气
     termDayIndex: solarTermDayIndex, // 节气日索引
     festivals, // 公历节日 & 农历节日
@@ -71,5 +80,9 @@ export const getLunarInfo = (date: Date) => {
     julianDay: solar.getJulianDay().toString(), // 儒略日
     solar: solar,
     lunarDanZhiDate, // 农历地支日
+    ganZhiYearName: rawGanZhiYearName,
+    ganZhiMonthName,
+    ganZhiDayName,
+    zodiac,
   };
 };
