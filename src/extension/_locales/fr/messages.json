@@ -1,0 +1,1021 @@
+{
+  "extension_name": {
+    "message": "Protection cervicale",
+    "description": "The name of the extension"
+  },
+  "extension_description": {
+    "message": "Une extension Chrome qui protège votre cou, vous aide à le mobiliser et vous fait découvrir poésie, histoire et sujets populaires.",
+    "description": "The description of the extension"
+  },
+  "popup_description": {
+    "message": "Protégez la santé de votre cou",
+    "description": "The description of the popup"
+  },
+  "language_switch_to_simplified_chinese": {
+    "message": "Passer au chinois simplifié",
+    "description": "The button label for switching to Simplified Chinese"
+  },
+  "language_switch_to_traditional_chinese": {
+    "message": "Passer au chinois traditionnel",
+    "description": "The button label for switching to Traditional Chinese"
+  },
+  "language_switch_to_english": {
+    "message": "Passer à l’anglais",
+    "description": "The button label for switching to English"
+  },
+  "language_switch_to_russian": {
+    "message": "Passer au russe",
+    "description": "The button label for switching to Russian"
+  },
+  "language_switch_to_french": {
+    "message": "Passer au français",
+    "description": "The button label for switching to French"
+  },
+  "language_select": {
+    "message": "Choisir la langue",
+    "description": "The language menu button label"
+  },
+  "settings_open": {
+    "message": "Ouvrir les paramètres",
+    "description": "The new tab settings button label"
+  },
+  "settings_close": {
+    "message": "Fermer les paramètres",
+    "description": "The new tab close settings button label"
+  },
+  "settings_title": {
+    "message": "Paramètres",
+    "description": "The settings sidebar title"
+  },
+  "settings_neck_mode": {
+    "message": "Mode d’inclinaison du cou",
+    "description": "The neck tilt mode setting title"
+  },
+  "settings_content_type": {
+    "message": "Type de contenu",
+    "description": "The content type setting title"
+  },
+  "settings_poetry_source": {
+    "message": "Sources de poésie",
+    "description": "The poetry source setting title"
+  },
+  "settings_knowledge_source": {
+    "message": "Source de connaissances préférée",
+    "description": "The preferred knowledge source setting title"
+  },
+  "settings_feedback": {
+    "message": "Commentaires et soutien",
+    "description": "The feedback and support setting title"
+  },
+  "settings_switch_to": {
+    "message": "Passer à",
+    "description": "The prefix for a setting switch button label"
+  },
+  "settings_change_interval_seconds": {
+    "message": "Intervalle de changement (secondes)",
+    "description": "The advanced neck mode interval label"
+  },
+  "settings_max_rotation_angle": {
+    "message": "Angle de rotation maximal",
+    "description": "The advanced neck mode maximum angle label"
+  },
+  "settings_specific_sources": {
+    "message": "Sources précises (sélection multiple)",
+    "description": "The poetry source selection hint"
+  },
+  "settings_feedback_description": {
+    "message": "Ce projet vous intéresse ou vous avez trouvé un problème ? Venez en discuter avec nous.",
+    "description": "The feedback section description"
+  },
+  "settings_submit_issue": {
+    "message": "Signaler un problème",
+    "description": "The submit issue link"
+  },
+  "settings_discussions": {
+    "message": "Discussions",
+    "description": "The discussions link"
+  },
+  "settings_project_home": {
+    "message": "Accueil du projet",
+    "description": "The project home link"
+  },
+  "settings_support_description": {
+    "message": "Si cette extension vous aide, votre soutien est apprécié.",
+    "description": "The support section description"
+  },
+  "settings_donation_qr": {
+    "message": "Code QR de don",
+    "description": "The donation QR code alternative text"
+  },
+  "header_festivals": {
+    "message": "Fêtes",
+    "description": "The lunar festival label"
+  },
+  "header_solar_term": {
+    "message": "Terme solaire",
+    "description": "The solar term label"
+  },
+  "header_term_day_prefix": {
+    "message": "Jour ",
+    "description": "The solar term day prefix"
+  },
+  "header_suitable": {
+    "message": "Propice「宜」",
+    "description": "The almanac suitable activities label"
+  },
+  "header_avoid": {
+    "message": "À éviter「忌」",
+    "description": "The almanac activities to avoid label"
+  },
+  "header_julian_day": {
+    "message": "Date julienne",
+    "description": "The Julian day label"
+  },
+  "header_pengzu": {
+    "message": "Tabous de Peng Zu「彭祖百忌」",
+    "description": "The Peng Zu taboos label"
+  },
+  "header_plum_rain": {
+    "message": "Pluies des pruniers",
+    "description": "The plum rain label"
+  },
+  "header_next_break": {
+    "message": "Prochain jour de repos",
+    "description": "The next day off hint"
+  },
+  "header_break_in": {
+    "message": " dans ",
+    "description": "The next day off time connector"
+  },
+  "header_day": {
+    "message": " jour",
+    "description": "The singular day unit"
+  },
+  "header_days": {
+    "message": " jours",
+    "description": "The plural day unit"
+  },
+  "history_today": {
+    "message": "Ce jour dans l’histoire",
+    "description": "The history content title"
+  },
+  "history_holidays": {
+    "message": "Fêtes et coutumes",
+    "description": "The holiday content title"
+  },
+  "news_login_first": {
+    "message": "Veuillez d’abord vous connecter",
+    "description": "The news source sign-in hint"
+  },
+  "content_refresh": {
+    "message": "Actualiser le contenu",
+    "description": "The content refresh button label"
+  },
+  "popup_wobble_title": {
+    "message": "Oscillation de la page",
+    "description": "The title of the page wobble feature"
+  },
+  "popup_wobble_description": {
+    "message": "Incliner périodiquement la page actuelle",
+    "description": "The description of the page wobble feature"
+  },
+  "popup_wobble_fixed_angle": {
+    "message": "Angle fixe",
+    "description": "The fixed page wobble angle label"
+  },
+  "popup_wobble_max_angle": {
+    "message": "Angle maximal",
+    "description": "The random page wobble maximum angle label"
+  },
+  "popup_wobble_random_angle": {
+    "message": "Aléatoire dans la plage",
+    "description": "The random page wobble switch label"
+  },
+  "popup_wobble_fixed_angle_hint": {
+    "message": "Alterner à gauche et à droite selon l’angle choisi",
+    "description": "The fixed angle mode hint"
+  },
+  "popup_wobble_random_angle_hint": {
+    "message": "Choisir un nouvel angle dans les limites positive et négative",
+    "description": "The random angle mode hint"
+  },
+  "popup_wobble_cycle": {
+    "message": "Cycle de changement",
+    "description": "The page wobble cycle label"
+  },
+  "popup_wobble_minutes": {
+    "message": "min",
+    "description": "The minute unit"
+  },
+  "popup_wobble_seconds": {
+    "message": "s",
+    "description": "The second unit"
+  },
+  "popup_wobble_next_change": {
+    "message": "Prochain changement dans",
+    "description": "The next page angle change hint"
+  },
+  "popup_wobble_unsupported": {
+    "message": "Cette page ne peut pas être contrôlée. Ouvrez un site web ordinaire et réessayez.",
+    "description": "The notice for unsupported Chrome internal pages"
+  },
+  "popup_wobble_error": {
+    "message": "Impossible de contrôler cette page. Actualisez-la puis réessayez.",
+    "description": "The page wobble activation error"
+  },
+  "popup_wobble_current_domain": {
+    "message": "Domaine actuel",
+    "description": "The current regular website domain label"
+  },
+  "popup_wobble_domain_allowed": {
+    "message": "Autorisé",
+    "description": "The allowed page wobble domain status"
+  },
+  "popup_wobble_domain_blocked": {
+    "message": "Bloqué",
+    "description": "The blocked page wobble domain status"
+  },
+  "popup_wobble_add_whitelist": {
+    "message": "Ajouter à la liste d’autorisation",
+    "description": "The button to add the current domain to the allowlist"
+  },
+  "popup_wobble_add_blacklist": {
+    "message": "Ajouter à la liste de blocage",
+    "description": "The button to add the current domain to the blocklist"
+  },
+  "popup_wobble_remove_current_rule": {
+    "message": "Supprimer la règle actuelle",
+    "description": "The button to remove exact rules for the current domain"
+  },
+  "popup_wobble_manage_domains": {
+    "message": "Gérer les listes de domaines",
+    "description": "The domain allowlist and blocklist manager title"
+  },
+  "popup_wobble_domain_rules_hint": {
+    "message": "Une liste d’autorisation vide permet tous les sites ordinaires. Si elle contient des domaines, seuls ceux-ci sont autorisés. La liste de blocage est toujours prioritaire et une règle de domaine parent inclut ses sous-domaines.",
+    "description": "The domain allowlist and blocklist matching rules"
+  },
+  "popup_wobble_whitelist": {
+    "message": "Liste d’autorisation",
+    "description": "The page wobble domain allowlist title"
+  },
+  "popup_wobble_blacklist": {
+    "message": "Liste de blocage",
+    "description": "The page wobble domain blocklist title"
+  },
+  "popup_wobble_domain_placeholder": {
+    "message": "Par exemple, example.com",
+    "description": "The domain input placeholder"
+  },
+  "popup_wobble_add_domain": {
+    "message": "Ajouter",
+    "description": "The button to add a domain rule"
+  },
+  "popup_wobble_domain_list_empty": {
+    "message": "Aucun domaine",
+    "description": "The empty domain rule list hint"
+  },
+  "popup_wobble_remove_domain": {
+    "message": "Supprimer le domaine",
+    "description": "The accessible label for the remove domain rule button"
+  },
+  "popup_wobble_domain_blacklisted": {
+    "message": "Ce domaine figure dans la liste de blocage. L’interrupteur peut rester activé, mais cette page n’oscillera pas.",
+    "description": "The current domain blocklist match notice"
+  },
+  "popup_wobble_domain_not_whitelisted": {
+    "message": "La liste d’autorisation est active et ne contient pas ce domaine. L’interrupteur peut rester activé, mais cette page n’oscillera pas.",
+    "description": "The current domain allowlist miss notice"
+  },
+  "popup_btn_open_new_tab": {
+    "message": "Ouvrir un nouvel onglet",
+    "description": "The button to open a new tab"
+  },
+  "popup_btn_open_extension_detail": {
+    "message": "Gérer les extensions",
+    "description": "The button to manage the extensions"
+  },
+  "popup_btn_open_website_permission": {
+    "message": "Autorisations des sites",
+    "description": "The button to view the website permissions"
+  },
+  "popup_btn_open_shortcut": {
+    "message": "Raccourcis",
+    "description": "The button to open the shortcut"
+  },
+  "popup_btn_open_feedback": {
+    "message": "Commentaires et discussion",
+    "description": "The button to open the feedback of github issues"
+  },
+  "lunar_solar_term_0": {
+    "message": "Solstice d’hiver"
+  },
+  "lunar_solar_term_1": {
+    "message": "Petit froid"
+  },
+  "lunar_solar_term_2": {
+    "message": "Grand froid"
+  },
+  "lunar_solar_term_3": {
+    "message": "Début du printemps"
+  },
+  "lunar_solar_term_4": {
+    "message": "Eau de pluie"
+  },
+  "lunar_solar_term_5": {
+    "message": "Éveil des insectes"
+  },
+  "lunar_solar_term_6": {
+    "message": "Équinoxe de printemps"
+  },
+  "lunar_solar_term_7": {
+    "message": "Clarté pure"
+  },
+  "lunar_solar_term_8": {
+    "message": "Pluie des céréales"
+  },
+  "lunar_solar_term_9": {
+    "message": "Début de l’été"
+  },
+  "lunar_solar_term_10": {
+    "message": "Petite plénitude"
+  },
+  "lunar_solar_term_11": {
+    "message": "Grain en épi"
+  },
+  "lunar_solar_term_12": {
+    "message": "Solstice d’été"
+  },
+  "lunar_solar_term_13": {
+    "message": "Petite chaleur"
+  },
+  "lunar_solar_term_14": {
+    "message": "Grande chaleur"
+  },
+  "lunar_solar_term_15": {
+    "message": "Début de l’automne"
+  },
+  "lunar_solar_term_16": {
+    "message": "Fin de la chaleur"
+  },
+  "lunar_solar_term_17": {
+    "message": "Rosée blanche"
+  },
+  "lunar_solar_term_18": {
+    "message": "Équinoxe d’automne"
+  },
+  "lunar_solar_term_19": {
+    "message": "Rosée froide"
+  },
+  "lunar_solar_term_20": {
+    "message": "Descente du givre"
+  },
+  "lunar_solar_term_21": {
+    "message": "Début de l’hiver"
+  },
+  "lunar_solar_term_22": {
+    "message": "Petite neige"
+  },
+  "lunar_solar_term_23": {
+    "message": "Grande neige"
+  },
+  "lunar_zodiac_0": {
+    "message": "Rat"
+  },
+  "lunar_zodiac_1": {
+    "message": "Bœuf"
+  },
+  "lunar_zodiac_2": {
+    "message": "Tigre"
+  },
+  "lunar_zodiac_3": {
+    "message": "Lapin"
+  },
+  "lunar_zodiac_4": {
+    "message": "Dragon"
+  },
+  "lunar_zodiac_5": {
+    "message": "Serpent"
+  },
+  "lunar_zodiac_6": {
+    "message": "Cheval"
+  },
+  "lunar_zodiac_7": {
+    "message": "Chèvre"
+  },
+  "lunar_zodiac_8": {
+    "message": "Singe"
+  },
+  "lunar_zodiac_9": {
+    "message": "Coq"
+  },
+  "lunar_zodiac_10": {
+    "message": "Chien"
+  },
+  "lunar_zodiac_11": {
+    "message": "Cochon"
+  },
+  "holiday_new_years_day": {
+    "message": "Jour de l’An"
+  },
+  "holiday_spring_festival": {
+    "message": "Fête du Printemps"
+  },
+  "holiday_qingming_festival": {
+    "message": "Fête de Qingming"
+  },
+  "holiday_labor_day": {
+    "message": "Fête du Travail"
+  },
+  "holiday_dragon_boat_festival": {
+    "message": "Fête des Bateaux-Dragons"
+  },
+  "holiday_mid_autumn_festival": {
+    "message": "Fête de la Mi-Automne"
+  },
+  "holiday_national_day": {
+    "message": "Fête nationale"
+  },
+  "holiday_weekday_monday": {
+    "message": "Lundi"
+  },
+  "holiday_weekday_tuesday": {
+    "message": "Mardi"
+  },
+  "holiday_weekday_wednesday": {
+    "message": "Mercredi"
+  },
+  "holiday_weekday_thursday": {
+    "message": "Jeudi"
+  },
+  "holiday_weekday_friday": {
+    "message": "Vendredi"
+  },
+  "holiday_weekday_saturday": {
+    "message": "Samedi"
+  },
+  "holiday_weekday_sunday": {
+    "message": "Dimanche"
+  },
+  "lunar_calendar_prefix": {
+    "message": "Calendrier lunaire"
+  },
+  "lunar_festival_0": {
+    "message": "春节"
+  },
+  "lunar_festival_1": {
+    "message": "元宵节"
+  },
+  "lunar_festival_2": {
+    "message": "龙头节"
+  },
+  "lunar_festival_3": {
+    "message": "上巳节"
+  },
+  "lunar_festival_4": {
+    "message": "清明节"
+  },
+  "lunar_festival_5": {
+    "message": "端午节"
+  },
+  "lunar_festival_6": {
+    "message": "七夕节"
+  },
+  "lunar_festival_7": {
+    "message": "中元节"
+  },
+  "lunar_festival_8": {
+    "message": "中秋节"
+  },
+  "lunar_festival_9": {
+    "message": "重阳节"
+  },
+  "lunar_festival_10": {
+    "message": "冬至节"
+  },
+  "lunar_festival_11": {
+    "message": "腊八节"
+  },
+  "lunar_festival_12": {
+    "message": "除夕"
+  },
+  "solar_festival_0": {
+    "message": "元旦"
+  },
+  "solar_festival_1": {
+    "message": "三八妇女节"
+  },
+  "solar_festival_2": {
+    "message": "植树节"
+  },
+  "solar_festival_3": {
+    "message": "五一劳动节"
+  },
+  "solar_festival_4": {
+    "message": "五四青年节"
+  },
+  "solar_festival_5": {
+    "message": "六一儿童节"
+  },
+  "solar_festival_6": {
+    "message": "建党节"
+  },
+  "solar_festival_7": {
+    "message": "八一建军节"
+  },
+  "solar_festival_8": {
+    "message": "教师节"
+  },
+  "solar_festival_9": {
+    "message": "国庆节"
+  },
+  "lunar_activity_0": {
+    "message": "Offrandes rituelles「祭祀」"
+  },
+  "lunar_activity_1": {
+    "message": "Prière pour les bénédictions「祈福」"
+  },
+  "lunar_activity_2": {
+    "message": "Prière pour une descendance「求嗣」"
+  },
+  "lunar_activity_3": {
+    "message": "Consécration「开光」"
+  },
+  "lunar_activity_4": {
+    "message": "Sculpture et peinture「塑绘」"
+  },
+  "lunar_activity_5": {
+    "message": "Rite taoïste de purification「齐醮」"
+  },
+  "lunar_activity_6": {
+    "message": "Rite taoïste de jeûne「斋醮」"
+  },
+  "lunar_activity_7": {
+    "message": "Bain rituel「沐浴」"
+  },
+  "lunar_activity_8": {
+    "message": "Remerciement aux divinités「酬神」"
+  },
+  "lunar_activity_9": {
+    "message": "Construction d’un temple「造庙」"
+  },
+  "lunar_activity_10": {
+    "message": "Culte du dieu du foyer「祀灶」"
+  },
+  "lunar_activity_11": {
+    "message": "Encens「焚香」"
+  },
+  "lunar_activity_12": {
+    "message": "Remerciement au dieu de la terre「谢土」"
+  },
+  "lunar_activity_13": {
+    "message": "Déplacement du feu sacré「出火」"
+  },
+  "lunar_activity_14": {
+    "message": "Sculpture「雕刻」"
+  },
+  "lunar_activity_15": {
+    "message": "Mariage「嫁娶」"
+  },
+  "lunar_activity_16": {
+    "message": "Fiançailles「订婚」"
+  },
+  "lunar_activity_17": {
+    "message": "Présentation des cadeaux de fiançailles「纳采」"
+  },
+  "lunar_activity_18": {
+    "message": "Demande du nom de la mariée「问名」"
+  },
+  "lunar_activity_19": {
+    "message": "Accueil d’un gendre「纳婿」"
+  },
+  "lunar_activity_20": {
+    "message": "Visite de la mariée à ses parents「归宁」"
+  },
+  "lunar_activity_21": {
+    "message": "Installation d’un lit「安床」"
+  },
+  "lunar_activity_22": {
+    "message": "Installation du dais nuptial「合帐」"
+  },
+  "lunar_activity_23": {
+    "message": "Cérémonie de passage à l’âge adulte「冠笄」"
+  },
+  "lunar_activity_24": {
+    "message": "Conclusion d’une alliance「订盟」"
+  },
+  "lunar_activity_25": {
+    "message": "Accueil de nouveaux membres dans le foyer「进人口」"
+  },
+  "lunar_activity_26": {
+    "message": "Confection de vêtements「裁衣」"
+  },
+  "lunar_activity_27": {
+    "message": "Épilation du visage au fil「挽面」"
+  },
+  "lunar_activity_28": {
+    "message": "Soins du visage「开容」"
+  },
+  "lunar_activity_29": {
+    "message": "Réparation d’une tombe「修坟」"
+  },
+  "lunar_activity_30": {
+    "message": "Ouverture d’une tombe「启钻」"
+  },
+  "lunar_activity_31": {
+    "message": "Ouverture du sol pour une tombe「破土」"
+  },
+  "lunar_activity_32": {
+    "message": "Inhumation「安葬」"
+  },
+  "lunar_activity_33": {
+    "message": "Érection d’une stèle「立碑」"
+  },
+  "lunar_activity_34": {
+    "message": "Prise des vêtements de deuil「成服」"
+  },
+  "lunar_activity_35": {
+    "message": "Fin du deuil「除服」"
+  },
+  "lunar_activity_36": {
+    "message": "Préparation anticipée d’une tombe「开生坟」"
+  },
+  "lunar_activity_37": {
+    "message": "Préparation d’un cercueil「合寿木」"
+  },
+  "lunar_activity_38": {
+    "message": "Mise en bière「入殓」"
+  },
+  "lunar_activity_39": {
+    "message": "Déplacement d’un cercueil「移柩」"
+  },
+  "lunar_activity_40": {
+    "message": "Rite de salut universel「普渡」"
+  },
+  "lunar_activity_41": {
+    "message": "Emménagement「入宅」"
+  },
+  "lunar_activity_42": {
+    "message": "Installation d’un autel à encens「安香」"
+  },
+  "lunar_activity_43": {
+    "message": "Installation d’une porte「安门」"
+  },
+  "lunar_activity_44": {
+    "message": "Construction et réparations「修造」"
+  },
+  "lunar_activity_45": {
+    "message": "Pose des fondations「起基」"
+  },
+  "lunar_activity_46": {
+    "message": "Travaux de terrassement「动土」"
+  },
+  "lunar_activity_47": {
+    "message": "Pose de la poutre faîtière「上梁」"
+  },
+  "lunar_activity_48": {
+    "message": "Érection des piliers「竖柱」"
+  },
+  "lunar_activity_49": {
+    "message": "Creusement de puits ou bassins「开井开池」"
+  },
+  "lunar_activity_50": {
+    "message": "Construction de digues et libération de l’eau「作陂放水」"
+  },
+  "lunar_activity_51": {
+    "message": "Démolition「拆卸」"
+  },
+  "lunar_activity_52": {
+    "message": "Démolition d’une maison「破屋」"
+  },
+  "lunar_activity_53": {
+    "message": "Démolition d’un mur「坏垣」"
+  },
+  "lunar_activity_54": {
+    "message": "Réparation d’un mur「补垣」"
+  },
+  "lunar_activity_55": {
+    "message": "Abattage de bois pour les poutres「伐木做梁」"
+  },
+  "lunar_activity_56": {
+    "message": "Construction d’un foyer「作灶」"
+  },
+  "lunar_activity_57": {
+    "message": "Levée des restrictions「解除」"
+  },
+  "lunar_activity_58": {
+    "message": "Perçage des logements de piliers「开柱眼」"
+  },
+  "lunar_activity_59": {
+    "message": "Installation de cadres de paravent「穿屏扇架」"
+  },
+  "lunar_activity_60": {
+    "message": "Pose du toit et assemblage du faîte「盖屋合脊」"
+  },
+  "lunar_activity_61": {
+    "message": "Construction de latrines「开厕」"
+  },
+  "lunar_activity_62": {
+    "message": "Construction d’un grenier「造仓」"
+  },
+  "lunar_activity_63": {
+    "message": "Obturation des ouvertures「塞穴」"
+  },
+  "lunar_activity_64": {
+    "message": "Nivellement des routes「平治道涂」"
+  },
+  "lunar_activity_65": {
+    "message": "Construction d’un pont「造桥」"
+  },
+  "lunar_activity_66": {
+    "message": "Construction de toilettes「作厕」"
+  },
+  "lunar_activity_67": {
+    "message": "Construction d’une digue「筑堤」"
+  },
+  "lunar_activity_68": {
+    "message": "Creusement d’un bassin「开池」"
+  },
+  "lunar_activity_69": {
+    "message": "Abattage d’arbres「伐木」"
+  },
+  "lunar_activity_70": {
+    "message": "Creusement d’un canal「开渠」"
+  },
+  "lunar_activity_71": {
+    "message": "Creusement d’un puits「掘井」"
+  },
+  "lunar_activity_72": {
+    "message": "Nettoyage de la maison「扫舍」"
+  },
+  "lunar_activity_73": {
+    "message": "Libération de l’eau「放水」"
+  },
+  "lunar_activity_74": {
+    "message": "Construction d’une maison「造屋」"
+  },
+  "lunar_activity_75": {
+    "message": "Assemblage du faîte du toit「合脊」"
+  },
+  "lunar_activity_76": {
+    "message": "Construction d’enclos pour le bétail「造畜稠」"
+  },
+  "lunar_activity_77": {
+    "message": "Réparation d’une porte「修门」"
+  },
+  "lunar_activity_78": {
+    "message": "Pose des pierres de fondation「定磉」"
+  },
+  "lunar_activity_79": {
+    "message": "Fabrication de poutres「作梁」"
+  },
+  "lunar_activity_80": {
+    "message": "Réparation et décoration des murs「修饰垣墙」"
+  },
+  "lunar_activity_81": {
+    "message": "Installation de tréteaux「架马」"
+  },
+  "lunar_activity_82": {
+    "message": "Ouverture d’un commerce「开市」"
+  },
+  "lunar_activity_83": {
+    "message": "Pose d’une enseigne「挂匾」"
+  },
+  "lunar_activity_84": {
+    "message": "Réception de richesses「纳财」"
+  },
+  "lunar_activity_85": {
+    "message": "Recherche de richesse「求财」"
+  },
+  "lunar_activity_86": {
+    "message": "Ouverture d’un grenier「开仓」"
+  },
+  "lunar_activity_87": {
+    "message": "Achat d’un véhicule「买车」"
+  },
+  "lunar_activity_88": {
+    "message": "Acquisition d’un bien「置产」"
+  },
+  "lunar_activity_89": {
+    "message": "Embauche de travailleurs「雇佣」"
+  },
+  "lunar_activity_90": {
+    "message": "Expédition de marchandises et de fonds「出货财」"
+  },
+  "lunar_activity_91": {
+    "message": "Installation de machines「安机械」"
+  },
+  "lunar_activity_92": {
+    "message": "Fabrication de véhicules「造车器」"
+  },
+  "lunar_activity_93": {
+    "message": "Travail textile「经络」"
+  },
+  "lunar_activity_94": {
+    "message": "Brassage「酝酿」"
+  },
+  "lunar_activity_95": {
+    "message": "Teinture「作染」"
+  },
+  "lunar_activity_96": {
+    "message": "Fonte du métal「鼓铸」"
+  },
+  "lunar_activity_97": {
+    "message": "Construction d’un bateau「造船」"
+  },
+  "lunar_activity_98": {
+    "message": "Récolte du miel「割蜜」"
+  },
+  "lunar_activity_99": {
+    "message": "Plantation「栽种」"
+  },
+  "lunar_activity_100": {
+    "message": "Pêche「取渔」"
+  },
+  "lunar_activity_101": {
+    "message": "Fabrication de filets「结网」"
+  },
+  "lunar_activity_102": {
+    "message": "Élevage du bétail「牧养」"
+  },
+  "lunar_activity_103": {
+    "message": "Installation d’équipement de traitement des céréales「安碓磑」"
+  },
+  "lunar_activity_104": {
+    "message": "Apprentissage d’un métier「习艺」"
+  },
+  "lunar_activity_105": {
+    "message": "Entrée à l’école「入学」"
+  },
+  "lunar_activity_106": {
+    "message": "Coiffure「理发」"
+  },
+  "lunar_activity_107": {
+    "message": "Visite aux malades「探病」"
+  },
+  "lunar_activity_108": {
+    "message": "Rencontre d’une personne influente「见贵」"
+  },
+  "lunar_activity_109": {
+    "message": "Embarquement「乘船」"
+  },
+  "lunar_activity_110": {
+    "message": "Traversée de l’eau「渡水」"
+  },
+  "lunar_activity_111": {
+    "message": "Acupuncture「针灸」"
+  },
+  "lunar_activity_112": {
+    "message": "Voyage「出行」"
+  },
+  "lunar_activity_113": {
+    "message": "Déménagement「移徙」"
+  },
+  "lunar_activity_114": {
+    "message": "Séparation des foyers「分居」"
+  },
+  "lunar_activity_115": {
+    "message": "Rasage de la tête「剃头」"
+  },
+  "lunar_activity_116": {
+    "message": "Coupe des ongles「整手足甲」"
+  },
+  "lunar_activity_117": {
+    "message": "Acquisition de bétail「纳畜」"
+  },
+  "lunar_activity_118": {
+    "message": "Capture d’animaux「捕捉」"
+  },
+  "lunar_activity_119": {
+    "message": "Chasse「畋猎」"
+  },
+  "lunar_activity_120": {
+    "message": "Dressage des bovins et des chevaux「教牛马」"
+  },
+  "lunar_activity_121": {
+    "message": "Rencontre de parents et d’amis「会亲友」"
+  },
+  "lunar_activity_122": {
+    "message": "Prise de fonctions「赴任」"
+  },
+  "lunar_activity_123": {
+    "message": "Consultation médicale「求医」"
+  },
+  "lunar_activity_124": {
+    "message": "Traitement d’une maladie「治病」"
+  },
+  "lunar_activity_125": {
+    "message": "Procès「词讼」"
+  },
+  "lunar_activity_126": {
+    "message": "Pose des fondations et terrassement「起基动土」"
+  },
+  "lunar_activity_127": {
+    "message": "Démolition de maisons et de murs「破屋坏垣」"
+  },
+  "lunar_activity_128": {
+    "message": "Construction d’une maison「盖屋」"
+  },
+  "lunar_activity_129": {
+    "message": "Construction d’un entrepôt「造仓库」"
+  },
+  "lunar_activity_130": {
+    "message": "Signature de contrats et commerce「立券交易」"
+  },
+  "lunar_activity_131": {
+    "message": "Commerce「交易」"
+  },
+  "lunar_activity_132": {
+    "message": "Signature d’un contrat「立券」"
+  },
+  "lunar_activity_133": {
+    "message": "Installation d’équipement「安机」"
+  },
+  "lunar_activity_134": {
+    "message": "Rencontre d’amis「会友」"
+  },
+  "lunar_activity_135": {
+    "message": "Demande de soins médicaux「求医疗病」"
+  },
+  "lunar_activity_136": {
+    "message": "Aucune activité n’est propice「诸事不宜」"
+  },
+  "lunar_activity_137": {
+    "message": "Éviter toute autre activité「馀事勿取」"
+  },
+  "lunar_activity_138": {
+    "message": "Tenue de funérailles「行丧」"
+  },
+  "lunar_activity_139": {
+    "message": "Lutte contre les nuisibles「断蚁」"
+  },
+  "lunar_activity_140": {
+    "message": "Retour à la retraite de montagne「归岫」"
+  },
+  "lunar_pengzu_heaven_0": {
+    "message": "Les jours Jia, n’ouvrez pas le grenier, sinon les richesses se dissiperont「甲不开仓财物耗散」"
+  },
+  "lunar_pengzu_heaven_1": {
+    "message": "Les jours Yi, ne plantez pas, sinon mille plants ne pousseront pas「乙不栽植千株不长」"
+  },
+  "lunar_pengzu_heaven_2": {
+    "message": "Les jours Bing, ne réparez pas le foyer, sinon le malheur suivra「丙不修灶必见灾殃」"
+  },
+  "lunar_pengzu_heaven_3": {
+    "message": "Les jours Ding, ne vous rasez pas la tête, sinon des plaies apparaîtront「丁不剃头头必生疮」"
+  },
+  "lunar_pengzu_heaven_4": {
+    "message": "Les jours Wu, n’acceptez pas de terres, sinon le propriétaire connaîtra le malheur「戊不受田田主不祥」"
+  },
+  "lunar_pengzu_heaven_5": {
+    "message": "Les jours Ji, ne rompez pas de contrats, sinon les deux parties subiront des pertes「己不破券二比并亡」"
+  },
+  "lunar_pengzu_heaven_6": {
+    "message": "Les jours Geng, ne tissez pas, sinon le métier restera inutilisé「庚不经络织机虚张」"
+  },
+  "lunar_pengzu_heaven_7": {
+    "message": "Les jours Xin, ne préparez pas de sauces, sinon le maître de maison n’y goûtera pas「辛不合酱主人不尝」"
+  },
+  "lunar_pengzu_heaven_8": {
+    "message": "Les jours Ren, ne puisez pas d’eau, sinon le danger sera difficile à prévenir「壬不泱水更难提防」"
+  },
+  "lunar_pengzu_heaven_9": {
+    "message": "Les jours Gui, n’engagez pas de procès, sinon votre cause sera faible et l’adversaire fort「癸不词讼理弱敌强」"
+  },
+  "lunar_pengzu_earth_0": {
+    "message": "Les jours Zi, ne consultez pas les oracles, sinon vous attirerez le malheur「子不问卜自惹祸殃」"
+  },
+  "lunar_pengzu_earth_1": {
+    "message": "Les jours Chou, ne célébrez pas de passage à l’âge adulte, sinon le voyageur pourrait ne pas rentrer「丑不冠带主不还乡」"
+  },
+  "lunar_pengzu_earth_2": {
+    "message": "Les jours Yin, ne faites pas d’offrandes rituelles, sinon les esprits ne les accepteront pas「寅不祭祀神鬼不尝」"
+  },
+  "lunar_pengzu_earth_3": {
+    "message": "Les jours Mao, ne creusez pas de puits, sinon l’eau deviendra fétide「卯不穿井水泉不香」"
+  },
+  "lunar_pengzu_earth_4": {
+    "message": "Les jours Chen, ne pleurez pas, sinon un nouveau deuil pourrait suivre「辰不哭泣必主重丧」"
+  },
+  "lunar_pengzu_earth_5": {
+    "message": "Les jours Si, ne voyagez pas loin, sinon des biens pourraient être perdus「巳不远行财物伏藏」"
+  },
+  "lunar_pengzu_earth_6": {
+    "message": "Les jours Wu, ne couvrez pas une maison, sinon le propriétaire devra la reconstruire「午不苫盖屋主更张」"
+  },
+  "lunar_pengzu_earth_7": {
+    "message": "Les jours Wei, ne prenez pas de médicaments, sinon des toxines pourraient entrer dans le corps「未不服药毒气入肠」"
+  },
+  "lunar_pengzu_earth_8": {
+    "message": "Les jours Shen, n’installez pas de lit, sinon de mauvais esprits pourraient entrer dans la pièce「申不安床鬼祟入房」"
+  },
+  "lunar_pengzu_earth_9": {
+    "message": "Les jours You, ne recevez pas d’invités, sinon l’ivresse pourrait semer le désordre「酉不会客醉坐颠狂」"
+  },
+  "lunar_pengzu_earth_10": {
+    "message": "Les jours Xu, ne mangez pas de viande de chien, sinon des événements étranges pourraient survenir au lit「戌不吃犬作怪上床」"
+  },
+  "lunar_pengzu_earth_11": {
+    "message": "Les jours Hai, ne vous mariez pas, sinon cela pourrait nuire au marié「亥不嫁娶不利新郎」"
+  }
+}

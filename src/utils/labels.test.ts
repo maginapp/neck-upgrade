@@ -29,4 +29,14 @@ describe('颈椎阅读模式', () => {
     expect(getDataTypeLabel(DataType.News, AppLanguage.ZhTW)).toBe('熱榜');
     expect(getNewsLabel('社会', AppLanguage.ZhTW)).toBe('社會');
   });
+
+  it('应该返回俄语和法语界面标签', () => {
+    expect(getThemeLabel(Theme.System, AppLanguage.Ru)).toBe('Системная');
+    expect(getNeckModeLabel(NeckMode.Reading, AppLanguage.Ru)).toBe('Чтение');
+    expect(getNewsLabel('社会', AppLanguage.Ru)).toBe('Общество');
+
+    expect(getThemeLabel(Theme.System, AppLanguage.Fr)).toBe('Système');
+    expect(getDataTypeLabel(DataType.News, AppLanguage.Fr)).toBe('Tendances');
+    expect(getNewsLabel('美食', AppLanguage.Fr)).toBe('Cuisine');
+  });
 });

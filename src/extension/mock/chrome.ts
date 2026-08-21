@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import en from '@/extension/_locales/en/messages.json';
+import fr from '@/extension/_locales/fr/messages.json';
+import ru from '@/extension/_locales/ru/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
 import zhTW from '@/extension/_locales/zh_TW/messages.json';
 
@@ -14,6 +16,8 @@ type Messages = {
 // 模拟 Chrome 扩展的 i18n 消息
 const messages: Record<string, Messages> = {
   en,
+  fr,
+  ru,
   zh_CN: zhCN,
   zh_TW: zhTW,
 };
@@ -27,12 +31,18 @@ let mockWobbleStatus = {
 };
 
 // 获取当前浏览器语言
-const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' => {
+const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' | 'ru' | 'fr' => {
   const lang = navigator.language.toLowerCase();
   if (/^zh(?:-|_)(?:tw|hk|mo|hant)/.test(lang)) {
     return 'zh_TW';
   }
-  return lang.startsWith('zh') ? 'zh_CN' : 'en';
+  if (lang.startsWith('zh')) {
+    return 'zh_CN';
+  }
+  if (lang.startsWith('ru')) {
+    return 'ru';
+  }
+  return lang.startsWith('fr') ? 'fr' : 'en';
 };
 
 // 模拟 Chrome API

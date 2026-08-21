@@ -32,7 +32,13 @@ const getBrowserLanguage = (): AppLanguage => {
   if (/^zh(?:-|_)(?:tw|hk|mo|hant)/.test(browserLanguage)) {
     return AppLanguage.ZhTW;
   }
-  return browserLanguage.startsWith('zh') ? AppLanguage.ZhCN : AppLanguage.En;
+  if (browserLanguage.startsWith('zh')) {
+    return AppLanguage.ZhCN;
+  }
+  if (browserLanguage.startsWith('ru')) {
+    return AppLanguage.Ru;
+  }
+  return browserLanguage.startsWith('fr') ? AppLanguage.Fr : AppLanguage.En;
 };
 
 const createDefaultSettings = (): Settings => {
@@ -68,7 +74,9 @@ const normalizeSettings = (storedSettings: Settings | null): Settings => {
     language:
       storedSettings.language === AppLanguage.ZhCN ||
       storedSettings.language === AppLanguage.ZhTW ||
-      storedSettings.language === AppLanguage.En
+      storedSettings.language === AppLanguage.En ||
+      storedSettings.language === AppLanguage.Ru ||
+      storedSettings.language === AppLanguage.Fr
         ? storedSettings.language
         : defaultSettings.language,
     neck: {

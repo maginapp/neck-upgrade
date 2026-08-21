@@ -17,6 +17,8 @@ export enum AppLanguage {
   ZhCN = 'zh_CN',
   ZhTW = 'zh_TW',
   En = 'en',
+  Ru = 'ru',
+  Fr = 'fr',
 }
 
 // 颈椎模式类型

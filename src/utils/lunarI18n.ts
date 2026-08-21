@@ -120,7 +120,23 @@ export const formatLunarDate = (info: LunarInfo, language: AppLanguage, t: Trans
   }
 
   const zodiac = translateIndexedName(info.zodiac, Zodiac.NAMES, 'lunar_zodiac', t);
-  const month = `${info.isLeapMonth ? 'Leap ' : ''}${toOrdinal(Math.abs(info.lunarMonth))}`;
+  const monthNumber = Math.abs(info.lunarMonth);
+
+  if (language === AppLanguage.Ru) {
+    const month = `${info.isLeapMonth ? 'дополнительного ' : ''}${monthNumber}-го`;
+    return `${info.lunarDay}-й день ${month} лунного месяца, год ${romanizeSixtyCycle(
+      info.ganZhiYearName
+    )} (${zodiac})`;
+  }
+
+  if (language === AppLanguage.Fr) {
+    const month = `${monthNumber}e mois lunaire${info.isLeapMonth ? ' intercalaire' : ''}`;
+    return `${info.lunarDay}e jour du ${month}, année ${romanizeSixtyCycle(
+      info.ganZhiYearName
+    )} (${zodiac})`;
+  }
+
+  const month = `${info.isLeapMonth ? 'Leap ' : ''}${toOrdinal(monthNumber)}`;
 
   return `${toOrdinal(info.lunarDay)} day of the ${month} Lunar Month, ${romanizeSixtyCycle(
     info.ganZhiYearName
@@ -140,6 +156,18 @@ export const formatLunarGanZhiDate = (info: LunarInfo, language: AppLanguage, t:
   }
 
   const zodiac = translateIndexedName(info.zodiac, Zodiac.NAMES, 'lunar_zodiac', t);
+  if (language === AppLanguage.Ru) {
+    return `Год ${romanizeSixtyCycle(info.ganZhiYearName)} (${zodiac}) · месяц ${romanizeSixtyCycle(
+      info.ganZhiMonthName
+    )} · день ${romanizeSixtyCycle(info.ganZhiDayName)}`;
+  }
+
+  if (language === AppLanguage.Fr) {
+    return `Année ${romanizeSixtyCycle(info.ganZhiYearName)} (${zodiac}) · mois ${romanizeSixtyCycle(
+      info.ganZhiMonthName
+    )} · jour ${romanizeSixtyCycle(info.ganZhiDayName)}`;
+  }
+
   return `${romanizeSixtyCycle(info.ganZhiYearName)} (${zodiac}) Year · ${romanizeSixtyCycle(
     info.ganZhiMonthName
   )} Month · ${romanizeSixtyCycle(info.ganZhiDayName)} Day`;
@@ -151,7 +179,7 @@ export const formatSolarTerm = (
   language: AppLanguage,
   t: Translate
 ) => {
-  if (language !== AppLanguage.En) {
+  if (language === AppLanguage.ZhCN || language === AppLanguage.ZhTW) {
     const translatedTerm = translateIndexedName(term, SolarTerm.NAMES, 'lunar_solar_term', t);
     return `${translatedTerm}${
       dayIndex ? `${t('header_term_day_prefix')}${dayIndex}${t('header_day')}` : ''

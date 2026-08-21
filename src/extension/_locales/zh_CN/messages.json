@@ -23,6 +23,18 @@
     "message": "切换到英文",
     "description": "切换到英文的按钮说明"
   },
+  "language_switch_to_russian": {
+    "message": "切换到俄语",
+    "description": "切换到俄语的按钮说明"
+  },
+  "language_switch_to_french": {
+    "message": "切换到法语",
+    "description": "切换到法语的按钮说明"
+  },
+  "language_select": {
+    "message": "选择语言",
+    "description": "语言菜单按钮说明"
+  },
   "settings_open": {
     "message": "打开设置",
     "description": "新标签页打开设置按钮说明"

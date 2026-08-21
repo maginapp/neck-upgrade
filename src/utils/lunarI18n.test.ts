@@ -10,6 +10,8 @@ import {
 import { describe, expect, it } from 'vitest';
 
 import en from '@/extension/_locales/en/messages.json';
+import fr from '@/extension/_locales/fr/messages.json';
+import ru from '@/extension/_locales/ru/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
 import zhTW from '@/extension/_locales/zh_TW/messages.json';
 import { AppLanguage } from '@/types/app';
@@ -30,14 +32,20 @@ type Catalog = Record<string, { message: string }>;
 const enCatalog = en as Catalog;
 const zhCatalog = zhCN as Catalog;
 const zhTWCatalog = zhTW as Catalog;
+const ruCatalog = ru as Catalog;
+const frCatalog = fr as Catalog;
 const enT = (key: string) => enCatalog[key]?.message ?? key;
 const zhT = (key: string) => zhCatalog[key]?.message ?? key;
 const zhTWT = (key: string) => zhTWCatalog[key]?.message ?? key;
+const ruT = (key: string) => ruCatalog[key]?.message ?? key;
+const frT = (key: string) => frCatalog[key]?.message ?? key;
 
 describe('lunar i18n catalogs', () => {
-  it('keeps Simplified Chinese, Traditional Chinese, and English catalog keys aligned', () => {
+  it('keeps all five locale catalog keys aligned', () => {
     expect(Object.keys(zhTWCatalog)).toEqual(Object.keys(zhCatalog));
     expect(Object.keys(enCatalog)).toEqual(Object.keys(zhCatalog));
+    expect(Object.keys(ruCatalog)).toEqual(Object.keys(zhCatalog));
+    expect(Object.keys(frCatalog)).toEqual(Object.keys(zhCatalog));
   });
 
   it('keeps every tyme4ts activity aligned with its bilingual English message', () => {
@@ -45,6 +53,8 @@ describe('lunar i18n catalogs', () => {
       expect(zhT(`lunar_activity_${index}`)).toBe(name);
       expect(zhTWT(`lunar_activity_${index}`)).not.toBe(`lunar_activity_${index}`);
       expect(enT(`lunar_activity_${index}`).endsWith(`「${name}」`)).toBe(true);
+      expect(ruT(`lunar_activity_${index}`).endsWith(`「${name}」`)).toBe(true);
+      expect(frT(`lunar_activity_${index}`).endsWith(`「${name}」`)).toBe(true);
     });
   });
 
@@ -53,12 +63,16 @@ describe('lunar i18n catalogs', () => {
       expect(zhT(`lunar_solar_term_${index}`)).toBe(name);
       expect(zhTWT(`lunar_solar_term_${index}`)).not.toBe(`lunar_solar_term_${index}`);
       expect(enT(`lunar_solar_term_${index}`)).not.toBe(`lunar_solar_term_${index}`);
+      expect(ruT(`lunar_solar_term_${index}`)).not.toBe(`lunar_solar_term_${index}`);
+      expect(frT(`lunar_solar_term_${index}`)).not.toBe(`lunar_solar_term_${index}`);
     });
 
     Zodiac.NAMES.forEach((name, index) => {
       expect(zhT(`lunar_zodiac_${index}`)).toBe(name);
       expect(zhTWT(`lunar_zodiac_${index}`)).not.toBe(`lunar_zodiac_${index}`);
       expect(enT(`lunar_zodiac_${index}`)).not.toBe(`lunar_zodiac_${index}`);
+      expect(ruT(`lunar_zodiac_${index}`)).not.toBe(`lunar_zodiac_${index}`);
+      expect(frT(`lunar_zodiac_${index}`)).not.toBe(`lunar_zodiac_${index}`);
     });
   });
 
@@ -67,12 +81,16 @@ describe('lunar i18n catalogs', () => {
       expect(zhT(`lunar_pengzu_heaven_${index}`)).toBe(name);
       expect(zhTWT(`lunar_pengzu_heaven_${index}`)).not.toBe(`lunar_pengzu_heaven_${index}`);
       expect(enT(`lunar_pengzu_heaven_${index}`).endsWith(`「${name}」`)).toBe(true);
+      expect(ruT(`lunar_pengzu_heaven_${index}`).endsWith(`「${name}」`)).toBe(true);
+      expect(frT(`lunar_pengzu_heaven_${index}`).endsWith(`「${name}」`)).toBe(true);
     });
 
     PengZuEarthBranch.NAMES.forEach((name, index) => {
       expect(zhT(`lunar_pengzu_earth_${index}`)).toBe(name);
       expect(zhTWT(`lunar_pengzu_earth_${index}`)).not.toBe(`lunar_pengzu_earth_${index}`);
       expect(enT(`lunar_pengzu_earth_${index}`).endsWith(`「${name}」`)).toBe(true);
+      expect(ruT(`lunar_pengzu_earth_${index}`).endsWith(`「${name}」`)).toBe(true);
+      expect(frT(`lunar_pengzu_earth_${index}`).endsWith(`「${name}」`)).toBe(true);
     });
   });
 
@@ -108,6 +126,30 @@ describe('lunar i18n formatting', () => {
     expect(translatePengZuTaboo('丁不剃头头必生疮', AppLanguage.En, enT)).toBe(
       'On Ding days, do not shave the head, or sores will develop「丁不剃头头必生疮」'
     );
+  });
+
+  it('formats Russian and French lunar fields and keeps Chinese sources for special text', () => {
+    expect(formatLunarDate(info, AppLanguage.Ru, ruT)).toBe(
+      '9-й день 7-го лунного месяца, год Bing-wu (Лошадь)'
+    );
+    expect(formatLunarGanZhiDate(info, AppLanguage.Ru, ruT)).toBe(
+      'Год Bing-wu (Лошадь) · месяц Bing-shen · день Ding-mao'
+    );
+    expect(formatSolarTerm(info.term, info.termDayIndex, AppLanguage.Ru, ruT)).toBe(
+      'Начало осени · День 14'
+    );
+    expect(translateLunarActivity('嫁娶', AppLanguage.Ru, ruT)).toBe('Бракосочетание「嫁娶」');
+
+    expect(formatLunarDate(info, AppLanguage.Fr, frT)).toBe(
+      '9e jour du 7e mois lunaire, année Bing-wu (Cheval)'
+    );
+    expect(formatLunarGanZhiDate(info, AppLanguage.Fr, frT)).toBe(
+      'Année Bing-wu (Cheval) · mois Bing-shen · jour Ding-mao'
+    );
+    expect(formatSolarTerm(info.term, info.termDayIndex, AppLanguage.Fr, frT)).toBe(
+      'Début de l’automne · Jour 14'
+    );
+    expect(translateLunarActivity('嫁娶', AppLanguage.Fr, frT)).toBe('Mariage「嫁娶」');
   });
 
   it('keeps the original Chinese output and unknown source values unchanged', () => {

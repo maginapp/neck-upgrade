@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { createRoot } from 'react-dom/client';
 
+import '@/extension/mock/chrome';
 import '@/styles/global.scss';
 import { App } from './App';
 

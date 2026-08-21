@@ -1,0 +1,1021 @@
+{
+  "extension_name": {
+    "message": "Защита шеи",
+    "description": "The name of the extension"
+  },
+  "extension_description": {
+    "message": "Расширение Chrome для здоровья шеи: помогает разминать шею и знакомит с поэзией, историей и популярными темами.",
+    "description": "The description of the extension"
+  },
+  "popup_description": {
+    "message": "Берегите здоровье шеи",
+    "description": "The description of the popup"
+  },
+  "language_switch_to_simplified_chinese": {
+    "message": "Переключить на упрощённый китайский",
+    "description": "The button label for switching to Simplified Chinese"
+  },
+  "language_switch_to_traditional_chinese": {
+    "message": "Переключить на традиционный китайский",
+    "description": "The button label for switching to Traditional Chinese"
+  },
+  "language_switch_to_english": {
+    "message": "Переключить на английский",
+    "description": "The button label for switching to English"
+  },
+  "language_switch_to_russian": {
+    "message": "Переключить на русский",
+    "description": "The button label for switching to Russian"
+  },
+  "language_switch_to_french": {
+    "message": "Переключить на французский",
+    "description": "The button label for switching to French"
+  },
+  "language_select": {
+    "message": "Выбрать язык",
+    "description": "The language menu button label"
+  },
+  "settings_open": {
+    "message": "Открыть настройки",
+    "description": "The new tab settings button label"
+  },
+  "settings_close": {
+    "message": "Закрыть настройки",
+    "description": "The new tab close settings button label"
+  },
+  "settings_title": {
+    "message": "Настройки",
+    "description": "The settings sidebar title"
+  },
+  "settings_neck_mode": {
+    "message": "Режим наклона шеи",
+    "description": "The neck tilt mode setting title"
+  },
+  "settings_content_type": {
+    "message": "Тип содержимого",
+    "description": "The content type setting title"
+  },
+  "settings_poetry_source": {
+    "message": "Источники поэзии",
+    "description": "The poetry source setting title"
+  },
+  "settings_knowledge_source": {
+    "message": "Предпочитаемый источник знаний",
+    "description": "The preferred knowledge source setting title"
+  },
+  "settings_feedback": {
+    "message": "Отзывы и поддержка",
+    "description": "The feedback and support setting title"
+  },
+  "settings_switch_to": {
+    "message": "Переключить на",
+    "description": "The prefix for a setting switch button label"
+  },
+  "settings_change_interval_seconds": {
+    "message": "Интервал смены (секунды)",
+    "description": "The advanced neck mode interval label"
+  },
+  "settings_max_rotation_angle": {
+    "message": "Максимальный угол поворота",
+    "description": "The advanced neck mode maximum angle label"
+  },
+  "settings_specific_sources": {
+    "message": "Конкретные источники (можно выбрать несколько)",
+    "description": "The poetry source selection hint"
+  },
+  "settings_feedback_description": {
+    "message": "Заинтересовались проектом или нашли проблему? Свяжитесь с нами.",
+    "description": "The feedback section description"
+  },
+  "settings_submit_issue": {
+    "message": "Сообщить о проблеме",
+    "description": "The submit issue link"
+  },
+  "settings_discussions": {
+    "message": "Обсуждения",
+    "description": "The discussions link"
+  },
+  "settings_project_home": {
+    "message": "Страница проекта",
+    "description": "The project home link"
+  },
+  "settings_support_description": {
+    "message": "Если расширение вам помогает, мы будем благодарны за поддержку.",
+    "description": "The support section description"
+  },
+  "settings_donation_qr": {
+    "message": "QR-код для пожертвования",
+    "description": "The donation QR code alternative text"
+  },
+  "header_festivals": {
+    "message": "Праздники",
+    "description": "The lunar festival label"
+  },
+  "header_solar_term": {
+    "message": "Солнечный сезон",
+    "description": "The solar term label"
+  },
+  "header_term_day_prefix": {
+    "message": "День ",
+    "description": "The solar term day prefix"
+  },
+  "header_suitable": {
+    "message": "Благоприятно「宜」",
+    "description": "The almanac suitable activities label"
+  },
+  "header_avoid": {
+    "message": "Избегать「忌」",
+    "description": "The almanac activities to avoid label"
+  },
+  "header_julian_day": {
+    "message": "Юлианская дата",
+    "description": "The Julian day label"
+  },
+  "header_pengzu": {
+    "message": "Запреты Пэн-цзу「彭祖百忌」",
+    "description": "The Peng Zu taboos label"
+  },
+  "header_plum_rain": {
+    "message": "Сезон сливовых дождей",
+    "description": "The plum rain label"
+  },
+  "header_next_break": {
+    "message": "Следующий выходной",
+    "description": "The next day off hint"
+  },
+  "header_break_in": {
+    "message": " через ",
+    "description": "The next day off time connector"
+  },
+  "header_day": {
+    "message": " день",
+    "description": "The singular day unit"
+  },
+  "header_days": {
+    "message": " дней",
+    "description": "The plural day unit"
+  },
+  "history_today": {
+    "message": "Этот день в истории",
+    "description": "The history content title"
+  },
+  "history_holidays": {
+    "message": "Праздники и обычаи",
+    "description": "The holiday content title"
+  },
+  "news_login_first": {
+    "message": "Сначала войдите в систему",
+    "description": "The news source sign-in hint"
+  },
+  "content_refresh": {
+    "message": "Обновить содержимое",
+    "description": "The content refresh button label"
+  },
+  "popup_wobble_title": {
+    "message": "Покачивание страницы",
+    "description": "The title of the page wobble feature"
+  },
+  "popup_wobble_description": {
+    "message": "Периодически наклонять текущую страницу",
+    "description": "The description of the page wobble feature"
+  },
+  "popup_wobble_fixed_angle": {
+    "message": "Фиксированный угол",
+    "description": "The fixed page wobble angle label"
+  },
+  "popup_wobble_max_angle": {
+    "message": "Максимальный угол",
+    "description": "The random page wobble maximum angle label"
+  },
+  "popup_wobble_random_angle": {
+    "message": "Случайно в диапазоне",
+    "description": "The random page wobble switch label"
+  },
+  "popup_wobble_fixed_angle_hint": {
+    "message": "Чередовать наклон влево и вправо на выбранный угол",
+    "description": "The fixed angle mode hint"
+  },
+  "popup_wobble_random_angle_hint": {
+    "message": "Выбирать новый угол в пределах положительного и отрицательного лимита",
+    "description": "The random angle mode hint"
+  },
+  "popup_wobble_cycle": {
+    "message": "Цикл смены",
+    "description": "The page wobble cycle label"
+  },
+  "popup_wobble_minutes": {
+    "message": "мин",
+    "description": "The minute unit"
+  },
+  "popup_wobble_seconds": {
+    "message": "с",
+    "description": "The second unit"
+  },
+  "popup_wobble_next_change": {
+    "message": "До следующей смены",
+    "description": "The next page angle change hint"
+  },
+  "popup_wobble_unsupported": {
+    "message": "Этой страницей нельзя управлять. Откройте обычный сайт и попробуйте снова.",
+    "description": "The notice for unsupported Chrome internal pages"
+  },
+  "popup_wobble_error": {
+    "message": "Не удалось управлять страницей. Обновите её и попробуйте снова.",
+    "description": "The page wobble activation error"
+  },
+  "popup_wobble_current_domain": {
+    "message": "Текущий домен",
+    "description": "The current regular website domain label"
+  },
+  "popup_wobble_domain_allowed": {
+    "message": "Разрешён",
+    "description": "The allowed page wobble domain status"
+  },
+  "popup_wobble_domain_blocked": {
+    "message": "Заблокирован",
+    "description": "The blocked page wobble domain status"
+  },
+  "popup_wobble_add_whitelist": {
+    "message": "Добавить в список разрешённых",
+    "description": "The button to add the current domain to the allowlist"
+  },
+  "popup_wobble_add_blacklist": {
+    "message": "Добавить в список блокировки",
+    "description": "The button to add the current domain to the blocklist"
+  },
+  "popup_wobble_remove_current_rule": {
+    "message": "Удалить текущее правило",
+    "description": "The button to remove exact rules for the current domain"
+  },
+  "popup_wobble_manage_domains": {
+    "message": "Управление списками доменов",
+    "description": "The domain allowlist and blocklist manager title"
+  },
+  "popup_wobble_domain_rules_hint": {
+    "message": "Пустой список разрешает все обычные сайты. Непустой список разрешает только указанные домены. Список блокировки всегда имеет приоритет, а правило родительского домена распространяется на поддомены.",
+    "description": "The domain allowlist and blocklist matching rules"
+  },
+  "popup_wobble_whitelist": {
+    "message": "Список разрешённых",
+    "description": "The page wobble domain allowlist title"
+  },
+  "popup_wobble_blacklist": {
+    "message": "Список блокировки",
+    "description": "The page wobble domain blocklist title"
+  },
+  "popup_wobble_domain_placeholder": {
+    "message": "Например, example.com",
+    "description": "The domain input placeholder"
+  },
+  "popup_wobble_add_domain": {
+    "message": "Добавить",
+    "description": "The button to add a domain rule"
+  },
+  "popup_wobble_domain_list_empty": {
+    "message": "Нет доменов",
+    "description": "The empty domain rule list hint"
+  },
+  "popup_wobble_remove_domain": {
+    "message": "Удалить домен",
+    "description": "The accessible label for the remove domain rule button"
+  },
+  "popup_wobble_domain_blacklisted": {
+    "message": "Домен находится в списке блокировки. Переключатель может оставаться включённым, но эта страница не будет покачиваться.",
+    "description": "The current domain blocklist match notice"
+  },
+  "popup_wobble_domain_not_whitelisted": {
+    "message": "Список разрешённых активен и не содержит этот домен. Переключатель может оставаться включённым, но эта страница не будет покачиваться.",
+    "description": "The current domain allowlist miss notice"
+  },
+  "popup_btn_open_new_tab": {
+    "message": "Открыть новую вкладку",
+    "description": "The button to open a new tab"
+  },
+  "popup_btn_open_extension_detail": {
+    "message": "Управление расширениями",
+    "description": "The button to manage the extensions"
+  },
+  "popup_btn_open_website_permission": {
+    "message": "Разрешения для сайтов",
+    "description": "The button to view the website permissions"
+  },
+  "popup_btn_open_shortcut": {
+    "message": "Горячие клавиши",
+    "description": "The button to open the shortcut"
+  },
+  "popup_btn_open_feedback": {
+    "message": "Отзывы и обсуждение",
+    "description": "The button to open the feedback of github issues"
+  },
+  "lunar_solar_term_0": {
+    "message": "Зимнее солнцестояние"
+  },
+  "lunar_solar_term_1": {
+    "message": "Малые холода"
+  },
+  "lunar_solar_term_2": {
+    "message": "Большие холода"
+  },
+  "lunar_solar_term_3": {
+    "message": "Начало весны"
+  },
+  "lunar_solar_term_4": {
+    "message": "Дождевая вода"
+  },
+  "lunar_solar_term_5": {
+    "message": "Пробуждение насекомых"
+  },
+  "lunar_solar_term_6": {
+    "message": "Весеннее равноденствие"
+  },
+  "lunar_solar_term_7": {
+    "message": "Чистый свет"
+  },
+  "lunar_solar_term_8": {
+    "message": "Хлебные дожди"
+  },
+  "lunar_solar_term_9": {
+    "message": "Начало лета"
+  },
+  "lunar_solar_term_10": {
+    "message": "Малое наполнение"
+  },
+  "lunar_solar_term_11": {
+    "message": "Колошение хлебов"
+  },
+  "lunar_solar_term_12": {
+    "message": "Летнее солнцестояние"
+  },
+  "lunar_solar_term_13": {
+    "message": "Малая жара"
+  },
+  "lunar_solar_term_14": {
+    "message": "Большая жара"
+  },
+  "lunar_solar_term_15": {
+    "message": "Начало осени"
+  },
+  "lunar_solar_term_16": {
+    "message": "Конец жары"
+  },
+  "lunar_solar_term_17": {
+    "message": "Белая роса"
+  },
+  "lunar_solar_term_18": {
+    "message": "Осеннее равноденствие"
+  },
+  "lunar_solar_term_19": {
+    "message": "Холодная роса"
+  },
+  "lunar_solar_term_20": {
+    "message": "Выпадение инея"
+  },
+  "lunar_solar_term_21": {
+    "message": "Начало зимы"
+  },
+  "lunar_solar_term_22": {
+    "message": "Малый снег"
+  },
+  "lunar_solar_term_23": {
+    "message": "Большой снег"
+  },
+  "lunar_zodiac_0": {
+    "message": "Крыса"
+  },
+  "lunar_zodiac_1": {
+    "message": "Бык"
+  },
+  "lunar_zodiac_2": {
+    "message": "Тигр"
+  },
+  "lunar_zodiac_3": {
+    "message": "Кролик"
+  },
+  "lunar_zodiac_4": {
+    "message": "Дракон"
+  },
+  "lunar_zodiac_5": {
+    "message": "Змея"
+  },
+  "lunar_zodiac_6": {
+    "message": "Лошадь"
+  },
+  "lunar_zodiac_7": {
+    "message": "Коза"
+  },
+  "lunar_zodiac_8": {
+    "message": "Обезьяна"
+  },
+  "lunar_zodiac_9": {
+    "message": "Петух"
+  },
+  "lunar_zodiac_10": {
+    "message": "Собака"
+  },
+  "lunar_zodiac_11": {
+    "message": "Свинья"
+  },
+  "holiday_new_years_day": {
+    "message": "Новый год"
+  },
+  "holiday_spring_festival": {
+    "message": "Праздник весны"
+  },
+  "holiday_qingming_festival": {
+    "message": "Праздник Цинмин"
+  },
+  "holiday_labor_day": {
+    "message": "День труда"
+  },
+  "holiday_dragon_boat_festival": {
+    "message": "Праздник драконьих лодок"
+  },
+  "holiday_mid_autumn_festival": {
+    "message": "Праздник середины осени"
+  },
+  "holiday_national_day": {
+    "message": "Национальный день"
+  },
+  "holiday_weekday_monday": {
+    "message": "Понедельник"
+  },
+  "holiday_weekday_tuesday": {
+    "message": "Вторник"
+  },
+  "holiday_weekday_wednesday": {
+    "message": "Среда"
+  },
+  "holiday_weekday_thursday": {
+    "message": "Четверг"
+  },
+  "holiday_weekday_friday": {
+    "message": "Пятница"
+  },
+  "holiday_weekday_saturday": {
+    "message": "Суббота"
+  },
+  "holiday_weekday_sunday": {
+    "message": "Воскресенье"
+  },
+  "lunar_calendar_prefix": {
+    "message": "Лунный календарь"
+  },
+  "lunar_festival_0": {
+    "message": "春节"
+  },
+  "lunar_festival_1": {
+    "message": "元宵节"
+  },
+  "lunar_festival_2": {
+    "message": "龙头节"
+  },
+  "lunar_festival_3": {
+    "message": "上巳节"
+  },
+  "lunar_festival_4": {
+    "message": "清明节"
+  },
+  "lunar_festival_5": {
+    "message": "端午节"
+  },
+  "lunar_festival_6": {
+    "message": "七夕节"
+  },
+  "lunar_festival_7": {
+    "message": "中元节"
+  },
+  "lunar_festival_8": {
+    "message": "中秋节"
+  },
+  "lunar_festival_9": {
+    "message": "重阳节"
+  },
+  "lunar_festival_10": {
+    "message": "冬至节"
+  },
+  "lunar_festival_11": {
+    "message": "腊八节"
+  },
+  "lunar_festival_12": {
+    "message": "除夕"
+  },
+  "solar_festival_0": {
+    "message": "元旦"
+  },
+  "solar_festival_1": {
+    "message": "三八妇女节"
+  },
+  "solar_festival_2": {
+    "message": "植树节"
+  },
+  "solar_festival_3": {
+    "message": "五一劳动节"
+  },
+  "solar_festival_4": {
+    "message": "五四青年节"
+  },
+  "solar_festival_5": {
+    "message": "六一儿童节"
+  },
+  "solar_festival_6": {
+    "message": "建党节"
+  },
+  "solar_festival_7": {
+    "message": "八一建军节"
+  },
+  "solar_festival_8": {
+    "message": "教师节"
+  },
+  "solar_festival_9": {
+    "message": "国庆节"
+  },
+  "lunar_activity_0": {
+    "message": "Ритуальные подношения「祭祀」"
+  },
+  "lunar_activity_1": {
+    "message": "Молитва о благословении「祈福」"
+  },
+  "lunar_activity_2": {
+    "message": "Молитва о потомстве「求嗣」"
+  },
+  "lunar_activity_3": {
+    "message": "Освящение「开光」"
+  },
+  "lunar_activity_4": {
+    "message": "Создание скульптур и росписей「塑绘」"
+  },
+  "lunar_activity_5": {
+    "message": "Даосский обряд очищения「齐醮」"
+  },
+  "lunar_activity_6": {
+    "message": "Даосский обряд поста「斋醮」"
+  },
+  "lunar_activity_7": {
+    "message": "Омовение「沐浴」"
+  },
+  "lunar_activity_8": {
+    "message": "Благодарение божествам「酬神」"
+  },
+  "lunar_activity_9": {
+    "message": "Строительство храма「造庙」"
+  },
+  "lunar_activity_10": {
+    "message": "Поклонение богу очага「祀灶」"
+  },
+  "lunar_activity_11": {
+    "message": "Воскурение благовоний「焚香」"
+  },
+  "lunar_activity_12": {
+    "message": "Благодарение божеству земли「谢土」"
+  },
+  "lunar_activity_13": {
+    "message": "Перенос священного огня「出火」"
+  },
+  "lunar_activity_14": {
+    "message": "Резьба「雕刻」"
+  },
+  "lunar_activity_15": {
+    "message": "Бракосочетание「嫁娶」"
+  },
+  "lunar_activity_16": {
+    "message": "Помолвка「订婚」"
+  },
+  "lunar_activity_17": {
+    "message": "Поднесение брачных даров「纳采」"
+  },
+  "lunar_activity_18": {
+    "message": "Узнавание имени невесты「问名」"
+  },
+  "lunar_activity_19": {
+    "message": "Принятие зятя в семью「纳婿」"
+  },
+  "lunar_activity_20": {
+    "message": "Визит невесты к родителям「归宁」"
+  },
+  "lunar_activity_21": {
+    "message": "Установка кровати「安床」"
+  },
+  "lunar_activity_22": {
+    "message": "Установка свадебного полога「合帐」"
+  },
+  "lunar_activity_23": {
+    "message": "Обряд совершеннолетия「冠笄」"
+  },
+  "lunar_activity_24": {
+    "message": "Заключение союза「订盟」"
+  },
+  "lunar_activity_25": {
+    "message": "Пополнение семьи「进人口」"
+  },
+  "lunar_activity_26": {
+    "message": "Пошив одежды「裁衣」"
+  },
+  "lunar_activity_27": {
+    "message": "Удаление волос нитью「挽面」"
+  },
+  "lunar_activity_28": {
+    "message": "Уход за лицом「开容」"
+  },
+  "lunar_activity_29": {
+    "message": "Ремонт могилы「修坟」"
+  },
+  "lunar_activity_30": {
+    "message": "Вскрытие могилы「启钻」"
+  },
+  "lunar_activity_31": {
+    "message": "Начало земляных работ для могилы「破土」"
+  },
+  "lunar_activity_32": {
+    "message": "Погребение「安葬」"
+  },
+  "lunar_activity_33": {
+    "message": "Установка памятника「立碑」"
+  },
+  "lunar_activity_34": {
+    "message": "Облачение в траур「成服」"
+  },
+  "lunar_activity_35": {
+    "message": "Завершение траура「除服」"
+  },
+  "lunar_activity_36": {
+    "message": "Подготовка могилы заранее「开生坟」"
+  },
+  "lunar_activity_37": {
+    "message": "Подготовка гроба「合寿木」"
+  },
+  "lunar_activity_38": {
+    "message": "Положение покойного в гроб「入殓」"
+  },
+  "lunar_activity_39": {
+    "message": "Перенос гроба「移柩」"
+  },
+  "lunar_activity_40": {
+    "message": "Обряд всеобщего спасения「普渡」"
+  },
+  "lunar_activity_41": {
+    "message": "Переезд в новый дом「入宅」"
+  },
+  "lunar_activity_42": {
+    "message": "Установка алтаря благовоний「安香」"
+  },
+  "lunar_activity_43": {
+    "message": "Установка двери「安门」"
+  },
+  "lunar_activity_44": {
+    "message": "Строительство и ремонт「修造」"
+  },
+  "lunar_activity_45": {
+    "message": "Закладка фундамента「起基」"
+  },
+  "lunar_activity_46": {
+    "message": "Земляные работы「动土」"
+  },
+  "lunar_activity_47": {
+    "message": "Установка коньковой балки「上梁」"
+  },
+  "lunar_activity_48": {
+    "message": "Установка колонн「竖柱」"
+  },
+  "lunar_activity_49": {
+    "message": "Рытьё колодцев или прудов「开井开池」"
+  },
+  "lunar_activity_50": {
+    "message": "Строительство дамб и спуск воды「作陂放水」"
+  },
+  "lunar_activity_51": {
+    "message": "Демонтаж「拆卸」"
+  },
+  "lunar_activity_52": {
+    "message": "Снос дома「破屋」"
+  },
+  "lunar_activity_53": {
+    "message": "Снос стены「坏垣」"
+  },
+  "lunar_activity_54": {
+    "message": "Ремонт стены「补垣」"
+  },
+  "lunar_activity_55": {
+    "message": "Заготовка древесины для балок「伐木做梁」"
+  },
+  "lunar_activity_56": {
+    "message": "Устройство очага「作灶」"
+  },
+  "lunar_activity_57": {
+    "message": "Снятие ограничений「解除」"
+  },
+  "lunar_activity_58": {
+    "message": "Сверление отверстий под колонны「开柱眼」"
+  },
+  "lunar_activity_59": {
+    "message": "Установка рам для ширм「穿屏扇架」"
+  },
+  "lunar_activity_60": {
+    "message": "Укладка крыши и соединение конька「盖屋合脊」"
+  },
+  "lunar_activity_61": {
+    "message": "Устройство отхожего места「开厕」"
+  },
+  "lunar_activity_62": {
+    "message": "Строительство зернохранилища「造仓」"
+  },
+  "lunar_activity_63": {
+    "message": "Заделка отверстий「塞穴」"
+  },
+  "lunar_activity_64": {
+    "message": "Выравнивание дорог「平治道涂」"
+  },
+  "lunar_activity_65": {
+    "message": "Строительство моста「造桥」"
+  },
+  "lunar_activity_66": {
+    "message": "Устройство туалета「作厕」"
+  },
+  "lunar_activity_67": {
+    "message": "Строительство дамбы「筑堤」"
+  },
+  "lunar_activity_68": {
+    "message": "Рытьё пруда「开池」"
+  },
+  "lunar_activity_69": {
+    "message": "Валка деревьев「伐木」"
+  },
+  "lunar_activity_70": {
+    "message": "Рытьё канала「开渠」"
+  },
+  "lunar_activity_71": {
+    "message": "Рытьё колодца「掘井」"
+  },
+  "lunar_activity_72": {
+    "message": "Уборка дома「扫舍」"
+  },
+  "lunar_activity_73": {
+    "message": "Спуск воды「放水」"
+  },
+  "lunar_activity_74": {
+    "message": "Строительство дома「造屋」"
+  },
+  "lunar_activity_75": {
+    "message": "Соединение конька крыши「合脊」"
+  },
+  "lunar_activity_76": {
+    "message": "Строительство загонов для скота「造畜稠」"
+  },
+  "lunar_activity_77": {
+    "message": "Ремонт двери「修门」"
+  },
+  "lunar_activity_78": {
+    "message": "Установка фундаментных камней「定磉」"
+  },
+  "lunar_activity_79": {
+    "message": "Изготовление балок「作梁」"
+  },
+  "lunar_activity_80": {
+    "message": "Ремонт и отделка стен「修饰垣墙」"
+  },
+  "lunar_activity_81": {
+    "message": "Установка козел「架马」"
+  },
+  "lunar_activity_82": {
+    "message": "Открытие предприятия「开市」"
+  },
+  "lunar_activity_83": {
+    "message": "Вывешивание вывески「挂匾」"
+  },
+  "lunar_activity_84": {
+    "message": "Получение богатства「纳财」"
+  },
+  "lunar_activity_85": {
+    "message": "Поиск богатства「求财」"
+  },
+  "lunar_activity_86": {
+    "message": "Открытие зернохранилища「开仓」"
+  },
+  "lunar_activity_87": {
+    "message": "Покупка автомобиля「买车」"
+  },
+  "lunar_activity_88": {
+    "message": "Покупка недвижимости「置产」"
+  },
+  "lunar_activity_89": {
+    "message": "Наём работников「雇佣」"
+  },
+  "lunar_activity_90": {
+    "message": "Отправка товаров и средств「出货财」"
+  },
+  "lunar_activity_91": {
+    "message": "Установка оборудования「安机械」"
+  },
+  "lunar_activity_92": {
+    "message": "Изготовление транспортных средств「造车器」"
+  },
+  "lunar_activity_93": {
+    "message": "Текстильные работы「经络」"
+  },
+  "lunar_activity_94": {
+    "message": "Пивоварение「酝酿」"
+  },
+  "lunar_activity_95": {
+    "message": "Окрашивание「作染」"
+  },
+  "lunar_activity_96": {
+    "message": "Литьё металла「鼓铸」"
+  },
+  "lunar_activity_97": {
+    "message": "Строительство лодки「造船」"
+  },
+  "lunar_activity_98": {
+    "message": "Сбор мёда「割蜜」"
+  },
+  "lunar_activity_99": {
+    "message": "Посадка растений「栽种」"
+  },
+  "lunar_activity_100": {
+    "message": "Рыбная ловля「取渔」"
+  },
+  "lunar_activity_101": {
+    "message": "Изготовление сетей「结网」"
+  },
+  "lunar_activity_102": {
+    "message": "Разведение скота「牧养」"
+  },
+  "lunar_activity_103": {
+    "message": "Установка зерноперерабатывающего оборудования「安碓磑」"
+  },
+  "lunar_activity_104": {
+    "message": "Обучение ремеслу「习艺」"
+  },
+  "lunar_activity_105": {
+    "message": "Начало учёбы「入学」"
+  },
+  "lunar_activity_106": {
+    "message": "Стрижка волос「理发」"
+  },
+  "lunar_activity_107": {
+    "message": "Посещение больного「探病」"
+  },
+  "lunar_activity_108": {
+    "message": "Встреча с влиятельным человеком「见贵」"
+  },
+  "lunar_activity_109": {
+    "message": "Посадка на судно「乘船」"
+  },
+  "lunar_activity_110": {
+    "message": "Переправа через воду「渡水」"
+  },
+  "lunar_activity_111": {
+    "message": "Иглоукалывание「针灸」"
+  },
+  "lunar_activity_112": {
+    "message": "Путешествие「出行」"
+  },
+  "lunar_activity_113": {
+    "message": "Переселение「移徙」"
+  },
+  "lunar_activity_114": {
+    "message": "Разделение семей「分居」"
+  },
+  "lunar_activity_115": {
+    "message": "Бритьё головы「剃头」"
+  },
+  "lunar_activity_116": {
+    "message": "Стрижка ногтей「整手足甲」"
+  },
+  "lunar_activity_117": {
+    "message": "Приобретение скота「纳畜」"
+  },
+  "lunar_activity_118": {
+    "message": "Ловля животных「捕捉」"
+  },
+  "lunar_activity_119": {
+    "message": "Охота「畋猎」"
+  },
+  "lunar_activity_120": {
+    "message": "Обучение крупного скота и лошадей「教牛马」"
+  },
+  "lunar_activity_121": {
+    "message": "Встреча с родственниками и друзьями「会亲友」"
+  },
+  "lunar_activity_122": {
+    "message": "Вступление в должность「赴任」"
+  },
+  "lunar_activity_123": {
+    "message": "Обращение за медицинской помощью「求医」"
+  },
+  "lunar_activity_124": {
+    "message": "Лечение болезни「治病」"
+  },
+  "lunar_activity_125": {
+    "message": "Судебная тяжба「词讼」"
+  },
+  "lunar_activity_126": {
+    "message": "Закладка фундамента и земляные работы「起基动土」"
+  },
+  "lunar_activity_127": {
+    "message": "Снос домов и стен「破屋坏垣」"
+  },
+  "lunar_activity_128": {
+    "message": "Строительство дома「盖屋」"
+  },
+  "lunar_activity_129": {
+    "message": "Строительство склада「造仓库」"
+  },
+  "lunar_activity_130": {
+    "message": "Подписание контрактов и торговля「立券交易」"
+  },
+  "lunar_activity_131": {
+    "message": "Торговля「交易」"
+  },
+  "lunar_activity_132": {
+    "message": "Подписание контракта「立券」"
+  },
+  "lunar_activity_133": {
+    "message": "Установка оборудования「安机」"
+  },
+  "lunar_activity_134": {
+    "message": "Встреча с друзьями「会友」"
+  },
+  "lunar_activity_135": {
+    "message": "Обращение за лечением「求医疗病」"
+  },
+  "lunar_activity_136": {
+    "message": "Ничего не благоприятно「诸事不宜」"
+  },
+  "lunar_activity_137": {
+    "message": "Избегать всех прочих дел「馀事勿取」"
+  },
+  "lunar_activity_138": {
+    "message": "Проведение похорон「行丧」"
+  },
+  "lunar_activity_139": {
+    "message": "Борьба с вредителями「断蚁」"
+  },
+  "lunar_activity_140": {
+    "message": "Возвращение в горную обитель「归岫」"
+  },
+  "lunar_pengzu_heaven_0": {
+    "message": "В дни Цзя не открывайте амбар, иначе богатство рассеется「甲不开仓财物耗散」"
+  },
+  "lunar_pengzu_heaven_1": {
+    "message": "В дни И не сажайте растения, иначе тысяча ростков не вырастет「乙不栽植千株不长」"
+  },
+  "lunar_pengzu_heaven_2": {
+    "message": "В дни Бин не ремонтируйте очаг, иначе последует беда「丙不修灶必见灾殃」"
+  },
+  "lunar_pengzu_heaven_3": {
+    "message": "В дни Дин не брейте голову, иначе появятся язвы「丁不剃头头必生疮」"
+  },
+  "lunar_pengzu_heaven_4": {
+    "message": "В дни У не принимайте землю, иначе владельца постигнет несчастье「戊不受田田主不祥」"
+  },
+  "lunar_pengzu_heaven_5": {
+    "message": "В дни Цзи не расторгайте договоры, иначе обе стороны понесут убытки「己不破券二比并亡」"
+  },
+  "lunar_pengzu_heaven_6": {
+    "message": "В дни Гэн не занимайтесь ткачеством, иначе станок будет простаивать「庚不经络织机虚张」"
+  },
+  "lunar_pengzu_heaven_7": {
+    "message": "В дни Синь не готовьте соусы, иначе хозяин их не попробует「辛不合酱主人不尝」"
+  },
+  "lunar_pengzu_heaven_8": {
+    "message": "В дни Жэнь не черпайте воду, иначе опасности будет трудно избежать「壬不泱水更难提防」"
+  },
+  "lunar_pengzu_heaven_9": {
+    "message": "В дни Гуй не судитесь, иначе ваши доводы будут слабы, а противник силён「癸不词讼理弱敌强」"
+  },
+  "lunar_pengzu_earth_0": {
+    "message": "В дни Цзы не гадайте, иначе навлечёте несчастье「子不问卜自惹祸殃」"
+  },
+  "lunar_pengzu_earth_1": {
+    "message": "В дни Чоу не проводите обряд совершеннолетия, иначе путник может не вернуться домой「丑不冠带主不还乡」"
+  },
+  "lunar_pengzu_earth_2": {
+    "message": "В дни Инь не приносите ритуальных подношений, иначе духи их не примут「寅不祭祀神鬼不尝」"
+  },
+  "lunar_pengzu_earth_3": {
+    "message": "В дни Мао не ройте колодцы, иначе вода станет дурно пахнуть「卯不穿井水泉不香」"
+  },
+  "lunar_pengzu_earth_4": {
+    "message": "В дни Чэнь не плачьте, иначе может последовать новая утрата「辰不哭泣必主重丧」"
+  },
+  "lunar_pengzu_earth_5": {
+    "message": "В дни Сы не отправляйтесь далеко, иначе можно потерять имущество「巳不远行财物伏藏」"
+  },
+  "lunar_pengzu_earth_6": {
+    "message": "В дни У не крыйте дом, иначе хозяину придётся перестраивать его「午不苫盖屋主更张」"
+  },
+  "lunar_pengzu_earth_7": {
+    "message": "В дни Вэй не принимайте лекарства, иначе токсины попадут в организм「未不服药毒气入肠」"
+  },
+  "lunar_pengzu_earth_8": {
+    "message": "В дни Шэнь не устанавливайте кровать, иначе злые духи войдут в комнату「申不安床鬼祟入房」"
+  },
+  "lunar_pengzu_earth_9": {
+    "message": "В дни Ю не принимайте гостей, иначе последует пьяный беспорядок「酉不会客醉坐颠狂」"
+  },
+  "lunar_pengzu_earth_10": {
+    "message": "В дни Сюй не ешьте собачье мясо, иначе в постели случится странное「戌不吃犬作怪上床」"
+  },
+  "lunar_pengzu_earth_11": {
+    "message": "В дни Хай не вступайте в брак, иначе это повредит жениху「亥不嫁娶不利新郎」"
+  }
+}

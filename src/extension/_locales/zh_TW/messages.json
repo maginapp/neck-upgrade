@@ -14,6 +14,9 @@
     "description": "切換到繁體中文的按鈕說明"
   },
   "language_switch_to_english": { "message": "切換到英文", "description": "切換到英文的按鈕說明" },
+  "language_switch_to_russian": { "message": "切換到俄語", "description": "切換到俄語的按鈕說明" },
+  "language_switch_to_french": { "message": "切換到法語", "description": "切換到法語的按鈕說明" },
+  "language_select": { "message": "選擇語言", "description": "語言選單按鈕說明" },
   "settings_open": { "message": "打開設置", "description": "新標籤頁打開設置按鈕說明" },
   "settings_close": { "message": "關閉設置", "description": "新標籤頁關閉設置按鈕說明" },
   "settings_title": { "message": "設置", "description": "側邊設置標題" },

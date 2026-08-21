@@ -20,6 +20,16 @@ import { getNextHoliday } from '../../utils/holidayApi';
 
 import styles from './Header.module.scss';
 
+const CHINESE_LANGUAGES = new Set([AppLanguage.ZhCN, AppLanguage.ZhTW]);
+
+const DATE_LOCALES: Record<AppLanguage, string> = {
+  [AppLanguage.ZhCN]: 'zh-CN',
+  [AppLanguage.ZhTW]: 'zh-TW',
+  [AppLanguage.En]: 'en-US',
+  [AppLanguage.Ru]: 'ru-RU',
+  [AppLanguage.Fr]: 'fr-FR',
+};
+
 export const Header: React.FC = () => {
   const { language, t } = useI18n();
   const [currentTime, setCurrentTime] = useState<string>('');
@@ -45,19 +55,18 @@ export const Header: React.FC = () => {
         `${padZero(now.getHours())}:${padZero(now.getMinutes())}:${padZero(now.getSeconds())}`
       );
 
-      const ymd =
-        language !== AppLanguage.En
-          ? `${now.getFullYear()}年${padZero(now.getMonth() + 1)}月${padZero(
-              now.getDate()
-            )}日 ${new Intl.DateTimeFormat(language === AppLanguage.ZhTW ? 'zh-TW' : 'zh-CN', {
-              weekday: 'long',
-            }).format(now)}`
-          : new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              weekday: 'long',
-            }).format(now);
+      const ymd = CHINESE_LANGUAGES.has(language)
+        ? `${now.getFullYear()}年${padZero(now.getMonth() + 1)}月${padZero(
+            now.getDate()
+          )}日 ${new Intl.DateTimeFormat(DATE_LOCALES[language], {
+            weekday: 'long',
+          }).format(now)}`
+        : new Intl.DateTimeFormat(DATE_LOCALES[language], {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            weekday: 'long',
+          }).format(now);
 
       setCurrentDate((prev) => {
         if (prev !== ymd) {
@@ -112,7 +121,7 @@ export const Header: React.FC = () => {
           {showLunarInfo && (
             <div
               className={`${styles.lunarInfoContent} ${
-                language === AppLanguage.En ? styles.lunarInfoContentEnglish : ''
+                CHINESE_LANGUAGES.has(language) ? '' : styles.lunarInfoContentWide
               }`}
               ref={popupRef}
             >
@@ -163,7 +172,7 @@ export const Header: React.FC = () => {
                 <span>
                   {lunarInfo.pengZu
                     .map((item) => translatePengZuTaboo(item, language, t))
-                    .join(language === AppLanguage.En ? '; ' : '， ')}
+                    .join(CHINESE_LANGUAGES.has(language) ? '， ' : '; ')}
                 </span>
               </div>
               {lunarInfo.rainDay ? (

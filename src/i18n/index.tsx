@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 
 import en from '@/extension/_locales/en/messages.json';
+import fr from '@/extension/_locales/fr/messages.json';
+import ru from '@/extension/_locales/ru/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
 import zhTW from '@/extension/_locales/zh_TW/messages.json';
 import { AppLanguage } from '@/types/app';
@@ -16,6 +18,8 @@ const catalogs: Record<AppLanguage, MessageCatalog> = {
   [AppLanguage.ZhCN]: zhCN,
   [AppLanguage.ZhTW]: zhTW,
   [AppLanguage.En]: en,
+  [AppLanguage.Ru]: ru,
+  [AppLanguage.Fr]: fr,
 };
 
 const I18nContext = createContext<I18nContextValue>({
@@ -34,6 +38,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ language, ch
       [AppLanguage.ZhCN]: 'zh-CN',
       [AppLanguage.ZhTW]: 'zh-TW',
       [AppLanguage.En]: 'en',
+      [AppLanguage.Ru]: 'ru',
+      [AppLanguage.Fr]: 'fr',
     }[language];
     document.documentElement.lang = htmlLanguage;
   }, [language]);

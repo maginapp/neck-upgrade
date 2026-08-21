@@ -23,6 +23,18 @@
     "message": "Switch to English",
     "description": "The button label for switching to English"
   },
+  "language_switch_to_russian": {
+    "message": "Switch to Russian",
+    "description": "The button label for switching to Russian"
+  },
+  "language_switch_to_french": {
+    "message": "Switch to French",
+    "description": "The button label for switching to French"
+  },
+  "language_select": {
+    "message": "Select language",
+    "description": "The language menu button label"
+  },
   "settings_open": {
     "message": "Open settings",
     "description": "The new tab settings button label"

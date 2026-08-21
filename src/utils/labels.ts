@@ -5,6 +5,8 @@ interface LocalizedLabel {
   [AppLanguage.ZhCN]: string;
   [AppLanguage.ZhTW]: string;
   [AppLanguage.En]: string;
+  [AppLanguage.Ru]: string;
+  [AppLanguage.Fr]: string;
 }
 
 /**
@@ -14,9 +16,15 @@ interface LocalizedLabel {
  */
 export const getThemeLabel = (theme: Theme, language = AppLanguage.ZhCN): string => {
   const labels: Record<Theme, LocalizedLabel> = {
-    [Theme.System]: { zh_CN: '系统', zh_TW: '系統', en: 'System' },
-    [Theme.Light]: { zh_CN: '亮色', zh_TW: '亮色', en: 'Light' },
-    [Theme.Dark]: { zh_CN: '暗黑', zh_TW: '暗黑', en: 'Dark' },
+    [Theme.System]: {
+      zh_CN: '系统',
+      zh_TW: '系統',
+      en: 'System',
+      ru: 'Системная',
+      fr: 'Système',
+    },
+    [Theme.Light]: { zh_CN: '亮色', zh_TW: '亮色', en: 'Light', ru: 'Светлая', fr: 'Clair' },
+    [Theme.Dark]: { zh_CN: '暗黑', zh_TW: '暗黑', en: 'Dark', ru: 'Тёмная', fr: 'Sombre' },
   };
   return labels[theme]?.[language] ?? labels[Theme.System][language];
 };
@@ -28,11 +36,41 @@ export const getThemeLabel = (theme: Theme, language = AppLanguage.ZhCN): string
  */
 export const getNeckModeLabel = (mode: NeckMode, language = AppLanguage.ZhCN): string => {
   const labels: Record<NeckMode, LocalizedLabel> = {
-    [NeckMode.Normal]: { zh_CN: '普通', zh_TW: '普通', en: 'Normal' },
-    [NeckMode.Training]: { zh_CN: '训练', zh_TW: '訓練', en: 'Training' },
-    [NeckMode.Reading]: { zh_CN: '阅读', zh_TW: '閱讀', en: 'Reading' },
-    [NeckMode.Intense]: { zh_CN: '强化', zh_TW: '強化', en: 'Intense' },
-    [NeckMode.Custom]: { zh_CN: '高级', zh_TW: '高級', en: 'Advanced' },
+    [NeckMode.Normal]: {
+      zh_CN: '普通',
+      zh_TW: '普通',
+      en: 'Normal',
+      ru: 'Обычный',
+      fr: 'Normal',
+    },
+    [NeckMode.Training]: {
+      zh_CN: '训练',
+      zh_TW: '訓練',
+      en: 'Training',
+      ru: 'Тренировка',
+      fr: 'Entraînement',
+    },
+    [NeckMode.Reading]: {
+      zh_CN: '阅读',
+      zh_TW: '閱讀',
+      en: 'Reading',
+      ru: 'Чтение',
+      fr: 'Lecture',
+    },
+    [NeckMode.Intense]: {
+      zh_CN: '强化',
+      zh_TW: '強化',
+      en: 'Intense',
+      ru: 'Интенсивный',
+      fr: 'Intensif',
+    },
+    [NeckMode.Custom]: {
+      zh_CN: '高级',
+      zh_TW: '高級',
+      en: 'Advanced',
+      ru: 'Расширенный',
+      fr: 'Avancé',
+    },
   };
   return labels[mode][language];
 };
@@ -44,10 +82,34 @@ export const getNeckModeLabel = (mode: NeckMode, language = AppLanguage.ZhCN): s
  */
 export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): string => {
   const labels: Record<DataType, LocalizedLabel> = {
-    [DataType.Poetry]: { zh_CN: '诗词', zh_TW: '詩詞', en: 'Poetry' },
-    [DataType.History]: { zh_CN: '历史', zh_TW: '歷史', en: 'History' },
-    [DataType.English]: { zh_CN: '英语', zh_TW: '英語', en: 'English' },
-    [DataType.News]: { zh_CN: '热榜', zh_TW: '熱榜', en: 'Trending' },
+    [DataType.Poetry]: {
+      zh_CN: '诗词',
+      zh_TW: '詩詞',
+      en: 'Poetry',
+      ru: 'Поэзия',
+      fr: 'Poésie',
+    },
+    [DataType.History]: {
+      zh_CN: '历史',
+      zh_TW: '歷史',
+      en: 'History',
+      ru: 'История',
+      fr: 'Histoire',
+    },
+    [DataType.English]: {
+      zh_CN: '英语',
+      zh_TW: '英語',
+      en: 'English',
+      ru: 'Английский',
+      fr: 'Anglais',
+    },
+    [DataType.News]: {
+      zh_CN: '热榜',
+      zh_TW: '熱榜',
+      en: 'Trending',
+      ru: 'Популярное',
+      fr: 'Tendances',
+    },
   };
   return labels[type][language];
 };
@@ -59,8 +121,20 @@ export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): s
  */
 export const getKnowledgeModeLabel = (mode: KnowledgeMode, language = AppLanguage.ZhCN): string => {
   const labels: Record<KnowledgeMode, LocalizedLabel> = {
-    [KnowledgeMode.Wiki]: { zh_CN: '维基百科', zh_TW: '維基百科', en: 'Wikipedia' },
-    [KnowledgeMode.Baidu]: { zh_CN: '百度百科', zh_TW: '百度百科', en: 'Baidu Baike' },
+    [KnowledgeMode.Wiki]: {
+      zh_CN: '维基百科',
+      zh_TW: '維基百科',
+      en: 'Wikipedia',
+      ru: 'Википедия',
+      fr: 'Wikipédia',
+    },
+    [KnowledgeMode.Baidu]: {
+      zh_CN: '百度百科',
+      zh_TW: '百度百科',
+      en: 'Baidu Baike',
+      ru: 'Байду Байкэ',
+      fr: 'Baidu Baike',
+    },
   };
   return labels[mode][language];
 };
@@ -70,70 +144,172 @@ export const getPoetryCategoryLabel = (
   language = AppLanguage.ZhCN
 ) => {
   const labels: Record<PoetrySourceCategory, LocalizedLabel> = {
-    [PoetrySourceCategory.All]: { zh_CN: '全部', zh_TW: '全部', en: 'All' },
-    [PoetrySourceCategory.Poem]: { zh_CN: '诗歌', zh_TW: '詩歌', en: 'Poems' },
-    [PoetrySourceCategory.Ci]: { zh_CN: '词', zh_TW: '詞', en: 'Ci Poetry' },
-    [PoetrySourceCategory.Classic]: { zh_CN: '经典', zh_TW: '經典', en: 'Classics' },
-    [PoetrySourceCategory.Primer]: { zh_CN: '蒙学', zh_TW: '蒙學', en: 'Primers' },
-    [PoetrySourceCategory.Essay]: { zh_CN: '文人小品', zh_TW: '文人小品', en: 'Essays' },
+    [PoetrySourceCategory.All]: {
+      zh_CN: '全部',
+      zh_TW: '全部',
+      en: 'All',
+      ru: 'Все',
+      fr: 'Tout',
+    },
+    [PoetrySourceCategory.Poem]: {
+      zh_CN: '诗歌',
+      zh_TW: '詩歌',
+      en: 'Poems',
+      ru: 'Стихи',
+      fr: 'Poèmes',
+    },
+    [PoetrySourceCategory.Ci]: {
+      zh_CN: '词',
+      zh_TW: '詞',
+      en: 'Ci Poetry',
+      ru: 'Поэзия цы',
+      fr: 'Poésie ci',
+    },
+    [PoetrySourceCategory.Classic]: {
+      zh_CN: '经典',
+      zh_TW: '經典',
+      en: 'Classics',
+      ru: 'Классика',
+      fr: 'Classiques',
+    },
+    [PoetrySourceCategory.Primer]: {
+      zh_CN: '蒙学',
+      zh_TW: '蒙學',
+      en: 'Primers',
+      ru: 'Учебные классики',
+      fr: 'Classiques éducatifs',
+    },
+    [PoetrySourceCategory.Essay]: {
+      zh_CN: '文人小品',
+      zh_TW: '文人小品',
+      en: 'Essays',
+      ru: 'Эссе',
+      fr: 'Essais',
+    },
   };
   return labels[category][language];
 };
 
 export const getPoetrySourceLabel = (source: PoetrySource, language = AppLanguage.ZhCN) => {
   const labels: Record<PoetrySource, LocalizedLabel> = {
-    [PoetrySource.Shijing]: { zh_CN: '诗经', zh_TW: '詩經', en: 'Book of Songs' },
-    [PoetrySource.Chuci]: { zh_CN: '楚辞', zh_TW: '楚辭', en: 'Songs of Chu' },
-    [PoetrySource.Caocao]: { zh_CN: '曹操诗集', zh_TW: '曹操詩集', en: "Cao Cao's Poems" },
-    [PoetrySource.Tang300]: { zh_CN: '唐诗三百首', zh_TW: '唐詩三百首', en: '300 Tang Poems' },
+    [PoetrySource.Shijing]: {
+      zh_CN: '诗经',
+      zh_TW: '詩經',
+      en: 'Book of Songs',
+      ru: 'Книга песен',
+      fr: 'Livre des Odes',
+    },
+    [PoetrySource.Chuci]: {
+      zh_CN: '楚辞',
+      zh_TW: '楚辭',
+      en: 'Songs of Chu',
+      ru: 'Чуские строфы',
+      fr: 'Chants de Chu',
+    },
+    [PoetrySource.Caocao]: {
+      zh_CN: '曹操诗集',
+      zh_TW: '曹操詩集',
+      en: "Cao Cao's Poems",
+      ru: 'Стихи Цао Цао',
+      fr: 'Poèmes de Cao Cao',
+    },
+    [PoetrySource.Tang300]: {
+      zh_CN: '唐诗三百首',
+      zh_TW: '唐詩三百首',
+      en: '300 Tang Poems',
+      ru: 'Триста танских поэм',
+      fr: 'Trois cents poèmes des Tang',
+    },
     [PoetrySource.TangFamousSelected]: {
       zh_CN: '全唐诗·名家精选',
       zh_TW: '全唐詩·名家精選',
       en: 'Selected Tang Poets',
+      ru: 'Избранные поэты эпохи Тан',
+      fr: 'Poètes Tang sélectionnés',
     },
     [PoetrySource.ShuimoTang]: {
       zh_CN: '水墨唐诗',
       zh_TW: '水墨唐詩',
       en: 'Ink-Wash Tang Poems',
+      ru: 'Танская поэзия в туши',
+      fr: 'Poèmes Tang à l’encre',
     },
     [PoetrySource.Qianjiashi]: {
       zh_CN: '千家诗',
       zh_TW: '千家詩',
       en: 'Poems of a Thousand Masters',
+      ru: 'Стихи тысячи мастеров',
+      fr: 'Poèmes de mille maîtres',
     },
     [PoetrySource.Songci300]: {
       zh_CN: '宋词三百首',
       zh_TW: '宋詞三百首',
       en: '300 Song Ci Poems',
+      ru: 'Триста песен цы эпохи Сун',
+      fr: 'Trois cents poèmes ci des Song',
     },
     [PoetrySource.SongciFamousSelected]: {
       zh_CN: '全宋词·名家精选',
       zh_TW: '全宋詞·名家精選',
       en: 'Selected Song Ci Poets',
+      ru: 'Избранные авторы цы эпохи Сун',
+      fr: 'Auteurs ci des Song sélectionnés',
     },
     [PoetrySource.Nalan]: {
       zh_CN: '纳兰性德词集',
       zh_TW: '納蘭性德詞集',
       en: "Nalan Xingde's Ci",
+      ru: 'Цы Налань Синдэ',
+      fr: 'Poèmes ci de Nalan Xingde',
     },
-    [PoetrySource.Lunyu]: { zh_CN: '论语', zh_TW: '論語', en: 'Analects' },
-    [PoetrySource.Mengzi]: { zh_CN: '孟子', zh_TW: '孟子', en: 'Mencius' },
-    [PoetrySource.Daxue]: { zh_CN: '大学', zh_TW: '大學', en: 'Great Learning' },
-    [PoetrySource.Zhongyong]: { zh_CN: '中庸', zh_TW: '中庸', en: 'Doctrine of the Mean' },
+    [PoetrySource.Lunyu]: {
+      zh_CN: '论语',
+      zh_TW: '論語',
+      en: 'Analects',
+      ru: 'Беседы и суждения',
+      fr: 'Entretiens de Confucius',
+    },
+    [PoetrySource.Mengzi]: {
+      zh_CN: '孟子',
+      zh_TW: '孟子',
+      en: 'Mencius',
+      ru: 'Мэн-цзы',
+      fr: 'Mencius',
+    },
+    [PoetrySource.Daxue]: {
+      zh_CN: '大学',
+      zh_TW: '大學',
+      en: 'Great Learning',
+      ru: 'Великое учение',
+      fr: 'La Grande Étude',
+    },
+    [PoetrySource.Zhongyong]: {
+      zh_CN: '中庸',
+      zh_TW: '中庸',
+      en: 'Doctrine of the Mean',
+      ru: 'Учение о середине',
+      fr: 'L’Invariable Milieu',
+    },
     [PoetrySource.Zengguang]: {
       zh_CN: '增广贤文',
       zh_TW: '增廣賢文',
       en: 'Zengguang Xianwen',
+      ru: 'Цзэнгуан Сяньвэнь',
+      fr: 'Zengguang Xianwen',
     },
     [PoetrySource.Qianziwen]: {
       zh_CN: '千字文',
       zh_TW: '千字文',
       en: 'Thousand Character Classic',
+      ru: 'Тысячесловие',
+      fr: 'Classique des Mille Caractères',
     },
     [PoetrySource.Youmengying]: {
       zh_CN: '幽梦影',
       zh_TW: '幽夢影',
       en: 'Quiet Dream Shadows',
+      ru: 'Тени тихих снов',
+      fr: 'Ombres des rêves sereins',
     },
   };
   return labels[source][language];
@@ -176,6 +352,80 @@ const ENGLISH_NEWS_LABELS: Record<string, string> = {
   创意: 'Creative',
 };
 
+const RUSSIAN_NEWS_LABELS: Record<string, string> = {
+  微博: 'Weibo',
+  我的: 'Моя лента',
+  热搜: 'В тренде',
+  文娱: 'Культура и развлечения',
+  生活: 'Образ жизни',
+  社会: 'Общество',
+  小红书: 'Xiaohongshu',
+  推荐: 'Для вас',
+  头条: 'Toutiao',
+  知乎: 'Zhihu',
+  热榜: 'Популярное',
+  综合: 'Общее',
+  动画: 'Аниме',
+  鬼畜: 'Ремиксы',
+  音乐: 'Музыка',
+  舞蹈: 'Танцы',
+  影视: 'Кино и ТВ',
+  娱乐: 'Развлечения',
+  知识: 'Знания',
+  科技: 'Технологии',
+  美食: 'Еда',
+  体育: 'Спорт',
+  中国: 'Китай',
+  全球: 'Мир',
+  商业: 'Бизнес',
+  百度: 'Baidu',
+  贴吧: 'Tieba',
+  '36氪': '36Kr',
+  股票: 'Акции',
+  公司: 'Компании',
+  宏观: 'Макроэкономика',
+  技术: 'Технологии',
+  好玩: 'Интересное',
+  创意: 'Творчество',
+};
+
+const FRENCH_NEWS_LABELS: Record<string, string> = {
+  微博: 'Weibo',
+  我的: 'Mon fil',
+  热搜: 'Tendances',
+  文娱: 'Culture et divertissement',
+  生活: 'Mode de vie',
+  社会: 'Société',
+  小红书: 'Xiaohongshu',
+  推荐: 'Pour vous',
+  头条: 'Toutiao',
+  知乎: 'Zhihu',
+  热榜: 'Tendances',
+  综合: 'Général',
+  动画: 'Animation',
+  鬼畜: 'Remix',
+  音乐: 'Musique',
+  舞蹈: 'Danse',
+  影视: 'Cinéma et télévision',
+  娱乐: 'Divertissement',
+  知识: 'Savoirs',
+  科技: 'Technologie',
+  美食: 'Cuisine',
+  体育: 'Sports',
+  中国: 'Chine',
+  全球: 'Monde',
+  商业: 'Économie',
+  百度: 'Baidu',
+  贴吧: 'Tieba',
+  '36氪': '36Kr',
+  股票: 'Actions',
+  公司: 'Entreprises',
+  宏观: 'Macroéconomie',
+  技术: 'Technologie',
+  好玩: 'Loisirs',
+  创意: 'Création',
+};
+
 const TRADITIONAL_NEWS_LABELS: Record<string, string> = {
   微博: '微博',
   我的: '我的',
@@ -216,6 +466,12 @@ const TRADITIONAL_NEWS_LABELS: Record<string, string> = {
 export const getNewsLabel = (label: string, language = AppLanguage.ZhCN) => {
   if (language === AppLanguage.En) {
     return ENGLISH_NEWS_LABELS[label] ?? label;
+  }
+  if (language === AppLanguage.Ru) {
+    return RUSSIAN_NEWS_LABELS[label] ?? label;
+  }
+  if (language === AppLanguage.Fr) {
+    return FRENCH_NEWS_LABELS[label] ?? label;
   }
   return language === AppLanguage.ZhTW ? TRADITIONAL_NEWS_LABELS[label] ?? label : label;
 };
