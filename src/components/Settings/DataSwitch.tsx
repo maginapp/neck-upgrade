@@ -1,3 +1,4 @@
+import { useI18n } from '@/i18n';
 import { DataType } from '@/types/app';
 import { getDataTypeLabel } from '@/utils/labels';
 
@@ -9,6 +10,7 @@ interface DataSwitchProps {
 }
 
 export const DataSwitch: React.FC<DataSwitchProps> = ({ currentType, onTypeChange }) => {
+  const { language } = useI18n();
   const types = Object.values(DataType);
 
   return (
@@ -19,7 +21,7 @@ export const DataSwitch: React.FC<DataSwitchProps> = ({ currentType, onTypeChang
           className={`${styles.typeButton} ${currentType === type ? styles.active : ''}`}
           onClick={() => onTypeChange(type)}
         >
-          {getDataTypeLabel(type)}
+          {getDataTypeLabel(type, language)}
         </button>
       ))}
     </div>

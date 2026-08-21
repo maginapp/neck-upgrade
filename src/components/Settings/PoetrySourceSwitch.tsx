@@ -4,7 +4,9 @@ import {
   PoetrySource,
   PoetrySourceCategory,
 } from '@/constants/poetry';
+import { useI18n } from '@/i18n';
 import { PoetrySourceConfig } from '@/types/app';
+import { getPoetryCategoryLabel, getPoetrySourceLabel } from '@/utils/labels';
 
 import styles from './Settings.module.scss';
 
@@ -14,6 +16,7 @@ interface PoetrySourceSwitchProps {
 }
 
 export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, onChange }) => {
+  const { language, t } = useI18n();
   const sourceGroup = getPoetrySourceGroup(config.category);
 
   const handleCategoryChange = (category: PoetrySourceCategory) => {
@@ -44,7 +47,7 @@ export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, 
           onClick={() => handleCategoryChange(PoetrySourceCategory.All)}
           aria-pressed={config.category === PoetrySourceCategory.All}
         >
-          全部
+          {getPoetryCategoryLabel(PoetrySourceCategory.All, language)}
         </button>
         {POETRY_SOURCE_GROUPS.map((group) => (
           <button
@@ -53,21 +56,21 @@ export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, 
             onClick={() => handleCategoryChange(group.category)}
             aria-pressed={config.category === group.category}
           >
-            {group.label}
+            {getPoetryCategoryLabel(group.category, language)}
           </button>
         ))}
       </div>
 
       {sourceGroup && (
         <div className={styles.poetrySourceDetail}>
-          <div className={styles.settingHint}>具体来源（可多选）</div>
+          <div className={styles.settingHint}>{t('settings_specific_sources')}</div>
           <div className={styles.buttonSwitch}>
             <button
               className={`${styles.typeButton} ${config.sources.length === 0 ? styles.active : ''}`}
               onClick={() => onChange({ ...config, sources: [] })}
               aria-pressed={config.sources.length === 0}
             >
-              全部
+              {getPoetryCategoryLabel(PoetrySourceCategory.All, language)}
             </button>
             {sourceGroup.sources.map((source) => (
               <button
@@ -76,7 +79,7 @@ export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, 
                 onClick={() => handleSourceChange(source.value)}
                 aria-pressed={config.sources.includes(source.value)}
               >
-                {source.label}
+                {getPoetrySourceLabel(source.value, language)}
               </button>
             ))}
           </div>

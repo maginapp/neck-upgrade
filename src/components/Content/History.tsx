@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
+import { useI18n } from '@/i18n';
 import { KnowledgeData, KnowledgeDisplay } from '@/types';
 import { KnowledgeMode } from '@/types/app';
 import { CrawlerManager } from '@/utils/crawlerManager';
 import { baiduManager } from '@/utils/knowledgeBaidu';
 import { wikiManager } from '@/utils/knowledgeWiki';
+import { getKnowledgeModeLabel } from '@/utils/labels';
 
 import { Toolbar } from '../Tools';
 
@@ -63,31 +65,30 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
 };
 
 export const History: React.FC<{ knowledgeMode: KnowledgeMode }> = (props) => {
+  const { language, t } = useI18n();
   const { knowledgeMode } = props;
   const { events, holidays, loading, fetchData, showMode } = useHistory(knowledgeMode);
 
   const title = useMemo(() => {
     if (events.length > 0 && holidays.length > 0) {
-      return '历史上的今天 - 节假日和习俗';
+      return `${t('history_today')} - ${t('history_holidays')}`;
     }
 
     if (events.length > 0) {
-      return '历史上的今天';
+      return t('history_today');
     }
 
     if (holidays.length > 0) {
-      return '节假日和习俗';
+      return t('history_holidays');
     }
-  }, [events, holidays]);
+  }, [events, holidays, t]);
 
   return (
     <>
       <Toolbar loading={loading} onRefresh={fetchData} />
       <div className={styles.title}>
         <h2>{title}</h2>
-        <span className={styles.source}>
-          {showMode === KnowledgeMode.Wiki ? '维基百科' : '百度百科'}
-        </span>
+        <span className={styles.source}>{getKnowledgeModeLabel(showMode, language)}</span>
       </div>
       <section className={styles.historicalSection}>
         <ul>

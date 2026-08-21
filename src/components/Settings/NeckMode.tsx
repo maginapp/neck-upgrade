@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
 import { MOD_CONFIG } from '@/constants';
+import { useI18n } from '@/i18n';
 import { NeckMode as NeckModeType, NeckModeConfig } from '@/types/app';
 import { formatIntNumber, getRandomNumber } from '@/utils/base';
 import { getNeckModeLabel } from '@/utils/labels';
@@ -19,6 +20,7 @@ interface CustomProps {
 }
 
 export const NeckMode = (props: NeckModeProps) => {
+  const { language, t } = useI18n();
   const { neckConfig, onModeChange } = props;
   const { mode, duration, cusMaxRotate, cusDuration, rotate } = neckConfig;
   const modes = Object.values(NeckModeType);
@@ -85,7 +87,7 @@ export const NeckMode = (props: NeckModeProps) => {
             className={`${settingStyles.typeButton} ${currentMode === mode ? settingStyles.active : ''}`}
             onClick={() => handleModeChange(currentMode)}
           >
-            {getNeckModeLabel(currentMode)}
+            {getNeckModeLabel(currentMode, language)}
           </button>
         ))}
       </div>
@@ -93,7 +95,7 @@ export const NeckMode = (props: NeckModeProps) => {
       {neckConfig.mode === NeckModeType.Custom && (
         <div className={styles.customConfig}>
           <div className={styles.configItem}>
-            <label>切换间隔（秒）</label>
+            <label>{t('settings_change_interval_seconds')}</label>
             <input
               type="number"
               min="0"
@@ -108,7 +110,7 @@ export const NeckMode = (props: NeckModeProps) => {
             />
           </div>
           <div className={styles.configItem}>
-            <label>最大旋转角度</label>
+            <label>{t('settings_max_rotation_angle')}</label>
             <input
               type="number"
               min="0"

@@ -1,7 +1,16 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
+import { LanguageToggle } from '@/components/Settings/LanguageToggle';
+import { ThemeToggle } from '@/components/Settings/ThemeToggle';
 import { MESSAGE_TYPES } from '@/constants/events';
-import { PageWobbleConfig, PageWobbleDomainRules, PageWobbleStatus } from '@/types/app';
+import { useI18n } from '@/i18n';
+import {
+  AppLanguage,
+  PageWobbleConfig,
+  PageWobbleDomainRules,
+  PageWobbleStatus,
+  Theme,
+} from '@/types/app';
 import { ChromeMessage, SettingsOpenStatusMessage } from '@/types/message';
 import {
   DEFAULT_PAGE_WOBBLE_CONFIG,
@@ -87,7 +96,20 @@ const formatCountdown = (seconds: number | null) => {
   return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
 };
 
-export const Popup: React.FC = () => {
+interface PopupProps {
+  language: AppLanguage;
+  theme: Theme;
+  onLanguageChange: (language: AppLanguage) => void;
+  onThemeChange: (theme: Theme) => void;
+}
+
+export const Popup: React.FC<PopupProps> = ({
+  language,
+  theme,
+  onLanguageChange,
+  onThemeChange,
+}) => {
+  const { t } = useI18n();
   const [isNewTab, setIsNewTab] = useState(false);
   const [currentTabId, setCurrentTabId] = useState<number | undefined>();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -318,7 +340,7 @@ export const Popup: React.FC = () => {
       setShowDomainRules(status.enabled);
     } catch {
       setWobbleEnabled(false);
-      setWobbleError(chrome.i18n.getMessage('popup_wobble_error'));
+      setWobbleError(t('popup_wobble_error'));
     } finally {
       setWobblePending(false);
     }
@@ -341,16 +363,14 @@ export const Popup: React.FC = () => {
 
   const formatDuration = (seconds: number) => {
     if (seconds < 60) {
-      return `${seconds} ${chrome.i18n.getMessage('popup_wobble_seconds')}`;
+      return `${seconds} ${t('popup_wobble_seconds')}`;
     }
 
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return [
-      `${minutes} ${chrome.i18n.getMessage('popup_wobble_minutes')}`,
-      remainingSeconds > 0
-        ? `${remainingSeconds} ${chrome.i18n.getMessage('popup_wobble_seconds')}`
-        : '',
+      `${minutes} ${t('popup_wobble_minutes')}`,
+      remainingSeconds > 0 ? `${remainingSeconds} ${t('popup_wobble_seconds')}` : '',
     ]
       .filter(Boolean)
       .join(' ');
@@ -400,21 +420,29 @@ export const Popup: React.FC = () => {
   return (
     <div className={styles.popup}>
       <header className={styles.hero}>
-        <h1>{chrome.i18n.getMessage('popup_title')}</h1>
-        <p>{chrome.i18n.getMessage('popup_description')}</p>
+        <div className={`${styles.heroControl} ${styles.heroControlLeft}`}>
+          <LanguageToggle language={language} onChange={onLanguageChange} compact />
+        </div>
+        <div className={styles.heroContent}>
+          <h1>{t('popup_title')}</h1>
+          <p>{t('popup_description')}</p>
+        </div>
+        <div className={`${styles.heroControl} ${styles.heroControlRight}`}>
+          <ThemeToggle currentTheme={theme} onThemeChange={onThemeChange} compact />
+        </div>
       </header>
 
       <section className={styles.wobbleCard}>
         <div className={styles.featureHeader}>
           <div>
-            <h2>{chrome.i18n.getMessage('popup_wobble_title')}</h2>
-            <p>{chrome.i18n.getMessage('popup_wobble_description')}</p>
+            <h2>{t('popup_wobble_title')}</h2>
+            <p>{t('popup_wobble_description')}</p>
           </div>
           <button
             type="button"
             role="switch"
             aria-checked={wobbleEnabled}
-            aria-label={chrome.i18n.getMessage('popup_wobble_title')}
+            aria-label={t('popup_wobble_title')}
             className={`${styles.switch} ${wobbleEnabled ? styles.switchActive : ''}`}
             disabled={!isPageSupported || wobblePending}
             onClick={handleToggleWobble}
@@ -424,13 +452,11 @@ export const Popup: React.FC = () => {
         </div>
 
         {!isPageSupported && !wobblePending && (
-          <p className={styles.featureNotice}>
-            {chrome.i18n.getMessage('popup_wobble_unsupported')}
-          </p>
+          <p className={styles.featureNotice}>{t('popup_wobble_unsupported')}</p>
         )}
         {isPageSupported && !isDomainAllowed && !wobblePending && (
           <p className={styles.featureNotice}>
-            {chrome.i18n.getMessage(
+            {t(
               domainAccess === 'blacklisted'
                 ? 'popup_wobble_domain_blacklisted'
                 : 'popup_wobble_domain_not_whitelisted'
@@ -443,9 +469,9 @@ export const Popup: React.FC = () => {
           <div className={styles.wobbleControls}>
             <div className={styles.randomMode}>
               <div>
-                <strong>{chrome.i18n.getMessage('popup_wobble_random_angle')}</strong>
+                <strong>{t('popup_wobble_random_angle')}</strong>
                 <p>
-                  {chrome.i18n.getMessage(
+                  {t(
                     wobbleConfig.randomAngle
                       ? 'popup_wobble_random_angle_hint'
                       : 'popup_wobble_fixed_angle_hint'
@@ -456,7 +482,7 @@ export const Popup: React.FC = () => {
                 type="button"
                 role="switch"
                 aria-checked={wobbleConfig.randomAngle}
-                aria-label={chrome.i18n.getMessage('popup_wobble_random_angle')}
+                aria-label={t('popup_wobble_random_angle')}
                 className={`${styles.switch} ${wobbleConfig.randomAngle ? styles.switchActive : ''}`}
                 onClick={handleRandomAngleChange}
               >
@@ -466,7 +492,7 @@ export const Popup: React.FC = () => {
 
             <div className={styles.controlHeader}>
               <span>
-                {chrome.i18n.getMessage(
+                {t(
                   wobbleConfig.randomAngle ? 'popup_wobble_max_angle' : 'popup_wobble_fixed_angle'
                 )}
               </span>
@@ -505,7 +531,7 @@ export const Popup: React.FC = () => {
                 PAGE_WOBBLE_LIMITS.angle.min,
                 PAGE_WOBBLE_LIMITS.angle.max
               )}
-              aria-label={chrome.i18n.getMessage(
+              aria-label={t(
                 wobbleConfig.randomAngle ? 'popup_wobble_max_angle' : 'popup_wobble_fixed_angle'
               )}
               onChange={handleAngleChange}
@@ -516,7 +542,7 @@ export const Popup: React.FC = () => {
             </div>
 
             <div className={`${styles.controlHeader} ${styles.cycleHeader}`}>
-              <span>{chrome.i18n.getMessage('popup_wobble_cycle')}</span>
+              <span>{t('popup_wobble_cycle')}</span>
               <strong>{formatDuration(wobbleConfig.cycleSeconds)}</strong>
             </div>
             <input
@@ -526,20 +552,19 @@ export const Popup: React.FC = () => {
               max={PAGE_WOBBLE_CYCLE_SLIDER_MAX}
               value={cycleSliderPosition}
               style={getRangeStyle(cycleSliderPosition, 0, PAGE_WOBBLE_CYCLE_SLIDER_MAX)}
-              aria-label={chrome.i18n.getMessage('popup_wobble_cycle')}
+              aria-label={t('popup_wobble_cycle')}
               onChange={handleCycleChange}
             />
             <div className={styles.rangeScale}>
               <span>
-                {PAGE_WOBBLE_LIMITS.cycleSeconds.min}{' '}
-                {chrome.i18n.getMessage('popup_wobble_second_short')}
+                {PAGE_WOBBLE_LIMITS.cycleSeconds.min} {t('popup_wobble_second_short')}
               </span>
-              <span>60 {chrome.i18n.getMessage('popup_wobble_minute_short')}</span>
+              <span>60 {t('popup_wobble_minute_short')}</span>
             </div>
 
             <div className={styles.nextChange}>
               <span className={styles.statusDot} />
-              <span>{chrome.i18n.getMessage('popup_wobble_next_change')}</span>
+              <span>{t('popup_wobble_next_change')}</span>
               <strong className={styles.countdown}>{formatCountdown(remainingSeconds)}</strong>
             </div>
           </div>
@@ -549,9 +574,7 @@ export const Popup: React.FC = () => {
           <div className={styles.domainControl}>
             <div className={styles.domainHeader}>
               <div>
-                <span className={styles.domainLabel}>
-                  {chrome.i18n.getMessage('popup_wobble_current_domain')}
-                </span>
+                <span className={styles.domainLabel}>{t('popup_wobble_current_domain')}</span>
                 <code title={currentDomain}>{currentDomain}</code>
               </div>
               <span
@@ -559,9 +582,7 @@ export const Popup: React.FC = () => {
                   isDomainAllowed ? styles.domainAllowed : styles.domainBlocked
                 }`}
               >
-                {chrome.i18n.getMessage(
-                  isDomainAllowed ? 'popup_wobble_domain_allowed' : 'popup_wobble_domain_blocked'
-                )}
+                {t(isDomainAllowed ? 'popup_wobble_domain_allowed' : 'popup_wobble_domain_blocked')}
               </span>
             </div>
 
@@ -574,7 +595,7 @@ export const Popup: React.FC = () => {
                 }
                 onClick={() => void addDomainRule('whitelist', currentDomain)}
               >
-                {chrome.i18n.getMessage('popup_wobble_add_whitelist')}
+                {t('popup_wobble_add_whitelist')}
               </button>
               <button
                 type="button"
@@ -584,20 +605,18 @@ export const Popup: React.FC = () => {
                 }
                 onClick={() => void addDomainRule('blacklist', currentDomain)}
               >
-                {chrome.i18n.getMessage('popup_wobble_add_blacklist')}
+                {t('popup_wobble_add_blacklist')}
               </button>
               {hasCurrentDomainRule && (
                 <button type="button" onClick={() => void removeCurrentDomainRule()}>
-                  {chrome.i18n.getMessage('popup_wobble_remove_current_rule')}
+                  {t('popup_wobble_remove_current_rule')}
                 </button>
               )}
             </div>
 
             <details className={styles.domainManager}>
-              <summary>{chrome.i18n.getMessage('popup_wobble_manage_domains')}</summary>
-              <p className={styles.domainHint}>
-                {chrome.i18n.getMessage('popup_wobble_domain_rules_hint')}
-              </p>
+              <summary>{t('popup_wobble_manage_domains')}</summary>
+              <p className={styles.domainHint}>{t('popup_wobble_domain_rules_hint')}</p>
 
               {(['whitelist', 'blacklist'] as const).map((list) => {
                 const input = list === 'whitelist' ? whitelistInput : blacklistInput;
@@ -605,7 +624,7 @@ export const Popup: React.FC = () => {
                 return (
                   <div className={styles.domainList} key={list}>
                     <strong>
-                      {chrome.i18n.getMessage(
+                      {t(
                         list === 'whitelist' ? 'popup_wobble_whitelist' : 'popup_wobble_blacklist'
                       )}
                     </strong>
@@ -616,18 +635,16 @@ export const Popup: React.FC = () => {
                       <input
                         type="text"
                         value={input}
-                        placeholder={chrome.i18n.getMessage('popup_wobble_domain_placeholder')}
-                        aria-label={chrome.i18n.getMessage('popup_wobble_domain_placeholder')}
+                        placeholder={t('popup_wobble_domain_placeholder')}
+                        aria-label={t('popup_wobble_domain_placeholder')}
                         onChange={(event) => setInput(event.target.value)}
                       />
-                      <button type="submit">
-                        {chrome.i18n.getMessage('popup_wobble_add_domain')}
-                      </button>
+                      <button type="submit">{t('popup_wobble_add_domain')}</button>
                     </form>
                     <div className={styles.domainChips}>
                       {domainRules[list].length === 0 ? (
                         <span className={styles.domainEmpty}>
-                          {chrome.i18n.getMessage('popup_wobble_domain_list_empty')}
+                          {t('popup_wobble_domain_list_empty')}
                         </span>
                       ) : (
                         domainRules[list].map((domain) => (
@@ -635,9 +652,7 @@ export const Popup: React.FC = () => {
                             <span title={domain}>{domain}</span>
                             <button
                               type="button"
-                              aria-label={`${chrome.i18n.getMessage(
-                                'popup_wobble_remove_domain'
-                              )} ${domain}`}
+                              aria-label={`${t('popup_wobble_remove_domain')} ${domain}`}
                               onClick={() => void removeDomainRule(list, domain)}
                             >
                               ×
@@ -657,25 +672,23 @@ export const Popup: React.FC = () => {
       <div className={styles.buttonGroup}>
         {isNewTab && (
           <button className={styles.button} onClick={handleOpenSettings}>
-            {chrome.i18n.getMessage(
-              isSettingsOpen ? 'popup_btn_close_settings' : 'popup_btn_open_settings'
-            )}
+            {t(isSettingsOpen ? 'popup_btn_close_settings' : 'popup_btn_open_settings')}
           </button>
         )}
         <button className={styles.button} onClick={handleOpenNewTab}>
-          {chrome.i18n.getMessage('popup_btn_open_new_tab')}
+          {t('popup_btn_open_new_tab')}
         </button>
         <button className={styles.button} onClick={handleOpenExtensionDetail}>
-          {chrome.i18n.getMessage('popup_btn_open_extension_detail')}
+          {t('popup_btn_open_extension_detail')}
         </button>
         <button className={styles.button} onClick={handleOpenWebsitePermission}>
-          {chrome.i18n.getMessage('popup_btn_open_website_permission')}
+          {t('popup_btn_open_website_permission')}
         </button>
         <button className={styles.button} onClick={handleOpenShortcut}>
-          {chrome.i18n.getMessage('popup_btn_open_shortcut')}
+          {t('popup_btn_open_shortcut')}
         </button>
         <button className={styles.button} onClick={handleOpenFeedback}>
-          {chrome.i18n.getMessage('popup_btn_open_feedback')}
+          {t('popup_btn_open_feedback')}
         </button>
       </div>
     </div>

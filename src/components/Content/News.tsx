@@ -2,8 +2,10 @@ import { useEffect, useMemo, useState, useRef } from 'react';
 
 import { DEFAULT_PAGE_INFO, NEWS_TAB_TYTPE_LIST_POP_WIDTH } from '@/constants';
 import { NEWS_GROUP_LABELS } from '@/constants/labels';
+import { useI18n } from '@/i18n';
 import { NewsDisplay } from '@/types';
 import { NewsGroup, NewsType, PageInfo } from '@/types/app';
+import { getNewsLabel } from '@/utils/labels';
 import { newsManagerMap } from '@/utils/news';
 
 import { Toolbar } from '../Tools';
@@ -22,6 +24,7 @@ interface NewsTypeInfoProps {
 }
 
 const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
+  const { language, t } = useI18n();
   const { typeInfo, isActive } = props;
   const manager = newsManagerMap[typeInfo.type];
   const [loading, setLoading] = useState(false);
@@ -74,7 +77,12 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
       <Toolbar loading={loading} onRefresh={handleRefresh} />
       {newsData.loginUrl && (
         <a className={styles.loginUrl} href={newsData.loginUrl} target="_blank" rel="noreferrer">
-          请先登录 <img className={styles.loginIcon} src={typeInfo.icon} alt={typeInfo.label} />
+          {t('news_login_first')}{' '}
+          <img
+            className={styles.loginIcon}
+            src={typeInfo.icon}
+            alt={getNewsLabel(typeInfo.label, language)}
+          />
         </a>
       )}
       {(newsData.news || []).map((item, index) => (
@@ -108,6 +116,7 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
 };
 
 export const News: React.FC = () => {
+  const { language } = useI18n();
   const [activeType, setActiveType] = useState<NewsType>(NewsType.Toutiao);
   const [activeGroup, setActiveGroup] = useState<NewsGroup>(NewsGroup.Toutiao);
   const [showGroup, setShowGroup] = useState<NewsGroup | null>(null);
@@ -192,8 +201,12 @@ export const News: React.FC = () => {
             className={`${styles.tab} ${activeGroup === item.group ? styles.active : ''}`}
             onClick={() => handleClickGroup(item)}
           >
-            <img src={item.icon} alt={item.label} className={styles.tabIcon} />
-            {item.group === activeGroup && typeInfo?.label}
+            <img
+              src={item.icon}
+              alt={getNewsLabel(item.label, language)}
+              className={styles.tabIcon}
+            />
+            {item.group === activeGroup && typeInfo && getNewsLabel(typeInfo.label, language)}
             {showGroup === item.group && (
               <div
                 className={`${styles.typeList} ${styles.show} ${rightAlign ? styles.rightAlign : ''}`}
@@ -207,7 +220,7 @@ export const News: React.FC = () => {
                       e.stopPropagation();
                     }}
                   >
-                    {child.label}
+                    {getNewsLabel(child.label, language)}
                   </div>
                 ))}
               </div>

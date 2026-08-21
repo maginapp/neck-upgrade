@@ -1,3 +1,4 @@
+import { useI18n } from '@/i18n';
 import { KnowledgeMode } from '@/types/app';
 import { getKnowledgeModeLabel } from '@/utils/labels';
 
@@ -9,6 +10,7 @@ interface KnowledgeModeProps {
 }
 
 export const KnowledgeSwtich: React.FC<KnowledgeModeProps> = ({ currentMode, onModeChange }) => {
+  const { language } = useI18n();
   const types = Object.values(KnowledgeMode);
 
   return (
@@ -19,7 +21,7 @@ export const KnowledgeSwtich: React.FC<KnowledgeModeProps> = ({ currentMode, onM
           className={`${styles.typeButton} ${currentMode === type ? styles.active : ''}`}
           onClick={() => onModeChange(type)}
         >
-          {getKnowledgeModeLabel(type)}
+          {getKnowledgeModeLabel(type, language)}
         </button>
       ))}
     </div>

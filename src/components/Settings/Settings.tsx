@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { MESSAGE_TYPES } from '@/constants/events';
+import { useI18n } from '@/i18n';
 import {
+  AppLanguage,
   DataType,
   Theme,
   NeckModeConfig,
@@ -14,6 +16,7 @@ import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
 import { Appreciation } from './Appreciation';
 import { DataSwitch } from './DataSwitch';
 import { KnowledgeSwtich } from './KnowledgeSwtich';
+import { LanguageToggle } from './LanguageToggle';
 import { NeckMode } from './NeckMode';
 import { PoetrySourceSwitch } from './PoetrySourceSwitch';
 import styles from './Settings.module.scss';
@@ -27,10 +30,14 @@ interface SettingsProps {
 
 export const Settings: React.FC<SettingsProps> = (props) => {
   const { setSettings, settings, currentTheme } = props;
+  const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
 
   const onThemeChange = (theme: Theme) => {
     setSettings((prev) => ({ ...prev, theme }));
+  };
+  const onLanguageChange = (language: AppLanguage) => {
+    setSettings((prev) => ({ ...prev, language }));
   };
 
   const onNeckModeChange = (neck: NeckModeConfig) => {
@@ -73,7 +80,7 @@ export const Settings: React.FC<SettingsProps> = (props) => {
       <button
         className={styles.settingsButton}
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Settings"
+        aria-label={t('settings_open')}
       >
         ⚙️
       </button>
@@ -83,38 +90,38 @@ export const Settings: React.FC<SettingsProps> = (props) => {
           <button
             className={styles.closeButton}
             onClick={() => setIsOpen(false)}
-            aria-label="Close settings"
+            aria-label={t('settings_close')}
           >
             ×
           </button>
-          <h3>设置</h3>
-          <div className={styles.settingsGroup}>
-            <h4>主题</h4>
+          <h3>{t('settings_title')}</h3>
+          <div className={`${styles.settingsGroup} ${styles.appearanceQuickSettings}`}>
+            <LanguageToggle language={settings.language} onChange={onLanguageChange} />
             <ThemeToggle currentTheme={settings.theme} onThemeChange={onThemeChange} />
           </div>
           <div className={styles.settingsGroup}>
-            <h4>颈椎倾斜模式</h4>
+            <h4>{t('settings_neck_mode')}</h4>
             <NeckMode neckConfig={settings.neck} onModeChange={onNeckModeChange} />
           </div>
           <div className={styles.settingsGroup}>
-            <h4>内容类型</h4>
+            <h4>{t('settings_content_type')}</h4>
             <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
           </div>
           {settings.dataType === DataType.Poetry && (
             <div className={styles.settingsGroup}>
-              <h4>诗词来源</h4>
+              <h4>{t('settings_poetry_source')}</h4>
               <PoetrySourceSwitch config={settings.poetry} onChange={onPoetrySourceChange} />
             </div>
           )}
           <div className={styles.settingsGroup}>
-            <h4>百科数据源(优先使用)</h4>
+            <h4>{t('settings_knowledge_source')}</h4>
             <KnowledgeSwtich
               currentMode={settings.knowledge}
               onModeChange={onKnowledgeModeChange}
             />
           </div>
           <div className={styles.settingsGroup}>
-            <h4>反馈与赞赏</h4>
+            <h4>{t('settings_feedback')}</h4>
             <Appreciation currentTheme={currentTheme} />
           </div>
         </div>

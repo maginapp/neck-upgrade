@@ -83,6 +83,13 @@
   }
 }
 
+.appearanceQuickSettings {
+  display: flex;
+  gap: 18px;
+  min-height: 40px;
+  align-items: center;
+}
+
 .overlay {
   position: fixed;
   z-index: 1000;

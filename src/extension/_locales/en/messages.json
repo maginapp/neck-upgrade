@@ -15,6 +15,162 @@
     "message": "Protect your neck health",
     "description": "The description of the popup"
   },
+  "language_switch_to_chinese": {
+    "message": "Switch to Chinese",
+    "description": "The button label for switching to Chinese"
+  },
+  "language_switch_to_english": {
+    "message": "Switch to English",
+    "description": "The button label for switching to English"
+  },
+  "settings_open": {
+    "message": "Open settings",
+    "description": "The new tab settings button label"
+  },
+  "settings_close": {
+    "message": "Close settings",
+    "description": "The new tab close settings button label"
+  },
+  "settings_title": {
+    "message": "Settings",
+    "description": "The settings sidebar title"
+  },
+  "settings_language": {
+    "message": "Interface language",
+    "description": "The interface language setting title"
+  },
+  "settings_theme": {
+    "message": "Theme",
+    "description": "The theme setting title"
+  },
+  "settings_neck_mode": {
+    "message": "Neck tilt mode",
+    "description": "The neck tilt mode setting title"
+  },
+  "settings_content_type": {
+    "message": "Content type",
+    "description": "The content type setting title"
+  },
+  "settings_poetry_source": {
+    "message": "Poetry sources",
+    "description": "The poetry source setting title"
+  },
+  "settings_knowledge_source": {
+    "message": "Preferred knowledge source",
+    "description": "The preferred knowledge source setting title"
+  },
+  "settings_feedback": {
+    "message": "Feedback and support",
+    "description": "The feedback and support setting title"
+  },
+  "settings_switch_to": {
+    "message": "Switch to",
+    "description": "The prefix for a setting switch button label"
+  },
+  "settings_change_interval_seconds": {
+    "message": "Change interval (seconds)",
+    "description": "The advanced neck mode interval label"
+  },
+  "settings_max_rotation_angle": {
+    "message": "Maximum rotation angle",
+    "description": "The advanced neck mode maximum angle label"
+  },
+  "settings_specific_sources": {
+    "message": "Specific sources (multiple selection)",
+    "description": "The poetry source selection hint"
+  },
+  "settings_feedback_description": {
+    "message": "Interested in this project or found a problem? Come talk with us.",
+    "description": "The feedback section description"
+  },
+  "settings_submit_issue": {
+    "message": "Submit an issue",
+    "description": "The submit issue link"
+  },
+  "settings_discussions": {
+    "message": "Discussions",
+    "description": "The discussions link"
+  },
+  "settings_project_home": {
+    "message": "Project home",
+    "description": "The project home link"
+  },
+  "settings_support_description": {
+    "message": "If this extension helps you, your support is appreciated.",
+    "description": "The support section description"
+  },
+  "settings_donation_qr": {
+    "message": "Donation QR code",
+    "description": "The donation QR code alternative text"
+  },
+  "header_festivals": {
+    "message": "Festivals",
+    "description": "The lunar festival label"
+  },
+  "header_solar_term": {
+    "message": "Solar term",
+    "description": "The solar term label"
+  },
+  "header_term_day_prefix": {
+    "message": "Day ",
+    "description": "The solar term day prefix"
+  },
+  "header_term_day_suffix": {
+    "message": "",
+    "description": "The solar term day suffix"
+  },
+  "header_suitable": {
+    "message": "Suitable",
+    "description": "The almanac suitable activities label"
+  },
+  "header_avoid": {
+    "message": "Avoid",
+    "description": "The almanac activities to avoid label"
+  },
+  "header_julian_day": {
+    "message": "Julian day",
+    "description": "The Julian day label"
+  },
+  "header_pengzu": {
+    "message": "Peng Zu taboos",
+    "description": "The Peng Zu taboos label"
+  },
+  "header_plum_rain": {
+    "message": "Plum rain",
+    "description": "The plum rain label"
+  },
+  "header_next_break": {
+    "message": "Next day off",
+    "description": "The next day off hint"
+  },
+  "header_break_in": {
+    "message": " in ",
+    "description": "The next day off time connector"
+  },
+  "header_day": {
+    "message": " day",
+    "description": "The singular day unit"
+  },
+  "header_days": {
+    "message": " days",
+    "description": "The plural day unit"
+  },
+  "history_today": {
+    "message": "Today in history",
+    "description": "The history content title"
+  },
+  "history_holidays": {
+    "message": "Holidays and customs",
+    "description": "The holiday content title"
+  },
+  "news_login_first": {
+    "message": "Please sign in first",
+    "description": "The news source sign-in hint"
+  },
+  "content_refresh": {
+    "message": "Refresh content",
+    "description": "The content refresh button label"
+  },
   "popup_wobble_title": {
     "message": "Page Wobble",
     "description": "The title of the page wobble feature"

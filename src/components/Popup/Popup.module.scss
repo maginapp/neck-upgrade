@@ -1,4 +1,5 @@
 .popup {
+  position: relative;
   display: flex;
   box-sizing: border-box;
   width: 100%;
@@ -12,7 +13,11 @@
 }
 
 .hero {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 64px;
+  gap: 8px;
   text-align: center;
+  align-items: start;
 
   h1 {
     margin: 0;
@@ -24,6 +29,24 @@
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
   }
+}
+
+.heroContent {
+  min-width: 0;
+}
+
+.heroControl {
+  display: flex;
+  padding-top: 2px;
+  align-items: center;
+}
+
+.heroControlLeft {
+  justify-content: flex-start;
+}
+
+.heroControlRight {
+  justify-content: flex-end;
 }
 
 .wobbleCard {

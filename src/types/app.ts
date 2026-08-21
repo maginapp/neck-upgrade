@@ -13,6 +13,11 @@ export enum Theme {
   Dark = 'dark',
 }
 
+export enum AppLanguage {
+  ZhCN = 'zh_CN',
+  En = 'en',
+}
+
 // 颈椎模式类型
 export enum NeckMode {
   Normal = 'normal',
@@ -58,6 +63,7 @@ export interface PoetrySourceConfig {
 }
 
 export interface Settings {
+  language: AppLanguage;
   theme: Theme;
   neck: NeckModeConfig;
   dataType: DataType;

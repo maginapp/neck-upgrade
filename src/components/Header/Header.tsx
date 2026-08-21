@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 import FindMoreIcon from '@/assets/images/find_more.svg?react';
+import { useI18n } from '@/i18n';
 import { HolidayDisplayInfo } from '@/types';
+import { AppLanguage } from '@/types/app';
 import { dateUtils, padZero } from '@/utils/base';
 import { getLunarInfo, LunarInfo } from '@/utils/lunar';
 
@@ -9,9 +11,8 @@ import { getNextHoliday } from '../../utils/holidayApi';
 
 import styles from './Header.module.scss';
 
-const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-
 export const Header: React.FC = () => {
+  const { language, t } = useI18n();
   const [currentTime, setCurrentTime] = useState<string>('');
   const [currentDate, setCurrentDate] = useState<string>('');
   const [nextHoliday, setNextHoliday] = useState<HolidayDisplayInfo | null>(null);
@@ -35,7 +36,17 @@ export const Header: React.FC = () => {
         `${padZero(now.getHours())}:${padZero(now.getMinutes())}:${padZero(now.getSeconds())}`
       );
 
-      const ymd = `${now.getFullYear()}年${padZero(now.getMonth() + 1)}月${padZero(now.getDate())}日 ${days[now.getDay()]}`;
+      const ymd =
+        language === AppLanguage.ZhCN
+          ? `${now.getFullYear()}年${padZero(now.getMonth() + 1)}月${padZero(
+              now.getDate()
+            )}日 ${new Intl.DateTimeFormat('zh-CN', { weekday: 'long' }).format(now)}`
+          : new Intl.DateTimeFormat('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              weekday: 'long',
+            }).format(now);
 
       setCurrentDate((prev) => {
         if (prev !== ymd) {
@@ -50,7 +61,7 @@ export const Header: React.FC = () => {
     const timer = setInterval(updateDateTime, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -95,40 +106,44 @@ export const Header: React.FC = () => {
               </div>
               {lunarInfo.festivals.length ? (
                 <div className={styles.lunarInfoItem}>
-                  <span className={styles.lunarInfoItemTitle}>节日</span>
+                  <span className={styles.lunarInfoItemTitle}>{t('header_festivals')}</span>
                   <span>{lunarInfo.festivals.join(' ')}</span>
                 </div>
               ) : null}
               <div className={styles.lunarInfoItem}>
-                <span className={styles.lunarInfoItemTitle}>节气</span>
+                <span className={styles.lunarInfoItemTitle}>{t('header_solar_term')}</span>
                 <span>
                   {lunarInfo.term}
-                  {lunarInfo.termDayIndex ? `第${lunarInfo.termDayIndex}天` : ''}
+                  {lunarInfo.termDayIndex
+                    ? `${t('header_term_day_prefix')}${lunarInfo.termDayIndex}${t(
+                        'header_term_day_suffix'
+                      )}`
+                    : ''}
                 </span>
               </div>
               {lunarInfo.daySuit.length ? (
                 <div className={styles.lunarInfoItem}>
-                  <span className={styles.lunarInfoItemTitle}>宜</span>
+                  <span className={styles.lunarInfoItemTitle}>{t('header_suitable')}</span>
                   <span>{lunarInfo.daySuit.join(' ')}</span>
                 </div>
               ) : null}
               {lunarInfo.dayAvoid.length ? (
                 <div className={styles.lunarInfoItem}>
-                  <span className={styles.lunarInfoItemTitle}>忌</span>
+                  <span className={styles.lunarInfoItemTitle}>{t('header_avoid')}</span>
                   <span>{lunarInfo.dayAvoid.join(' ')}</span>
                 </div>
               ) : null}
               <div className={styles.lunarInfoItem}>
-                <span className={styles.lunarInfoItemTitle}>儒略日</span>
+                <span className={styles.lunarInfoItemTitle}>{t('header_julian_day')}</span>
                 <span>{lunarInfo.julianDay}</span>
               </div>
               <div className={styles.lunarInfoItem}>
-                <span className={styles.lunarInfoItemTitle}>彭祖百忌</span>
+                <span className={styles.lunarInfoItemTitle}>{t('header_pengzu')}</span>
                 <span>{lunarInfo.pengZu.join('， ')}</span>
               </div>
               {lunarInfo.rainDay ? (
                 <div className={styles.lunarInfoItem}>
-                  <span className={styles.lunarInfoItemTitle}>梅雨</span>
+                  <span className={styles.lunarInfoItemTitle}>{t('header_plum_rain')}</span>
                   <span>{lunarInfo.rainDay}</span>
                 </div>
               ) : null}
@@ -138,8 +153,13 @@ export const Header: React.FC = () => {
       )}
       {nextHoliday && (
         <div>
-          距离下个休息日 - <span className={styles.holidayHighlight}>{nextHoliday.name}</span>还有
-          <span className={styles.holidayHighlight}>{nextHoliday.rest}天</span>
+          {t('header_next_break')} -{' '}
+          <span className={styles.holidayHighlight}>{nextHoliday.name}</span>
+          {t('header_break_in')}
+          <span className={styles.holidayHighlight}>
+            {nextHoliday.rest}
+            {t(nextHoliday.rest === 1 ? 'header_day' : 'header_days')}
+          </span>
         </div>
       )}
     </>

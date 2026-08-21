@@ -1,0 +1,23 @@
+.languageToggle {
+  display: inline-flex;
+  gap: 5px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--hover-bg);
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+  align-items: center;
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+.compact {
+  min-height: 30px;
+  padding: 3px 8px;
+  font-size: 12px;
+}

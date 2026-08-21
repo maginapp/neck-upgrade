@@ -1,3 +1,4 @@
+import { useI18n } from '@/i18n';
 import { Theme } from '@/types/app';
 import { getThemeLabel } from '@/utils/labels';
 
@@ -6,9 +7,15 @@ import styles from './ThemeToggle.module.scss';
 interface ThemeToggleProps {
   currentTheme: Theme;
   onThemeChange: (theme: Theme) => void;
+  compact?: boolean;
 }
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeChange }) => {
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({
+  currentTheme,
+  onThemeChange,
+  compact = false,
+}) => {
+  const { language, t } = useI18n();
   const getNextTheme = (current: Theme): Theme => {
     switch (current) {
       case Theme.System:
@@ -36,15 +43,20 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeC
   };
 
   return (
-    <div className={styles.themeToggleContainer}>
+    <div className={`${styles.themeToggleContainer} ${compact ? styles.compact : ''}`}>
       <button
         className={styles.themeToggle}
         onClick={() => onThemeChange(getNextTheme(currentTheme))}
-        aria-label={`切换到${getThemeLabel(getNextTheme(currentTheme))}主题`}
+        aria-label={`${t('settings_switch_to')} ${getThemeLabel(
+          getNextTheme(currentTheme),
+          language
+        )}`}
       >
         {getThemeIcon(currentTheme)}
       </button>
-      <span className={styles.themeLabel}>{getThemeLabel(currentTheme)}</span>
+      {!compact && (
+        <span className={styles.themeLabel}>{getThemeLabel(currentTheme, language)}</span>
+      )}
     </div>
   );
 };

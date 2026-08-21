@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 
 import { CACHE_KEYS } from '@/constants';
 import { PoetrySourceCategory } from '@/constants/poetry';
-import { DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
+import { AppLanguage, DataType, Theme, NeckMode, Settings, KnowledgeMode } from '@/types/app';
 import { LocalManager } from '@/utils/cacheManager';
 
 /**
@@ -25,7 +25,12 @@ const settingsStorage = new SettingsStorage();
 
 export function useSettings() {
   const [settings, setSettings] = useState<Settings>(() => {
+    const browserLanguage =
+      typeof navigator !== 'undefined' && navigator.language.toLowerCase().startsWith('zh')
+        ? AppLanguage.ZhCN
+        : AppLanguage.En;
     const defaultSettings: Settings = {
+      language: browserLanguage,
       theme: Theme.System,
       neck: {
         mode: NeckMode.Training,
@@ -50,6 +55,10 @@ export function useSettings() {
     return {
       ...defaultSettings,
       ...storedSettings,
+      language:
+        storedSettings.language === AppLanguage.ZhCN || storedSettings.language === AppLanguage.En
+          ? storedSettings.language
+          : defaultSettings.language,
       neck: {
         ...defaultSettings.neck,
         ...storedSettings.neck,

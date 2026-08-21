@@ -6,15 +6,30 @@
 }
 
 .themeToggle {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
   border: none;
   border-radius: 50%;
   background: none;
   font-size: var(--font-size-heading-3);
   transition: background-color 0.3s;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: var(--hover-bg);
+  }
+}
+
+.compact {
+  gap: 0;
+
+  .themeToggle {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
   }
 }
 

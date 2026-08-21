@@ -15,6 +15,162 @@
     "message": "保护你的颈椎健康",
     "description": "弹窗描述"
   },
+  "language_switch_to_chinese": {
+    "message": "切换到中文",
+    "description": "切换到中文的按钮说明"
+  },
+  "language_switch_to_english": {
+    "message": "切换到英文",
+    "description": "切换到英文的按钮说明"
+  },
+  "settings_open": {
+    "message": "打开设置",
+    "description": "新标签页打开设置按钮说明"
+  },
+  "settings_close": {
+    "message": "关闭设置",
+    "description": "新标签页关闭设置按钮说明"
+  },
+  "settings_title": {
+    "message": "设置",
+    "description": "侧边设置标题"
+  },
+  "settings_language": {
+    "message": "界面语言",
+    "description": "界面语言设置标题"
+  },
+  "settings_theme": {
+    "message": "主题",
+    "description": "主题设置标题"
+  },
+  "settings_neck_mode": {
+    "message": "颈椎倾斜模式",
+    "description": "颈椎倾斜模式设置标题"
+  },
+  "settings_content_type": {
+    "message": "内容类型",
+    "description": "内容类型设置标题"
+  },
+  "settings_poetry_source": {
+    "message": "诗词来源",
+    "description": "诗词来源设置标题"
+  },
+  "settings_knowledge_source": {
+    "message": "百科数据源（优先使用）",
+    "description": "百科数据源设置标题"
+  },
+  "settings_feedback": {
+    "message": "反馈与赞赏",
+    "description": "反馈与赞赏设置标题"
+  },
+  "settings_switch_to": {
+    "message": "切换到",
+    "description": "切换设置值的按钮说明前缀"
+  },
+  "settings_change_interval_seconds": {
+    "message": "切换间隔（秒）",
+    "description": "高级颈椎模式切换间隔标签"
+  },
+  "settings_max_rotation_angle": {
+    "message": "最大旋转角度",
+    "description": "高级颈椎模式最大角度标签"
+  },
+  "settings_specific_sources": {
+    "message": "具体来源（可多选）",
+    "description": "诗词具体来源提示"
+  },
+  "settings_feedback_description": {
+    "message": "如果你对本项目感兴趣或需要反馈问题，欢迎与我们交流。",
+    "description": "反馈区域说明"
+  },
+  "settings_submit_issue": {
+    "message": "提交 Issue",
+    "description": "提交问题链接"
+  },
+  "settings_discussions": {
+    "message": "交流区",
+    "description": "讨论区链接"
+  },
+  "settings_project_home": {
+    "message": "项目主页",
+    "description": "项目主页链接"
+  },
+  "settings_support_description": {
+    "message": "如果这个扩展对你有帮助，欢迎赞赏支持",
+    "description": "赞赏区域说明"
+  },
+  "settings_donation_qr": {
+    "message": "赞赏码",
+    "description": "赞赏二维码替代文本"
+  },
+  "header_festivals": {
+    "message": "节日",
+    "description": "农历节日标签"
+  },
+  "header_solar_term": {
+    "message": "节气",
+    "description": "节气标签"
+  },
+  "header_term_day_prefix": {
+    "message": "第",
+    "description": "节气天数前缀"
+  },
+  "header_term_day_suffix": {
+    "message": "天",
+    "description": "节气天数后缀"
+  },
+  "header_suitable": {
+    "message": "宜",
+    "description": "黄历宜标签"
+  },
+  "header_avoid": {
+    "message": "忌",
+    "description": "黄历忌标签"
+  },
+  "header_julian_day": {
+    "message": "儒略日",
+    "description": "儒略日标签"
+  },
+  "header_pengzu": {
+    "message": "彭祖百忌",
+    "description": "彭祖百忌标签"
+  },
+  "header_plum_rain": {
+    "message": "梅雨",
+    "description": "梅雨标签"
+  },
+  "header_next_break": {
+    "message": "距离下个休息日",
+    "description": "下个休息日提示"
+  },
+  "header_break_in": {
+    "message": "还有",
+    "description": "下个休息日剩余时间连接词"
+  },
+  "header_day": {
+    "message": "天",
+    "description": "单数天数单位"
+  },
+  "header_days": {
+    "message": "天",
+    "description": "复数天数单位"
+  },
+  "history_today": {
+    "message": "历史上的今天",
+    "description": "历史内容标题"
+  },
+  "history_holidays": {
+    "message": "节假日和习俗",
+    "description": "节假日内容标题"
+  },
+  "news_login_first": {
+    "message": "请先登录",
+    "description": "新闻数据源登录提示"
+  },
+  "content_refresh": {
+    "message": "刷新内容",
+    "description": "内容刷新按钮说明"
+  },
   "popup_wobble_title": {
     "message": "网页摇摆",
     "description": "网页摇摆功能标题"
