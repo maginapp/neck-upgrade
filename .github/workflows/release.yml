@@ -39,8 +39,9 @@ jobs:
         run: pnpm build
 
       - name: Package extension
+        working-directory: dist
         run: |
-          zip -r chrome-extension-${{ github.ref_name }}.zip dist
+          zip -r ../chrome-extension-${{ github.ref_name }}.zip . -x '*.DS_Store'
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
