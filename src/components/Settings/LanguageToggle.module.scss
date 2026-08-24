@@ -1,6 +1,9 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+
 .languageControl {
   position: relative;
   display: inline-flex;
+  direction: ltr;
   color: var(--text-color);
 }
 
@@ -32,11 +35,18 @@
 }
 
 .languageToggle:hover,
-.languageToggle:focus-visible,
+.languageToggle:focus-visible {
+  z-index: 1;
+  border-color: var(--primary-color);
+}
+
 .languageMenuToggle:hover,
 .languageMenuToggle:focus-visible {
   z-index: 1;
+  width: 27px;
   border-color: var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+  margin-left: -1px;
 }
 
 .languageMenuArrow {
@@ -81,6 +91,11 @@
   }
 }
 
+:global([dir='rtl']) .languageMenu {
+  direction: rtl;
+  text-align: right;
+}
+
 .active {
   font-weight: 600;
   color: var(--primary-color);
@@ -99,4 +114,11 @@
     min-height: 30px;
     padding: 0 6px 0 4px;
   }
+}
+
+// 下拉按钮被悬停时，共享边界仍由左侧主按钮使用默认颜色，
+// 避免错误地把右侧按钮的高亮显示在左侧分隔线。
+.languageControl:has(.languageMenuToggle:hover) .languageToggle,
+.languageControl:has(.languageMenuToggle:focus-visible) .languageToggle {
+  border-color: var(--border-color);
 }
