@@ -1039,4 +1039,13 @@
     "description": "Метка происхождения идиомы"
   },
   "chinese_basics_example": { "message": "Пример", "description": "Метка примера идиомы" }
+  ,"search_open": { "message": "Открыть поиск", "description": "Open search" }
+  ,"search_close": { "message": "Закрыть поиск", "description": "Close search" }
+  ,"search_title": { "message": "Поиск контента", "description": "Search title" }
+  ,"search_placeholder": { "message": "Поиск стихов, китайских или английских слов", "description": "Search input placeholder" }
+  ,"search_database": { "message": "Встроенные данные", "description": "Database results title" }
+  ,"search_history": { "message": "История", "description": "History results title" }
+  ,"search_hint": { "message": "Введите ключевые слова для нечёткого поиска", "description": "Search hint" }
+  ,"search_empty": { "message": "Подходящий контент не найден", "description": "No search results" }
+  ,"search_loading": { "message": "Поиск…", "description": "Search loading" }
 }

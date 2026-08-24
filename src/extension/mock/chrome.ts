@@ -1,3 +1,4 @@
+import ar from '@/extension/_locales/ar/messages.json';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import en from '@/extension/_locales/en/messages.json';
 import fr from '@/extension/_locales/fr/messages.json';
@@ -17,6 +18,7 @@ type Messages = {
 // 模拟 Chrome 扩展的 i18n 消息
 const messages: Record<string, Messages> = {
   en,
+  ar,
   fr,
   ja,
   ru,
@@ -33,7 +35,7 @@ let mockWobbleStatus = {
 };
 
 // 获取当前浏览器语言
-const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' | 'ru' | 'fr' | 'ja' => {
+const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' | 'ru' | 'fr' | 'ja' | 'ar' => {
   const lang = navigator.language.toLowerCase();
   if (/^zh(?:-|_)(?:tw|hk|mo|hant)/.test(lang)) {
     return 'zh_TW';
@@ -46,6 +48,9 @@ const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' | 'ru' | 'fr' | 'ja' => 
   }
   if (lang.startsWith('ja')) {
     return 'ja';
+  }
+  if (lang.startsWith('ar')) {
+    return 'ar';
   }
   return lang.startsWith('fr') ? 'fr' : 'en';
 };

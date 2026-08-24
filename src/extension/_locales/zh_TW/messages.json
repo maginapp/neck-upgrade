@@ -406,4 +406,13 @@
   "chinese_basics_answer": { "message": "謎底", "description": "歇後語答案欄位標籤" },
   "chinese_basics_derivation": { "message": "出處", "description": "成語出處欄位標籤" },
   "chinese_basics_example": { "message": "例句", "description": "成語例句欄位標籤" }
+  ,"search_open": { "message": "開啟搜尋", "description": "Open search" }
+  ,"search_close": { "message": "關閉搜尋", "description": "Close search" }
+  ,"search_title": { "message": "搜尋內容", "description": "Search title" }
+  ,"search_placeholder": { "message": "搜尋詩詞、漢字、詞語或英文單字", "description": "Search input placeholder" }
+  ,"search_database": { "message": "內建資料", "description": "Database results title" }
+  ,"search_history": { "message": "歷史記錄", "description": "History results title" }
+  ,"search_hint": { "message": "輸入關鍵字，支援模糊搜尋", "description": "Search hint" }
+  ,"search_empty": { "message": "找不到相關內容", "description": "No search results" }
+  ,"search_loading": { "message": "搜尋中…", "description": "Search loading" }
 }

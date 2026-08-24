@@ -19,6 +19,7 @@ const LANGUAGE_SHORT_LABELS: Record<AppLanguage, string> = {
   [AppLanguage.Ru]: 'RU',
   [AppLanguage.Fr]: 'FR',
   [AppLanguage.Ja]: 'JA',
+  [AppLanguage.Ar]: 'AR',
 };
 
 const LANGUAGE_NAMES: Record<AppLanguage, string> = {
@@ -28,6 +29,7 @@ const LANGUAGE_NAMES: Record<AppLanguage, string> = {
   [AppLanguage.Ru]: 'Русский',
   [AppLanguage.Fr]: 'Français',
   [AppLanguage.Ja]: '日本語',
+  [AppLanguage.Ar]: 'العربية',
 };
 
 const SWITCH_LABEL_KEYS: Record<AppLanguage, string> = {
@@ -37,6 +39,7 @@ const SWITCH_LABEL_KEYS: Record<AppLanguage, string> = {
   [AppLanguage.Ru]: 'language_switch_to_russian',
   [AppLanguage.Fr]: 'language_switch_to_french',
   [AppLanguage.Ja]: 'language_switch_to_japanese',
+  [AppLanguage.Ar]: 'language_switch_to_arabic',
 };
 
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({

@@ -84,7 +84,10 @@ export const Settings: React.FC<SettingsProps> = (props) => {
     <>
       <button
         className={styles.settingsButton}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          window.dispatchEvent(new Event('neck-upgrade:open-settings'));
+          setIsOpen(!isOpen);
+        }}
         aria-label={t('settings_open')}
       >
         ⚙️

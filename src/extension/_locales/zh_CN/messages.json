@@ -987,4 +987,13 @@
   "chinese_basics_answer": { "message": "谜底", "description": "歇后语答案字段标签" },
   "chinese_basics_derivation": { "message": "出处", "description": "成语出处字段标签" },
   "chinese_basics_example": { "message": "例句", "description": "成语例句字段标签" }
+  ,"search_open": { "message": "打开搜索", "description": "Open search" }
+  ,"search_close": { "message": "关闭搜索", "description": "Close search" }
+  ,"search_title": { "message": "搜索内容", "description": "Search title" }
+  ,"search_placeholder": { "message": "搜索诗词、汉字、词语或英文单词", "description": "Search input placeholder" }
+  ,"search_database": { "message": "内置数据", "description": "Database results title" }
+  ,"search_history": { "message": "历史记录", "description": "History results title" }
+  ,"search_hint": { "message": "输入关键词，支持模糊搜索", "description": "Search hint" }
+  ,"search_empty": { "message": "未找到相关内容", "description": "No search results" }
+  ,"search_loading": { "message": "正在搜索…", "description": "Search loading" }
 }

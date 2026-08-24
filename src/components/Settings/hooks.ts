@@ -49,6 +49,9 @@ const getBrowserLanguage = (): AppLanguage => {
   if (browserLanguage.startsWith('ja')) {
     return AppLanguage.Ja;
   }
+  if (browserLanguage.startsWith('ar')) {
+    return AppLanguage.Ar;
+  }
   return browserLanguage.startsWith('fr') ? AppLanguage.Fr : AppLanguage.En;
 };
 
@@ -91,7 +94,8 @@ const normalizeSettings = (storedSettings: Settings | null): Settings => {
       storedSettings.language === AppLanguage.En ||
       storedSettings.language === AppLanguage.Ru ||
       storedSettings.language === AppLanguage.Fr ||
-      storedSettings.language === AppLanguage.Ja
+      storedSettings.language === AppLanguage.Ja ||
+      storedSettings.language === AppLanguage.Ar
         ? storedSettings.language
         : defaultSettings.language,
     neck: {

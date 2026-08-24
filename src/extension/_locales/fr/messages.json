@@ -1045,4 +1045,13 @@
     "message": "Exemple",
     "description": "Libellé de l'exemple de l'expression"
   }
+  ,"search_open": { "message": "Ouvrir la recherche", "description": "Open search" }
+  ,"search_close": { "message": "Fermer la recherche", "description": "Close search" }
+  ,"search_title": { "message": "Rechercher du contenu", "description": "Search title" }
+  ,"search_placeholder": { "message": "Rechercher poésie, chinois ou mots anglais", "description": "Search input placeholder" }
+  ,"search_database": { "message": "Données intégrées", "description": "Database results title" }
+  ,"search_history": { "message": "Historique", "description": "History results title" }
+  ,"search_hint": { "message": "Saisissez des mots-clés pour une recherche floue", "description": "Search hint" }
+  ,"search_empty": { "message": "Aucun contenu correspondant", "description": "No search results" }
+  ,"search_loading": { "message": "Recherche…", "description": "Search loading" }
 }

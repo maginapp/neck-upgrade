@@ -1,4 +1,5 @@
 import { MainView } from '@/components/MainView';
+import { Search } from '@/components/Search';
 import { Settings } from '@/components/Settings';
 import { useSettings } from '@/components/Settings/hooks';
 import { ThemeContainer } from '@/components/Theme/ThemeContainer';
@@ -13,6 +14,7 @@ export function App() {
       <ThemeContainer currentTheme={currentTheme}>
         <div className={styles.app}>
           <MainView settings={settings} />
+          <Search />
           <Settings setSettings={setSettings} settings={settings} currentTheme={currentTheme} />
         </div>
       </ThemeContainer>

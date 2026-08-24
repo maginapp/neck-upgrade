@@ -85,4 +85,13 @@
   "chinese_basics_answer": { "message": "答え", "description": "Answer" },
   "chinese_basics_derivation": { "message": "由来", "description": "Derivation" },
   "chinese_basics_example": { "message": "例", "description": "Example" }
+  ,"search_open": { "message": "検索を開く", "description": "Open search" }
+  ,"search_close": { "message": "検索を閉じる", "description": "Close search" }
+  ,"search_title": { "message": "コンテンツを検索", "description": "Search title" }
+  ,"search_placeholder": { "message": "詩歌・中国語・英単語を検索", "description": "Search input placeholder" }
+  ,"search_database": { "message": "内蔵データ", "description": "Database results title" }
+  ,"search_history": { "message": "履歴", "description": "History results title" }
+  ,"search_hint": { "message": "キーワードを入力してあいまい検索", "description": "Search hint" }
+  ,"search_empty": { "message": "一致するコンテンツがありません", "description": "No search results" }
+  ,"search_loading": { "message": "検索中…", "description": "Search loading" }
 }

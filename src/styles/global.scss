@@ -29,6 +29,15 @@ body {
   font-size: var(--font-size);
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', SimHei, 'Helvetica Neue', Arial, sans-serif;
+    'Microsoft YaHei', SimHei, 'Noto Naskh Arabic', Tahoma, 'Helvetica Neue', Arial, sans-serif;
   font-variant-numeric: tabular-nums; /* 让非等宽字体中的数字表现为等宽 */
+}
+
+html[dir='rtl'] body {
+  direction: rtl;
+}
+
+html[dir='rtl'] input,
+html[dir='rtl'] textarea {
+  text-align: right;
 }

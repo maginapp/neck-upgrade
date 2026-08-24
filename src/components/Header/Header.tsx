@@ -29,6 +29,7 @@ const DATE_LOCALES: Record<AppLanguage, string> = {
   [AppLanguage.Ru]: 'ru-RU',
   [AppLanguage.Fr]: 'fr-FR',
   [AppLanguage.Ja]: 'ja-JP',
+  [AppLanguage.Ar]: 'ar',
 };
 
 export const Header: React.FC = () => {

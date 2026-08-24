@@ -996,4 +996,13 @@
     "description": "The idiom derivation field label"
   },
   "chinese_basics_example": { "message": "Example", "description": "The idiom example field label" }
+  ,"search_open": { "message": "Open search", "description": "Open search" }
+  ,"search_close": { "message": "Close search", "description": "Close search" }
+  ,"search_title": { "message": "Search content", "description": "Search title" }
+  ,"search_placeholder": { "message": "Search poetry, Chinese, or English words", "description": "Search input placeholder" }
+  ,"search_database": { "message": "Built-in data", "description": "Database results title" }
+  ,"search_history": { "message": "History", "description": "History results title" }
+  ,"search_hint": { "message": "Enter keywords for fuzzy search", "description": "Search hint" }
+  ,"search_empty": { "message": "No matching content found", "description": "No search results" }
+  ,"search_loading": { "message": "Searching…", "description": "Search loading" }
 }

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 
+import ar from '@/extension/_locales/ar/messages.json';
 import en from '@/extension/_locales/en/messages.json';
 import fr from '@/extension/_locales/fr/messages.json';
 import ja from '@/extension/_locales/ja/messages.json';
@@ -22,6 +23,7 @@ const catalogs: Record<AppLanguage, MessageCatalog> = {
   [AppLanguage.Ru]: ru,
   [AppLanguage.Fr]: fr,
   [AppLanguage.Ja]: ja,
+  [AppLanguage.Ar]: ar,
 };
 
 const I18nContext = createContext<I18nContextValue>({
@@ -43,8 +45,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ language, ch
       [AppLanguage.Ru]: 'ru',
       [AppLanguage.Fr]: 'fr',
       [AppLanguage.Ja]: 'ja',
+      [AppLanguage.Ar]: 'ar',
     }[language];
     document.documentElement.lang = htmlLanguage;
+    document.documentElement.dir = language === AppLanguage.Ar ? 'rtl' : 'ltr';
   }, [language]);
 
   const value = useMemo<I18nContextValue>(

@@ -55,9 +55,57 @@ const JAPANESE_LABELS: Record<string, string> = {
   幽梦影: '幽夢影',
 };
 
+const ARABIC_LABELS: Record<string, string> = {
+  系统: 'النظام',
+  亮色: 'فاتح',
+  暗黑: 'داكن',
+  普通: 'عادي',
+  训练: 'تدريب',
+  阅读: 'قراءة',
+  强化: 'مكثف',
+  高级: 'متقدم',
+  诗词: 'الشعر',
+  历史: 'التاريخ',
+  英语: 'الإنجليزية',
+  中文基础: 'أساسيات الصينية',
+  热榜: 'الرائج',
+  全部: 'الكل',
+  成语: 'التعابير الاصطلاحية',
+  汉字: 'الحروف الصينية',
+  歇后语: 'الأمثال ثنائية الشطر',
+  词语: 'الكلمات',
+  维基百科: 'ويكيبيديا',
+  百度百科: 'بايدو بايكي',
+  诗歌: 'قصائد',
+  词: 'شعر سي',
+  经典: 'كلاسيكيات',
+  蒙学: 'نصوص تعليمية',
+  文人小品: 'مقالات',
+  诗经: 'كتاب الأغاني',
+  楚辞: 'أغاني تشو',
+  曹操诗集: 'قصائد تساو تساو',
+  唐诗三百首: 'ثلاثمائة قصيدة من تانغ',
+  '全唐诗·名家精选': 'مختارات من شعر تانغ',
+  水墨唐诗: 'شعر تانغ بالحبر',
+  千家诗: 'ألف قصيدة',
+  宋词三百首: 'ثلاثمائة قصيدة سي من سونغ',
+  '全宋词·名家精选': 'مختارات من شعر سي لسونغ',
+  纳兰性德词集: 'قصائد نا لان شينغده',
+  论语: 'المحاورات',
+  孟子: 'منسيوس',
+  大学: 'التعلم العظيم',
+  中庸: 'مذهب الوسط',
+  增广贤文: 'أقوال الحكماء الموسعة',
+  千字文: 'كلاسيكية الألف حرف',
+  幽梦影: 'ظلال الأحلام الهادئة',
+};
+
 const getLocalizedLabel = (labels: LocalizedLabel, language: AppLanguage): string => {
   if (language === AppLanguage.Ja) {
     return JAPANESE_LABELS[labels[AppLanguage.ZhCN] ?? ''] ?? labels[AppLanguage.En] ?? '';
+  }
+  if (language === AppLanguage.Ar) {
+    return ARABIC_LABELS[labels[AppLanguage.ZhCN] ?? ''] ?? labels[AppLanguage.En] ?? '';
   }
   return labels[language] ?? labels[AppLanguage.En] ?? labels[AppLanguage.ZhCN] ?? '';
 };
@@ -568,6 +616,43 @@ const JAPANESE_NEWS_LABELS: Record<string, string> = {
   创意: 'クリエイティブ',
 };
 
+const ARABIC_NEWS_LABELS: Record<string, string> = {
+  微博: 'ويبو',
+  我的: 'موجزي',
+  热搜: 'الأكثر رواجًا',
+  文娱: 'ثقافة وترفيه',
+  生活: 'نمط الحياة',
+  社会: 'المجتمع',
+  小红书: 'شياو هونغ شو',
+  推荐: 'مقترح لك',
+  头条: 'توتياو',
+  知乎: 'تشيهو',
+  热榜: 'الرائج',
+  综合: 'عام',
+  动画: 'رسوم متحركة',
+  鬼畜: 'ريمكس',
+  音乐: 'موسيقى',
+  舞蹈: 'رقص',
+  影视: 'أفلام وتلفاز',
+  娱乐: 'ترفيه',
+  知识: 'معرفة',
+  科技: 'تقنية',
+  美食: 'طعام',
+  体育: 'رياضة',
+  中国: 'الصين',
+  全球: 'العالم',
+  商业: 'أعمال',
+  百度: 'بايدو',
+  贴吧: 'تيبا',
+  '36氪': '36Kr',
+  股票: 'أسهم',
+  公司: 'شركات',
+  宏观: 'اقتصاد كلي',
+  技术: 'تقنية',
+  好玩: 'متعة',
+  创意: 'إبداع',
+};
+
 const TRADITIONAL_NEWS_LABELS: Record<string, string> = {
   微博: '微博',
   我的: '我的',
@@ -617,6 +702,9 @@ export const getNewsLabel = (label: string, language = AppLanguage.ZhCN) => {
   }
   if (language === AppLanguage.Ja) {
     return JAPANESE_NEWS_LABELS[label] ?? label;
+  }
+  if (language === AppLanguage.Ar) {
+    return ARABIC_NEWS_LABELS[label] ?? label;
   }
   return language === AppLanguage.ZhTW ? TRADITIONAL_NEWS_LABELS[label] ?? label : label;
 };

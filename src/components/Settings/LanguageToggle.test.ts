@@ -12,6 +12,7 @@ describe('language toggle', () => {
       AppLanguage.Ru,
       AppLanguage.Fr,
       AppLanguage.Ja,
+      AppLanguage.Ar,
     ]);
     expect(APP_LANGUAGE_SEQUENCE.map(getNextAppLanguage)).toEqual([
       AppLanguage.ZhTW,
@@ -19,6 +20,7 @@ describe('language toggle', () => {
       AppLanguage.Ru,
       AppLanguage.Fr,
       AppLanguage.Ja,
+      AppLanguage.Ar,
       AppLanguage.ZhCN,
     ]);
   });
