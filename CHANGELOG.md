@@ -1,5 +1,15 @@
 # Neck Upgrade ChangeLog
 
+## 1.5.3
+
+### Patch Changes
+
+- 构建更新和多语言支持
+
+  1. 支持日语
+  2. 添加谷歌插件描述
+  3. 调整release构建日志说明
+
 ## 1.5.2
 
 ### Patch Changes

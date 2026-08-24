@@ -43,9 +43,28 @@ jobs:
         run: |
           zip -r ../chrome-extension-${{ github.ref_name }}.zip . -x '*.DS_Store'
 
+      - name: Prepare release notes
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          CHANGELOG_URL: https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md
+        run: |
+          release_version="${RELEASE_TAG#v}"
+          awk -v version="$release_version" '
+            $0 == "## " version { capture = 1; found = 1 }
+            capture && $0 ~ /^## / && $0 != "## " version { exit }
+            capture { print }
+          ' CHANGELOG.md > RELEASE_NOTES.md
+
+          if [ -s RELEASE_NOTES.md ]; then
+            printf '\n---\n\n' >> RELEASE_NOTES.md
+          else
+            echo "No changelog entry found for ${RELEASE_TAG}; using the full changelog link."
+          fi
+          printf '[View the complete changelog](%s)\n' "$CHANGELOG_URL" >> RELEASE_NOTES.md
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             chrome-extension-${{ github.ref_name }}.zip
-          body_path: CHANGELOG.md
+          body_path: RELEASE_NOTES.md
