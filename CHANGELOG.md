@@ -1,5 +1,11 @@
 # Neck Upgrade ChangeLog
 
+## 1.5.5
+
+### Patch Changes
+
+- 添加wiki百科，多语言支持
+
 ## 1.5.4
 
 ### Patch Changes
