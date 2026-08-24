@@ -76,8 +76,6 @@ export const Search = () => {
   }, [isOpen, keyword]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => setKeyword(event.target.value);
-  const hasResults = databaseResults.length > 0 || historyResults.length > 0;
-
   return (
     <div className={styles.search}>
       <button
@@ -117,7 +115,8 @@ export const Search = () => {
                   className={activeTab === 'database' ? styles.activeTab : ''}
                   onClick={() => setActiveTab('database')}
                 >
-                  {t('search_database')} ({databaseResults.length})
+                  {t('search_database')}
+                  {databaseResults.length ? ` (${databaseResults.length})` : ''}
                 </button>
                 <button
                   type="button"
@@ -126,13 +125,14 @@ export const Search = () => {
                   className={activeTab === 'history' ? styles.activeTab : ''}
                   onClick={() => setActiveTab('history')}
                 >
-                  {t('search_history')} ({historyResults.length})
+                  {t('search_history')}
+                  {historyResults.length ? ` (${historyResults.length})` : ''}
                 </button>
               </div>
-              <ResultGroup results={activeTab === 'database' ? databaseResults : historyResults} />
-              {!isSearching && !hasResults ? (
-                <p className={styles.empty}>{t('search_empty')}</p>
-              ) : null}
+              <ResultGroup
+                results={activeTab === 'database' ? databaseResults : historyResults}
+                emptyText={t('search_empty')}
+              />
               {isSearching ? <p className={styles.loading}>{t('search_loading')}</p> : null}
             </div>
           ) : (
@@ -144,7 +144,10 @@ export const Search = () => {
   );
 };
 
-const ResultGroup: React.FC<{ results: SearchResult[] }> = ({ results }) => (
+const ResultGroup: React.FC<{ results: SearchResult[]; emptyText: string }> = ({
+  results,
+  emptyText,
+}) => (
   <section className={styles.resultGroup}>
     {results.length ? (
       <ul>
@@ -157,7 +160,7 @@ const ResultGroup: React.FC<{ results: SearchResult[] }> = ({ results }) => (
         ))}
       </ul>
     ) : (
-      <p className={styles.groupEmpty}>0</p>
+      <p className={styles.groupEmpty}>{emptyText}</p>
     )}
   </section>
 );
