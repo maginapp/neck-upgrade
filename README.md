@@ -93,6 +93,7 @@ pnpm run release:extension
 7. 热榜消息来自于[Google New](https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans)、[头条热搜](https://so.toutiao.com/search/?keyword=%E7%83%AD%E6%A6%9C&pd=synthesis&source=input&traffic_source=&original_source=&in_tfs=&in_ogs=)、[微博热搜](https://s.weibo.com/top/summary?cate=realtimehot)、[小红书推荐](https://www.xiaohongshu.com/explore?channel_id=homefeed_recommend)、[知乎热榜](https://www.zhihu.com/billboard)、[bilibili](https://www.bilibili.com/v/popular/all)、[36氪](https://36kr.com/newsflashes/catalog/0)、[百度热搜](https://top.baidu.com/board?tab=realtime)、[百度贴吧](https://tieba.baidu.com/hottopic/browse/topicList?res_type=1)和[v2ex](http://v2ex.com/)等
 8. 项目功能参考[wai](https://github.com/dukeluo/wai)
 9. 使用开源日历工具库[Tyme](https://6tail.cn/tyme.html)，获取农历、干支、生肖、节气、法定假日，宜忌等
+10. 使用了[chinese-xinhua](https://github.com/pwxcoo/chinese-xinhua)，获取中文基础知识：字典、词语、成语和歇后语等
 
 ## 反馈
 
