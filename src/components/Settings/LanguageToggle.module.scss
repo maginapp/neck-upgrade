@@ -92,6 +92,8 @@
 }
 
 :global([dir='rtl']) .languageMenu {
+  right: 0;
+  left: auto;
   direction: rtl;
   text-align: right;
 }

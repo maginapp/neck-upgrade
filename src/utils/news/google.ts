@@ -1,9 +1,26 @@
 import { NEWS_URL, CACHE_KEYS } from '@/constants';
 import { NewsItem } from '@/types';
+import { AppLanguage } from '@/types/app';
 
 import { fetchUtils } from '../fetch';
 
 import { createNewsManager } from './newsManager';
+
+const GOOGLE_LOCALES: Record<AppLanguage, { hl: string; gl: string; ceid: string }> = {
+  [AppLanguage.ZhCN]: { hl: 'zh-CN', gl: 'CN', ceid: 'CN:zh-Hans' },
+  [AppLanguage.ZhTW]: { hl: 'zh-TW', gl: 'TW', ceid: 'TW:zh-Hant' },
+  [AppLanguage.En]: { hl: 'en-US', gl: 'US', ceid: 'US:en' },
+  [AppLanguage.Ru]: { hl: 'ru', gl: 'RU', ceid: 'RU:ru' },
+  [AppLanguage.Fr]: { hl: 'fr', gl: 'FR', ceid: 'FR:fr' },
+  [AppLanguage.Ja]: { hl: 'ja', gl: 'JP', ceid: 'JP:ja' },
+  [AppLanguage.Ar]: { hl: 'ar', gl: 'SA', ceid: 'SA:ar' },
+};
+
+let activeGoogleLanguage = AppLanguage.En;
+
+export const setGoogleNewsLanguage = (language: AppLanguage) => {
+  activeGoogleLanguage = language;
+};
 
 const googleQuery = {
   for_you_en: '/foryou?hl=en-US&gl=US&ceid=US:en',
@@ -35,40 +52,45 @@ const googleQuery = {
     '/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRFp1ZEdvU0JYcG9MVU5PR2dKRFRpZ0FQAQ?hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans',
 };
 
-const fetchGoogleNews = async (url: string) => {
+const getGoogleRssUrl = (path: string) => {
+  const locale = GOOGLE_LOCALES[activeGoogleLanguage];
+  const pathname = path.split('?')[0];
+  const rssPath =
+    pathname === '/foryou' ? '/rss' : pathname.replace(/^\/topics\//u, '/rss/topics/');
+  const parameters = new URLSearchParams(locale);
+  return `${NEWS_URL.GOOGLE_NEWS}${rssPath}?${parameters.toString()}`;
+};
+
+const fetchGoogleNews = async (path: string) => {
   try {
-    // 通过 background 脚本获取新闻
-    const response = await fetchUtils(url, { cacheFetch: true });
+    const response = await fetchUtils(getGoogleRssUrl(path), { cacheFetch: true });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const html = await response.text();
+    const xml = await response.text();
 
-    // 创建临时 DOM 解析 HTML
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const doc = parser.parseFromString(xml, 'application/xml');
+    if (doc.querySelector('parsererror')) {
+      throw new Error('Google News RSS returned invalid XML');
+    }
 
     const newsItems: NewsItem[] = [];
-    // 获取新闻列表
-    const articles = doc.querySelectorAll('article');
+    const items = doc.querySelectorAll('channel > item');
 
-    articles.forEach((article) => {
-      const linkElement: HTMLAnchorElement | null = article.querySelector('a[data-n-tid]');
-      const sourceElement = article.querySelector('div[data-n-tid]');
-      const timeElement = article.querySelector('time');
+    items.forEach((item) => {
+      const title = item.querySelector('title')?.textContent?.trim() ?? '';
+      const link = item.querySelector('link')?.textContent?.trim() ?? '';
+      const source = item.querySelector('source')?.textContent?.trim() ?? '';
+      const time = item.querySelector('pubDate')?.textContent?.trim() ?? '';
 
-      if (linkElement) {
-        // 处理相对链接
-        const link = linkElement.href.startsWith('/')
-          ? `https://news.google.com${linkElement.href}`
-          : linkElement.href;
-
+      if (title && link) {
         newsItems.push({
-          title: linkElement.textContent?.trim() || '',
+          title,
           link,
-          source: sourceElement?.textContent?.trim() || '',
-          time: timeElement?.getAttribute('datetime') || '',
+          source,
+          time,
         });
       }
     });
@@ -80,68 +102,89 @@ const fetchGoogleNews = async (url: string) => {
   }
 };
 
-export const ggEnForYouNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_FOR_YOU_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.for_you_en}`);
-});
+const createGoogleNewsManager = (cacheKey: string, path: string) => {
+  const manager = createNewsManager(cacheKey, () => fetchGoogleNews(path));
+  let cachedLanguage: AppLanguage | null = null;
+  const getAvailableSites = manager.getAvailableSites.bind(manager);
 
-export const ggZhForYouNews = createNewsManager(CACHE_KEYS.GOOGLE_ZH_FOR_YOU_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.for_you_zh}`);
-});
+  manager.getAvailableSites = async () => {
+    if (cachedLanguage !== activeGoogleLanguage) {
+      await manager.clearCache();
+      cachedLanguage = activeGoogleLanguage;
+    }
+    return getAvailableSites();
+  };
+  return manager;
+};
 
-export const ggEnGlobalNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_GLOBAL_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.global_en}`);
-});
+export const ggEnForYouNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_FOR_YOU_NEWS,
+  googleQuery.for_you_en
+);
 
-export const ggZhGlobalNews = createNewsManager(CACHE_KEYS.GOOGLE_ZH_GLOBAL_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.global_zh}`);
-});
+export const ggZhForYouNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_ZH_FOR_YOU_NEWS,
+  googleQuery.for_you_zh
+);
 
-export const ggEnTechNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_TECH_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.tech_en}`);
-});
+export const ggEnGlobalNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_GLOBAL_NEWS,
+  googleQuery.global_en
+);
 
-export const ggEnEntertainmentNews = createNewsManager(
+export const ggZhGlobalNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_ZH_GLOBAL_NEWS,
+  googleQuery.global_zh
+);
+
+export const ggEnTechNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_TECH_NEWS,
+  googleQuery.tech_en
+);
+
+export const ggEnEntertainmentNews = createGoogleNewsManager(
   CACHE_KEYS.GOOGLE_EN_ENTERTAINMENT_NEWS,
-  () => {
-    return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.entertainment_en}`);
-  }
+  googleQuery.entertainment_en
 );
 
-export const ggZhEntertainmentNews = createNewsManager(
+export const ggZhEntertainmentNews = createGoogleNewsManager(
   CACHE_KEYS.GOOGLE_ZH_ENTERTAINMENT_NEWS,
-  () => {
-    return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.entertainment_zh}`);
-  }
+  googleQuery.entertainment_zh
 );
 
-export const ggEnSportsNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_SPORTS_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.sports_en}`);
-});
+export const ggEnSportsNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_SPORTS_NEWS,
+  googleQuery.sports_en
+);
 
-export const ggZhSportsNews = createNewsManager(CACHE_KEYS.GOOGLE_ZH_SPORTS_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.sports_zh}`);
-});
+export const ggZhSportsNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_ZH_SPORTS_NEWS,
+  googleQuery.sports_zh
+);
 
-export const ggEnBussinessNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_BUSSINESS_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.bussiness_en}`);
-});
+export const ggEnBussinessNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_BUSSINESS_NEWS,
+  googleQuery.bussiness_en
+);
 
-export const ggZhBussinessNews = createNewsManager(CACHE_KEYS.GOOGLE_ZH_BUSSINESS_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.bussiness_zh}`);
-});
+export const ggZhBussinessNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_ZH_BUSSINESS_NEWS,
+  googleQuery.bussiness_zh
+);
 
-export const ggEnScienceNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_SCIENCE_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.science_en}`);
-});
+export const ggEnScienceNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_SCIENCE_NEWS,
+  googleQuery.science_en
+);
 
-export const ggEnHealthNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_HEALTH_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.health_en}`);
-});
+export const ggEnHealthNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_EN_HEALTH_NEWS,
+  googleQuery.health_en
+);
 
-export const ggEnUsNews = createNewsManager(CACHE_KEYS.GOOGLE_EN_US_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.us_en}`);
-});
+export const ggEnUsNews = createGoogleNewsManager(CACHE_KEYS.GOOGLE_EN_US_NEWS, googleQuery.us_en);
 
-export const ggZhChinaNews = createNewsManager(CACHE_KEYS.GOOGLE_ZH_CHINA_NEWS, () => {
-  return fetchGoogleNews(`${NEWS_URL.GOOGLE_NEWS}${googleQuery.china_zh}`);
-});
+export const ggZhChinaNews = createGoogleNewsManager(
+  CACHE_KEYS.GOOGLE_ZH_CHINA_NEWS,
+  googleQuery.china_zh
+);

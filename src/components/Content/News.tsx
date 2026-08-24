@@ -7,6 +7,7 @@ import { NewsDisplay } from '@/types';
 import { NewsGroup, NewsType, PageInfo } from '@/types/app';
 import { getNewsLabel } from '@/utils/labels';
 import { newsManagerMap } from '@/utils/news';
+import { setGoogleNewsLanguage } from '@/utils/news/google';
 
 import { Toolbar } from '../Tools';
 
@@ -36,6 +37,7 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
   const fetchNews = async (page?: PageInfo) => {
     setLoading(true);
     try {
+      setGoogleNewsLanguage(language);
       const newsData = await manager.getDisplayData(page);
       if (newsData) {
         setNewsData(newsData);
@@ -53,7 +55,7 @@ const NewsTypeInfo: React.FC<NewsTypeInfoProps> = (props) => {
     // 初始化 首次active 请求一次
     fetchNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isActive, language]);
 
   const handleRefresh = async () => {
     fetchNews({
