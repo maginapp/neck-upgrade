@@ -1,0 +1,67 @@
+Neck Upgrade : une extension Chrome pour préserver votre nuque
+
+Neck Upgrade est une extension de nouvel onglet Chrome qui associe rappels de mouvement du cou, informations de calendrier et contenus de découverte quotidiens. L'inclinaison contrôlée et l'oscillation de page vous invitent à changer de posture, tandis que l'histoire, la poésie, l'anglais, les bases du chinois et les tendances accompagnent chaque nouvel onglet.
+
+Remarque : cette extension sert de rappel postural quotidien et d'aide à l'entraînement léger. Ce n'est pas un dispositif médical et elle ne remplace pas un diagnostic ou un traitement professionnel. En cas de vertige, d'inconfort ou de douleur, désactivez immédiatement la rotation et consultez un professionnel.
+
+Points forts
+✔️ Plusieurs modes d'inclinaison : Standard, Entraînement, Lecture, Renforcé et Personnalisé avancé
+✔️ Oscillation de page : incline en douceur la page web ordinaire actuelle, avec angle, cycle et angle fixe ou aléatoire configurables
+✔️ Listes blanche et noire de domaines, avec correspondance des sous-domaines et priorité à la liste noire
+✔️ Heure, calendrier lunaire et prochain jour de repos en un coup d'œil
+✔️ Calendrier traditionnel : tiges célestes et branches terrestres, zodiaque, termes solaires, activités favorables/défavorables, tabous de Peng Zu, fêtes et coutumes
+✔️ « Ce jour dans l'histoire » ; Wikipedia suit la langue de l'interface et utilise un repli automatique
+✔️ Poésie et prose chinoises classiques, avec catégories et filtres de sources
+✔️ Mots d'anglais quotidiens, phonétique, prononciation et définitions
+✔️ Bases du chinois : idiomes, caractères, xiehouyu et mots
+✔️ Tendances de plateformes majeures ; Google Actualités suit la langue et la région de l'interface
+✔️ Recherche floue dans les données intégrées et l'historique local d'apprentissage
+✔️ Citations quotidiennes, plusieurs langues et plusieurs thèmes
+
+Thèmes
+✔️ Clair : lumineux et net pour la journée
+✔️ Sombre : lecture plus confortable en faible luminosité
+✔️ Système : suit automatiquement le thème clair/sombre du système (par défaut)
+
+Modes d'inclinaison
+✔️ Standard : faible inclinaison confortable pour une vue plus stable
+✔️ Entraînement : petites variations régulières pour éviter une posture fixe prolongée (par défaut)
+✔️ Lecture : une citation est mise en avant ; seule sa zone varie légèrement, le reste reste horizontal
+✔️ Renforcé : angle plus important pour les utilisateurs habitués à l'entraînement d'inclinaison
+✔️ Avancé : angle maximal et intervalle de changement personnalisables, appliqués immédiatement et stockés localement
+
+Oscillation de page
+✔️ À activer depuis le Popup de la barre d'outils ; s'applique uniquement à l'onglet web ordinaire actuel
+✔️ Réglage visuel de 0° à 180°, fixe ou aléatoire entre les limites positive et négative
+✔️ Cycles de 1 seconde à 60 minutes, précis à la seconde pour les cycles courts
+✔️ Compte à rebours avant le prochain changement
+✔️ La liste noire est prioritaire : une liste blanche vide autorise les pages ordinaires ; sinon seuls les domaines listés sont autorisés
+✔️ Les pages internes de Chrome, les pages d'extension et les pages restreintes par le navigateur ne sont pas prises en charge
+
+Catégories de contenu
+✔️ Poésie et classiques : nouveau contenu quotidien et conservation de 30 jours d'historique. Filtres par poèmes, ci, classiques, textes d'apprentissage, essais et sources, dont le Classique des vers, les Chants de Chu, la poésie Tang, les ci Song, les Entretiens, Mencius, la Grande Étude, la Doctrine du juste milieu, Zengguang Xianwen, le Classique des mille caractères et Youmeng Ying. Le Classique des mille caractères est présenté par sections de sens, huit caractères par ligne.
+✔️ Histoire : événements, fêtes et coutumes de ce jour. Wikipedia ou Baidu Baike peuvent être choisis comme source prioritaire ; Wikipedia demande la langue actuelle puis se replie sur l'anglais et le chinois.
+✔️ Anglais : contenu quotidien issu d'une liste de vocabulaire fréquent ; avec réseau, phonétique, prononciation, nature du mot et définition sont disponibles. La progression reste locale.
+✔️ Bases du chinois : Tout, Idiomes, Caractères, Xiehouyu et Mots. Les xiehouyu et mots sont affichés par quatre.
+✔️ Tendances : contenus publics de Weibo, Xiaohongshu, Toutiao, Zhihu, Bilibili, Google Actualités, Baidu, 36Kr, V2EX et plus, actualisés environ toutes les 5 minutes. Certaines sources peuvent dépendre de la connexion, du réseau ou des changements de site.
+✔️ Citations : citations aléatoires d'un ensemble local ; le mode Lecture met cette zone en avant.
+
+Recherche
+✔️ L'entrée de recherche est à gauche de Paramètres ; recherche par inclusion et recherche floue suivant l'ordre des caractères
+✔️ Données intégrées : poésie, bases du chinois et vocabulaire anglais
+✔️ Historique : apprentissage local de poésie, d'anglais et de bases du chinois
+✔️ Résultats séparés dans les onglets « Données intégrées / Historique »
+
+Langues et interface
+✔️ Prend en charge le chinois simplifié, le chinois traditionnel, l'anglais, le russe, le français, le japonais et l'arabe
+✔️ Le bouton principal fait défiler les langues dans un ordre fixe ; le menu permet de choisir directement une langue
+✔️ L'arabe utilise automatiquement une mise en page RTL ; Recherche, Paramètres et le panneau de réglages restent à droite, tandis que les champs de domaine et d'URL restent LTR pour la saisie
+
+Sources encyclopédiques
+✔️ Wikipedia : source par défaut, requêtes multilingues et repli vers l'anglais et le chinois
+✔️ Baidu Baike : source chinoise
+
+Données et confidentialité
+✔️ Les réglages, la progression, les règles de domaine et le cache sont enregistrés localement dans le navigateur actuel
+✔️ L'extension n'a pas de système de compte et ne téléverse pas ces données locales vers des serveurs appartenant au projet
+✔️ Les fonctions d'histoire, calendrier, dictionnaire, citations et tendances accèdent si nécessaire à des services publics tiers. Les liens d'actualité, de dictionnaire ou de commentaires ouvrent le site tiers correspondant.

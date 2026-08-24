@@ -1,0 +1,67 @@
+Neck Upgrade: A Chrome Extension for Healthier Neck Habits
+
+Neck Upgrade is a Chrome new-tab extension that combines neck-movement reminders, calendar information, and daily learning content. Controlled page tilts and page wobble encourage you to change your viewing posture, while history, poetry, English, Chinese fundamentals, and trending information accompany every new tab.
+
+Note: This extension is for everyday posture reminders and light training assistance. It is not a medical device and does not replace professional diagnosis or treatment. If you feel dizzy, uncomfortable, or in pain, turn off rotation immediately and consult a qualified professional.
+
+Highlights
+✔️ Multiple neck-tilt modes: Standard, Training, Reading, Enhanced, and advanced custom mode
+✔️ Page Wobble gently tilts the current regular webpage; configure angle, cycle, and fixed or random angles
+✔️ Domain allowlist and blocklist control where Page Wobble works, with subdomain matching and blocklist priority
+✔️ Current time, lunar date, and next day off at a glance
+✔️ Traditional calendar details: heavenly stems and earthly branches, zodiac, solar terms, daily suitable/avoid activities, Peng Zu taboos, holidays, and customs
+✔️ On This Day in History, with Wikipedia requests following the interface language and automatic fallback
+✔️ Classical Chinese poetry and prose with multi-level categories and source filters
+✔️ Daily English words, phonetics, pronunciation, and definitions
+✔️ Chinese fundamentals: idioms, characters, xiehouyu sayings, and words
+✔️ Trending topics from major platforms; Google News follows the selected interface language and region
+✔️ Global fuzzy search across built-in poetry, Chinese fundamentals, English vocabulary, and local learning history
+✔️ Daily quotes, multiple interface languages, and multiple themes
+
+Theme modes
+✔️ Light: bright and clear for daytime use
+✔️ Dark: more comfortable reading in low-light environments
+✔️ System: automatically follows the system light/dark preference (default)
+
+Neck tilt modes
+✔️ Standard: a comfortable, small tilt range for a more stable view
+✔️ Training: timed changes in a small tilt range to break prolonged fixed viewing posture (default)
+✔️ Reading: highlights a quote in the main area; only the quote area changes slightly while the rest stays level
+✔️ Enhanced: a larger rotation range for users accustomed to tilt training
+✔️ Advanced: customize the maximum rotation angle and switching interval; settings apply immediately and are stored locally
+
+Page Wobble
+✔️ Enable it from the browser-toolbar popup; it applies only to the current regular webpage tab
+✔️ Visually set a page angle from 0° to 180°, either fixed or random within the positive/negative maximum range
+✔️ Cycles range from 1 second to 60 minutes, with second-level precision for short cycles and larger steps for long cycles
+✔️ Shows a live countdown to the next switch
+✔️ Blocklist rules take priority: an empty allowlist permits regular webpages by default; a non-empty allowlist permits only listed domains
+✔️ Chrome internal pages, extension pages, and other browser-restricted pages are not supported
+
+Content categories
+✔️ Poetry and classics: prepares new reading content daily and keeps the latest 30 days of learning history. Filter poems, ci poetry, classics, elementary texts, literary essays, and specific sources, including The Book of Songs, Songs of Chu, Tang poetry, Song ci, The Analects, Mencius, Great Learning, Doctrine of the Mean, Zengguang Xianwen, Thousand Character Classic, and Youmeng Ying. The Thousand Character Classic is presented in semantic sections, eight Chinese characters per line.
+✔️ History: shows events, holidays, and customs for this day in history. Choose Wikipedia or Baidu Baike as the preferred source. Wikipedia requests the current interface language and falls back to English and then Chinese when needed.
+✔️ English: delivers daily learning items from a high-frequency vocabulary list. When online, it shows phonetics, pronunciation, part of speech, and definitions. Progress is stored locally.
+✔️ Chinese fundamentals: browse All, Idioms, Characters, Xiehouyu, and Words. Xiehouyu and Words show four entries at a time.
+✔️ Trending: aggregates public trending content from Weibo, Xiaohongshu, Toutiao, Zhihu, Bilibili, Google News, Baidu, 36Kr, V2EX, and more. Content refreshes about every five minutes; some sources may be affected by sign-in status, network conditions, or site changes.
+✔️ Quotes: randomly displays quotes from a local content pool; Reading mode emphasizes this area.
+
+Search
+✔️ The search entry is to the left of Settings and supports substring and character-order fuzzy matching
+✔️ Built-in data: poetry, Chinese fundamentals, and English vocabulary
+✔️ History: locally stored poetry, English, and Chinese-fundamentals learning records
+✔️ Results are separated into Built-in Data and History tabs
+
+Languages and interface
+✔️ Supports Simplified Chinese, Traditional Chinese, English, Russian, French, Japanese, and Arabic
+✔️ Click the main language button to cycle through languages in a fixed order, or use the dropdown to select a language directly
+✔️ Arabic uses RTL text layout automatically; Search, Settings, and the settings drawer remain on the right, while domain and URL fields stay LTR for editing
+
+Encyclopedia sources
+✔️ Wikipedia: default source, with multilingual requests and English/Chinese fallback
+✔️ Baidu Baike: Chinese-language source
+
+Data and privacy
+✔️ Settings, learning progress, domain rules, and content cache are stored locally in the current browser
+✔️ The extension has no account system and does not upload this local data to project-owned servers
+✔️ History, calendar, dictionary, quotes, and trending features access relevant public third-party services when needed. Following news, dictionary, or feedback links opens the corresponding third-party website.
