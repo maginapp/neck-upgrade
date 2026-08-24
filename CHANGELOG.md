@@ -1,5 +1,11 @@
 # Neck Upgrade ChangeLog
 
+## 1.5.2
+
+### Patch Changes
+
+- 修复release actions 压缩产物目录问题
+
 ## 1.5.1
 
 ### Patch Changes
