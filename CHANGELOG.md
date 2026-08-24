@@ -1,5 +1,12 @@
 # Neck Upgrade ChangeLog
 
+## 1.5.4
+
+### Patch Changes
+
+- f418d7f: 添加谷歌多语言支持
+- 87fb9a1: 添加搜索功能，支持历史记录和本地数据，添加阿拉伯语支持
+
 ## 1.5.3
 
 ### Patch Changes
