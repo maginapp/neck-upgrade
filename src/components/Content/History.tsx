@@ -2,17 +2,17 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useI18n } from '@/i18n';
 import { KnowledgeData, KnowledgeDisplay } from '@/types';
-import { KnowledgeMode } from '@/types/app';
+import { AppLanguage, KnowledgeMode } from '@/types/app';
 import { CrawlerManager } from '@/utils/crawlerManager';
 import { baiduManager } from '@/utils/knowledgeBaidu';
-import { wikiManager } from '@/utils/knowledgeWiki';
+import { getWikiManager } from '@/utils/knowledgeWiki';
 import { getKnowledgeModeLabel } from '@/utils/labels';
 
 import { Toolbar } from '../Tools';
 
 import styles from './History.module.scss';
 
-const useHistory = (knowledgeMode: KnowledgeMode) => {
+const useHistory = (knowledgeMode: KnowledgeMode, language: AppLanguage) => {
   const [data, setData] = useState<KnowledgeDisplay>({ events: [], holidays: [] });
   const [loading, setLoading] = useState<boolean>(false);
   const successRef = useRef(false);
@@ -40,6 +40,8 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
   };
 
   const fetchData = async () => {
+    successRef.current = false;
+    const wikiManager = getWikiManager(language);
     if (knowledgeMode === KnowledgeMode.Wiki) {
       await fetchKnowledge(wikiManager);
       if (!successRef.current) {
@@ -59,7 +61,7 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
     setShowMode(knowledgeMode);
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [knowledgeMode]);
+  }, [knowledgeMode, language]);
 
   return { events: data.events, holidays: data.holidays, loading, fetchData, showMode };
 };
@@ -67,7 +69,7 @@ const useHistory = (knowledgeMode: KnowledgeMode) => {
 export const History: React.FC<{ knowledgeMode: KnowledgeMode }> = (props) => {
   const { language, t } = useI18n();
   const { knowledgeMode } = props;
-  const { events, holidays, loading, fetchData, showMode } = useHistory(knowledgeMode);
+  const { events, holidays, loading, fetchData, showMode } = useHistory(knowledgeMode, language);
 
   const title = useMemo(() => {
     if (events.length > 0 && holidays.length > 0) {

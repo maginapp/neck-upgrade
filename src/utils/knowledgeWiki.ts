@@ -1,116 +1,121 @@
+import { CACHE_KEYS } from '@/constants';
 import { HolidayToday, KnowledgeData, HistoricalEvent } from '@/types';
-
-import { WIKI_BASE_URL, CACHE_KEYS, WIKI_MATCH_CATEGORY } from '../constants';
+import { AppLanguage } from '@/types/app';
 
 import { dateUtils } from './base';
-import { CacheManager } from './cacheManager';
 import { fetchUtils } from './fetch';
 import { createKnowledgeManager } from './knowledgeManager';
 
-// 创建维基数据缓存管理器
-const wikiCache = new CacheManager<KnowledgeData>(CACHE_KEYS.WIKI_DATA);
+type WikiLanguage = 'zh' | 'en' | 'ru' | 'fr' | 'ja' | 'ar';
 
-// 处理维基百科链接，将/wiki开头的路径转换为完整URL/ //upload图片添加 https, 引用链接移除
-const processWikiLinks = (html: string): string => {
-  return (
-    html
-      // 替换 /wiki 链接为完整 Wikipedia 链接
-      .replace(/href="\/wiki\/([^"]+)"/g, 'href="https://zh.wikipedia.org/wiki/$1" target="_blank"')
-      // 删除参考引用链接，如 #cite_note-*
-      .replace(/<a[^>]*href="#cite_note-[^"]*"[^>]*>.*?<\/a>/g, '')
-      // 修复图片链接的 src 协议
-      .replace(
-        /src="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
-        'src="https://upload.wikimedia.org/$1"'
-      )
-      // 修复图片链接的 srcset 协议
-      .replace(
-        /srcset="\/\/upload\.wikimedia\.org\/([^"]+)"/g,
-        'src="https://upload.wikimedia.org/$1"'
-      )
-  );
+interface WikiOnThisDayItem {
+  text?: string;
+  year?: number;
+  pages?: Array<{
+    title?: string;
+    content_urls?: { desktop?: { page?: string } };
+  }>;
+}
+
+interface WikiOnThisDayResponse {
+  events?: WikiOnThisDayItem[];
+  holidays?: WikiOnThisDayItem[];
+}
+
+const WIKI_LANGUAGE_BY_APP_LANGUAGE: Record<AppLanguage, WikiLanguage> = {
+  [AppLanguage.ZhCN]: 'zh',
+  [AppLanguage.ZhTW]: 'zh',
+  [AppLanguage.En]: 'en',
+  [AppLanguage.Ru]: 'ru',
+  [AppLanguage.Fr]: 'fr',
+  [AppLanguage.Ja]: 'ja',
+  [AppLanguage.Ar]: 'ar',
 };
 
-// 解析HTML内容，提取大事记和节假日信息
-const parseWikiEvents = (html: string): { events: HistoricalEvent[]; holidays: HolidayToday[] } => {
-  const events: HistoricalEvent[] = [];
-  const holidays: HolidayToday[] = [];
-
-  // 使用正则表达式匹配h2标签和其内容，提取id属性作为分类
-  const sectionRegex =
-    /<h2[^>]*id="([^"]*)"[^>]*>.*?<span[^>]*>.*?<\/span>(.*?)<\/h2>(.*?)(?=<h2|$)/gs;
-
-  let sectionMatch;
-
-  while ((sectionMatch = sectionRegex.exec(html)) !== null) {
-    const category = sectionMatch[1].trim();
-    const title = sectionMatch[2].trim();
-    const content = sectionMatch[3];
-
-    const list = new DOMParser().parseFromString(content, 'text/html').querySelectorAll('li');
-
-    if (
-      WIKI_MATCH_CATEGORY.bigEvent.includes(category) ||
-      WIKI_MATCH_CATEGORY.bigEvent.includes(title)
-    ) {
-      // 处理历史事件
-      const eventRegex = /(\d{4})年.*?/;
-      for (const item of list) {
-        const eventMatch = item.innerHTML.match(eventRegex);
-        if (eventMatch !== null) {
-          events.push({
-            html: processWikiLinks(item.innerHTML ?? ''),
-            category,
-          });
-        }
-      }
-    } else if (
-      WIKI_MATCH_CATEGORY.holiday.includes(category) ||
-      WIKI_MATCH_CATEGORY.holiday.includes(title)
-    ) {
-      // 处理节假日信息
-      for (const item of list) {
-        const text = item.textContent ?? '';
-        if (text.includes('节') || text.includes('日')) {
-          holidays.push({
-            html: processWikiLinks(item.innerHTML),
-          });
-        }
-      }
-    }
-  }
-
-  return { events, holidays };
+const getLanguageFallbacks = (language: AppLanguage): WikiLanguage[] => {
+  const primary = WIKI_LANGUAGE_BY_APP_LANGUAGE[language];
+  return [...new Set<WikiLanguage>([primary, 'en', 'zh'])];
 };
 
-// 获取维基百科页面内容
-const fetchWikiPage = async (): Promise<KnowledgeData> => {
-  try {
-    const today = dateUtils.getNow();
-    const dateStr = `${today.getMonth() + 1}月${today.getDate()}日`;
-    // 缓存未命中，请求新数据
-    const response = await fetchUtils(`${WIKI_BASE_URL}/${dateStr}`, { cacheFetch: true });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const html = await response.text();
-
-    // 解析数据
-    const { events: allHistoricalEvents, holidays: allHolidays } = parseWikiEvents(html);
-
-    // 更新缓存
-    const wikiData: KnowledgeData = {
-      allHistoricalEvents,
-      allHolidays,
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>'"]/g, (character) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;',
     };
-    await wikiCache.set(wikiData);
-    console.log('更新维基数据缓存');
+    return entities[character];
+  });
 
-    return wikiData;
-  } catch (error) {
-    console.error('Error fetching wiki page:', error);
-    throw error;
+const toHtml = (item: WikiOnThisDayItem) => {
+  const text = escapeHtml(item.text?.trim() ?? '');
+  const page = item.pages?.[0];
+  const pageUrl = page?.content_urls?.desktop?.page;
+  const pageTitle = page?.title?.trim();
+  if (!pageUrl || !pageTitle) {
+    return text;
   }
+  return `${text} <a href="${escapeHtml(pageUrl)}" target="_blank" rel="noreferrer">${escapeHtml(pageTitle)}</a>`;
 };
 
-export const wikiManager = createKnowledgeManager(CACHE_KEYS.WIKI_DATA, fetchWikiPage);
+const parseWikiData = (data: WikiOnThisDayResponse): KnowledgeData => {
+  const allHistoricalEvents: HistoricalEvent[] = (data.events ?? [])
+    .filter((item) => item.text)
+    .map((item) => ({
+      // 所有事件归属同一分类，保证内容区维持既有的随机条数上限。
+      category: 'events',
+      html: toHtml(item),
+    }));
+  const allHolidays: HolidayToday[] = (data.holidays ?? [])
+    .filter((item) => item.text)
+    .map((item) => ({ html: toHtml(item) }));
+  return { allHistoricalEvents, allHolidays };
+};
+
+const getWikiUrl = (language: WikiLanguage) => {
+  const today = dateUtils.getNow();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `https://${language}.wikipedia.org/api/rest_v1/feed/onthisday/all/${month}/${day}`;
+};
+
+const fetchWikiData = async (language: AppLanguage): Promise<KnowledgeData> => {
+  let lastError: unknown;
+  for (const wikiLanguage of getLanguageFallbacks(language)) {
+    try {
+      const response = await fetchUtils(getWikiUrl(wikiLanguage), { cacheFetch: true });
+      if (!response.ok) {
+        throw new Error(`Wikipedia ${wikiLanguage} returned HTTP ${response.status}`);
+      }
+      const data = parseWikiData((await response.json()) as WikiOnThisDayResponse);
+      if (data.allHistoricalEvents.length || data.allHolidays.length) {
+        return data;
+      }
+      lastError = new Error(`Wikipedia ${wikiLanguage} returned no daily data`);
+    } catch (error) {
+      lastError = error;
+      console.error(`Wikipedia ${wikiLanguage} data request failed:`, error);
+    }
+  }
+  throw lastError ?? new Error('Wikipedia returned no daily data');
+};
+
+const wikiManagers = new Map<AppLanguage, ReturnType<typeof createKnowledgeManager>>();
+
+export const getWikiManager = (language: AppLanguage) => {
+  const existingManager = wikiManagers.get(language);
+  if (existingManager) {
+    return existingManager;
+  }
+
+  const manager = createKnowledgeManager(
+    `${CACHE_KEYS.WIKI_DATA}:${WIKI_LANGUAGE_BY_APP_LANGUAGE[language]}`,
+    () => fetchWikiData(language)
+  );
+  wikiManagers.set(language, manager);
+  return manager;
+};
+
+export const __wikiTestUtils = { getLanguageFallbacks, parseWikiData, getWikiUrl };
