@@ -6,6 +6,7 @@ export const APP_LANGUAGE_SEQUENCE = [
   AppLanguage.En,
   AppLanguage.Ru,
   AppLanguage.Fr,
+  AppLanguage.Ja,
 ] as const;
 
 export const getNextAppLanguage = (language: AppLanguage): AppLanguage => {

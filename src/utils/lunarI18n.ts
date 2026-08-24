@@ -136,6 +136,11 @@ export const formatLunarDate = (info: LunarInfo, language: AppLanguage, t: Trans
     )} (${zodiac})`;
   }
 
+  if (language === AppLanguage.Ja) {
+    const leap = info.isLeapMonth ? '閏' : '';
+    return `旧暦${romanizeSixtyCycle(info.ganZhiYearName)}年（${zodiac}）${leap}${monthNumber}月${info.lunarDay}日`;
+  }
+
   const month = `${info.isLeapMonth ? 'Leap ' : ''}${toOrdinal(monthNumber)}`;
 
   return `${toOrdinal(info.lunarDay)} day of the ${month} Lunar Month, ${romanizeSixtyCycle(
@@ -166,6 +171,12 @@ export const formatLunarGanZhiDate = (info: LunarInfo, language: AppLanguage, t:
     return `Année ${romanizeSixtyCycle(info.ganZhiYearName)} (${zodiac}) · mois ${romanizeSixtyCycle(
       info.ganZhiMonthName
     )} · jour ${romanizeSixtyCycle(info.ganZhiDayName)}`;
+  }
+
+  if (language === AppLanguage.Ja) {
+    return `${romanizeSixtyCycle(info.ganZhiYearName)}年（${zodiac}）・${romanizeSixtyCycle(
+      info.ganZhiMonthName
+    )}月・${romanizeSixtyCycle(info.ganZhiDayName)}日`;
   }
 
   return `${romanizeSixtyCycle(info.ganZhiYearName)} (${zodiac}) Year · ${romanizeSixtyCycle(

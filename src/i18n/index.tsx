@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo } from 'react';
 
 import en from '@/extension/_locales/en/messages.json';
 import fr from '@/extension/_locales/fr/messages.json';
+import ja from '@/extension/_locales/ja/messages.json';
 import ru from '@/extension/_locales/ru/messages.json';
 import zhCN from '@/extension/_locales/zh_CN/messages.json';
 import zhTW from '@/extension/_locales/zh_TW/messages.json';
@@ -20,6 +21,7 @@ const catalogs: Record<AppLanguage, MessageCatalog> = {
   [AppLanguage.En]: en,
   [AppLanguage.Ru]: ru,
   [AppLanguage.Fr]: fr,
+  [AppLanguage.Ja]: ja,
 };
 
 const I18nContext = createContext<I18nContextValue>({
@@ -40,6 +42,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ language, ch
       [AppLanguage.En]: 'en',
       [AppLanguage.Ru]: 'ru',
       [AppLanguage.Fr]: 'fr',
+      [AppLanguage.Ja]: 'ja',
     }[language];
     document.documentElement.lang = htmlLanguage;
   }, [language]);
@@ -47,7 +50,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ language, ch
   const value = useMemo<I18nContextValue>(
     () => ({
       language,
-      t: (key) => catalogs[language][key]?.message ?? key,
+      // Keep untranslated data labels readable while a locale is being expanded.
+      t: (key) => catalogs[language][key]?.message ?? (en as MessageCatalog)[key]?.message ?? key,
     }),
     [language]
   );

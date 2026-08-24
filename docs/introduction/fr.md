@@ -11,7 +11,7 @@ Neck Upgrade est une extension Chrome pour le nouvel onglet qui associe de doux 
 - **Listes blanche et noire de domaines** — avec une liste blanche vide, la fonction est disponible par défaut sur les pages ordinaires ; si elle est renseignée, seuls les domaines listés sont autorisés. La liste noire est toujours prioritaire et les règles couvrent les sous-domaines.
 - **Heure et calendrier traditionnel** — heure en direct, date grégorienne, date lunaire, prochain jour de repos, ainsi que tiges célestes et branches terrestres, zodiaque, termes solaires, activités favorables/défavorables et tabous de Peng Zu.
 - **Centre de contenu quotidien** — passez entre l’Histoire, la Poésie, l’Anglais, les Bases du chinois et les Tendances, puis actualisez pour poursuivre votre lecture.
-- **Cinq langues d’interface** — 简体中文, 繁體中文, English, Русский et Français. La langue et le thème sont synchronisés entre le nouvel onglet, les réglages et la fenêtre contextuelle.
+- **Plusieurs langues d’interface** — La langue et le thème sont synchronisés entre le nouvel onglet, les réglages et la fenêtre contextuelle.
 - **Trois thèmes** — clair, sombre et système.
 
 ## Catégories de contenu
@@ -22,9 +22,7 @@ Découvrez les événements historiques importants, les fêtes et les coutumes d
 
 ### Poésie et classiques
 
-Parcourez de la poésie et de la prose chinoises intégrées, par catégorie ou source : poèmes, poésie ci, classiques, textes éducatifs et essais. Les sources comprennent le *Livre des Odes*, les *Chants de Chu*, la poésie Tang, les ci Song, les *Entretiens de Confucius*, *Mencius*, *La Grande Étude*, *L’Invariable Milieu*, le *Zengguang Xianwen*, le *Classique des mille caractères* et *Youmengying*. La progression de lecture est conservée localement.
-
-Le *Classique des mille caractères* est organisé en sections sémantiques et présenté avec huit caractères chinois par ligne pour une lecture plus fluide.
+Parcourez de la poésie et de la prose chinoises intégrées, par catégorie ou source : poèmes, poésie ci, classiques, textes éducatifs et essais. Les sources comprennent le _Livre des Odes_, les _Chants de Chu_, la poésie Tang, les ci Song, les _Entretiens de Confucius_, _Mencius_, _La Grande Étude_, _L’Invariable Milieu_, le _Zengguang Xianwen_, le _Classique des mille caractères_ et _Youmengying_. La progression de lecture est conservée localement.
 
 ### Anglais
 

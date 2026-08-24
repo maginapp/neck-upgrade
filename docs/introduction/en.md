@@ -11,7 +11,7 @@ Neck Upgrade is a Chrome new-tab extension that combines gentle posture reminder
 - **Domain allowlist and blocklist** — With an empty allowlist, Page Wobble is available on regular pages by default; once an allowlist is set, only listed domains are allowed. The blocklist always takes priority, and rules include subdomains.
 - **Time and traditional calendar** — See the live time, Gregorian date, lunar date, next day off, and details such as Heavenly Stems and Earthly Branches, zodiac, solar terms, daily auspicious/avoid activities, and Peng Zu taboos.
 - **Daily content hub** — Switch between History, Poetry, English, Chinese Basics, and Trending content, then refresh to keep exploring.
-- **Five interface languages** — 简体中文, 繁體中文, English, Русский, and Français. Language and theme stay in sync across New Tab, Settings, and the popup.
+- **Multiple interface languages** — Language and theme stay in sync across New Tab, Settings, and the popup.
 - **Three themes** — Light, Dark, and System.
 
 ## Content categories
@@ -22,9 +22,7 @@ Explore notable historical events, holidays, and customs for the current date. C
 
 ### Poetry and classics
 
-Browse built-in Chinese poetry and prose by category or source: poems, ci poetry, classics, primers, and essays. Sources include the *Book of Songs*, *Songs of Chu*, Tang poetry, Song ci, *Analects*, *Mencius*, *Great Learning*, *Doctrine of the Mean*, *Zengguang Xianwen*, *Thousand Character Classic*, and *Youmengying*. Reading progress is stored locally so refresh can continue your exploration.
-
-The *Thousand Character Classic* is arranged into semantic sections and laid out as eight Chinese characters per line for easier reading.
+Browse built-in Chinese poetry and prose by category or source: poems, ci poetry, classics, primers, and essays. Sources include the _Book of Songs_, _Songs of Chu_, Tang poetry, Song ci, _Analects_, _Mencius_, _Great Learning_, _Doctrine of the Mean_, _Zengguang Xianwen_, _Thousand Character Classic_, and _Youmengying_. Reading progress is stored locally so refresh can continue your exploration.
 
 ### English
 

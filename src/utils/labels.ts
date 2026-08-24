@@ -8,13 +8,59 @@ import {
   KnowledgeMode,
 } from '@/types/app';
 
-interface LocalizedLabel {
-  [AppLanguage.ZhCN]: string;
-  [AppLanguage.ZhTW]: string;
-  [AppLanguage.En]: string;
-  [AppLanguage.Ru]: string;
-  [AppLanguage.Fr]: string;
-}
+type LocalizedLabel = Partial<Record<AppLanguage, string>>;
+
+const JAPANESE_LABELS: Record<string, string> = {
+  系统: 'システム',
+  亮色: 'ライト',
+  暗黑: 'ダーク',
+  普通: '通常',
+  训练: 'トレーニング',
+  阅读: '読書',
+  强化: '強化',
+  高级: '詳細',
+  诗词: '詩歌',
+  历史: '歴史',
+  英语: '英語',
+  中文基础: '中国語の基礎',
+  热榜: 'トレンド',
+  全部: 'すべて',
+  成语: '成語',
+  汉字: '漢字',
+  歇后语: 'しゃれことば',
+  词语: '単語',
+  维基百科: 'ウィキペディア',
+  百度百科: 'Baidu Baike',
+  诗歌: '詩',
+  词: '詞',
+  经典: '古典',
+  蒙学: '初等教材',
+  文人小品: '随筆',
+  诗经: '詩経',
+  楚辞: '楚辞',
+  曹操诗集: '曹操詩集',
+  唐诗三百首: '唐詩三百首',
+  '全唐诗·名家精选': '全唐詩・名家選集',
+  水墨唐诗: '水墨唐詩',
+  千家诗: '千家詩',
+  宋词三百首: '宋詞三百首',
+  '全宋词·名家精选': '全宋詞・名家選集',
+  纳兰性德词集: '納蘭性徳詞集',
+  论语: '論語',
+  孟子: '孟子',
+  大学: '大学',
+  中庸: '中庸',
+  增广贤文: '増広賢文',
+  千字文: '千字文',
+  幽梦影: '幽夢影',
+};
+
+const getLocalizedLabel = (labels: LocalizedLabel, language: AppLanguage): string => {
+  if (language === AppLanguage.Ja) {
+    return JAPANESE_LABELS[labels[AppLanguage.ZhCN] ?? ''] ?? labels[AppLanguage.En] ?? '';
+  }
+  return labels[language] ?? labels[AppLanguage.En] ?? labels[AppLanguage.ZhCN] ?? '';
+};
 
 /**
  * 获取主题的显示标签
@@ -33,7 +79,7 @@ export const getThemeLabel = (theme: Theme, language = AppLanguage.ZhCN): string
     [Theme.Light]: { zh_CN: '亮色', zh_TW: '亮色', en: 'Light', ru: 'Светлая', fr: 'Clair' },
     [Theme.Dark]: { zh_CN: '暗黑', zh_TW: '暗黑', en: 'Dark', ru: 'Тёмная', fr: 'Sombre' },
   };
-  return labels[theme]?.[language] ?? labels[Theme.System][language];
+  return getLocalizedLabel(labels[theme] ?? labels[Theme.System], language);
 };
 
 /**
@@ -79,7 +125,7 @@ export const getNeckModeLabel = (mode: NeckMode, language = AppLanguage.ZhCN): s
       fr: 'Avancé',
     },
   };
-  return labels[mode][language];
+  return getLocalizedLabel(labels[mode], language);
 };
 
 /**
@@ -125,7 +171,7 @@ export const getDataTypeLabel = (type: DataType, language = AppLanguage.ZhCN): s
       fr: 'Tendances',
     },
   };
-  return labels[type][language];
+  return getLocalizedLabel(labels[type], language);
 };
 
 export const getChineseBasicsCategoryLabel = (
@@ -170,7 +216,7 @@ export const getChineseBasicsCategoryLabel = (
     },
   };
 
-  return labels[category][language];
+  return getLocalizedLabel(labels[category], language);
 };
 
 /**
@@ -195,7 +241,7 @@ export const getKnowledgeModeLabel = (mode: KnowledgeMode, language = AppLanguag
       fr: 'Baidu Baike',
     },
   };
-  return labels[mode][language];
+  return getLocalizedLabel(labels[mode], language);
 };
 
 export const getPoetryCategoryLabel = (
@@ -246,7 +292,7 @@ export const getPoetryCategoryLabel = (
       fr: 'Essais',
     },
   };
-  return labels[category][language];
+  return getLocalizedLabel(labels[category], language);
 };
 
 export const getPoetrySourceLabel = (source: PoetrySource, language = AppLanguage.ZhCN) => {
@@ -371,7 +417,7 @@ export const getPoetrySourceLabel = (source: PoetrySource, language = AppLanguag
       fr: 'Ombres des rêves sereins',
     },
   };
-  return labels[source][language];
+  return getLocalizedLabel(labels[source], language);
 };
 
 const ENGLISH_NEWS_LABELS: Record<string, string> = {
@@ -485,6 +531,43 @@ const FRENCH_NEWS_LABELS: Record<string, string> = {
   创意: 'Création',
 };
 
+const JAPANESE_NEWS_LABELS: Record<string, string> = {
+  微博: 'Weibo',
+  我的: 'マイフィード',
+  热搜: '急上昇',
+  文娱: 'エンタメ',
+  生活: 'ライフスタイル',
+  社会: '社会',
+  小红书: 'Xiaohongshu',
+  推荐: 'おすすめ',
+  头条: 'Toutiao',
+  知乎: 'Zhihu',
+  热榜: 'トレンド',
+  综合: '総合',
+  动画: 'アニメ',
+  鬼畜: 'リミックス',
+  音乐: '音楽',
+  舞蹈: 'ダンス',
+  影视: '映画・テレビ',
+  娱乐: 'エンタメ',
+  知识: '知識',
+  科技: 'テクノロジー',
+  美食: 'グルメ',
+  体育: 'スポーツ',
+  中国: '中国',
+  全球: '世界',
+  商业: 'ビジネス',
+  百度: 'Baidu',
+  贴吧: 'Tieba',
+  '36氪': '36Kr',
+  股票: '株式',
+  公司: '企業',
+  宏观: 'マクロ経済',
+  技术: 'テクノロジー',
+  好玩: 'お楽しみ',
+  创意: 'クリエイティブ',
+};
+
 const TRADITIONAL_NEWS_LABELS: Record<string, string> = {
   微博: '微博',
   我的: '我的',
@@ -531,6 +614,9 @@ export const getNewsLabel = (label: string, language = AppLanguage.ZhCN) => {
   }
   if (language === AppLanguage.Fr) {
     return FRENCH_NEWS_LABELS[label] ?? label;
+  }
+  if (language === AppLanguage.Ja) {
+    return JAPANESE_NEWS_LABELS[label] ?? label;
   }
   return language === AppLanguage.ZhTW ? TRADITIONAL_NEWS_LABELS[label] ?? label : label;
 };

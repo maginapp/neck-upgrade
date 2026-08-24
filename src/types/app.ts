@@ -28,6 +28,7 @@ export enum AppLanguage {
   En = 'en',
   Ru = 'ru',
   Fr = 'fr',
+  Ja = 'ja',
 }
 
 // 颈椎模式类型

@@ -9,5 +9,6 @@ This directory contains the current Chrome Web Store introduction copy for **Nec
 | English | [en.md](en.md) |
 | Русский | [ru.md](ru.md) |
 | Français | [fr.md](fr.md) |
+| 日本語 | [ja.md](ja.md) |
 
 The five files describe the same feature set. Keep them aligned when features change.
