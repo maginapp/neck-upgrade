@@ -60,9 +60,16 @@
         "argsIgnorePattern": "^_", // 参数名以 _ 开头也忽略
         "caughtErrors": "all" // try/catch 的 error 参数同理
       }
+    ],
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^@/"]
+      }
     ]
   },
   "settings": {
+    "import/internal-regex": "^@/",
     "react": {
       "version": "detect"
     },

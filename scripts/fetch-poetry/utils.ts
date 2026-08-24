@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import { readFileSync, existsSync, rmSync, readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 
-import * as opencc from 'opencc';
+import { Converter } from 'opencc-js';
 
 import {
   SONG_CI_CONFIG,
@@ -17,10 +17,7 @@ import {
 } from './config';
 import { SongciPoem, TangshiPoem, PoetryItem } from './types';
 
-import type { OpenCC as OpenCCTypings } from 'opencc';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const OpenCC = (opencc as unknown as any).default.OpenCC as new (config: string) => OpenCCTypings;
+const convertTraditionalToSimplified = Converter({ from: 't', to: 'cn' });
 
 // 清理函数
 export function cleanup() {
@@ -68,10 +65,8 @@ export function ensureTargetDir(targetDir: string) {
 }
 
 // 繁体转简体
-async function transFan2Jian(str: string) {
-  const converter = new OpenCC('t2s.json');
-  const result: string = await converter.convertPromise(str);
-  return result;
+function transFan2Jian(str: string) {
+  return convertTraditionalToSimplified(str);
 }
 
 // 获取诗词的key（繁体转简体）
