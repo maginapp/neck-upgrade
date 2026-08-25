@@ -38,7 +38,7 @@ Page Wobble
 ✔️ Chrome internal pages, extension pages, and other browser-restricted pages are not supported
 
 Content categories
-✔️ Poetry and classics: prepares new reading content daily and keeps the latest 30 days of learning history. Filter poems, ci poetry, classics, elementary texts, literary essays, and specific sources, including The Book of Songs, Songs of Chu, Tang poetry, Song ci, The Analects, Mencius, Great Learning, Doctrine of the Mean, Zengguang Xianwen, Thousand Character Classic, and Youmeng Ying. The Thousand Character Classic is presented in semantic sections, eight Chinese characters per line.
+✔️ Poetry and classics: prepares new reading content daily and keeps the latest 30 days of learning history. Filter poems, ci poetry, classics, elementary texts, literary essays, and specific sources.
 ✔️ History: shows events, holidays, and customs for this day in history. Choose Wikipedia or Baidu Baike as the preferred source. Wikipedia requests the current interface language and falls back to English and then Chinese when needed.
 ✔️ English: delivers daily learning items from a high-frequency vocabulary list. When online, it shows phonetics, pronunciation, part of speech, and definitions. Progress is stored locally.
 ✔️ Chinese fundamentals: browse All, Idioms, Characters, Xiehouyu, and Words. Xiehouyu and Words show four entries at a time.

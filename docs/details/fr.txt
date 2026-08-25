@@ -1,6 +1,6 @@
-Neck Upgrade : une extension Chrome pour préserver votre nuque
+Protection cervicale : une extension Chrome pour préserver votre nuque
 
-Neck Upgrade est une extension de nouvel onglet Chrome qui associe rappels de mouvement du cou, informations de calendrier et contenus de découverte quotidiens. L'inclinaison contrôlée et l'oscillation de page vous invitent à changer de posture, tandis que l'histoire, la poésie, l'anglais, les bases du chinois et les tendances accompagnent chaque nouvel onglet.
+Protection cervicale est une extension de nouvel onglet Chrome qui associe rappels de mouvement du cou, informations de calendrier et contenus de découverte quotidiens. L'inclinaison contrôlée et l'oscillation de page vous invitent à changer de posture, tandis que l'histoire, la poésie, l'anglais, les bases du chinois et les tendances accompagnent chaque nouvel onglet.
 
 Remarque : cette extension sert de rappel postural quotidien et d'aide à l'entraînement léger. Ce n'est pas un dispositif médical et elle ne remplace pas un diagnostic ou un traitement professionnel. En cas de vertige, d'inconfort ou de douleur, désactivez immédiatement la rotation et consultez un professionnel.
 
@@ -38,7 +38,7 @@ Oscillation de page
 ✔️ Les pages internes de Chrome, les pages d'extension et les pages restreintes par le navigateur ne sont pas prises en charge
 
 Catégories de contenu
-✔️ Poésie et classiques : nouveau contenu quotidien et conservation de 30 jours d'historique. Filtres par poèmes, ci, classiques, textes d'apprentissage, essais et sources, dont le Classique des vers, les Chants de Chu, la poésie Tang, les ci Song, les Entretiens, Mencius, la Grande Étude, la Doctrine du juste milieu, Zengguang Xianwen, le Classique des mille caractères et Youmeng Ying. Le Classique des mille caractères est présenté par sections de sens, huit caractères par ligne.
+✔️ Poésie et classiques : nouveau contenu quotidien et conservation de 30 jours d'historique. Filtres par poèmes, ci, classiques, textes d'apprentissage, essais et sources.
 ✔️ Histoire : événements, fêtes et coutumes de ce jour. Wikipedia ou Baidu Baike peuvent être choisis comme source prioritaire ; Wikipedia demande la langue actuelle puis se replie sur l'anglais et le chinois.
 ✔️ Anglais : contenu quotidien issu d'une liste de vocabulaire fréquent ; avec réseau, phonétique, prononciation, nature du mot et définition sont disponibles. La progression reste locale.
 ✔️ Bases du chinois : Tout, Idiomes, Caractères, Xiehouyu et Mots. Les xiehouyu et mots sont affichés par quatre.
