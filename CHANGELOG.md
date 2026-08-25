@@ -1,5 +1,12 @@
 # Neck Upgrade ChangeLog
 
+## 1.5.6
+
+### Patch Changes
+
+- c3296cb: 插件描述🌧️多语言修改
+- c3296cb: 新闻获取失败提示优化
+
 ## 1.5.5
 
 ### Patch Changes
