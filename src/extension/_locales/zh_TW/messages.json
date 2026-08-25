@@ -67,7 +67,7 @@
   "header_days": { "message": "天", "description": "複數天數單位" },
   "history_today": { "message": "歷史上的今天", "description": "歷史內容標題" },
   "history_holidays": { "message": "節假日和習俗", "description": "節假日內容標題" },
-  "news_login_first": { "message": "請先登錄", "description": "新聞數據源登錄提示" },
+  "news_login_first": { "message": "請先造訪", "description": "新聞數據源造訪提示" },
   "content_refresh": { "message": "刷新內容", "description": "內容刷新按鈕說明" },
   "popup_wobble_title": { "message": "網頁搖擺", "description": "網頁搖擺功能標題" },
   "popup_wobble_description": {

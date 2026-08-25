@@ -164,8 +164,8 @@
     "description": "The holiday content title"
   },
   "news_login_first": {
-    "message": "Сначала войдите в систему",
-    "description": "The news source sign-in hint"
+    "message": "Сначала посетите сайт",
+    "description": "The news source visit hint"
   },
   "content_refresh": {
     "message": "Обновить содержимое",

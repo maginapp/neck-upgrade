@@ -56,10 +56,16 @@ const fetchWeiboNews = async (url: string) => {
       }
     });
 
+    // 微博可能返回验证页或变更后的页面结构。没有解析到内容时，也引导用户
+    // 先访问当前请求地址，建立站点会话后再刷新。
+    if (newsItems.length === 0) {
+      return { loginUrl: url };
+    }
+
     return newsItems;
   } catch (error) {
     console.error('获取新闻失败:', error);
-    return [];
+    return { loginUrl: url };
   }
 };
 

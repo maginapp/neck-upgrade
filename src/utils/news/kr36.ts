@@ -47,10 +47,16 @@ const fetchKr36Page = async (url: string) => {
       }
     });
 
+    // 36Kr may return an anti-bot page or an updated page structure. Ask the
+    // user to open the requested URL once so the site can establish a session.
+    if (newsItems.length === 0) {
+      return { loginUrl: url };
+    }
+
     return newsItems;
   } catch (error) {
     console.error('获取新闻失败:', error);
-    return [];
+    return { loginUrl: url };
   }
 };
 

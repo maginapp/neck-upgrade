@@ -42,7 +42,7 @@
   "header_days": { "message": " أيام", "description": "Days unit" },
   "history_today": { "message": "حدث في مثل هذا اليوم", "description": "History title" },
   "history_holidays": { "message": "العطلات والعادات", "description": "Holidays title" },
-  "news_login_first": { "message": "يرجى تسجيل الدخول أولاً", "description": "Sign-in hint" },
+  "news_login_first": { "message": "يرجى زيارة الموقع أولاً", "description": "Visit hint" },
   "content_refresh": { "message": "تحديث المحتوى", "description": "Refresh content" },
   "popup_wobble_title": { "message": "تمايل الصفحة", "description": "Page wobble title" },
   "popup_wobble_description": { "message": "إمالة الصفحة الحالية بشكل دوري", "description": "Page wobble description" },

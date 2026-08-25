@@ -164,8 +164,8 @@
     "description": "The holiday content title"
   },
   "news_login_first": {
-    "message": "Please sign in first",
-    "description": "The news source sign-in hint"
+    "message": "Please visit first",
+    "description": "The news source visit hint"
   },
   "content_refresh": {
     "message": "Refresh content",

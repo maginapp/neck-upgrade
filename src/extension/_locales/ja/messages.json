@@ -41,7 +41,7 @@
   "header_days": { "message": "日", "description": "Days unit" },
   "history_today": { "message": "今日は何の日", "description": "History title" },
   "history_holidays": { "message": "祝日と習慣", "description": "Holidays title" },
-  "news_login_first": { "message": "先にログインしてください", "description": "Sign-in hint" },
+  "news_login_first": { "message": "先にアクセスしてください", "description": "Visit hint" },
   "content_refresh": { "message": "コンテンツを更新", "description": "Refresh content" },
   "popup_wobble_title": { "message": "ページ揺れ", "description": "Page wobble title" },
   "popup_wobble_description": { "message": "現在のページを定期的に傾ける", "description": "Page wobble description" },

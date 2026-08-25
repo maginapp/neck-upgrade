@@ -164,8 +164,8 @@
     "description": "节假日内容标题"
   },
   "news_login_first": {
-    "message": "请先登录",
-    "description": "新闻数据源登录提示"
+    "message": "请先访问",
+    "description": "新闻数据源访问提示"
   },
   "content_refresh": {
     "message": "刷新内容",
