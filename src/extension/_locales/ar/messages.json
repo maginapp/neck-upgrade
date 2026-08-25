@@ -1,5 +1,5 @@
 {
-  "extension_name": { "message": "Neck Upgrade", "description": "The name of the extension" },
+  "extension_name": { "message": "واقي الرقبة", "description": "The name of the extension" },
   "extension_description": { "message": "إضافة Chrome تساعد على حماية صحة الرقبة واكتشاف الشعر والتاريخ والموضوعات الرائجة.", "description": "The description of the extension" },
   "popup_description": { "message": "احمِ صحة رقبتك", "description": "The description of the popup" },
   "language_switch_to_simplified_chinese": { "message": "التبديل إلى الصينية المبسطة", "description": "Language switch label" },

@@ -14,7 +14,6 @@ Highlights
 ✔️ Classical Chinese poetry and prose with multi-level categories and source filters
 ✔️ Daily English words, phonetics, pronunciation, and definitions
 ✔️ Chinese fundamentals: idioms, characters, xiehouyu sayings, and words
-✔️ Trending topics from major platforms; Google News follows the selected interface language and region
 ✔️ Global fuzzy search across built-in poetry, Chinese fundamentals, English vocabulary, and local learning history
 ✔️ Daily quotes, multiple interface languages, and multiple themes
 
@@ -43,7 +42,7 @@ Content categories
 ✔️ History: shows events, holidays, and customs for this day in history. Choose Wikipedia or Baidu Baike as the preferred source. Wikipedia requests the current interface language and falls back to English and then Chinese when needed.
 ✔️ English: delivers daily learning items from a high-frequency vocabulary list. When online, it shows phonetics, pronunciation, part of speech, and definitions. Progress is stored locally.
 ✔️ Chinese fundamentals: browse All, Idioms, Characters, Xiehouyu, and Words. Xiehouyu and Words show four entries at a time.
-✔️ Trending: aggregates public trending content from Weibo, Xiaohongshu, Toutiao, Zhihu, Bilibili, Google News, Baidu, 36Kr, V2EX, and more. Content refreshes about every five minutes; some sources may be affected by sign-in status, network conditions, or site changes.
+✔️ Trending: aggregates popular content from multiple platforms. Content refreshes about every five minutes; some sources may be affected by sign-in status, network conditions, or site changes.
 ✔️ Quotes: randomly displays quotes from a local content pool; Reading mode emphasizes this area.
 
 Search
@@ -53,13 +52,8 @@ Search
 ✔️ Results are separated into Built-in Data and History tabs
 
 Languages and interface
-✔️ Supports Simplified Chinese, Traditional Chinese, English, Russian, French, Japanese, and Arabic
+✔️ Supports multiple languages
 ✔️ Click the main language button to cycle through languages in a fixed order, or use the dropdown to select a language directly
-✔️ Arabic uses RTL text layout automatically; Search, Settings, and the settings drawer remain on the right, while domain and URL fields stay LTR for editing
-
-Encyclopedia sources
-✔️ Wikipedia: default source, with multilingual requests and English/Chinese fallback
-✔️ Baidu Baike: Chinese-language source
 
 Data and privacy
 ✔️ Settings, learning progress, domain rules, and content cache are stored locally in the current browser

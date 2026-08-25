@@ -1,5 +1,5 @@
 {
-  "extension_name": { "message": "Neck Upgrade", "description": "The name of the extension" },
+  "extension_name": { "message": "首の保護", "description": "The name of the extension" },
   "extension_description": { "message": "首と姿勢の健康を支え、詩歌、歴史、話題を楽しめる Chrome 拡張機能です。", "description": "The description of the extension" },
   "popup_description": { "message": "首の健康を守る", "description": "The description of the popup" },
   "language_switch_to_simplified_chinese": { "message": "簡体字中国語に切り替え", "description": "Language switch label" },

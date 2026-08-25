@@ -14,7 +14,6 @@ Points forts
 ✔️ Poésie et prose chinoises classiques, avec catégories et filtres de sources
 ✔️ Mots d'anglais quotidiens, phonétique, prononciation et définitions
 ✔️ Bases du chinois : idiomes, caractères, xiehouyu et mots
-✔️ Tendances de plateformes majeures ; Google Actualités suit la langue et la région de l'interface
 ✔️ Recherche floue dans les données intégrées et l'historique local d'apprentissage
 ✔️ Citations quotidiennes, plusieurs langues et plusieurs thèmes
 
@@ -43,7 +42,7 @@ Catégories de contenu
 ✔️ Histoire : événements, fêtes et coutumes de ce jour. Wikipedia ou Baidu Baike peuvent être choisis comme source prioritaire ; Wikipedia demande la langue actuelle puis se replie sur l'anglais et le chinois.
 ✔️ Anglais : contenu quotidien issu d'une liste de vocabulaire fréquent ; avec réseau, phonétique, prononciation, nature du mot et définition sont disponibles. La progression reste locale.
 ✔️ Bases du chinois : Tout, Idiomes, Caractères, Xiehouyu et Mots. Les xiehouyu et mots sont affichés par quatre.
-✔️ Tendances : contenus publics de Weibo, Xiaohongshu, Toutiao, Zhihu, Bilibili, Google Actualités, Baidu, 36Kr, V2EX et plus, actualisés environ toutes les 5 minutes. Certaines sources peuvent dépendre de la connexion, du réseau ou des changements de site.
+✔️ Tendances : agrège les contenus populaires de plusieurs plateformes, actualisés environ toutes les 5 minutes. Certaines sources peuvent dépendre de la connexion, du réseau ou des changements de site.
 ✔️ Citations : citations aléatoires d'un ensemble local ; le mode Lecture met cette zone en avant.
 
 Recherche
@@ -53,13 +52,8 @@ Recherche
 ✔️ Résultats séparés dans les onglets « Données intégrées / Historique »
 
 Langues et interface
-✔️ Prend en charge le chinois simplifié, le chinois traditionnel, l'anglais, le russe, le français, le japonais et l'arabe
+✔️ Prend en charge plusieurs langues
 ✔️ Le bouton principal fait défiler les langues dans un ordre fixe ; le menu permet de choisir directement une langue
-✔️ L'arabe utilise automatiquement une mise en page RTL ; Recherche, Paramètres et le panneau de réglages restent à droite, tandis que les champs de domaine et d'URL restent LTR pour la saisie
-
-Sources encyclopédiques
-✔️ Wikipedia : source par défaut, requêtes multilingues et repli vers l'anglais et le chinois
-✔️ Baidu Baike : source chinoise
 
 Données et confidentialité
 ✔️ Les réglages, la progression, les règles de domaine et le cache sont enregistrés localement dans le navigateur actuel
