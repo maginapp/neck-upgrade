@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: '要发布的 tag，例如 v1.5.7'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -11,10 +17,25 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_tag || github.ref }}
+
+      - name: Verify release tag
+        run: |
+          case "$RELEASE_TAG" in
+            v*) ;;
+            *)
+              echo "release_tag must start with v: $RELEASE_TAG"
+              exit 1
+              ;;
+          esac
+          git rev-parse --verify "refs/tags/$RELEASE_TAG^{commit}"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -41,12 +62,11 @@ jobs:
       - name: Package extension
         working-directory: dist
         run: |
-          zip -r ../chrome-extension-${{ github.ref_name }}.zip . -x '*.DS_Store'
+          zip -r ../chrome-extension-$RELEASE_TAG.zip . -x '*.DS_Store'
 
       - name: Prepare release notes
         env:
-          RELEASE_TAG: ${{ github.ref_name }}
-          CHANGELOG_URL: https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md
+          CHANGELOG_URL: https://github.com/${{ github.repository }}/blob/${{ env.RELEASE_TAG }}/CHANGELOG.md
         run: |
           release_version="${RELEASE_TAG#v}"
           awk -v version="$release_version" '
@@ -65,6 +85,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.RELEASE_TAG }}
           files: |
-            chrome-extension-${{ github.ref_name }}.zip
+            chrome-extension-${{ env.RELEASE_TAG }}.zip
           body_path: RELEASE_NOTES.md
