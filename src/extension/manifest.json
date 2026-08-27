@@ -4,27 +4,8 @@
   "description": "__MSG_extension_description__",
   "default_locale": "en",
   "version": "1.0.0",
-  "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": [
-    "https://*.wikipedia.org/*",
-    "https://timor.tech/*",
-    "https://api.dictionaryapi.dev/*",
-    "https://zenquotes.io/*",
-    "https://v1.hitokoto.cn/*",
-    "https://s.weibo.com/*",
-    "https://www.xiaohongshu.com/*",
-    "https://so.toutiao.com/*",
-    "https://api.toutiaoapi.com/*",
-    "https://news.google.com/*",
-    "https://baike.baidu.com/*",
-    "https://www.zhihu.com/*",
-    "https://api.bilibili.com/*",
-    "https://passport.weibo.com/*",
-    "https://tieba.baidu.com/*",
-    "https://36kr.com/*",
-    "https://top.baidu.com/*",
-    "https://www.v2ex.com/*"
-  ],
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "host_permissions": ["http://*/*", "https://*/*"],
   "action": {
     "default_popup": "pages/popup.html",
     "default_icon": {
@@ -40,6 +21,13 @@
     "service_worker": "assets/background.js",
     "type": "module"
   },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["assets/content.js"],
+      "run_at": "document_start"
+    }
+  ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

@@ -179,6 +179,9 @@
     "message": "Periodically tilt the current page",
     "description": "The description of the page wobble feature"
   },
+  "popup_wobble_scope": { "message": "Apply to", "description": "The page wobble scope" },
+  "popup_wobble_scope_current": { "message": "This page", "description": "Apply to the current page only" },
+  "popup_wobble_scope_global": { "message": "All pages", "description": "Apply to all pages" },
   "popup_wobble_fixed_angle": {
     "message": "Fixed Angle",
     "description": "The fixed page wobble angle label"

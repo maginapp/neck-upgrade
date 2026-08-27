@@ -10,10 +10,26 @@ import {
   normalizePageWobbleDomain,
   normalizePageWobbleConfig,
   normalizePageWobbleDomainRules,
+  normalizePageWobbleEnabled,
+  normalizePageWobbleScope,
   PAGE_WOBBLE_CYCLE_SLIDER_MAX,
 } from './pageWobble';
 
 describe('页面摇摆配置', () => {
+  it('应该只接受显式开启的全局开关状态', () => {
+    expect(normalizePageWobbleEnabled(true)).toBe(true);
+    expect(normalizePageWobbleEnabled(false)).toBe(false);
+    expect(normalizePageWobbleEnabled('true')).toBe(false);
+    expect(normalizePageWobbleEnabled(undefined)).toBe(false);
+  });
+
+  it('应该默认使用全局范围，并支持切换为当前页面范围', () => {
+    expect(normalizePageWobbleScope(undefined)).toBe('global');
+    expect(normalizePageWobbleScope('global')).toBe('global');
+    expect(normalizePageWobbleScope('current')).toBe('current');
+    expect(normalizePageWobbleScope('invalid')).toBe('global');
+  });
+
   it('应该补全非法配置并限制角度与周期范围', () => {
     expect(normalizePageWobbleConfig(null)).toEqual(DEFAULT_PAGE_WOBBLE_CONFIG);
     expect(normalizePageWobbleConfig({ angle: -10, cycleSeconds: 5000 })).toEqual({

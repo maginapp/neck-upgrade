@@ -1,7 +1,11 @@
 import { PageWobbleConfig, PageWobbleDomainRules } from '@/types/app';
 
 export const PAGE_WOBBLE_STORAGE_KEY = 'page_wobble_config';
+export const PAGE_WOBBLE_ENABLED_STORAGE_KEY = 'page_wobble_enabled';
+export const PAGE_WOBBLE_SCOPE_STORAGE_KEY = 'page_wobble_scope';
 export const PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY = 'page_wobble_domain_rules';
+
+export type PageWobbleScope = 'current' | 'global';
 
 export const PAGE_WOBBLE_LIMITS = {
   angle: { min: 0, max: 180 },
@@ -30,6 +34,12 @@ export const DEFAULT_PAGE_WOBBLE_CONFIG: PageWobbleConfig = {
 export const DEFAULT_PAGE_WOBBLE_DOMAIN_RULES: PageWobbleDomainRules = {
   whitelist: [],
   blacklist: [],
+};
+
+export const normalizePageWobbleEnabled = (value: unknown) => value === true;
+
+export const normalizePageWobbleScope = (value: unknown): PageWobbleScope => {
+  return value === 'current' ? 'current' : 'global';
 };
 
 const normalizeNumber = (value: unknown, min: number, max: number, fallback: number) => {

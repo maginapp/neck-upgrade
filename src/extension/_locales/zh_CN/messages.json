@@ -179,6 +179,9 @@
     "message": "让当前页面定时改变倾斜方向",
     "description": "网页摇摆功能描述"
   },
+  "popup_wobble_scope": { "message": "生效范围", "description": "网页摇摆生效范围" },
+  "popup_wobble_scope_current": { "message": "当前页面", "description": "仅当前页面生效" },
+  "popup_wobble_scope_global": { "message": "所有页面", "description": "所有页面生效" },
   "popup_wobble_fixed_angle": {
     "message": "固定角度",
     "description": "固定网页摇摆角度标签"

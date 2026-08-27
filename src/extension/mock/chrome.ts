@@ -33,6 +33,7 @@ let mockWobbleStatus = {
   randomAngle: false,
   nextChangeAt: null as number | null,
 };
+const mockStorageLocal: Record<string, unknown> = {};
 
 // 获取当前浏览器语言
 const getBrowserLanguage = (): 'zh_CN' | 'zh_TW' | 'en' | 'ru' | 'fr' | 'ja' | 'ar' => {
@@ -117,10 +118,23 @@ const mockChrome = {
     local: {
       get: (keys: string | string[] | null, callback: (items: { [key: string]: any }) => void) => {
         console.log('Mock chrome.storage.local.get:', keys);
-        callback({});
+        const requestedKeys = typeof keys === 'string' ? [keys] : keys;
+        if (!requestedKeys) {
+          callback({ ...mockStorageLocal });
+          return;
+        }
+        callback(
+          requestedKeys.reduce<Record<string, unknown>>((items, key) => {
+            if (key in mockStorageLocal) {
+              items[key] = mockStorageLocal[key];
+            }
+            return items;
+          }, {})
+        );
       },
       set: (items: { [key: string]: any }, callback?: () => void) => {
         console.log('Mock chrome.storage.local.set:', items);
+        Object.assign(mockStorageLocal, items);
         if (callback) callback();
       },
     },

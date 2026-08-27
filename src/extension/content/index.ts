@@ -1,6 +1,9 @@
 (() => {
   const GET_STATUS_MESSAGE = 'popup:get-page-wobble-status';
   const SET_CONFIG_MESSAGE = 'popup:set-page-wobble-config';
+  const CONFIG_STORAGE_KEY = 'page_wobble_config';
+  const ENABLED_STORAGE_KEY = 'page_wobble_enabled';
+  const SCOPE_STORAGE_KEY = 'page_wobble_scope';
   const DOMAIN_RULES_STORAGE_KEY = 'page_wobble_domain_rules';
   const TRANSITION = 'transform 800ms cubic-bezier(0.22, 1, 0.36, 1)';
 
@@ -63,11 +66,21 @@
     let nextChangeAt: number | null = null;
     let timer: number | undefined;
 
-    const normalizeConfig = (config?: Partial<WobbleConfig>): WobbleConfig => ({
-      angle: Math.min(180, Math.max(0, Math.round(Number(config?.angle) || 0))),
-      cycleSeconds: Math.min(3600, Math.max(1, Math.round(Number(config?.cycleSeconds) || 60))),
-      randomAngle: config?.randomAngle === true,
-    });
+    const normalizeConfig = (config?: Partial<WobbleConfig>): WobbleConfig => {
+      const angleValue = Number(config?.angle);
+      const cycleValue = Number(config?.cycleSeconds);
+      return {
+        angle: Math.min(
+          180,
+          Math.max(0, Math.round(Number.isFinite(angleValue) ? angleValue : 15))
+        ),
+        cycleSeconds: Math.min(
+          3600,
+          Math.max(1, Math.round(Number.isFinite(cycleValue) ? cycleValue : 60))
+        ),
+        randomAngle: config?.randomAngle === true,
+      };
+    };
 
     const normalizeDomainList = (value: unknown) => {
       if (!Array.isArray(value)) {
@@ -196,6 +209,19 @@
     const controller: WobbleController = { getStatus, update };
     host.__neckUpgradePageWobble__ = controller;
 
+    const syncFromStorage = () => {
+      chrome.storage.local.get(
+        [ENABLED_STORAGE_KEY, SCOPE_STORAGE_KEY, CONFIG_STORAGE_KEY, DOMAIN_RULES_STORAGE_KEY],
+        (items) => {
+          controller.update(
+            items[SCOPE_STORAGE_KEY] === 'current' ? enabled : items[ENABLED_STORAGE_KEY] === true,
+            normalizeConfig(items[CONFIG_STORAGE_KEY]),
+            isCurrentDomainAllowed(items[DOMAIN_RULES_STORAGE_KEY])
+          );
+        }
+      );
+    };
+
     chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       if (message?.type === GET_STATUS_MESSAGE) {
         sendResponse(controller.getStatus());
@@ -213,13 +239,21 @@
     });
 
     chrome.storage.onChanged.addListener((changes, areaName) => {
-      const domainRulesChange = changes[DOMAIN_RULES_STORAGE_KEY];
-      if (areaName === 'local' && enabled && domainRulesChange) {
-        const nextDomainAllowed = isCurrentDomainAllowed(domainRulesChange.newValue);
-        if (domainAllowed !== nextDomainAllowed) {
-          controller.update(true, { angle, cycleSeconds, randomAngle }, nextDomainAllowed);
+      if (
+        areaName === 'local' &&
+        (changes[ENABLED_STORAGE_KEY] ||
+          changes[SCOPE_STORAGE_KEY] ||
+          changes[CONFIG_STORAGE_KEY] ||
+          changes[DOMAIN_RULES_STORAGE_KEY])
+      ) {
+        if (changes[SCOPE_STORAGE_KEY]?.newValue === 'current') {
+          controller.update(false, { angle, cycleSeconds, randomAngle }, domainAllowed);
+          return;
         }
+        syncFromStorage();
       }
     });
+
+    syncFromStorage();
   }
 })();

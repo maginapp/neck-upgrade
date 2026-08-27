@@ -74,6 +74,9 @@
     "message": "讓當前頁面定時改變傾斜方向",
     "description": "網頁搖擺功能描述"
   },
+  "popup_wobble_scope": { "message": "生效範圍", "description": "網頁搖擺生效範圍" },
+  "popup_wobble_scope_current": { "message": "目前頁面", "description": "僅目前頁面生效" },
+  "popup_wobble_scope_global": { "message": "所有頁面", "description": "所有頁面生效" },
   "popup_wobble_fixed_angle": { "message": "固定角度", "description": "固定網頁搖擺角度標籤" },
   "popup_wobble_max_angle": { "message": "最大角度", "description": "隨機網頁搖擺最大角度標籤" },
   "popup_wobble_random_angle": { "message": "範圍內隨機", "description": "隨機網頁搖擺開關標籤" },

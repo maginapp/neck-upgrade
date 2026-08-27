@@ -26,8 +26,13 @@ import {
   normalizePageWobbleDomainRules,
   PAGE_WOBBLE_CYCLE_SLIDER_MAX,
   PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY,
+  PAGE_WOBBLE_ENABLED_STORAGE_KEY,
   PAGE_WOBBLE_LIMITS,
+  PAGE_WOBBLE_SCOPE_STORAGE_KEY,
   PAGE_WOBBLE_STORAGE_KEY,
+  normalizePageWobbleEnabled,
+  normalizePageWobbleScope,
+  PageWobbleScope,
 } from '@/utils/pageWobble';
 
 import styles from './Popup.module.scss';
@@ -52,6 +57,44 @@ const getStoredWobbleConfig = () => {
 
 const saveWobbleConfig = (config: PageWobbleConfig) => {
   chrome.storage.local.set({ [PAGE_WOBBLE_STORAGE_KEY]: config });
+};
+
+const getStoredWobbleEnabled = () => {
+  return new Promise<boolean>((resolve) => {
+    chrome.storage.local.get(PAGE_WOBBLE_ENABLED_STORAGE_KEY, (items) => {
+      const enabled = normalizePageWobbleEnabled(items[PAGE_WOBBLE_ENABLED_STORAGE_KEY]);
+      chrome.storage.local.set({ [PAGE_WOBBLE_ENABLED_STORAGE_KEY]: enabled });
+      resolve(enabled);
+    });
+  });
+};
+
+const saveWobbleEnabled = (enabled: boolean) => {
+  return new Promise<void>((resolve) => {
+    chrome.storage.local.set({ [PAGE_WOBBLE_ENABLED_STORAGE_KEY]: enabled }, resolve);
+  });
+};
+
+const getStoredWobbleScope = () => {
+  return new Promise<PageWobbleScope>((resolve) => {
+    chrome.storage.local.get(PAGE_WOBBLE_SCOPE_STORAGE_KEY, (items) => {
+      const scope = normalizePageWobbleScope(items[PAGE_WOBBLE_SCOPE_STORAGE_KEY]);
+      chrome.storage.local.set({ [PAGE_WOBBLE_SCOPE_STORAGE_KEY]: scope });
+      resolve(scope);
+    });
+  });
+};
+
+const saveWobbleScopeState = (scope: PageWobbleScope, enabled: boolean) => {
+  return new Promise<void>((resolve) => {
+    chrome.storage.local.set(
+      {
+        [PAGE_WOBBLE_SCOPE_STORAGE_KEY]: scope,
+        [PAGE_WOBBLE_ENABLED_STORAGE_KEY]: enabled,
+      },
+      resolve
+    );
+  });
 };
 
 const getStoredDomainRules = () => {
@@ -119,6 +162,7 @@ export const Popup: React.FC<PopupProps> = ({
   const [whitelistInput, setWhitelistInput] = useState('');
   const [blacklistInput, setBlacklistInput] = useState('');
   const [showDomainRules, setShowDomainRules] = useState(false);
+  const [wobbleScope, setWobbleScope] = useState<PageWobbleScope>('global');
   const [wobbleEnabled, setWobbleEnabled] = useState(false);
   const [wobbleConfig, setWobbleConfig] = useState(DEFAULT_PAGE_WOBBLE_CONFIG);
   const [wobblePending, setWobblePending] = useState(true);
@@ -130,16 +174,22 @@ export const Popup: React.FC<PopupProps> = ({
     let cancelled = false;
 
     const initialize = async () => {
-      const [currentTab, storedConfig, storedRules] = await Promise.all([
-        getActiveTab(),
-        getStoredWobbleConfig(),
-        getStoredDomainRules(),
-      ]);
+      const [currentTab, storedConfig, storedEnabled, storedScope, storedRules] = await Promise.all(
+        [
+          getActiveTab(),
+          getStoredWobbleConfig(),
+          getStoredWobbleEnabled(),
+          getStoredWobbleScope(),
+          getStoredDomainRules(),
+        ]
+      );
       if (cancelled) {
         return;
       }
 
       setWobbleConfig(storedConfig);
+      setWobbleScope(storedScope);
+      setWobbleEnabled(storedScope === 'global' && storedEnabled);
       setDomainRules(storedRules);
       setCurrentTabId(currentTab?.id);
       const domain = normalizePageWobbleDomain(currentTab?.url);
@@ -160,27 +210,36 @@ export const Popup: React.FC<PopupProps> = ({
         return;
       }
 
-      const status = await sendTabMessage<PageWobbleStatus>(currentTab.id, {
-        type: MESSAGE_TYPES.GET_PAGE_WOBBLE_STATUS,
-      });
-      if (!cancelled && status) {
-        const activeConfig = normalizePageWobbleConfig(status);
-        if (status.enabled && !isPageWobbleDomainAllowed(domain, storedRules)) {
-          const suspendedStatus = await sendTabMessage<PageWobbleStatus>(currentTab.id, {
-            type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
-            enabled: true,
-            domainAllowed: false,
-            config: activeConfig,
+      try {
+        if (storedScope === 'global' && storedEnabled) {
+          await chrome.scripting.executeScript({
+            target: { tabId: currentTab.id },
+            files: ['assets/content.js'],
           });
-          setWobbleEnabled(suspendedStatus?.enabled ?? true);
-          setNextChangeAt(suspendedStatus?.nextChangeAt ?? null);
-          setWobbleConfig(activeConfig);
-        } else {
-          setWobbleEnabled(status.enabled);
-          setNextChangeAt(status.nextChangeAt);
-          if (status.enabled) {
-            setWobbleConfig(activeConfig);
+        }
+
+        const status =
+          storedScope === 'global'
+            ? await sendTabMessage<PageWobbleStatus>(currentTab.id, {
+                type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
+                enabled: storedEnabled,
+                domainAllowed: isPageWobbleDomainAllowed(domain, storedRules),
+                config: storedConfig,
+              })
+            : await sendTabMessage<PageWobbleStatus>(currentTab.id, {
+                type: MESSAGE_TYPES.GET_PAGE_WOBBLE_STATUS,
+              });
+        if (!cancelled && status) {
+          if (storedScope === 'current') {
+            setWobbleEnabled(status.enabled);
           }
+          setNextChangeAt(status.nextChangeAt);
+        } else if (!cancelled && storedScope === 'global' && storedEnabled) {
+          setWobbleError(t('popup_wobble_error'));
+        }
+      } catch {
+        if (!cancelled && storedScope === 'global' && storedEnabled) {
+          setWobbleError(t('popup_wobble_error'));
         }
       }
       if (!cancelled) {
@@ -192,7 +251,7 @@ export const Popup: React.FC<PopupProps> = ({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (!wobbleEnabled || !nextChangeAt) {
@@ -226,7 +285,7 @@ export const Popup: React.FC<PopupProps> = ({
     if (wobbleEnabled && currentTabId) {
       void sendTabMessage<PageWobbleStatus>(currentTabId, {
         type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
-        enabled: true,
+        enabled: wobbleEnabled,
         domainAllowed: isDomainAllowed,
         config: normalizedConfig,
       }).then((status) => {
@@ -247,12 +306,11 @@ export const Popup: React.FC<PopupProps> = ({
       const domainAllowed = isPageWobbleDomainAllowed(currentDomain, normalizedRules);
       const status = await sendTabMessage<PageWobbleStatus>(currentTabId, {
         type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
-        enabled: true,
+        enabled: wobbleEnabled,
         domainAllowed,
         config: wobbleConfig,
       });
       if (status) {
-        setWobbleEnabled(status.enabled);
         setNextChangeAt(status.nextChangeAt);
         setClock(Date.now());
       }
@@ -305,17 +363,23 @@ export const Popup: React.FC<PopupProps> = ({
 
   const domainAccess = getPageWobbleDomainAccess(currentDomain, domainRules);
   const isDomainAllowed = domainAccess === 'allowed';
+  const isWobbleEffective = wobbleEnabled && isPageSupported && isDomainAllowed && !wobbleError;
   const hasCurrentDomainRule =
     domainRules.whitelist.includes(currentDomain) || domainRules.blacklist.includes(currentDomain);
 
   const handleToggleWobble = async () => {
-    if (!currentTabId || !isPageSupported || wobblePending) {
+    if (!currentTabId || !isPageSupported || !isDomainAllowed || wobblePending) {
       return;
     }
 
     setWobblePending(true);
     setWobbleError('');
     const nextEnabled = !wobbleEnabled;
+    if (wobbleScope === 'global') {
+      await saveWobbleEnabled(nextEnabled);
+    }
+    setWobbleEnabled(nextEnabled);
+    setShowDomainRules(nextEnabled);
 
     try {
       if (nextEnabled) {
@@ -331,19 +395,60 @@ export const Popup: React.FC<PopupProps> = ({
         domainAllowed: isDomainAllowed,
         config: wobbleConfig,
       });
-      if (!status) {
+      if (!status && nextEnabled) {
         throw new Error('Unable to communicate with current page');
       }
-      setWobbleEnabled(status.enabled);
-      setNextChangeAt(status.nextChangeAt);
+      setNextChangeAt(status?.nextChangeAt ?? null);
       setClock(Date.now());
-      setShowDomainRules(status.enabled);
     } catch {
-      setWobbleEnabled(false);
-      setWobbleError(t('popup_wobble_error'));
+      if (nextEnabled) {
+        setWobbleError(t('popup_wobble_error'));
+      }
     } finally {
       setWobblePending(false);
     }
+  };
+
+  const handleScopeChange = async (nextScope: PageWobbleScope) => {
+    if (nextScope === wobbleScope) {
+      return;
+    }
+
+    setWobblePending(true);
+    setWobbleError('');
+    // Keep the current switch state while moving between scopes. When changing
+    // from global to current, storage stops the other tabs and the message
+    // below immediately keeps the active tab running.
+    const nextEnabled = wobbleEnabled;
+    await saveWobbleScopeState(nextScope, nextEnabled);
+    setWobbleScope(nextScope);
+    setWobbleEnabled(nextEnabled);
+    setShowDomainRules(nextEnabled);
+
+    if (currentTabId && isPageSupported) {
+      try {
+        if (nextEnabled) {
+          await chrome.scripting.executeScript({
+            target: { tabId: currentTabId },
+            files: ['assets/content.js'],
+          });
+        }
+
+        const status = await sendTabMessage<PageWobbleStatus>(currentTabId, {
+          type: MESSAGE_TYPES.SET_PAGE_WOBBLE_CONFIG,
+          enabled: nextEnabled,
+          domainAllowed: isDomainAllowed,
+          config: wobbleConfig,
+        });
+        setNextChangeAt(status?.nextChangeAt ?? null);
+        setClock(Date.now());
+      } catch {
+        if (nextEnabled) {
+          setWobbleError(t('popup_wobble_error'));
+        }
+      }
+    }
+    setWobblePending(false);
   };
 
   const handleAngleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -437,14 +542,34 @@ export const Popup: React.FC<PopupProps> = ({
           <div>
             <h2>{t('popup_wobble_title')}</h2>
             <p>{t('popup_wobble_description')}</p>
+            <div className={styles.scopeControl} role="group" aria-label={t('popup_wobble_scope')}>
+              <button
+                type="button"
+                className={wobbleScope === 'current' ? styles.scopeOptionActive : ''}
+                aria-pressed={wobbleScope === 'current'}
+                onClick={() => void handleScopeChange('current')}
+              >
+                {t('popup_wobble_scope_current')}
+              </button>
+              <button
+                type="button"
+                className={wobbleScope === 'global' ? styles.scopeOptionActive : ''}
+                aria-pressed={wobbleScope === 'global'}
+                onClick={() => void handleScopeChange('global')}
+              >
+                {t('popup_wobble_scope_global')}
+              </button>
+            </div>
           </div>
           <button
             type="button"
             role="switch"
             aria-checked={wobbleEnabled}
             aria-label={t('popup_wobble_title')}
-            className={`${styles.switch} ${wobbleEnabled ? styles.switchActive : ''}`}
-            disabled={!isPageSupported || wobblePending}
+            className={`${styles.switch} ${wobbleEnabled ? styles.switchActive : ''} ${
+              !isPageSupported || !isDomainAllowed || wobbleError ? styles.switchUnavailable : ''
+            }`}
+            disabled={!isPageSupported || !isDomainAllowed || wobblePending}
             onClick={handleToggleWobble}
           >
             <span className={styles.switchThumb} />
@@ -465,7 +590,7 @@ export const Popup: React.FC<PopupProps> = ({
         )}
         {wobbleError && <p className={styles.featureError}>{wobbleError}</p>}
 
-        {wobbleEnabled && isPageSupported && isDomainAllowed && (
+        {isWobbleEffective && (
           <div className={styles.wobbleControls}>
             <div className={styles.randomMode}>
               <div>

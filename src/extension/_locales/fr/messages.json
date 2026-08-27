@@ -179,6 +179,9 @@
     "message": "Incliner périodiquement la page actuelle",
     "description": "The description of the page wobble feature"
   },
+  "popup_wobble_scope": { "message": "Appliquer à", "description": "The page wobble scope" },
+  "popup_wobble_scope_current": { "message": "Cette page", "description": "Apply to the current page only" },
+  "popup_wobble_scope_global": { "message": "Toutes les pages", "description": "Apply to all pages" },
   "popup_wobble_fixed_angle": {
     "message": "Angle fixe",
     "description": "The fixed page wobble angle label"

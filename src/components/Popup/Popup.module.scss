@@ -252,6 +252,33 @@
   }
 }
 
+.scopeControl {
+  display: inline-flex;
+  margin-top: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+
+  button {
+    padding: 4px 7px;
+    border: 0;
+    border-inline-end: 1px solid var(--border-color);
+    background: transparent;
+    font-size: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+
+    &:last-child {
+      border-inline-end: 0;
+    }
+  }
+}
+
+.scopeOptionActive {
+  background: var(--primary-color) !important;
+  color: #fff !important;
+}
+
 .switch {
   position: relative;
   flex: 0 0 auto;
@@ -288,6 +315,10 @@
   .switchThumb {
     transform: translateX(20px);
   }
+}
+
+.switchUnavailable {
+  background: var(--border-color);
 }
 
 :global([dir='rtl']) {

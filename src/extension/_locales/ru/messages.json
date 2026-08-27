@@ -179,6 +179,9 @@
     "message": "Периодически наклонять текущую страницу",
     "description": "The description of the page wobble feature"
   },
+  "popup_wobble_scope": { "message": "Область действия", "description": "The page wobble scope" },
+  "popup_wobble_scope_current": { "message": "Эта страница", "description": "Apply to the current page only" },
+  "popup_wobble_scope_global": { "message": "Все страницы", "description": "Apply to all pages" },
   "popup_wobble_fixed_angle": {
     "message": "Фиксированный угол",
     "description": "The fixed page wobble angle label"
