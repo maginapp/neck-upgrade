@@ -1,5 +1,14 @@
 # Neck Upgrade ChangeLog
 
+## 1.6.2
+
+### Patch Changes
+
+- 功能优化与ui修复
+
+  - 修复pop页面尺寸异常
+  - 支持多视图拖拽
+
 ## 1.6.1
 
 ### Patch Changes
