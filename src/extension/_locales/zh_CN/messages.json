@@ -47,6 +47,10 @@
     "message": "设置",
     "description": "侧边设置标题"
   },
+  "settings_panel_tabs": { "message": "栏目配置", "description": "栏目配置标签列表" },
+  "settings_panel": { "message": "栏目", "description": "栏目标签名称" },
+  "settings_remove_panel": { "message": "删除栏目", "description": "删除栏目按钮说明" },
+  "settings_add_panel": { "message": "新增栏目", "description": "新增栏目按钮说明" },
   "settings_neck_mode": {
     "message": "颈椎倾斜模式",
     "description": "颈椎倾斜模式设置标题"

@@ -80,9 +80,24 @@ export interface ChineseBasicsConfig {
   category: ChineseBasicsCategory;
 }
 
+export type ContentColumnCount = 1 | 2 | 3 | 4 | 5 | 6;
+
+export interface ContentPanelConfig {
+  id: string;
+  neck: NeckModeConfig;
+  dataType: DataType;
+  knowledge: KnowledgeMode;
+  poetry: PoetrySourceConfig;
+  chineseBasics: ChineseBasicsConfig;
+}
+
 export interface Settings {
   language: AppLanguage;
   theme: Theme;
+  columns: ContentColumnCount;
+  activePanelId: string;
+  panels: ContentPanelConfig[];
+  // 保留旧字段用于已有用户配置迁移及旧版本兼容。
   neck: NeckModeConfig;
   dataType: DataType;
   knowledge: KnowledgeMode;

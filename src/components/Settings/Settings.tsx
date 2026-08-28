@@ -4,6 +4,8 @@ import { MESSAGE_TYPES } from '@/constants/events';
 import { useI18n } from '@/i18n';
 import {
   AppLanguage,
+  ContentColumnCount,
+  ContentPanelConfig,
   DataType,
   Theme,
   NeckModeConfig,
@@ -17,6 +19,7 @@ import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
 import { Appreciation } from './Appreciation';
 import { ChineseBasicsSwitch } from './ChineseBasicsSwitch';
 import { DataSwitch } from './DataSwitch';
+import { createNextContentPanelConfig } from './hooks';
 import { KnowledgeSwtich } from './KnowledgeSwtich';
 import { LanguageToggle } from './LanguageToggle';
 import { NeckMode } from './NeckMode';
@@ -42,20 +45,58 @@ export const Settings: React.FC<SettingsProps> = (props) => {
     setSettings((prev) => ({ ...prev, language }));
   };
 
-  const onNeckModeChange = (neck: NeckModeConfig) => {
-    setSettings((prev) => ({ ...prev, neck }));
+  const syncLegacySettings = (
+    prev: SettingsType,
+    panels: ContentPanelConfig[],
+    activePanelId = prev.activePanelId
+  ): SettingsType => {
+    const firstPanel = panels[0];
+    return {
+      ...prev,
+      columns: panels.length as ContentColumnCount,
+      activePanelId: panels.some((panel) => panel.id === activePanelId)
+        ? activePanelId
+        : firstPanel.id,
+      panels,
+      neck: firstPanel.neck,
+      dataType: firstPanel.dataType,
+      knowledge: firstPanel.knowledge,
+      poetry: firstPanel.poetry,
+      chineseBasics: firstPanel.chineseBasics,
+    };
   };
-  const onDataTypeChange = (dataType: DataType) => {
-    setSettings((prev) => ({ ...prev, dataType }));
+
+  const updatePanel = (panelId: string, patch: Partial<ContentPanelConfig>) => {
+    setSettings((prev) =>
+      syncLegacySettings(
+        prev,
+        prev.panels.map((panel) => (panel.id === panelId ? { ...panel, ...patch } : panel))
+      )
+    );
   };
-  const onKnowledgeModeChange = (knowledge: KnowledgeMode) => {
-    setSettings((prev) => ({ ...prev, knowledge }));
+
+  const addPanel = () => {
+    setSettings((prev) => {
+      if (prev.panels.length >= 6) {
+        return prev;
+      }
+      const newPanel = createNextContentPanelConfig(prev.panels, prev.activePanelId);
+      return syncLegacySettings(prev, [...prev.panels, newPanel], newPanel.id);
+    });
   };
-  const onPoetrySourceChange = (poetry: PoetrySourceConfig) => {
-    setSettings((prev) => ({ ...prev, poetry }));
-  };
-  const onChineseBasicsChange = (chineseBasics: ChineseBasicsConfig) => {
-    setSettings((prev) => ({ ...prev, chineseBasics }));
+
+  const removePanel = (panelId: string) => {
+    setSettings((prev) => {
+      if (prev.panels.length <= 1) {
+        return prev;
+      }
+      const removedIndex = prev.panels.findIndex((panel) => panel.id === panelId);
+      const panels = prev.panels.filter((panel) => panel.id !== panelId);
+      const nextActivePanel = panels[Math.min(Math.max(removedIndex, 0), panels.length - 1)];
+      const activePanelId =
+        prev.activePanelId === panelId ? nextActivePanel.id : prev.activePanelId;
+      return syncLegacySettings(prev, panels, activePanelId);
+    });
   };
 
   useEffect(() => {
@@ -107,36 +148,98 @@ export const Settings: React.FC<SettingsProps> = (props) => {
             <LanguageToggle language={settings.language} onChange={onLanguageChange} />
             <ThemeToggle currentTheme={settings.theme} onThemeChange={onThemeChange} />
           </div>
-          <div className={styles.settingsGroup}>
-            <h4>{t('settings_neck_mode')}</h4>
-            <NeckMode neckConfig={settings.neck} onModeChange={onNeckModeChange} />
+          <div className={styles.panelTabs} role="tablist" aria-label={t('settings_panel_tabs')}>
+            {settings.panels.map((panel, index) => (
+              <div
+                key={panel.id}
+                className={`${styles.panelTab} ${settings.activePanelId === panel.id ? styles.panelTabActive : ''}`}
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={settings.activePanelId === panel.id}
+                  onClick={() => setSettings((prev) => ({ ...prev, activePanelId: panel.id }))}
+                >
+                  {t('settings_panel')} {index + 1}
+                </button>
+                {settings.panels.length > 1 && (
+                  <button
+                    type="button"
+                    className={styles.removePanelButton}
+                    aria-label={`${t('settings_remove_panel')} ${index + 1}`}
+                    onClick={() => removePanel(panel.id)}
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              className={styles.addPanelButton}
+              disabled={settings.panels.length >= 6}
+              aria-label={t('settings_add_panel')}
+              onClick={addPanel}
+            >
+              +
+            </button>
           </div>
-          <div className={styles.settingsGroup}>
-            <h4>{t('settings_content_type')}</h4>
-            <DataSwitch currentType={settings.dataType} onTypeChange={onDataTypeChange} />
-          </div>
-          {settings.dataType === DataType.Poetry && (
-            <div className={styles.settingsGroup}>
-              <h4>{t('settings_poetry_source')}</h4>
-              <PoetrySourceSwitch config={settings.poetry} onChange={onPoetrySourceChange} />
+          {settings.panels.map((panel) => (
+            <div
+              key={panel.id}
+              role="tabpanel"
+              className={`${styles.panelSettings} ${
+                settings.activePanelId === panel.id ? styles.panelSettingsActive : ''
+              }`}
+              aria-hidden={settings.activePanelId !== panel.id}
+            >
+              <div className={styles.settingsGroup}>
+                <h4>{t('settings_neck_mode')}</h4>
+                <NeckMode
+                  neckConfig={panel.neck}
+                  onModeChange={(neck: NeckModeConfig) => updatePanel(panel.id, { neck })}
+                />
+              </div>
+              <div className={styles.settingsGroup}>
+                <h4>{t('settings_content_type')}</h4>
+                <DataSwitch
+                  currentType={panel.dataType}
+                  onTypeChange={(dataType: DataType) => updatePanel(panel.id, { dataType })}
+                />
+              </div>
+              {panel.dataType === DataType.Poetry && (
+                <div className={styles.settingsGroup}>
+                  <h4>{t('settings_poetry_source')}</h4>
+                  <PoetrySourceSwitch
+                    config={panel.poetry}
+                    onChange={(poetry: PoetrySourceConfig) => updatePanel(panel.id, { poetry })}
+                  />
+                </div>
+              )}
+              {panel.dataType === DataType.ChineseBasics && (
+                <div className={styles.settingsGroup}>
+                  <h4>{t('settings_chinese_basics_category')}</h4>
+                  <ChineseBasicsSwitch
+                    config={panel.chineseBasics}
+                    onChange={(chineseBasics: ChineseBasicsConfig) =>
+                      updatePanel(panel.id, { chineseBasics })
+                    }
+                  />
+                </div>
+              )}
+              {panel.dataType === DataType.History && (
+                <div className={styles.settingsGroup}>
+                  <h4>{t('settings_knowledge_source')}</h4>
+                  <KnowledgeSwtich
+                    currentMode={panel.knowledge}
+                    onModeChange={(knowledge: KnowledgeMode) =>
+                      updatePanel(panel.id, { knowledge })
+                    }
+                  />
+                </div>
+              )}
             </div>
-          )}
-          {settings.dataType === DataType.ChineseBasics && (
-            <div className={styles.settingsGroup}>
-              <h4>{t('settings_chinese_basics_category')}</h4>
-              <ChineseBasicsSwitch
-                config={settings.chineseBasics}
-                onChange={onChineseBasicsChange}
-              />
-            </div>
-          )}
-          <div className={styles.settingsGroup}>
-            <h4>{t('settings_knowledge_source')}</h4>
-            <KnowledgeSwtich
-              currentMode={settings.knowledge}
-              onModeChange={onKnowledgeModeChange}
-            />
-          </div>
+          ))}
           <div className={styles.settingsGroup}>
             <h4>{t('settings_feedback')}</h4>
             <Appreciation currentTheme={currentTheme} />

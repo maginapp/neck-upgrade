@@ -1,4 +1,7 @@
-import { NeckMode as NeckModeType } from '@/types/app';
+import { DataType, NeckMode as NeckModeType } from '@/types/app';
+
+// 设置页内容类型的唯一显示顺序；新增栏目也复用该顺序。
+export const DATA_TYPE_OPTIONS = Object.values(DataType);
 
 // 维基百科相关
 export const WIKI_BASE_URL = `https://zh.wikipedia.org/wiki`;

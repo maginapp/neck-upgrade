@@ -6,12 +6,27 @@
 }
 
 @media screen and (max-width: 900px), (max-height: 900px) {
-  .mainViewContainer {
+  .columns1 {
     transform: translate(-50%, -50%) scale(var(--scale-main-view-ratio));
   }
 }
 
-.mainView {
+.columns2,
+.columns3,
+.columns4,
+.columns5,
+.columns6 {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  min-height: 0;
+  padding: clamp(12px, 1.5vw, 24px);
+  transform: none;
+}
+
+.singleMainView {
   display: grid;
   grid:
     'h  s' 1fr
@@ -22,73 +37,217 @@
   height: 60vh;
   min-height: 600px;
   margin: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-
-  .side {
-    grid-area: s;
-
-    // 计算所得 width: 60vh / (5 + 1);
-    width: 10vh;
-    padding: 10px 0 10px 10px;
-    writing-mode: vertical-rl;
-    text-orientation: sideways;
-    justify-self: center;
-    overflow-y: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
-    }
-  }
-
-  .content {
-    grid-area: c;
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    overflow: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
-    }
-  }
-
-  .header {
-    grid-area: h;
-    margin-bottom: 10px;
-    padding: 0 10px;
-  }
-
-  &.custom,
-  &.intense {
-    .content {
-      transform: rotate(180deg);
-    }
+    display: none;
   }
 }
 
-// 其他可能的组合示例
-.verticalUpright {
-  writing-mode: vertical-lr;
-  text-orientation: upright;
+.singleHeader {
+  grid-area: h;
+  margin-bottom: 10px;
+  padding: 0 10px;
 }
 
-.verticalSideways {
-  writing-mode: vertical-lr;
+.singleSide {
+  grid-area: s;
+  width: 10vh;
+  padding: 10px 0 10px 10px;
+  writing-mode: vertical-rl;
   text-orientation: sideways;
+  justify-self: center;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.sidewaysRight {
-  writing-mode: sideways-rl;
-  text-orientation: sideways-right;
+.singleContent {
+  grid-area: c;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.mixedOrientation {
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
+.singleMainView.custom .singleContent,
+.singleMainView.intense .singleContent {
+  transform: rotate(180deg);
+}
+
+.mainView {
+  --font-size: clamp(15px, 0.95vw, 18px);
+  --font-size-xs: clamp(11px, 0.7vw, 14px);
+  --font-size-sm: clamp(13px, 0.8vw, 16px);
+  --font-size-lg: clamp(17px, 1.05vw, 21px);
+  --font-size-xl: clamp(19px, 1.2vw, 24px);
+  --font-size-heading-1: clamp(36px, 3vw, 56px);
+  --font-size-heading-2: clamp(27px, 2vw, 38px);
+  --font-size-heading-3: clamp(21px, 1.45vw, 29px);
+  --font-size-heading-4: clamp(18px, 1.15vw, 23px);
+
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  gap: clamp(12px, 1.4vh, 22px);
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-size);
+}
+
+.header {
+  min-width: 0;
+  padding: 0 clamp(10px, 1.2vw, 20px);
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 1.3vw, 24px);
+  min-width: 0;
+  min-height: 0;
+}
+
+.columns2 .panelGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.columns3 .panelGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.columns4 .panelGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.columns5 .panelGrid,
+.columns6 .panelGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.columns2 .mainView,
+.columns3 .mainView,
+.columns4 .mainView,
+.columns5 .mainView,
+.columns6 .mainView {
+  --font-size: clamp(14px, 0.78vw, 17px);
+  --font-size-xs: clamp(10px, 0.62vw, 13px);
+  --font-size-sm: clamp(12px, 0.7vw, 15px);
+  --font-size-lg: clamp(16px, 0.9vw, 20px);
+  --font-size-xl: clamp(18px, 1vw, 22px);
+  --font-size-heading-1: clamp(34px, 2.5vw, 52px);
+  --font-size-heading-2: clamp(25px, 1.7vw, 36px);
+  --font-size-heading-3: clamp(20px, 1.2vw, 27px);
+  --font-size-heading-4: clamp(17px, 1vw, 22px);
+
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.panelSlot {
+  container-type: size;
+  min-width: 0;
+  min-height: 0;
+}
+
+.columns2 .panelSlot,
+.columns3 .panelSlot,
+.columns4 .panelSlot,
+.columns5 .panelSlot,
+.columns6 .panelSlot {
+  overflow: hidden;
+}
+
+.panel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(10px, 1vh, 16px);
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(14px, 1.2vw, 22px);
+  border: 1px solid var(--border-color);
+  border-radius: clamp(12px, 1vw, 18px);
+  background: color-mix(in srgb, var(--settings-bg) 72%, transparent);
+  box-shadow: 0 8px 24px var(--box-shadow-color);
+  transform-origin: 50% 50%;
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.columns2 .panel,
+.columns3 .panel,
+.columns4 .panel,
+.columns5 .panel,
+.columns6 .panel {
+  --font-size: clamp(14px, min(3.1cqi, 5cqb), 19px);
+  --font-size-xs: clamp(11px, min(2.2cqi, 3.8cqb), 14px);
+  --font-size-sm: clamp(13px, min(2.7cqi, 4.5cqb), 16px);
+  --font-size-lg: clamp(17px, min(3.8cqi, 6cqb), 22px);
+  --font-size-xl: clamp(19px, min(4.3cqi, 6.8cqb), 24px);
+  --font-size-heading-1: clamp(32px, min(7.5cqi, 12cqb), 54px);
+  --font-size-heading-2: clamp(24px, min(5.6cqi, 9cqb), 38px);
+  --font-size-heading-3: clamp(20px, min(4.7cqi, 7.5cqb), 30px);
+  --font-size-heading-4: clamp(17px, min(4cqi, 6.4cqb), 24px);
+
+  gap: clamp(8px, min(1.8cqi, 2.5cqb), 16px);
+  padding: clamp(10px, min(2.2cqi, 3cqb), 22px);
+  font-size: var(--font-size);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.panelSide {
+  width: 100%;
+  max-height: 88px;
+  padding: 4px clamp(4px, 0.6vw, 10px) 0;
+  justify-self: center;
+  overflow: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .columns2 .panelGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .columns3 .panelGrid,
+  .columns4 .panelGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .columns5 .panelGrid,
+  .columns6 .panelGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
 }

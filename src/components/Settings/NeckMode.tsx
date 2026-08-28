@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { MOD_CONFIG } from '@/constants';
 import { useI18n } from '@/i18n';
@@ -24,6 +24,11 @@ export const NeckMode = (props: NeckModeProps) => {
   const { neckConfig, onModeChange } = props;
   const { mode, duration, cusMaxRotate, cusDuration, rotate } = neckConfig;
   const modes = Object.values(NeckModeType);
+  const onModeChangeRef = useRef(onModeChange);
+
+  useEffect(() => {
+    onModeChangeRef.current = onModeChange;
+  }, [onModeChange]);
 
   const handleCustomConfigChange = useCallback(
     (params: CustomProps) => {
@@ -33,7 +38,7 @@ export const NeckMode = (props: NeckModeProps) => {
       const duration = nextCurDuration ?? cusDuration ?? config.duration;
       const maxRotate = nextCurMaxRotate ?? cusMaxRotate ?? config.max;
 
-      onModeChange({
+      onModeChangeRef.current({
         mode: NeckModeType.Custom,
         rotate: getRandomNumber(config.min, maxRotate, rotate),
         duration,
@@ -41,7 +46,7 @@ export const NeckMode = (props: NeckModeProps) => {
         cusMaxRotate: maxRotate,
       });
     },
-    [cusDuration, cusMaxRotate, onModeChange, rotate]
+    [cusDuration, cusMaxRotate, rotate]
   );
 
   const handleModeChange = useCallback(
@@ -49,7 +54,7 @@ export const NeckMode = (props: NeckModeProps) => {
       const config = MOD_CONFIG[newMode];
 
       if (newMode !== NeckModeType.Custom) {
-        onModeChange({
+        onModeChangeRef.current({
           mode: newMode,
           rotate: getRandomNumber(config.min, config.max, rotate),
           duration: config.duration,
@@ -60,7 +65,7 @@ export const NeckMode = (props: NeckModeProps) => {
         handleCustomConfigChange({});
       }
     },
-    [cusDuration, cusMaxRotate, onModeChange, rotate, handleCustomConfigChange]
+    [cusDuration, cusMaxRotate, rotate, handleCustomConfigChange]
   );
 
   useEffect(() => {

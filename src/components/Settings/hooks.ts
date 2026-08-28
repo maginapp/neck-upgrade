@@ -1,10 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
 
-import { CACHE_KEYS } from '@/constants';
+import { CACHE_KEYS, DATA_TYPE_OPTIONS } from '@/constants';
 import { PoetrySourceCategory } from '@/constants/poetry';
 import {
   AppLanguage,
   ChineseBasicsCategory,
+  ContentColumnCount,
+  ContentPanelConfig,
   DataType,
   Theme,
   NeckMode,
@@ -31,6 +33,48 @@ class SettingsStorage extends LocalManager<Settings> {
 // 导出设置存储实例
 const settingsStorage = new SettingsStorage();
 
+const DEFAULT_PANEL_DATA_TYPES = [DataType.History, DataType.Poetry, DataType.English] as const;
+
+const createDefaultNeckConfig = (index = 0) => ({
+  mode: index === 0 ? NeckMode.Training : NeckMode.Reading,
+  rotate: 0,
+  duration: 0,
+  cusDuration: 15,
+  cusMaxRotate: 180,
+});
+
+export const createContentPanelConfig = (index = 0): ContentPanelConfig => ({
+  id: `panel-${Date.now()}-${index}-${Math.random().toString(36).slice(2, 8)}`,
+  neck: createDefaultNeckConfig(index),
+  dataType: DEFAULT_PANEL_DATA_TYPES[index] ?? DataType.History,
+  knowledge: KnowledgeMode.Wiki,
+  poetry: {
+    category: PoetrySourceCategory.All,
+    sources: [],
+  },
+  chineseBasics: {
+    category: ChineseBasicsCategory.All,
+  },
+});
+
+export const createNextContentPanelConfig = (
+  panels: ContentPanelConfig[],
+  activePanelId: string
+): ContentPanelConfig => {
+  const activePanel =
+    panels.find((panel) => panel.id === activePanelId) ?? panels[panels.length - 1];
+  const usedDataTypes = new Set(panels.map((panel) => panel.dataType));
+  const dataType =
+    DATA_TYPE_OPTIONS.find((type) => !usedDataTypes.has(type)) ?? DATA_TYPE_OPTIONS[0];
+  const panel = createContentPanelConfig(panels.length);
+
+  return {
+    ...panel,
+    dataType,
+    neck: activePanel ? { ...activePanel.neck } : panel.neck,
+  };
+};
+
 const getBrowserLanguage = (): AppLanguage => {
   if (typeof navigator === 'undefined') {
     return AppLanguage.En;
@@ -56,27 +100,47 @@ const getBrowserLanguage = (): AppLanguage => {
 };
 
 const createDefaultSettings = (): Settings => {
+  const firstPanel = createContentPanelConfig(0);
   return {
     language: getBrowserLanguage(),
     theme: Theme.System,
-    neck: {
-      mode: NeckMode.Training,
-      rotate: 0,
-      duration: 0,
-      cusDuration: 15,
-      cusMaxRotate: 180,
-    },
-    dataType: DataType.History,
-    knowledge: KnowledgeMode.Wiki,
-    poetry: {
-      category: PoetrySourceCategory.All,
-      sources: [],
-    },
-    chineseBasics: {
-      category: ChineseBasicsCategory.All,
-    },
+    columns: 1,
+    activePanelId: firstPanel.id,
+    panels: [firstPanel],
+    neck: firstPanel.neck,
+    dataType: firstPanel.dataType,
+    knowledge: firstPanel.knowledge,
+    poetry: firstPanel.poetry,
+    chineseBasics: firstPanel.chineseBasics,
   };
 };
+
+const normalizeColumnCount = (value: unknown): ContentColumnCount =>
+  typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 6
+    ? (value as ContentColumnCount)
+    : 1;
+
+const normalizePanel = (
+  panel: Partial<ContentPanelConfig>,
+  fallback: ContentPanelConfig,
+  id: string
+): ContentPanelConfig => ({
+  ...fallback,
+  ...panel,
+  id,
+  neck: {
+    ...fallback.neck,
+    ...panel.neck,
+  },
+  poetry: {
+    ...fallback.poetry,
+    ...panel.poetry,
+  },
+  chineseBasics: {
+    ...fallback.chineseBasics,
+    ...panel.chineseBasics,
+  },
+});
 
 const normalizeSettings = (storedSettings: Settings | null): Settings => {
   const defaultSettings = createDefaultSettings();
@@ -84,6 +148,31 @@ const normalizeSettings = (storedSettings: Settings | null): Settings => {
   if (!storedSettings) {
     return defaultSettings;
   }
+
+  const legacyPanel: Partial<ContentPanelConfig> = {
+    neck: storedSettings.neck,
+    dataType: storedSettings.dataType,
+    knowledge: storedSettings.knowledge,
+    poetry: storedSettings.poetry,
+    chineseBasics: storedSettings.chineseBasics,
+  };
+  const storedPanels = Array.isArray(storedSettings.panels) ? storedSettings.panels : [];
+  const columns = storedPanels.length
+    ? normalizeColumnCount(storedSettings.columns ?? storedPanels.length)
+    : 1;
+  const usedIds = new Set<string>();
+  const panels = Array.from({ length: columns }, (_, index) => {
+    const fallback = createContentPanelConfig(index);
+    const storedPanel = storedPanels[index] ?? (index === 0 ? legacyPanel : {});
+    const requestedId = typeof storedPanel.id === 'string' ? storedPanel.id : fallback.id;
+    const id = usedIds.has(requestedId) ? fallback.id : requestedId;
+    usedIds.add(id);
+    return normalizePanel(storedPanel, fallback, id);
+  });
+  const firstPanel = panels[0];
+  const activePanelId = panels.some((panel) => panel.id === storedSettings.activePanelId)
+    ? storedSettings.activePanelId
+    : firstPanel.id;
 
   return {
     ...defaultSettings,
@@ -98,18 +187,14 @@ const normalizeSettings = (storedSettings: Settings | null): Settings => {
       storedSettings.language === AppLanguage.Ar
         ? storedSettings.language
         : defaultSettings.language,
-    neck: {
-      ...defaultSettings.neck,
-      ...storedSettings.neck,
-    },
-    poetry: {
-      ...defaultSettings.poetry,
-      ...storedSettings.poetry,
-    },
-    chineseBasics: {
-      ...defaultSettings.chineseBasics,
-      ...storedSettings.chineseBasics,
-    },
+    columns,
+    activePanelId,
+    panels,
+    neck: firstPanel.neck,
+    dataType: firstPanel.dataType,
+    knowledge: firstPanel.knowledge,
+    poetry: firstPanel.poetry,
+    chineseBasics: firstPanel.chineseBasics,
   };
 };
 

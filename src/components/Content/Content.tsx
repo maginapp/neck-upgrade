@@ -1,4 +1,4 @@
-import { DataType, Settings } from '@/types/app';
+import { ContentPanelConfig, DataType } from '@/types/app';
 
 import { ChineseBasics } from './ChineseBasics';
 import { English } from './English';
@@ -7,7 +7,7 @@ import { News } from './News';
 import { PoetryComponent } from './Poetry';
 
 interface ContentProps {
-  settings: Settings;
+  settings: ContentPanelConfig;
 }
 
 export const Content: React.FC<ContentProps> = (props) => {

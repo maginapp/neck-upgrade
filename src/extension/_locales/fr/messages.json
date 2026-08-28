@@ -47,6 +47,10 @@
     "message": "Paramètres",
     "description": "The settings sidebar title"
   },
+  "settings_panel_tabs": { "message": "Réglages des colonnes", "description": "Panel tabs" },
+  "settings_panel": { "message": "Colonne", "description": "Panel label" },
+  "settings_remove_panel": { "message": "Supprimer la colonne", "description": "Remove panel" },
+  "settings_add_panel": { "message": "Ajouter une colonne", "description": "Add panel" },
   "settings_neck_mode": {
     "message": "Mode d’inclinaison du cou",
     "description": "The neck tilt mode setting title"

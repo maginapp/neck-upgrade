@@ -47,6 +47,10 @@
     "message": "Настройки",
     "description": "The settings sidebar title"
   },
+  "settings_panel_tabs": { "message": "Настройки колонок", "description": "Panel tabs" },
+  "settings_panel": { "message": "Колонка", "description": "Panel label" },
+  "settings_remove_panel": { "message": "Удалить колонку", "description": "Remove panel" },
+  "settings_add_panel": { "message": "Добавить колонку", "description": "Add panel" },
   "settings_neck_mode": {
     "message": "Режим наклона шеи",
     "description": "The neck tilt mode setting title"

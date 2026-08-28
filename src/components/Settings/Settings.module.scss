@@ -45,9 +45,9 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -400px;
+  right: min(-520px, -92vw);
   z-index: 1001;
-  width: 400px;
+  width: min(520px, 92vw);
   height: 100vh;
   background-color: var(--settings-bg);
   box-shadow: -2px 0 5px var(--box-shadow-color);
@@ -96,6 +96,94 @@
   gap: 18px;
   min-height: 40px;
   align-items: center;
+}
+
+.panelTabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.addPanelButton {
+  width: 100%;
+  min-height: 40px;
+  border: 1px dashed var(--border-color);
+  border-radius: 7px;
+  background: transparent;
+  font-size: var(--font-size-heading-4);
+  line-height: 1;
+  color: var(--text-color);
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    background: var(--hover-bg);
+    color: var(--primary-color);
+  }
+}
+
+.panelTab {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--settings-bg-light);
+  overflow: hidden;
+
+  > button {
+    border: 0;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  &.panelTabActive {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+
+    > button {
+      color: var(--primary-bg-text-color);
+    }
+  }
+
+  > button:first-child {
+    min-width: 0;
+    padding: 8px 12px;
+    font-size: var(--font-size-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.removePanelButton {
+  width: 30px;
+  border-left: 1px solid color-mix(in srgb, currentcolor 28%, transparent) !important;
+  font-size: var(--font-size-lg);
+}
+
+.panelSettings {
+  display: none;
+}
+
+.panelSettingsActive {
+  display: block;
 }
 
 .overlay {
@@ -156,5 +244,10 @@
     padding-right: 10px;
     border-left: 0;
     border-right: 2px solid var(--border-color);
+  }
+
+  .removePanelButton {
+    border-right: 1px solid color-mix(in srgb, currentcolor 28%, transparent) !important;
+    border-left: 0 !important;
   }
 }

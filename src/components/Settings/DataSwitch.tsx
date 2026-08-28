@@ -1,3 +1,4 @@
+import { DATA_TYPE_OPTIONS } from '@/constants';
 import { useI18n } from '@/i18n';
 import { DataType } from '@/types/app';
 import { getDataTypeLabel } from '@/utils/labels';
@@ -11,11 +12,9 @@ interface DataSwitchProps {
 
 export const DataSwitch: React.FC<DataSwitchProps> = ({ currentType, onTypeChange }) => {
   const { language } = useI18n();
-  const types = Object.values(DataType);
-
   return (
     <div className={styles.buttonSwitch}>
-      {types.map((type) => (
+      {DATA_TYPE_OPTIONS.map((type) => (
         <button
           key={type}
           className={`${styles.typeButton} ${currentType === type ? styles.active : ''}`}
