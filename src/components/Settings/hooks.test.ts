@@ -1,8 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
+import { PoetrySource } from '@/constants/poetry';
 import { DataType, NeckMode } from '@/types/app';
 
-import { createContentPanelConfig, createNextContentPanelConfig } from './hooks';
+import {
+  createContentPanelConfig,
+  createNextContentPanelConfig,
+  duplicateContentPanelConfig,
+} from './hooks';
 
 describe('createNextContentPanelConfig', () => {
   it('按设置页内容类型显示顺序跳过已使用类型', () => {
@@ -46,5 +51,21 @@ describe('createNextContentPanelConfig', () => {
     const nextPanel = createNextContentPanelConfig(panels, panels[panels.length - 1].id);
 
     expect(nextPanel.dataType).toBe(Object.values(DataType)[0]);
+  });
+});
+
+describe('duplicateContentPanelConfig', () => {
+  it('复制视图配置并生成独立 id 和嵌套对象', () => {
+    const source = createContentPanelConfig(0);
+    source.poetry.sources = [PoetrySource.Qianziwen];
+
+    const duplicated = duplicateContentPanelConfig(source, 1);
+
+    expect(duplicated).toEqual({ ...source, id: duplicated.id });
+    expect(duplicated.id).not.toBe(source.id);
+    expect(duplicated.neck).not.toBe(source.neck);
+    expect(duplicated.poetry).not.toBe(source.poetry);
+    expect(duplicated.poetry.sources).not.toBe(source.poetry.sources);
+    expect(duplicated.chineseBasics).not.toBe(source.chineseBasics);
   });
 });

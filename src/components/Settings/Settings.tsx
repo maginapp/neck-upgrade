@@ -15,11 +15,12 @@ import {
   ChineseBasicsConfig,
 } from '@/types/app';
 import { ChromeMessage, ToggleActiveSettingsMessage } from '@/types/message';
+import { getDataTypeLabel } from '@/utils/labels';
 
 import { Appreciation } from './Appreciation';
 import { ChineseBasicsSwitch } from './ChineseBasicsSwitch';
 import { DataSwitch } from './DataSwitch';
-import { createNextContentPanelConfig } from './hooks';
+import { createNextContentPanelConfig, duplicateContentPanelConfig } from './hooks';
 import { KnowledgeSwtich } from './KnowledgeSwtich';
 import { LanguageToggle } from './LanguageToggle';
 import { NeckMode } from './NeckMode';
@@ -35,7 +36,7 @@ interface SettingsProps {
 
 export const Settings: React.FC<SettingsProps> = (props) => {
   const { setSettings, settings, currentTheme } = props;
-  const { t } = useI18n();
+  const { language, t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
 
   const onThemeChange = (theme: Theme) => {
@@ -96,6 +97,25 @@ export const Settings: React.FC<SettingsProps> = (props) => {
       const activePanelId =
         prev.activePanelId === panelId ? nextActivePanel.id : prev.activePanelId;
       return syncLegacySettings(prev, panels, activePanelId);
+    });
+  };
+
+  const duplicatePanel = (panelId: string) => {
+    setSettings((prev) => {
+      if (prev.panels.length >= 6) {
+        return prev;
+      }
+      const sourceIndex = prev.panels.findIndex((panel) => panel.id === panelId);
+      if (sourceIndex < 0) {
+        return prev;
+      }
+      const duplicatedPanel = duplicateContentPanelConfig(
+        prev.panels[sourceIndex],
+        prev.panels.length
+      );
+      const panels = [...prev.panels];
+      panels.splice(sourceIndex + 1, 0, duplicatedPanel);
+      return syncLegacySettings(prev, panels, duplicatedPanel.id);
     });
   };
 
@@ -160,13 +180,29 @@ export const Settings: React.FC<SettingsProps> = (props) => {
                   aria-selected={settings.activePanelId === panel.id}
                   onClick={() => setSettings((prev) => ({ ...prev, activePanelId: panel.id }))}
                 >
-                  {t('settings_panel')} {index + 1}
+                  {t('settings_panel')} {t(`settings_panel_number_${index + 1}`)} -{' '}
+                  {getDataTypeLabel(panel.dataType, language)}
                 </button>
+                {settings.panels.length < 6 && (
+                  <button
+                    type="button"
+                    className={styles.duplicatePanelButton}
+                    aria-label={`${t('settings_duplicate_panel')} ${t(
+                      `settings_panel_number_${index + 1}`
+                    )}`}
+                    title={t('settings_duplicate_panel')}
+                    onClick={() => duplicatePanel(panel.id)}
+                  >
+                    ⧉
+                  </button>
+                )}
                 {settings.panels.length > 1 && (
                   <button
                     type="button"
                     className={styles.removePanelButton}
-                    aria-label={`${t('settings_remove_panel')} ${index + 1}`}
+                    aria-label={`${t('settings_remove_panel')} ${t(
+                      `settings_panel_number_${index + 1}`
+                    )}`}
                     onClick={() => removePanel(panel.id)}
                   >
                     ×
@@ -174,15 +210,16 @@ export const Settings: React.FC<SettingsProps> = (props) => {
                 )}
               </div>
             ))}
-            <button
-              type="button"
-              className={styles.addPanelButton}
-              disabled={settings.panels.length >= 6}
-              aria-label={t('settings_add_panel')}
-              onClick={addPanel}
-            >
-              +
-            </button>
+            {settings.panels.length < 6 && (
+              <button
+                type="button"
+                className={styles.addPanelButton}
+                aria-label={t('settings_add_panel')}
+                onClick={addPanel}
+              >
+                +
+              </button>
+            )}
           </div>
           {settings.panels.map((panel) => (
             <div

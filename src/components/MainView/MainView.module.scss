@@ -110,11 +110,22 @@
   padding: 0 clamp(10px, 1.2vw, 20px);
 }
 
+.panelGridViewport {
+  container-type: size;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+}
+
 .panelGrid {
+  --panel-grid-gap: clamp(14px, 1.3vw, 24px);
+
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(14px, 1.3vw, 24px);
+  gap: var(--panel-grid-gap);
+  width: 100%;
   min-width: 0;
+  height: 100%;
   min-height: 0;
 }
 
@@ -131,6 +142,9 @@
 .columns4 .panelGrid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
+  width: min(100cqw, calc(180cqh - var(--panel-grid-gap)));
+  height: min(100cqh, calc(180cqw - var(--panel-grid-gap)));
+  place-self: center;
 }
 
 .columns5 .panelGrid,
@@ -161,14 +175,6 @@
   container-type: size;
   min-width: 0;
   min-height: 0;
-}
-
-.columns2 .panelSlot,
-.columns3 .panelSlot,
-.columns4 .panelSlot,
-.columns5 .panelSlot,
-.columns6 .panelSlot {
-  overflow: hidden;
 }
 
 .panel {

@@ -121,7 +121,43 @@
   color: var(--accent-color);
 }
 
+.wideHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px clamp(14px, 1.4vw, 24px);
+  width: 100%;
+
+  .timeSection {
+    flex: 0 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .lunarInfoSection,
+  .holidaySection {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 1000px), screen and (orientation: portrait) {
+  .wideHeader {
+    gap: 6px 12px;
+  }
+}
+
 :global([dir='rtl']) {
+  .wideHeader {
+    direction: ltr;
+    justify-content: flex-start;
+
+    > * {
+      direction: rtl;
+    }
+  }
+
   .currentTime {
     margin-right: 0;
     margin-left: 10px;

@@ -1,5 +1,11 @@
 # Neck Upgrade ChangeLog
 
+## 1.6.1
+
+### Patch Changes
+
+- 优化显示布局
+
 ## 1.6.0
 
 ### Minor Changes

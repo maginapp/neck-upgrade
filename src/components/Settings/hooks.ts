@@ -75,6 +75,20 @@ export const createNextContentPanelConfig = (
   };
 };
 
+export const duplicateContentPanelConfig = (
+  panel: ContentPanelConfig,
+  index: number
+): ContentPanelConfig => ({
+  ...panel,
+  id: createContentPanelConfig(index).id,
+  neck: { ...panel.neck },
+  poetry: {
+    ...panel.poetry,
+    sources: [...panel.poetry.sources],
+  },
+  chineseBasics: { ...panel.chineseBasics },
+});
+
 const getBrowserLanguage = (): AppLanguage => {
   if (typeof navigator === 'undefined') {
     return AppLanguage.En;

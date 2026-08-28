@@ -47,10 +47,17 @@
     "message": "Settings",
     "description": "The settings sidebar title"
   },
-  "settings_panel_tabs": { "message": "Column settings", "description": "Panel tabs" },
-  "settings_panel": { "message": "Column", "description": "Panel label" },
-  "settings_remove_panel": { "message": "Remove column", "description": "Remove panel" },
-  "settings_add_panel": { "message": "Add column", "description": "Add panel" },
+  "settings_panel_tabs": { "message": "View settings", "description": "Panel tabs" },
+  "settings_panel": { "message": "View", "description": "Panel label" },
+  "settings_panel_number_1": { "message": "one", "description": "View number one" },
+  "settings_panel_number_2": { "message": "two", "description": "View number two" },
+  "settings_panel_number_3": { "message": "three", "description": "View number three" },
+  "settings_panel_number_4": { "message": "four", "description": "View number four" },
+  "settings_panel_number_5": { "message": "five", "description": "View number five" },
+  "settings_panel_number_6": { "message": "six", "description": "View number six" },
+  "settings_remove_panel": { "message": "Remove view", "description": "Remove panel" },
+  "settings_add_panel": { "message": "Add view", "description": "Add panel" },
+  "settings_duplicate_panel": { "message": "Duplicate view", "description": "Duplicate panel" },
   "settings_neck_mode": {
     "message": "Neck tilt mode",
     "description": "The neck tilt mode setting title"

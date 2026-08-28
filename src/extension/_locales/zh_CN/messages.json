@@ -47,10 +47,17 @@
     "message": "设置",
     "description": "侧边设置标题"
   },
-  "settings_panel_tabs": { "message": "栏目配置", "description": "栏目配置标签列表" },
-  "settings_panel": { "message": "栏目", "description": "栏目标签名称" },
-  "settings_remove_panel": { "message": "删除栏目", "description": "删除栏目按钮说明" },
-  "settings_add_panel": { "message": "新增栏目", "description": "新增栏目按钮说明" },
+  "settings_panel_tabs": { "message": "视图配置", "description": "视图配置标签列表" },
+  "settings_panel": { "message": "视图", "description": "视图标签名称" },
+  "settings_panel_number_1": { "message": "一", "description": "视图序号一" },
+  "settings_panel_number_2": { "message": "二", "description": "视图序号二" },
+  "settings_panel_number_3": { "message": "三", "description": "视图序号三" },
+  "settings_panel_number_4": { "message": "四", "description": "视图序号四" },
+  "settings_panel_number_5": { "message": "五", "description": "视图序号五" },
+  "settings_panel_number_6": { "message": "六", "description": "视图序号六" },
+  "settings_remove_panel": { "message": "删除视图", "description": "删除视图按钮说明" },
+  "settings_add_panel": { "message": "新增视图", "description": "新增视图按钮说明" },
+  "settings_duplicate_panel": { "message": "复制视图", "description": "复制视图按钮说明" },
   "settings_neck_mode": {
     "message": "颈椎倾斜模式",
     "description": "颈椎倾斜模式设置标题"

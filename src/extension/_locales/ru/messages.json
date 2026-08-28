@@ -47,10 +47,17 @@
     "message": "Настройки",
     "description": "The settings sidebar title"
   },
-  "settings_panel_tabs": { "message": "Настройки колонок", "description": "Panel tabs" },
-  "settings_panel": { "message": "Колонка", "description": "Panel label" },
-  "settings_remove_panel": { "message": "Удалить колонку", "description": "Remove panel" },
-  "settings_add_panel": { "message": "Добавить колонку", "description": "Add panel" },
+  "settings_panel_tabs": { "message": "Настройки видов", "description": "Panel tabs" },
+  "settings_panel": { "message": "Вид", "description": "Panel label" },
+  "settings_panel_number_1": { "message": "один", "description": "View number one" },
+  "settings_panel_number_2": { "message": "два", "description": "View number two" },
+  "settings_panel_number_3": { "message": "три", "description": "View number three" },
+  "settings_panel_number_4": { "message": "четыре", "description": "View number four" },
+  "settings_panel_number_5": { "message": "пять", "description": "View number five" },
+  "settings_panel_number_6": { "message": "шесть", "description": "View number six" },
+  "settings_remove_panel": { "message": "Удалить вид", "description": "Remove panel" },
+  "settings_add_panel": { "message": "Добавить вид", "description": "Add panel" },
+  "settings_duplicate_panel": { "message": "Дублировать вид", "description": "Duplicate panel" },
   "settings_neck_mode": {
     "message": "Режим наклона шеи",
     "description": "The neck tilt mode setting title"

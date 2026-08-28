@@ -12,18 +12,30 @@ interface MainViewProps {
   settings: Settings;
 }
 
-const getPanelTransform = (rotate: number, panelCount: number, width: number, height: number) => {
+const MIN_PANEL_SCALE = 0.6;
+const MAX_PANEL_SCALE = 0.96;
+
+export const getPanelScale = (panelCount: number, width: number, height: number) => {
   if (panelCount === 1 || width <= 0 || height <= 0) {
-    return `rotate(${rotate}deg)`;
+    return 1;
   }
 
-  const radians = ((Math.abs(rotate) % 180) * Math.PI) / 180;
-  const sin = Math.abs(Math.sin(radians));
-  const cos = Math.abs(Math.cos(radians));
   const aspectRatio = width / height;
-  const widthScale = 1 / (cos + sin / aspectRatio);
-  const heightScale = 1 / (cos + sin * aspectRatio);
-  const scale = Math.min(1, widthScale, heightScale) * 0.96;
+  const longestSideRatio = Math.max(aspectRatio, 1 / aspectRatio);
+  const safeScale = MAX_PANEL_SCALE / Math.sqrt(1 + longestSideRatio ** 2);
+  return Math.min(MAX_PANEL_SCALE, Math.max(MIN_PANEL_SCALE, safeScale));
+};
+
+export const getPanelTransform = (
+  rotate: number,
+  panelCount: number,
+  width: number,
+  height: number
+) => {
+  const scale = getPanelScale(panelCount, width, height);
+  if (scale === 1) {
+    return `rotate(${rotate}deg)`;
+  }
   return `rotate(${rotate}deg) scale(${scale.toFixed(3)})`;
 };
 
@@ -131,13 +143,15 @@ export function MainView(props: MainViewProps) {
     <div className={`${styles.mainViewContainer} ${styles[`columns${settings.columns}`]}`}>
       <div className={styles.mainView}>
         <header className={styles.header}>
-          <Header />
+          <Header wide />
         </header>
-        <main className={styles.panelGrid}>
-          {visiblePanels.map((panel) => (
-            <PanelView key={panel.id} panel={panel} panelCount={visiblePanels.length} />
-          ))}
-        </main>
+        <div className={styles.panelGridViewport}>
+          <main className={styles.panelGrid}>
+            {visiblePanels.map((panel) => (
+              <PanelView key={panel.id} panel={panel} panelCount={visiblePanels.length} />
+            ))}
+          </main>
+        </div>
       </div>
     </div>
   );

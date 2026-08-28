@@ -32,7 +32,11 @@ const DATE_LOCALES: Record<AppLanguage, string> = {
   [AppLanguage.Ar]: 'ar',
 };
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  wide?: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ wide = false }) => {
   const { language, t } = useI18n();
   const [currentTime, setCurrentTime] = useState<string>('');
   const [currentDate, setCurrentDate] = useState<string>('');
@@ -103,7 +107,7 @@ export const Header: React.FC = () => {
     };
   }, []);
 
-  return (
+  const headerContent = (
     <>
       <div className={styles.timeSection}>
         <span className={styles.currentTime}>{currentTime}</span>
@@ -188,7 +192,7 @@ export const Header: React.FC = () => {
         </div>
       )}
       {nextHoliday && (
-        <div>
+        <div className={styles.holidaySection}>
           {t('header_next_break')} -{' '}
           <span className={styles.holidayHighlight}>
             {translateHolidayName(nextHoliday.name, language, t)}
@@ -202,4 +206,6 @@ export const Header: React.FC = () => {
       )}
     </>
   );
+
+  return wide ? <div className={styles.wideHeader}>{headerContent}</div> : headerContent;
 };

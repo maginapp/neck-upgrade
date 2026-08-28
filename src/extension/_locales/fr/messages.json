@@ -47,10 +47,17 @@
     "message": "Paramètres",
     "description": "The settings sidebar title"
   },
-  "settings_panel_tabs": { "message": "Réglages des colonnes", "description": "Panel tabs" },
-  "settings_panel": { "message": "Colonne", "description": "Panel label" },
-  "settings_remove_panel": { "message": "Supprimer la colonne", "description": "Remove panel" },
-  "settings_add_panel": { "message": "Ajouter une colonne", "description": "Add panel" },
+  "settings_panel_tabs": { "message": "Réglages des vues", "description": "Panel tabs" },
+  "settings_panel": { "message": "Vue", "description": "Panel label" },
+  "settings_panel_number_1": { "message": "un", "description": "View number one" },
+  "settings_panel_number_2": { "message": "deux", "description": "View number two" },
+  "settings_panel_number_3": { "message": "trois", "description": "View number three" },
+  "settings_panel_number_4": { "message": "quatre", "description": "View number four" },
+  "settings_panel_number_5": { "message": "cinq", "description": "View number five" },
+  "settings_panel_number_6": { "message": "six", "description": "View number six" },
+  "settings_remove_panel": { "message": "Supprimer la vue", "description": "Remove panel" },
+  "settings_add_panel": { "message": "Ajouter une vue", "description": "Add panel" },
+  "settings_duplicate_panel": { "message": "Dupliquer la vue", "description": "Duplicate panel" },
   "settings_neck_mode": {
     "message": "Mode d’inclinaison du cou",
     "description": "The neck tilt mode setting title"
