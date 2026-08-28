@@ -1,5 +1,19 @@
 # Neck Upgrade ChangeLog
 
+## 1.6.0
+
+### Minor Changes
+
+- 925956a: 通用网页旋转能力优化
+
+  - 权限调整：允许控制所有网页
+  - 支持不点击插件弹窗直接生效
+  - 支持全局和当前网页生效
+
+### Patch Changes
+
+- d588a3f: 添加多栏目布局
+
 ## 1.5.7
 
 ### Patch Changes
