@@ -7,6 +7,7 @@ import {
   createContentPanelConfig,
   createNextContentPanelConfig,
   duplicateContentPanelConfig,
+  reorderContentPanels,
 } from './hooks';
 
 describe('createNextContentPanelConfig', () => {
@@ -67,5 +68,25 @@ describe('duplicateContentPanelConfig', () => {
     expect(duplicated.poetry).not.toBe(source.poetry);
     expect(duplicated.poetry.sources).not.toBe(source.poetry.sources);
     expect(duplicated.chineseBasics).not.toBe(source.chineseBasics);
+  });
+});
+
+describe('reorderContentPanels', () => {
+  it('把拖动视图插入目标视图指定位置且不修改原数组', () => {
+    const panels = ['first', 'second', 'third'].map((id, index) => ({
+      ...createContentPanelConfig(index),
+      id,
+    }));
+
+    const reordered = reorderContentPanels(panels, 'first', 'third', 'after');
+
+    expect(reordered.map((panel) => panel.id)).toEqual(['second', 'third', 'first']);
+    expect(panels.map((panel) => panel.id)).toEqual(['first', 'second', 'third']);
+  });
+
+  it('来源和目标相同时保留原数组', () => {
+    const panels = [{ ...createContentPanelConfig(0), id: 'first' }];
+
+    expect(reorderContentPanels(panels, 'first', 'first', 'before')).toBe(panels);
   });
 });

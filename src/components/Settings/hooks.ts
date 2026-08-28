@@ -89,6 +89,30 @@ export const duplicateContentPanelConfig = (
   chineseBasics: { ...panel.chineseBasics },
 });
 
+export type PanelDropPosition = 'before' | 'after';
+
+export const reorderContentPanels = (
+  panels: ContentPanelConfig[],
+  sourcePanelId: string,
+  targetPanelId: string,
+  position: PanelDropPosition
+): ContentPanelConfig[] => {
+  const sourceIndex = panels.findIndex((panel) => panel.id === sourcePanelId);
+  const targetIndex = panels.findIndex((panel) => panel.id === targetPanelId);
+
+  if (sourceIndex < 0 || targetIndex < 0 || sourceIndex === targetIndex) {
+    return panels;
+  }
+
+  const reorderedPanels = [...panels];
+  const [sourcePanel] = reorderedPanels.splice(sourceIndex, 1);
+  const nextTargetIndex = reorderedPanels.findIndex((panel) => panel.id === targetPanelId);
+  const insertionIndex = nextTargetIndex + (position === 'after' ? 1 : 0);
+  reorderedPanels.splice(insertionIndex, 0, sourcePanel);
+
+  return reorderedPanels;
+};
+
 const getBrowserLanguage = (): AppLanguage => {
   if (typeof navigator === 'undefined') {
     return AppLanguage.En;

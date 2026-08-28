@@ -20,7 +20,12 @@ import { getDataTypeLabel } from '@/utils/labels';
 import { Appreciation } from './Appreciation';
 import { ChineseBasicsSwitch } from './ChineseBasicsSwitch';
 import { DataSwitch } from './DataSwitch';
-import { createNextContentPanelConfig, duplicateContentPanelConfig } from './hooks';
+import {
+  createNextContentPanelConfig,
+  duplicateContentPanelConfig,
+  PanelDropPosition,
+  reorderContentPanels,
+} from './hooks';
 import { KnowledgeSwtich } from './KnowledgeSwtich';
 import { LanguageToggle } from './LanguageToggle';
 import { NeckMode } from './NeckMode';
@@ -38,6 +43,11 @@ export const Settings: React.FC<SettingsProps> = (props) => {
   const { setSettings, settings, currentTheme } = props;
   const { language, t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
+  const [draggedPanelId, setDraggedPanelId] = useState<string | null>(null);
+  const [panelDropTarget, setPanelDropTarget] = useState<{
+    panelId: string;
+    position: PanelDropPosition;
+  } | null>(null);
 
   const onThemeChange = (theme: Theme) => {
     setSettings((prev) => ({ ...prev, theme }));
@@ -119,6 +129,55 @@ export const Settings: React.FC<SettingsProps> = (props) => {
     });
   };
 
+  const resetPanelDrag = () => {
+    setDraggedPanelId(null);
+    setPanelDropTarget(null);
+  };
+
+  const getPanelDropPosition = (event: React.DragEvent<HTMLDivElement>): PanelDropPosition => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const isStartHalf =
+      language === AppLanguage.Ar
+        ? event.clientX >= rect.left + rect.width / 2
+        : event.clientX <= rect.left + rect.width / 2;
+    return isStartHalf ? 'before' : 'after';
+  };
+
+  const handlePanelDragStart = (event: React.DragEvent<HTMLDivElement>, panelId: string) => {
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', panelId);
+    setDraggedPanelId(panelId);
+    setPanelDropTarget(null);
+  };
+
+  const handlePanelDragOver = (event: React.DragEvent<HTMLDivElement>, panelId: string) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+    setPanelDropTarget(
+      panelId === draggedPanelId
+        ? null
+        : {
+            panelId,
+            position: getPanelDropPosition(event),
+          }
+    );
+  };
+
+  const handlePanelDrop = (event: React.DragEvent<HTMLDivElement>, panelId: string) => {
+    event.preventDefault();
+    const sourcePanelId = event.dataTransfer.getData('text/plain') || draggedPanelId;
+
+    if (sourcePanelId && sourcePanelId !== panelId) {
+      const position = getPanelDropPosition(event);
+      setSettings((prev) => {
+        const panels = reorderContentPanels(prev.panels, sourcePanelId, panelId, position);
+        return panels === prev.panels ? prev : syncLegacySettings(prev, panels);
+      });
+    }
+
+    resetPanelDrag();
+  };
+
   useEffect(() => {
     // todo 策略模式
     const messageListener = (message: ChromeMessage) => {
@@ -172,7 +231,20 @@ export const Settings: React.FC<SettingsProps> = (props) => {
             {settings.panels.map((panel, index) => (
               <div
                 key={panel.id}
-                className={`${styles.panelTab} ${settings.activePanelId === panel.id ? styles.panelTabActive : ''}`}
+                className={`${styles.panelTab} ${
+                  settings.activePanelId === panel.id ? styles.panelTabActive : ''
+                } ${draggedPanelId === panel.id ? styles.panelTabDragging : ''} ${
+                  panelDropTarget?.panelId === panel.id
+                    ? panelDropTarget.position === 'before'
+                      ? styles.panelTabDropBefore
+                      : styles.panelTabDropAfter
+                    : ''
+                }`}
+                draggable={settings.panels.length > 1}
+                onDragStart={(event) => handlePanelDragStart(event, panel.id)}
+                onDragOver={(event) => handlePanelDragOver(event, panel.id)}
+                onDrop={(event) => handlePanelDrop(event, panel.id)}
+                onDragEnd={resetPanelDrag}
               >
                 <button
                   type="button"
@@ -191,6 +263,11 @@ export const Settings: React.FC<SettingsProps> = (props) => {
                       `settings_panel_number_${index + 1}`
                     )}`}
                     title={t('settings_duplicate_panel')}
+                    draggable={false}
+                    onDragStart={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }}
                     onClick={() => duplicatePanel(panel.id)}
                   >
                     ⧉
@@ -203,6 +280,11 @@ export const Settings: React.FC<SettingsProps> = (props) => {
                     aria-label={`${t('settings_remove_panel')} ${t(
                       `settings_panel_number_${index + 1}`
                     )}`}
+                    draggable={false}
+                    onDragStart={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }}
                     onClick={() => removePanel(panel.id)}
                   >
                     ×

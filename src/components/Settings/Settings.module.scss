@@ -140,12 +140,13 @@
   position: relative;
   display: inline-flex;
   flex: 0 0 auto;
-  align-items: stretch;
   min-width: 0;
   border: 1px solid var(--border-color);
   border-radius: 7px;
   background: var(--settings-bg-light);
+  cursor: grab;
   overflow: visible;
+  align-items: stretch;
 
   > button {
     border: 0;
@@ -167,10 +168,42 @@
     min-width: 0;
     padding: 8px 12px;
     font-size: var(--font-size-sm);
+    cursor: grab;
     overflow: hidden;
+    user-select: none;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+}
+
+.panelTabDragging {
+  opacity: 0.45;
+  cursor: grabbing;
+
+  > button:first-child {
+    cursor: grabbing;
+  }
+}
+
+.panelTabDropBefore::before,
+.panelTabDropAfter::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  z-index: 3;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--primary-color);
+  pointer-events: none;
+}
+
+.panelTabDropBefore::before {
+  inset-inline-start: -5px;
+}
+
+.panelTabDropAfter::after {
+  inset-inline-end: -5px;
 }
 
 .duplicatePanelButton,
