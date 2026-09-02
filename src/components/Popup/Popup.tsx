@@ -48,8 +48,11 @@ const getActiveTab = () => {
 const getStoredWobbleConfig = () => {
   return new Promise<PageWobbleConfig>((resolve) => {
     chrome.storage.local.get(PAGE_WOBBLE_STORAGE_KEY, (items) => {
-      const config = normalizePageWobbleConfig(items[PAGE_WOBBLE_STORAGE_KEY]);
-      chrome.storage.local.set({ [PAGE_WOBBLE_STORAGE_KEY]: config });
+      const storedConfig = items[PAGE_WOBBLE_STORAGE_KEY];
+      const config = normalizePageWobbleConfig(storedConfig);
+      if (JSON.stringify(storedConfig) !== JSON.stringify(config)) {
+        chrome.storage.local.set({ [PAGE_WOBBLE_STORAGE_KEY]: config });
+      }
       resolve(config);
     });
   });
@@ -62,8 +65,11 @@ const saveWobbleConfig = (config: PageWobbleConfig) => {
 const getStoredWobbleEnabled = () => {
   return new Promise<boolean>((resolve) => {
     chrome.storage.local.get(PAGE_WOBBLE_ENABLED_STORAGE_KEY, (items) => {
-      const enabled = normalizePageWobbleEnabled(items[PAGE_WOBBLE_ENABLED_STORAGE_KEY]);
-      chrome.storage.local.set({ [PAGE_WOBBLE_ENABLED_STORAGE_KEY]: enabled });
+      const storedEnabled = items[PAGE_WOBBLE_ENABLED_STORAGE_KEY];
+      const enabled = normalizePageWobbleEnabled(storedEnabled);
+      if (storedEnabled !== enabled) {
+        chrome.storage.local.set({ [PAGE_WOBBLE_ENABLED_STORAGE_KEY]: enabled });
+      }
       resolve(enabled);
     });
   });
@@ -78,8 +84,11 @@ const saveWobbleEnabled = (enabled: boolean) => {
 const getStoredWobbleScope = () => {
   return new Promise<PageWobbleScope>((resolve) => {
     chrome.storage.local.get(PAGE_WOBBLE_SCOPE_STORAGE_KEY, (items) => {
-      const scope = normalizePageWobbleScope(items[PAGE_WOBBLE_SCOPE_STORAGE_KEY]);
-      chrome.storage.local.set({ [PAGE_WOBBLE_SCOPE_STORAGE_KEY]: scope });
+      const storedScope = items[PAGE_WOBBLE_SCOPE_STORAGE_KEY];
+      const scope = normalizePageWobbleScope(storedScope);
+      if (storedScope !== scope) {
+        chrome.storage.local.set({ [PAGE_WOBBLE_SCOPE_STORAGE_KEY]: scope });
+      }
       resolve(scope);
     });
   });
@@ -100,8 +109,11 @@ const saveWobbleScopeState = (scope: PageWobbleScope, enabled: boolean) => {
 const getStoredDomainRules = () => {
   return new Promise<PageWobbleDomainRules>((resolve) => {
     chrome.storage.local.get(PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY, (items) => {
-      const rules = normalizePageWobbleDomainRules(items[PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY]);
-      chrome.storage.local.set({ [PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY]: rules });
+      const storedRules = items[PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY];
+      const rules = normalizePageWobbleDomainRules(storedRules);
+      if (JSON.stringify(storedRules) !== JSON.stringify(rules)) {
+        chrome.storage.local.set({ [PAGE_WOBBLE_DOMAIN_RULES_STORAGE_KEY]: rules });
+      }
       resolve(rules);
     });
   });

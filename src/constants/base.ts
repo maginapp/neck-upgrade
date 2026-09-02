@@ -156,7 +156,7 @@ export const MOD_CONFIG = {
   [NeckModeType.Training]: {
     min: 15,
     max: 60,
-    duration: 5,
+    duration: 15,
   },
   [NeckModeType.Reading]: {
     min: 0,
@@ -171,6 +171,6 @@ export const MOD_CONFIG = {
   [NeckModeType.Custom]: {
     min: 0,
     max: 360,
-    duration: 5,
+    duration: 15,
   },
 };

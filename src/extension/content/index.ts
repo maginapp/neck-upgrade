@@ -65,6 +65,8 @@
     let currentRotation = 0;
     let nextChangeAt: number | null = null;
     let timer: number | undefined;
+    let timerGeneration = 0;
+    let pausedRemainingMs: number | null = null;
 
     const normalizeConfig = (config?: Partial<WobbleConfig>): WobbleConfig => {
       const angleValue = Number(config?.angle);
@@ -144,6 +146,7 @@
     };
 
     const stopTimer = () => {
+      timerGeneration += 1;
       if (timer !== undefined) {
         window.clearTimeout(timer);
         timer = undefined;
@@ -151,17 +154,61 @@
       nextChangeAt = null;
     };
 
-    const scheduleNextChange = () => {
+    const scheduleNextChange = (delayMs = cycleSeconds * 1000) => {
       stopTimer();
       if (!enabled || !domainAllowed) {
         return;
       }
 
-      nextChangeAt = Date.now() + cycleSeconds * 1000;
+      const nextDelayMs = Math.max(0, delayMs);
+      if (document.hidden) {
+        pausedRemainingMs = nextDelayMs;
+        return;
+      }
+
+      const generation = timerGeneration;
+      nextChangeAt = Date.now() + nextDelayMs;
       timer = window.setTimeout(() => {
+        if (generation !== timerGeneration) {
+          return;
+        }
+        if (document.hidden) {
+          pausedRemainingMs = 0;
+          stopTimer();
+          return;
+        }
         applyAngle(true);
         scheduleNextChange();
-      }, cycleSeconds * 1000);
+      }, nextDelayMs);
+    };
+
+    const pauseTimer = () => {
+      if (!enabled || !domainAllowed) {
+        pausedRemainingMs = null;
+        stopTimer();
+        return;
+      }
+
+      if (nextChangeAt !== null) {
+        pausedRemainingMs = Math.max(0, nextChangeAt - Date.now());
+      } else if (pausedRemainingMs === null) {
+        pausedRemainingMs = cycleSeconds * 1000;
+      }
+      stopTimer();
+    };
+
+    const resumeTimer = () => {
+      if (!enabled || !domainAllowed) {
+        pausedRemainingMs = null;
+        return;
+      }
+      if (timer !== undefined) {
+        return;
+      }
+
+      const remainingMs = pausedRemainingMs ?? cycleSeconds * 1000;
+      pausedRemainingMs = null;
+      scheduleNextChange(remainingMs);
     };
 
     const restorePageStyles = () => {
@@ -178,7 +225,9 @@
     const update = (nextEnabled: boolean, config: WobbleConfig, nextDomainAllowed: boolean) => {
       const normalizedConfig = normalizeConfig(config);
       const wasActive = enabled && domainAllowed;
+      const angleChanged = angle !== normalizedConfig.angle;
       const cycleChanged = cycleSeconds !== normalizedConfig.cycleSeconds;
+      const randomAngleChanged = randomAngle !== normalizedConfig.randomAngle;
       angle = normalizedConfig.angle;
       cycleSeconds = normalizedConfig.cycleSeconds;
       randomAngle = normalizedConfig.randomAngle;
@@ -186,6 +235,7 @@
       domainAllowed = nextDomainAllowed;
 
       if (!enabled || !domainAllowed) {
+        pausedRemainingMs = null;
         stopTimer();
         if (!enabled) {
           direction = 1;
@@ -198,10 +248,16 @@
       page.style.setProperty('transform-origin', '50% 50%', 'important');
       page.style.setProperty('transition', TRANSITION, 'important');
       page.style.setProperty('will-change', 'transform', 'important');
-      applyAngle();
+      if (!wasActive || angleChanged || randomAngleChanged) {
+        applyAngle();
+      }
 
       if (!wasActive || cycleChanged || timer === undefined) {
-        scheduleNextChange();
+        const remainingMs =
+          document.hidden && wasActive && !cycleChanged
+            ? pausedRemainingMs ?? cycleSeconds * 1000
+            : cycleSeconds * 1000;
+        scheduleNextChange(remainingMs);
       }
       return getStatus();
     };
@@ -253,6 +309,17 @@
         syncFromStorage();
       }
     });
+
+    document.addEventListener('visibilitychange', () => {
+      console.log('????? vis');
+      if (document.hidden) {
+        pauseTimer();
+      } else {
+        resumeTimer();
+      }
+    });
+    window.addEventListener('pagehide', pauseTimer);
+    window.addEventListener('pageshow', resumeTimer);
 
     syncFromStorage();
   }

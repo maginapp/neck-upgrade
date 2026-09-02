@@ -68,14 +68,94 @@ export const NeckMode = (props: NeckModeProps) => {
     [cusDuration, cusMaxRotate, rotate, handleCustomConfigChange]
   );
 
+  const handleModeChangeRef = useRef(handleModeChange);
+
   useEffect(() => {
-    if (duration > 0) {
-      const timer = setInterval(() => {
-        handleModeChange(mode);
-      }, duration * 1000);
-      return () => clearInterval(timer);
+    handleModeChangeRef.current = handleModeChange;
+  }, [handleModeChange]);
+
+  useEffect(() => {
+    if (duration <= 0) {
+      return;
     }
-  }, [duration, mode, handleModeChange]);
+
+    const cycleMs = duration * 1000;
+    let timer: number | undefined;
+    let timerGeneration = 0;
+    let nextChangeAt: number | null = null;
+    let pausedRemainingMs = cycleMs;
+
+    const stopTimer = () => {
+      timerGeneration += 1;
+      if (timer !== undefined) {
+        window.clearTimeout(timer);
+        timer = undefined;
+      }
+      nextChangeAt = null;
+    };
+
+    const scheduleNextChange = (delayMs = cycleMs) => {
+      stopTimer();
+      const nextDelayMs = Math.max(0, delayMs);
+      if (document.hidden) {
+        pausedRemainingMs = nextDelayMs;
+        return;
+      }
+
+      const generation = timerGeneration;
+      nextChangeAt = Date.now() + nextDelayMs;
+      timer = window.setTimeout(() => {
+        if (generation !== timerGeneration) {
+          return;
+        }
+        if (document.hidden) {
+          pausedRemainingMs = 0;
+          stopTimer();
+          return;
+        }
+
+        handleModeChangeRef.current(mode);
+        pausedRemainingMs = cycleMs;
+        scheduleNextChange();
+      }, nextDelayMs);
+    };
+
+    const pauseTimer = () => {
+      if (nextChangeAt !== null) {
+        pausedRemainingMs = Math.max(0, nextChangeAt - Date.now());
+      }
+      stopTimer();
+    };
+
+    const resumeTimer = () => {
+      if (timer !== undefined) {
+        return;
+      }
+      const remainingMs = pausedRemainingMs;
+      pausedRemainingMs = cycleMs;
+      scheduleNextChange(remainingMs);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        pauseTimer();
+      } else {
+        resumeTimer();
+      }
+    };
+
+    scheduleNextChange();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', pauseTimer);
+    window.addEventListener('pageshow', resumeTimer);
+
+    return () => {
+      stopTimer();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pagehide', pauseTimer);
+      window.removeEventListener('pageshow', resumeTimer);
+    };
+  }, [duration, mode]);
 
   useEffect(() => {
     console.log('🚀 ~ useEffect ~ mode:  ', mode);
