@@ -1,5 +1,5 @@
 import {
-  getPoetrySourceGroup,
+  getPoetrySourceOptions,
   POETRY_SOURCE_GROUPS,
   PoetrySource,
   PoetrySourceCategory,
@@ -17,7 +17,7 @@ interface PoetrySourceSwitchProps {
 
 export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, onChange }) => {
   const { language, t } = useI18n();
-  const sourceGroup = getPoetrySourceGroup(config.category);
+  const sourceOptions = getPoetrySourceOptions(config.category);
 
   const handleCategoryChange = (category: PoetrySourceCategory) => {
     onChange({ category, sources: [] });
@@ -61,7 +61,7 @@ export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, 
         ))}
       </div>
 
-      {sourceGroup && (
+      {sourceOptions.length > 0 && (
         <div className={styles.poetrySourceDetail}>
           <div className={styles.settingHint}>{t('settings_specific_sources')}</div>
           <div className={styles.buttonSwitch}>
@@ -72,7 +72,7 @@ export const PoetrySourceSwitch: React.FC<PoetrySourceSwitchProps> = ({ config, 
             >
               {getPoetryCategoryLabel(PoetrySourceCategory.All, language)}
             </button>
-            {sourceGroup.sources.map((source) => (
+            {sourceOptions.map((source) => (
               <button
                 key={source.value}
                 className={`${styles.typeButton} ${config.sources.includes(source.value) ? styles.active : ''}`}

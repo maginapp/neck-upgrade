@@ -93,3 +93,11 @@ export const ALL_POETRY_SOURCES = POETRY_SOURCE_GROUPS.flatMap((group) => group.
 export const getPoetrySourceGroup = (category: PoetrySourceCategory) => {
   return POETRY_SOURCE_GROUPS.find((group) => group.category === category);
 };
+
+export const getPoetrySourceOptions = (category: PoetrySourceCategory): PoetrySourceOption[] => {
+  if (category === PoetrySourceCategory.All) {
+    return POETRY_SOURCE_GROUPS.flatMap((group) => group.sources);
+  }
+
+  return getPoetrySourceGroup(category)?.sources ?? [];
+};
