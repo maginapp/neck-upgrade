@@ -1,5 +1,12 @@
 # Neck Upgrade ChangeLog
 
+## 1.6.3
+
+### Patch Changes
+
+- c7137ca: 页面不可见，暂停旋转计时
+- 462fe06: 诗词古文添加二级分类
+
 ## 1.6.2
 
 ### Patch Changes
